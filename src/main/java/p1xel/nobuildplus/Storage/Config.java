@@ -1,0 +1,33 @@
+package p1xel.nobuildplus.Storage;
+
+import org.bukkit.ChatColor;
+import p1xel.nobuildplus.NoBuildPlus;
+
+import java.util.List;
+
+public class Config {
+
+    public static String getString(String path) {
+        return NoBuildPlus.getInstance().getConfig().getString(path);
+    }
+
+    public static boolean getBool(String path) {
+        return NoBuildPlus.getInstance().getConfig().getBoolean(path);
+    }
+
+    public static String getLanguage() {
+        return NoBuildPlus.getInstance().getConfig().getString("Language");
+    }
+
+    public static void reloadConfig() {
+
+        NoBuildPlus.getInstance().reloadConfig();
+        Locale.checkLanguage();
+
+    }
+
+    public static String getVersion() {
+        return getString("Version");
+    }
+
+}

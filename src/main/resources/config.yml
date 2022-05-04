@@ -1,0 +1,51 @@
+#############################################################################
+##                                                                         ##
+##                                                                         ##
+##                                                                         ##
+##                                                                         ##
+##                                                                         ##
+##                           No Build Plus                                 ##
+##                          made by p1xEL_mc                               ##
+##                                                                         ##
+##                                                                         ##
+##                                                                         ##
+##                                                                         ##
+##                                                                         ##
+#############################################################################
+## How to use the plugin
+##
+## Example:
+## settings-file: settings.yml # worlds-data-file: worlds.yml # lang-file: locale.yml # flags-file: flags.yml
+##
+## settings.yml is the global settings file which includes the default settings of the world and enable worlds list.
+## If you want to change the world's default settings. just change the boolean for the frag which is in the file.
+##
+## worlds.yml is the worlds data file. You can change each world's flag and deny message.
+## You can change the flag for world with command. However, you have to change the deny message by yourself. (Or it will use the default settings')
+##
+## flags.yml is a flags manager file. You can enable or disable the flag here.
+## There is a type for the flag. type: all (some flags are unavailable for type: all) type: list (Use the objects from the list.)
+##
+## Sorry for my bad english.
+##
+## Thanks for using my plugin
+## My name in spigotmc is p1xEL_mc
+
+# The version of the plugin.
+Version: 1.0.0
+type: Release
+
+# Files
+# They are the file's name. I don't recommend you to change them.
+settings-file: settings.yml
+worlds-data-file: worlds.yml
+lang-file: locale.yml
+flags-file: flags.yml
+
+# Language of the file.
+# Languages list: eng(English) zh_CN(Simplified Chinese).
+# It only changes the texts from language file if you change this.
+Language: eng
+
+# Check update when load the plugin.
+check-update: true

@@ -1,0 +1,195 @@
+package p1xel.nobuildplus.Command;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import p1xel.nobuildplus.Storage.*;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cmd implements CommandExecutor {
+
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+
+        if (!sender.hasPermission("nobuildplus.use")) {
+            sender.sendMessage(Locale.getMessage("no-perm"));
+            return true;
+        }
+
+        if (args.length == 0) {
+
+            sender.sendMessage(Locale.getCmdMessage("commands.help"));
+            sender.sendMessage(Locale.getCmdMessage("commands.help-2"));
+            return true;
+
+        }
+
+        if (args.length == 1) {
+
+            if (args[0].equalsIgnoreCase("help")) {
+
+                sender.sendMessage(Locale.getCmdMessage("commands.top"));
+                sender.sendMessage(Locale.getCmdMessage("commands.plugin"));
+                sender.sendMessage(Locale.getCmdMessage("commands.space-1"));
+                sender.sendMessage(Locale.getCmdMessage("commands.help"));
+                sender.sendMessage(Locale.getCmdMessage("commands.help-2"));
+                sender.sendMessage(Locale.getCmdMessage("commands.space-2"));
+                sender.sendMessage(Locale.getCmdMessage("commands.list"));
+                sender.sendMessage(Locale.getCmdMessage("commands.list-2"));
+                sender.sendMessage(Locale.getCmdMessage("commands.space-3"));
+                sender.sendMessage(Locale.getCmdMessage("commands.add"));
+                sender.sendMessage(Locale.getCmdMessage("commands.add-2"));
+                sender.sendMessage(Locale.getCmdMessage("commands.space-4"));
+                sender.sendMessage(Locale.getCmdMessage("commands.remove"));
+                sender.sendMessage(Locale.getCmdMessage("commands.remove-2"));
+                sender.sendMessage(Locale.getCmdMessage("commands.space-5"));
+                sender.sendMessage(Locale.getCmdMessage("commands.clear"));
+                sender.sendMessage(Locale.getCmdMessage("commands.clear-2"));
+                sender.sendMessage(Locale.getCmdMessage("commands.space-6"));
+                sender.sendMessage(Locale.getCmdMessage("commands.flag"));
+                sender.sendMessage(Locale.getCmdMessage("commands.flag-2"));
+                sender.sendMessage(Locale.getCmdMessage("commands.space-7"));
+                sender.sendMessage(Locale.getCmdMessage("commands.reload"));
+                sender.sendMessage(Locale.getCmdMessage("commands.reload-2"));
+                sender.sendMessage(Locale.getCmdMessage("commands.space-8"));
+                sender.sendMessage(Locale.getCmdMessage("commands.bottom"));
+                return true;
+
+            }
+
+            if (args[0].equalsIgnoreCase("list")) {
+
+                ArrayList<String> list = (ArrayList<String>) Settings.getEnableWorldList();
+
+                sender.sendMessage(Locale.getMessage("list-1"));
+                sender.sendMessage(Locale.getMessage("list-2").replaceAll("%list%", list.toString()));
+                return true;
+
+            }
+
+            if (args[0].equalsIgnoreCase("clear")) {
+
+                Settings.clearEnableWorldsList();
+                sender.sendMessage(Locale.getMessage("clear-success"));
+                return true;
+
+            }
+
+            if (args[0].equalsIgnoreCase("reload")) {
+
+                Config.reloadConfig();
+                sender.sendMessage(Locale.getMessage("reload-success"));
+                return true;
+
+            }
+
+        }
+
+        if (args.length == 2) {
+
+            if (args[0].equalsIgnoreCase("add")) {
+
+                if (!Settings.getEnableWorldList().contains(args[1])) {
+
+                    Worlds.createWorld(args[1]);
+                    sender.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", args[1]));
+                    return true;
+
+                } else {
+                    sender.sendMessage(Locale.getMessage("already-exists"));
+                    return true;
+                }
+
+            }
+
+            if (args[0].equalsIgnoreCase("remove")) {
+
+                if (Settings.getEnableWorldList().contains(args[1])) {
+
+                    Worlds.removeWorld(args[1]);
+                    sender.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%", args[1]));
+                    return true;
+
+                } else {
+                    sender.sendMessage(Locale.getMessage("not-in-list"));
+                    return true;
+                }
+
+            }
+
+        }
+
+        if (args.length == 4) {
+
+            if (args[0].equalsIgnoreCase("flag")) {
+
+                if (!Settings.getEnableWorldList().contains(args[1])) {
+                    sender.sendMessage(Locale.getMessage("cant-find-world"));
+                    return true;
+                }
+
+                if (!FlagsManager.isInTheFlagsList(args[2])) {
+                    String m = Locale.getMessage("flags-list");
+                    m = m.replaceAll("%break%", Locale.getMessage("flag.break"));
+                    m = m.replaceAll("%build%", Locale.getMessage("flag.build"));
+                    m = m.replaceAll("%use%", Locale.getMessage("flag.use"));
+                    m = m.replaceAll("%container%", Locale.getMessage("flag.container"));
+                    m = m.replaceAll("%move%", Locale.getMessage("flag.move"));
+                    m = m.replaceAll("%mob-damage%", Locale.getMessage("flag.mob-damage"));
+                    m = m.replaceAll("%pvp%", Locale.getMessage("flag.pvp"));
+                    sender.sendMessage(m);
+                    return true;
+                }
+
+                if (args[3].equalsIgnoreCase("true")) {
+
+                    Worlds.setFlag(args[1], args[2], true);
+                    sender.sendMessage(Locale.getMessage("flag-set-success").replaceAll("%world%",args[1]).replaceAll("%flag%",args[2]).replaceAll("%boolean%", args[3]));
+                    return true;
+
+                }
+
+                if (args[3].equalsIgnoreCase("false")) {
+
+                    Worlds.setFlag(args[1], args[2], false);
+                    sender.sendMessage(Locale.getMessage("flag-set-success").replaceAll("%world%",args[1]).replaceAll("%flag%",args[2]).replaceAll("%boolean%", args[3]));
+                    return true;
+
+                }
+
+                sender.sendMessage(Locale.getMessage("invalid-boolean"));
+                return true;
+
+
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return false;
+    }
+
+}

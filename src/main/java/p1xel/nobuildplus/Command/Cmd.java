@@ -140,7 +140,9 @@ public class Cmd implements CommandExecutor {
                     m = m.replaceAll("%container%", Locale.getMessage("flag.container"));
                     m = m.replaceAll("%move%", Locale.getMessage("flag.move"));
                     m = m.replaceAll("%mob-damage%", Locale.getMessage("flag.mob-damage"));
+                    m = m.replaceAll("%mob-explode%", Locale.getMessage("flag.mob-explode"));
                     m = m.replaceAll("%pvp%", Locale.getMessage("flag.pvp"));
+                    m = m.replaceAll("%pvp%", Locale.getMessage("flag.tnt"));
                     sender.sendMessage(m);
                     return true;
                 }

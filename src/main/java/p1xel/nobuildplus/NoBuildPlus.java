@@ -23,6 +23,7 @@ public class NoBuildPlus extends JavaPlugin {
         Settings.createWorldsFile();
         Worlds.createWorldsFile();
         FlagsManager.createLocaleFile();
+        FlagsManager.checkFlag();
 
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
         getServer().getPluginManager().registerEvents(new WorldProtect(), this);

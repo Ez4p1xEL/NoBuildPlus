@@ -23,7 +23,7 @@ public class FlagsManager {
                 ioException.printStackTrace();
             }
 
-            set("FlagsList", Arrays.asList("break","build","use","container","move","mob-damage","pvp"));
+            set("FlagsList", Arrays.asList("break","build","use","container","move","mob-damage","mob-explode","pvp","tnt"));
             setDefaultFlags();
 
         }
@@ -69,6 +69,18 @@ public class FlagsManager {
 
     }
 
+    public static List<String> getTheFlagsList() {
+        return get().getStringList("FlagsList");
+    }
+
+    public static void addToTheFlagsList(String flag) {
+
+        List<String> flags = getTheFlagsList();
+        flags.add(flag);
+        set("FlagsList", flags);
+
+    }
+
     public static void setDefaultFlags() {
         set("flags.break.enable", true);
         set("flags.break.type", "all");
@@ -87,7 +99,29 @@ public class FlagsManager {
         set("flags.mob-damage.enable", true);
         set("flags.mob-damage.type", "all");
         set("flags.mob-damage.list", Collections.singletonList("ZOMBIE"));
+        set("flags.mob-explode.enable", true);
+        set("flags.mob-explode.type", "all");
+        set("flags.mob-explode.list", Collections.singletonList("CREEPER"));
         set("flags.pvp.enable", true);
+        set("flags.tnt.enable", false);
+    }
+
+    public static void checkFlag() {
+
+        if (Config.getInt("Id") == 0) {
+            if (!isInTheFlagsList("mob-explode")) {
+                set("flags.mob-explode.enable", true);
+                set("flags.mob-explode.type", "all");
+                set("flags.mob-explode.list", Collections.singletonList("CREEPER"));
+                addToTheFlagsList("mob-explode");
+            }
+
+            if (!isInTheFlagsList("tnt")) {
+                set("flags.tnt.enable", false);
+                addToTheFlagsList("tnt");
+            }
+        }
+
     }
 
 }

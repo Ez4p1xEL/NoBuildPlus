@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import p1xel.nobuildplus.Storage.FlagsManager;
@@ -285,6 +286,61 @@ public class WorldProtect implements Listener {
 
         }
 
+
+    }
+
+    // Flag: Mob Explode
+    @EventHandler
+    public void onMobExplode(EntityExplodeEvent e) {
+
+        String world = e.getEntity().getWorld().getName();
+
+        if (FlagsManager.getFlagsIsEnabled("mob-explode")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "mob-explode")) {
+
+                        if (FlagsManager.getFlagsType("mob-explode").equalsIgnoreCase("all")) {
+
+                                e.setCancelled(true);
+
+                        }
+
+                        if (FlagsManager.getFlagsType("mob-explode").equalsIgnoreCase("list")) {
+
+                                for (String string : FlagsManager.getFlagsList("mob-explode")) {
+
+                                    if (e.getEntityType() == EntityType.valueOf(string)) {
+
+                                        e.setCancelled(true);
+
+                                    }
+
+                                }
+
+
+                        }
+                }
+            }
+
+        }
+
+        // Flag: Tnt
+        if (FlagsManager.getFlagsIsEnabled("tnt")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "tnt")) {
+
+                    if (e.getEntityType() == EntityType.PRIMED_TNT || e.getEntityType() == EntityType.MINECART_TNT) {
+                        e.setCancelled(true);
+                    }
+
+                }
+            }
+
+        }
 
     }
 }

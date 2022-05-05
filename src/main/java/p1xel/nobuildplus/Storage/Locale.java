@@ -190,7 +190,7 @@ public class Locale {
         set("add-success", "&a你将 &9%world% &a加入至列表中");
         set("remove-success", "&a你将 &9%world% &a移除至列表中");
         set("cant-find-world", "&c无法找到世界 (有可能是世界未启用本插件)");
-        set("flags-list", "&7属性列表: &fbreak&7(%break%), &fbuild&7(%build%), &fuse&7(%use%), &fcontainer&7(%container%), &fmove&7(%move%), &fmob-damage&7(%mob-damage%), &fpvp&7(%pvp%)");
+        set("flags-list", "&7属性列表: &fbreak&7(%break%), &fbuild&7(%build%), &fuse&7(%use%), &fcontainer&7(%container%), &fmove&7(%move%), &fmob-damage&7(%mob-damage%), &fmob-explode&7(%mob-explode%), &fpvp&7(%pvp%), &ftnt&7(%tnt%)");
         set("invalid-boolean", "&c错误, 请输入true或false代表是否开启");
         set("flag-set-success", "&a你成功将 &9%world% &a的属性 &e%flag% &a设置为 &b%boolean%");
 
@@ -200,7 +200,9 @@ public class Locale {
         set("flag.container", "容器");
         set("flag.move", "移动");
         set("flag.mob-damage", "生物伤害");
+        set("flag.mob-explode", "生物爆炸");
         set("flag.pvp", "PVP");
+        set("flag.tnt", "TNT");
 
     }
 

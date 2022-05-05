@@ -32,7 +32,8 @@
 ## My name in spigotmc is p1xEL_mc
 
 # The version of the plugin.
-Version: 1.0.0
+Version: 1.0.2
+Id: 2
 type: Release
 
 # Files

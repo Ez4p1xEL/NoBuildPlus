@@ -53,7 +53,9 @@ public class Worlds {
         set(world + ".flags.container", Settings.getDefaultFlag("container"));
         set(world + ".flags.move", Settings.getDefaultFlag("move"));
         set(world + ".flags.mob-damage", Settings.getDefaultFlag("mob-damage"));
+        set(world + ".flags.mob-explode", Settings.getDefaultFlag("mob-explode"));
         set(world + ".flags.pvp", Settings.getDefaultFlag("pvp"));
+        set(world + ".flags.tnt", Settings.getDefaultFlag("tnt"));
         set(world + ".deny-message", Settings.getDenyMessageString());
         Settings.addEnableWorldToList(world);
 
@@ -92,8 +94,16 @@ public class Worlds {
             set(world + ".flags.mob-damage", bool);
         }
 
+        if (flag.equalsIgnoreCase("mob-explode")) {
+            set(world + ".flags.mob-explode", bool);
+        }
+
         if (flag.equalsIgnoreCase("pvp")) {
             set(world + ".flags.pvp", bool);
+        }
+
+        if(flag.equalsIgnoreCase("tnt")) {
+            set(world + ".flags.tnt", bool);
         }
 
     }
@@ -124,8 +134,16 @@ public class Worlds {
             return get().getBoolean(world + ".flags.mob-damage");
         }
 
+        if (flag.equalsIgnoreCase("mob-explode")) {
+            return get().getBoolean(world + ".flags.mob-explode");
+        }
+
         if (flag.equalsIgnoreCase("pvp")) {
             return get().getBoolean(world + ".flags.pvp");
+        }
+
+        if (flag.equalsIgnoreCase("tnt")) {
+            return get().getBoolean(world + ".flags.tnt");
         }
 
         return false;

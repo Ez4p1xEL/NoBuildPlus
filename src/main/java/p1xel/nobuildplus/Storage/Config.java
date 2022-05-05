@@ -30,4 +30,8 @@ public class Config {
         return getString("Version");
     }
 
+    public static int getInt(String path) {
+        return NoBuildPlus.getInstance().getConfig().getInt(path);
+    }
+
 }

@@ -2,17 +2,15 @@ package p1xel.nobuildplus.Listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.*;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import p1xel.nobuildplus.Storage.FlagsManager;
@@ -146,6 +144,8 @@ public class WorldProtect implements Listener {
             }
 
         }
+
+
 
         // Flag: Container
         if (FlagsManager.getFlagsIsEnabled("container")) {
@@ -343,4 +343,116 @@ public class WorldProtect implements Listener {
         }
 
     }
+
+    // Flag: frame(move)
+    @EventHandler
+    public void onInteractEntity(PlayerInteractEntityEvent e) {
+
+        String world = e.getPlayer().getWorld().getName();
+        Player p = e.getPlayer();
+
+        if (FlagsManager.getFlagsIsEnabled("frame")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "frame")) {
+
+                    if (!p.hasPermission("nobuildplus.bypass")) {
+
+                        if (FlagsManager.FrameIsIncludingGlowFrame()) {
+
+                            if (e.getRightClicked().getType() == EntityType.GLOW_ITEM_FRAME) {
+
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                                e.setCancelled(true);
+
+                            }
+
+                        }
+
+                        if (e.getRightClicked().getType() == EntityType.ITEM_FRAME) {
+
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                            e.setCancelled(true);
+
+                        }
+
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    // Flag: frame (Place)
+    @EventHandler
+    public void onEntityPlace(EntitySpawnEvent e) {
+
+        String world = e.getEntity().getWorld().getName();
+
+        if (FlagsManager.getFlagsIsEnabled("frame")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "frame")) {
+
+                    if (FlagsManager.FrameIsIncludingGlowFrame()) {
+
+                        if (e.getEntityType() == EntityType.GLOW_ITEM_FRAME) {
+
+                            e.setCancelled(true);
+
+                        }
+
+                    }
+
+                    if (e.getEntityType() == EntityType.ITEM_FRAME) {
+
+                        e.setCancelled(true);
+
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    // Flag: frame (Break)
+    @EventHandler
+    public void onHangingBreakByEntity(HangingBreakByEntityEvent e) {
+
+        String world = e.getEntity().getWorld().getName();
+
+        if (FlagsManager.getFlagsIsEnabled("frame")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "frame")) {
+
+                    if (FlagsManager.FrameIsIncludingGlowFrame()) {
+
+                        if (e.getEntity() instanceof GlowItemFrame) {
+
+                            e.setCancelled(true);
+
+                        }
+
+                    }
+
+                    if (e.getEntity() instanceof ItemFrame) {
+
+                        e.setCancelled(true);
+
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
 }

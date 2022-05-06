@@ -53,7 +53,10 @@ public class Settings {
         set("global-settings.flags.container", false);
         set("global-settings.flags.move", true);
         set("global-settings.flags.mob-damage", true);
+        set("globa-settings.flags.mob-explode", false);
         set("global-settings.flags.pvp", false);
+        set("global-settings.flags.tnt", false);
+        set("global-settings.flags.frame",false);
         set("global-settings.deny-message", Locale.getMessage("not-allow"));
 
         set("enable-worlds", "[]");
@@ -111,8 +114,20 @@ public class Settings {
             return get().getBoolean("global-settings.flags.mob-damage");
         }
 
+        if (flag.equalsIgnoreCase("mob-explode")) {
+            return get().getBoolean("global-settings.flags.mob-explode");
+        }
+
         if (flag.equalsIgnoreCase("pvp")) {
             return get().getBoolean("global-settings.flags.pvp");
+        }
+
+        if (flag.equalsIgnoreCase("tnt")) {
+            return get().getBoolean("global-settings.flags.tnt");
+        }
+
+        if (flag.equalsIgnoreCase("frame")) {
+            return get().getBoolean("global-settings.flags.frame");
         }
 
         return false;

@@ -56,6 +56,7 @@ public class Worlds {
         set(world + ".flags.mob-explode", Settings.getDefaultFlag("mob-explode"));
         set(world + ".flags.pvp", Settings.getDefaultFlag("pvp"));
         set(world + ".flags.tnt", Settings.getDefaultFlag("tnt"));
+        set(world + ".flags.frame", Settings.getDefaultFlag("frame"));
         set(world + ".deny-message", Settings.getDenyMessageString());
         Settings.addEnableWorldToList(world);
 
@@ -106,6 +107,10 @@ public class Worlds {
             set(world + ".flags.tnt", bool);
         }
 
+        if (flag.equalsIgnoreCase("frame")) {
+            set(world + ".flags.frame", bool);
+        }
+
     }
 
     public static boolean getFlag(String world, String flag) {
@@ -144,6 +149,10 @@ public class Worlds {
 
         if (flag.equalsIgnoreCase("tnt")) {
             return get().getBoolean(world + ".flags.tnt");
+        }
+
+        if (flag.equalsIgnoreCase("frame")) {
+            return get().getBoolean(world + ".flags.frame");
         }
 
         return false;

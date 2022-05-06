@@ -23,7 +23,7 @@ public class FlagsManager {
                 ioException.printStackTrace();
             }
 
-            set("FlagsList", Arrays.asList("break","build","use","container","move","mob-damage","mob-explode","pvp","tnt"));
+            set("FlagsList", Arrays.asList("break","build","use","container","move","mob-damage","mob-explode","pvp","tnt","frame"));
             setDefaultFlags();
 
         }
@@ -104,11 +104,17 @@ public class FlagsManager {
         set("flags.mob-explode.list", Collections.singletonList("CREEPER"));
         set("flags.pvp.enable", true);
         set("flags.tnt.enable", false);
+        set("flags.frame.enable", true);
+        set("flags.frame.include-glow-frame", false);
+    }
+
+    public static boolean FrameIsIncludingGlowFrame() {
+        return get().getBoolean("flags.frame.include-glow-frame");
     }
 
     public static void checkFlag() {
 
-        if (Config.getInt("Id") == 0) {
+        if (Config.getInt("Id") <= 2) {
             if (!isInTheFlagsList("mob-explode")) {
                 set("flags.mob-explode.enable", true);
                 set("flags.mob-explode.type", "all");
@@ -119,6 +125,12 @@ public class FlagsManager {
             if (!isInTheFlagsList("tnt")) {
                 set("flags.tnt.enable", false);
                 addToTheFlagsList("tnt");
+            }
+
+            if (!isInTheFlagsList("frame")) {
+                set("flags.frame.enable", false);
+                set("flags.frame.include-glow-frame", true);
+                addToTheFlagsList("frame");
             }
         }
 

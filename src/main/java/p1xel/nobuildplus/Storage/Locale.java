@@ -133,7 +133,7 @@ public class Locale {
         set("add-success", "&aYou added &9%world% &ato the list.");
         set("remove-success", "&aYou removed &9%world% &afrom the list.");
         set("cant-find-world", "&cCan't find world. (Or the world is disabled)");
-        set("flags-list", "&7Flags List: &fbreak&7(%break%), &fbuild&7(%build%), &fuse&7(%use%), &fcontainer&7(%container%), &fmove&7(%move%), &fmob-damage&7(%mob-damage%), &fpvp&7(%pvp%)");
+        set("flags-list", "&7Flags List: &fbreak&7(%break%), &fbuild&7(%build%), &fuse&7(%use%), &fcontainer&7(%container%), &fmove&7(%move%), &fmob-damage&7(%mob-damage%), &fmob-explode&7(%mob-explode%), &fpvp&7(%pvp%), &ftnt&7(%tnt%), &fframe&7(%frame%)");
         set("invalid-boolean", "&cInvalid, please type true or false for the flag");
         set("flag-set-success", "&aYou set &9%world% &a's flag &e%flag% &ato &b%boolean%&a.");
 
@@ -143,7 +143,10 @@ public class Locale {
         set("flag.container", "Container");
         set("flag.move", "Move");
         set("flag.mob-damage", "Mob Damage");
+        set("flag.mob-explode", "Mob Explode");
         set("flag.pvp", "PVP");
+        set("flag.tnt", "TNT");
+        set("flag.frame", "Frame");
 
     }
 
@@ -190,7 +193,7 @@ public class Locale {
         set("add-success", "&a你将 &9%world% &a加入至列表中");
         set("remove-success", "&a你将 &9%world% &a移除至列表中");
         set("cant-find-world", "&c无法找到世界 (有可能是世界未启用本插件)");
-        set("flags-list", "&7属性列表: &fbreak&7(%break%), &fbuild&7(%build%), &fuse&7(%use%), &fcontainer&7(%container%), &fmove&7(%move%), &fmob-damage&7(%mob-damage%), &fmob-explode&7(%mob-explode%), &fpvp&7(%pvp%), &ftnt&7(%tnt%)");
+        set("flags-list", "&7属性列表: &fbreak&7(%break%), &fbuild&7(%build%), &fuse&7(%use%), &fcontainer&7(%container%), &fmove&7(%move%), &fmob-damage&7(%mob-damage%), &fmob-explode&7(%mob-explode%), &fpvp&7(%pvp%), &ftnt&7(%tnt%), &fframe&7(%frame%)");
         set("invalid-boolean", "&c错误, 请输入true或false代表是否开启");
         set("flag-set-success", "&a你成功将 &9%world% &a的属性 &e%flag% &a设置为 &b%boolean%");
 
@@ -203,6 +206,7 @@ public class Locale {
         set("flag.mob-explode", "生物爆炸");
         set("flag.pvp", "PVP");
         set("flag.tnt", "TNT");
+        set("flag.frame", "展示框保护");
 
     }
 

@@ -39,7 +39,7 @@ public class WorldProtect implements Listener {
             return;
         }
 
-        if (p.hasPermission("nobuildplus.bypass")) {
+        if (p.hasPermission(Worlds.getPermission(world))) {
             return;
         }
 
@@ -83,7 +83,7 @@ public class WorldProtect implements Listener {
             return;
         }
 
-        if (p.hasPermission("nobuildplus.bypass")) {
+        if (p.hasPermission(Worlds.getPermission(world))) {
             return;
         }
 
@@ -123,7 +123,7 @@ public class WorldProtect implements Listener {
 
                 if (!Worlds.getFlag(world, "use")) {
 
-                    if (!p.hasPermission("nobuildplus.bypass")) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
 
                         if (FlagsManager.getFlagsType("use").equalsIgnoreCase("list")) {
 
@@ -158,7 +158,7 @@ public class WorldProtect implements Listener {
                 return;
             }
 
-            if (p.hasPermission("nobuildplus.bypass")) {
+            if (p.hasPermission(Worlds.getPermission(world))) {
                 return;
             }
 
@@ -199,7 +199,7 @@ public class WorldProtect implements Listener {
             return;
         }
 
-        if (p.hasPermission("nobuildplus.bypass")) {
+        if (p.hasPermission(Worlds.getPermission(world))) {
             return;
         }
 
@@ -225,7 +225,7 @@ public class WorldProtect implements Listener {
 
                 if (!Worlds.getFlag(world, "mob-damage")) {
 
-                    if (!p.hasPermission("nobuildplus.bypass")) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
 
                         if (FlagsManager.getFlagsType("mob-damage").equalsIgnoreCase("all")) {
 
@@ -273,7 +273,7 @@ public class WorldProtect implements Listener {
                 return;
             }
 
-            if (p.hasPermission("nobuildplus.bypass")) {
+            if (p.hasPermission(Worlds.getPermission(world))) {
                 return;
             }
 
@@ -357,7 +357,7 @@ public class WorldProtect implements Listener {
 
                 if (!Worlds.getFlag(world, "frame")) {
 
-                    if (!p.hasPermission("nobuildplus.bypass")) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
 
                         if (FlagsManager.FrameIsIncludingGlowFrame()) {
 

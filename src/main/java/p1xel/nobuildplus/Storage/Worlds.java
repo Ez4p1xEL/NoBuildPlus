@@ -45,6 +45,10 @@ public class Worlds {
         return ChatColor.translateAlternateColorCodes('&', get().getString(world + ".deny-message"));
     }
 
+    public static String getPermission(String world) {
+        return get().getString(world + ".permission");
+    }
+
     public static void createWorld(String world) {
 
         set(world + ".flags.break", Settings.getDefaultFlag("break"));
@@ -57,6 +61,7 @@ public class Worlds {
         set(world + ".flags.pvp", Settings.getDefaultFlag("pvp"));
         set(world + ".flags.tnt", Settings.getDefaultFlag("tnt"));
         set(world + ".flags.frame", Settings.getDefaultFlag("frame"));
+        set(world + ".permission", Settings.getPermission());
         set(world + ".deny-message", Settings.getDenyMessageString());
         Settings.addEnableWorldToList(world);
 

@@ -57,6 +57,7 @@ public class Settings {
         set("global-settings.flags.pvp", false);
         set("global-settings.flags.tnt", false);
         set("global-settings.flags.frame",false);
+        set("global-settings.permission", "nobuildplus.bypass");
         set("global-settings.deny-message", Locale.getMessage("not-allow"));
 
         set("enable-worlds", "[]");
@@ -133,6 +134,8 @@ public class Settings {
         return false;
 
     }
+
+    public static String getPermission() { return get().getString("global-settings.permission"); }
 
     public static String getDenyMessageString() {
         return get().getString("global-settings.deny-message");

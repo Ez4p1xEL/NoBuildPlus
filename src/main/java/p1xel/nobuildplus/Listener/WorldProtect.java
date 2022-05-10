@@ -1,6 +1,5 @@
 package p1xel.nobuildplus.Listener;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -15,7 +14,6 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import p1xel.nobuildplus.Storage.FlagsManager;
-import p1xel.nobuildplus.Storage.Locale;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
 

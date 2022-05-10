@@ -14,9 +14,6 @@
 #############################################################################
 ## How to use the plugin
 ##
-## Example:
-## settings-file: settings.yml # worlds-data-file: worlds.yml # lang-file: locale.yml # flags-file: flags.yml
-##
 ## settings.yml is the global settings file which includes the default settings of the world and enable worlds list.
 ## If you want to change the world's default settings. just change the boolean for the frag which is in the file.
 ##
@@ -32,8 +29,8 @@
 ## My name on SpigotMC is p1xEL_mc
 
 # The version of the plugin.
-Version: 1.0.3
-Id: 4
+Version: 1.0.4
+Id: 5
 type: Release
 
 # Files
@@ -44,9 +41,9 @@ lang-file: locale.yml
 flags-file: flags.yml
 
 # Language of the file.
-# Languages list: eng(English) zh_CN(Simplified Chinese).
+# Languages list: en(English) zh_CN(Simplified Chinese).
 # It only changes the texts from language file if you change this.
-Language: eng
+Language: en
 
-# Check update when load the plugin.
+# Check update when the plugin loaded.
 check-update: true

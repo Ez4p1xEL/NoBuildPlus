@@ -31,14 +31,14 @@ public class NoBuildPlus extends JavaPlugin {
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());
 
         int pluginId = 15126;
-        Metrics metrics = new Metrics(this, pluginId);
+        new Metrics(this, pluginId);
 
         if (Config.getBool("check-update")) {
             new UpdateChecker(this, 101815).getVersion(version -> {
                 if (this.getDescription().getVersion().equals(version)) {
-                    getLogger().info("There is not a new update available.");
+                    getLogger().info(Locale.getMessage("update-check.latest"));
                 } else {
-                    getLogger().info("There is a new update available.");
+                    getLogger().info(Locale.getMessage("update-check.outdate"));
                 }
             });
         }

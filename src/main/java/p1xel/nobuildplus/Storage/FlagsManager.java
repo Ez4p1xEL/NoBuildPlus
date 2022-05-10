@@ -23,7 +23,7 @@ public class FlagsManager {
                 ioException.printStackTrace();
             }
 
-            set("FlagsList", Arrays.asList("break","build","use","container","move","mob-damage","mob-explode","pvp","tnt","frame"));
+            set("FlagsList", Arrays.asList("break","build","use","container","move","mob-damage","mob-explode","pvp","tnt","frame","bed"));
             setDefaultFlags();
 
         }
@@ -81,6 +81,7 @@ public class FlagsManager {
 
     }
 
+
     public static void setDefaultFlags() {
         set("flags.break.enable", true);
         set("flags.break.type", "all");
@@ -106,6 +107,8 @@ public class FlagsManager {
         set("flags.tnt.enable", false);
         set("flags.frame.enable", true);
         set("flags.frame.include-glow-frame", false);
+        set("flags.bed.enable", true);
+        set("flags.voidtp.enable", true);
     }
 
     public static boolean FrameIsIncludingGlowFrame() {
@@ -131,6 +134,11 @@ public class FlagsManager {
                 set("flags.frame.enable", false);
                 set("flags.frame.include-glow-frame", true);
                 addToTheFlagsList("frame");
+            }
+
+            if (!isInTheFlagsList("bed")) {
+                set("flags.bed.enable", false);
+                addToTheFlagsList("bed");
             }
         }
 

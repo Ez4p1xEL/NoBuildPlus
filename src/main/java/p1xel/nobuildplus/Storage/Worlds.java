@@ -1,6 +1,7 @@
 package p1xel.nobuildplus.Storage;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import p1xel.nobuildplus.NoBuildPlus;
@@ -49,6 +50,21 @@ public class Worlds {
         return get().getString(world + ".permission");
     }
 
+    public static boolean isSpawnLocationSet(String world) {
+        if (get().get(world + ".spawn-loc") != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public static Location getSpawnLocation(String world) {
+        return (Location) get().get(world + ".spawn-loc");
+    }
+
+    public static void setSpawnLocation(String world, Location loc) {
+        set(world + ".spawn-loc", loc);
+    }
+
     public static void createWorld(String world) {
 
         set(world + ".flags.break", Settings.getDefaultFlag("break"));
@@ -61,6 +77,8 @@ public class Worlds {
         set(world + ".flags.pvp", Settings.getDefaultFlag("pvp"));
         set(world + ".flags.tnt", Settings.getDefaultFlag("tnt"));
         set(world + ".flags.frame", Settings.getDefaultFlag("frame"));
+        set(world + ".flags.bed", Settings.getDefaultFlag("bed"));
+        set(world + ".flags.voidtp", Settings.getDefaultFlag("voidtp"));
         set(world + ".permission", Settings.getPermission());
         set(world + ".deny-message", Settings.getDenyMessageString());
         Settings.addEnableWorldToList(world);
@@ -75,93 +93,11 @@ public class Worlds {
     }
 
     public static void setFlag(String world, String flag, boolean bool) {
-
-        if (flag.equalsIgnoreCase("break")) {
-            set(world + ".flags.break", bool);
-        }
-
-        if (flag.equalsIgnoreCase("build")) {
-            set(world + ".flags.build", bool);
-        }
-
-        if (flag.equalsIgnoreCase("use")) {
-            set(world + ".flags.use", bool);
-        }
-
-        if (flag.equalsIgnoreCase("container")) {
-            set(world + ".flags.container", bool);
-        }
-
-        if (flag.equalsIgnoreCase("move")) {
-            set(world + ".flags.move", bool);
-        }
-
-        if (flag.equalsIgnoreCase("mob-damage")) {
-            set(world + ".flags.mob-damage", bool);
-        }
-
-        if (flag.equalsIgnoreCase("mob-explode")) {
-            set(world + ".flags.mob-explode", bool);
-        }
-
-        if (flag.equalsIgnoreCase("pvp")) {
-            set(world + ".flags.pvp", bool);
-        }
-
-        if(flag.equalsIgnoreCase("tnt")) {
-            set(world + ".flags.tnt", bool);
-        }
-
-        if (flag.equalsIgnoreCase("frame")) {
-            set(world + ".flags.frame", bool);
-        }
-
+        set(world + ".flags." + flag, bool);
     }
 
     public static boolean getFlag(String world, String flag) {
-
-        if (flag.equalsIgnoreCase("break")) {
-            return get().getBoolean(world + ".flags.break");
-        }
-
-        if (flag.equalsIgnoreCase("build")) {
-            return get().getBoolean(world + ".flags.build");
-        }
-
-        if (flag.equalsIgnoreCase("use")) {
-            return get().getBoolean(world + ".flags.use");
-        }
-
-        if (flag.equalsIgnoreCase("container")) {
-            return get().getBoolean(world + ".flags.container");
-        }
-
-        if (flag.equalsIgnoreCase("move")) {
-            return get().getBoolean(world + ".flags.move");
-        }
-
-        if (flag.equalsIgnoreCase("mob-damage")) {
-            return get().getBoolean(world + ".flags.mob-damage");
-        }
-
-        if (flag.equalsIgnoreCase("mob-explode")) {
-            return get().getBoolean(world + ".flags.mob-explode");
-        }
-
-        if (flag.equalsIgnoreCase("pvp")) {
-            return get().getBoolean(world + ".flags.pvp");
-        }
-
-        if (flag.equalsIgnoreCase("tnt")) {
-            return get().getBoolean(world + ".flags.tnt");
-        }
-
-        if (flag.equalsIgnoreCase("frame")) {
-            return get().getBoolean(world + ".flags.frame");
-        }
-
-        return false;
-
+        return get().getBoolean(world + ".flags." + flag);
     }
 
 

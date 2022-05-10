@@ -3,6 +3,7 @@ package p1xel.nobuildplus.Command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import p1xel.nobuildplus.Storage.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -87,6 +88,55 @@ public class Cmd implements CommandExecutor {
 
             }
 
+            if (args[0].equalsIgnoreCase("setspawn")) {
+
+                if (!(sender instanceof Player)) {
+                    sender.sendMessage(Locale.getMessage("not-player"));
+                    return true;
+                }
+
+                Player p = (Player) sender;
+                String world = p.getWorld().getName();
+
+                if (!Settings.getEnableWorldList().contains(world)) {
+                    sender.sendMessage(Locale.getMessage("not-in-list"));
+                    return true;
+                }
+
+                Worlds.setSpawnLocation(world, p.getLocation());
+                sender.sendMessage(Locale.getMessage("loc-set-success").replaceAll("%world%", world));
+                return true;
+
+            }
+
+            if (args[0].equalsIgnoreCase("tp")) {
+
+                if (!(sender instanceof Player)) {
+                    sender.sendMessage(Locale.getMessage("not-player"));
+                    return true;
+                }
+
+                Player p = (Player) sender;
+                String world = p.getWorld().getName();
+
+                if (!Settings.getEnableWorldList().contains(world)) {
+                    sender.sendMessage(Locale.getMessage("not-in-list"));
+                    return true;
+                }
+
+                System.out.println(Worlds.isSpawnLocationSet(world));
+                System.out.println(world);
+
+                if (!Worlds.isSpawnLocationSet(world)) {
+                    sender.sendMessage(Locale.getMessage("loc-not-set"));
+                    return true;
+                }
+
+                sender.sendMessage(Locale.getMessage("tp-success").replaceAll("%world%",world));
+                p.teleport(Worlds.getSpawnLocation(world));
+                return true;
+            }
+
         }
 
         if (args.length == 2) {
@@ -121,6 +171,17 @@ public class Cmd implements CommandExecutor {
 
             }
 
+            if (args[0].equalsIgnoreCase("flag")) {
+
+                if (args[1].equalsIgnoreCase("list")) {
+
+                    sender.sendMessage(FlagsManager.getTheFlagsList().toString());
+                    return true;
+
+                }
+
+            }
+
         }
 
         if (args.length == 4) {
@@ -142,7 +203,8 @@ public class Cmd implements CommandExecutor {
                     m = m.replaceAll("%mob-damage%", Locale.getMessage("flag.mob-damage"));
                     m = m.replaceAll("%mob-explode%", Locale.getMessage("flag.mob-explode"));
                     m = m.replaceAll("%pvp%", Locale.getMessage("flag.pvp"));
-                    m = m.replaceAll("%pvp%", Locale.getMessage("flag.tnt"));
+                    m = m.replaceAll("%tnt%", Locale.getMessage("flag.tnt"));
+                    m = m.replaceAll("%bed%", Locale.getMessage("flag.bed"));
                     sender.sendMessage(m);
                     return true;
                 }

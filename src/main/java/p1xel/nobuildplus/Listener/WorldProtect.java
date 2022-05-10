@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -452,6 +453,59 @@ public class WorldProtect implements Listener {
             }
 
         }
+
+    }
+
+    // Flag: Bed
+    @EventHandler
+    public void onBed(PlayerBedEnterEvent e) {
+
+        String world = e.getPlayer().getWorld().getName();
+        Player p = e.getPlayer();
+
+        if (FlagsManager.getFlagsIsEnabled("bed")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "bed")) {
+
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                        p.sendMessage(Worlds.getDenyMessage(world));
+                        e.setCancelled(true);
+
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    // Flag: Void Teleport
+    @EventHandler
+    public void onDamage(EntityDamageEvent e) {
+
+        String world = e.getEntity().getWorld().getName();
+        Entity entity = e.getEntity();
+
+        if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
+            if (FlagsManager.getFlagsIsEnabled("voidtp")) {
+                if (Settings.getEnableWorldList().contains(world)) {
+                    if (Worlds.getFlag(world, "voidtp")) {
+                        if (Worlds.isSpawnLocationSet(world)) {
+                            if (entity instanceof Player) {
+                                Player p = (Player) e.getEntity();
+                                p.teleport(Worlds.getSpawnLocation(world));
+                                p.setFallDistance(0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 
     }
 

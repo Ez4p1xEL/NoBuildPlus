@@ -53,10 +53,12 @@ public class Settings {
         set("global-settings.flags.container", false);
         set("global-settings.flags.move", true);
         set("global-settings.flags.mob-damage", true);
-        set("globa-settings.flags.mob-explode", false);
+        set("global-settings.flags.mob-explode", false);
         set("global-settings.flags.pvp", false);
         set("global-settings.flags.tnt", false);
         set("global-settings.flags.frame",false);
+        set("global-settings.flags.bed",false);
+        set("global-settings.flags.voidtp",false);
         set("global-settings.permission", "nobuildplus.bypass");
         set("global-settings.deny-message", Locale.getMessage("not-allow"));
 
@@ -90,49 +92,7 @@ public class Settings {
     }
 
     public static boolean getDefaultFlag(String flag) {
-
-        if (flag.equalsIgnoreCase("break")) {
-            return get().getBoolean("global-settings.flags.break");
-        }
-
-        if (flag.equalsIgnoreCase("build")) {
-            return get().getBoolean("global-settings.flags.build");
-        }
-
-        if (flag.equalsIgnoreCase("use")) {
-            return get().getBoolean("global-settings.flags.use");
-        }
-
-        if (flag.equalsIgnoreCase("container")) {
-            return get().getBoolean("global-settings.flags.container");
-        }
-
-        if (flag.equalsIgnoreCase("move")) {
-            return get().getBoolean("global-settings.flags.move");
-        }
-
-        if (flag.equalsIgnoreCase("mob-damage")) {
-            return get().getBoolean("global-settings.flags.mob-damage");
-        }
-
-        if (flag.equalsIgnoreCase("mob-explode")) {
-            return get().getBoolean("global-settings.flags.mob-explode");
-        }
-
-        if (flag.equalsIgnoreCase("pvp")) {
-            return get().getBoolean("global-settings.flags.pvp");
-        }
-
-        if (flag.equalsIgnoreCase("tnt")) {
-            return get().getBoolean("global-settings.flags.tnt");
-        }
-
-        if (flag.equalsIgnoreCase("frame")) {
-            return get().getBoolean("global-settings.flags.frame");
-        }
-
-        return false;
-
+        return get().getBoolean("global-settings.flags." + flag);
     }
 
     public static String getPermission() { return get().getString("global-settings.permission"); }

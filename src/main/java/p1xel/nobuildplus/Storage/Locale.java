@@ -21,7 +21,7 @@ public class Locale {
                 ioException.printStackTrace();
             }
 
-            if (Config.getLanguage().equalsIgnoreCase("eng")) {
+            if (Config.getLanguage().equalsIgnoreCase("en")) {
                 setEnglish();
             }
 
@@ -54,8 +54,8 @@ public class Locale {
 
         if (!getLocaleLanguage().equalsIgnoreCase(Config.getLanguage())) {
 
-            if (Config.getLanguage().equalsIgnoreCase("eng")) {
-                setLocaleLanguage("eng");
+            if (Config.getLanguage().equalsIgnoreCase("en")) {
+                setLocaleLanguage("en");
             }
 
             if (Config.getLanguage().equalsIgnoreCase("zh_CN")) {
@@ -80,7 +80,7 @@ public class Locale {
 
     public static void setLocaleLanguage(String lang) {
 
-        if (lang.equalsIgnoreCase("eng")) {
+        if (lang.equalsIgnoreCase("en")) {
             setEnglish();
         }
 
@@ -92,7 +92,7 @@ public class Locale {
 
     public static void setEnglish() {
 
-        set("Language", "eng");
+        set("Language", "en");
         set("plugin-name", "NoBuildPlus");
         set("commands-plugin-name", "nbp");
         set("commands.top", "&8&m                              ");
@@ -121,6 +121,10 @@ public class Locale {
         set("commands.space-8", "&f");
         set("commands.bottom", "&8&m                              ");
 
+        set("update-check.invalid", "Unable to check for updates: ");
+        set("update-check.latest", "There is not a new update available.");
+        set("update-check.outdate", "There is a new update available.");
+
         set("list-1", "&7Enable worlds:");
         set("list-2", "&9%list%");
 
@@ -136,6 +140,10 @@ public class Locale {
         set("flags-list", "&7Flags List: &fbreak&7(%break%), &fbuild&7(%build%), &fuse&7(%use%), &fcontainer&7(%container%), &fmove&7(%move%), &fmob-damage&7(%mob-damage%), &fmob-explode&7(%mob-explode%), &fpvp&7(%pvp%), &ftnt&7(%tnt%), &fframe&7(%frame%)");
         set("invalid-boolean", "&cInvalid, please type true or false for the flag");
         set("flag-set-success", "&aYou set &9%world% &a's flag &e%flag% &ato &b%boolean%&a.");
+        set("loc-not-set", "&cYou didn't set the spawn location for your world!");
+        set("loc-set-success", "&aYou set the spawn location for &9%world%&a !");
+        set("not-player", "&cYou must be a player to do that.");
+        set("tp-success", "&aYou teleport to spawn of &9%world%&a.");
 
         set("flag.break", "Break");
         set("flag.build", "Build");
@@ -147,6 +155,7 @@ public class Locale {
         set("flag.pvp", "PVP");
         set("flag.tnt", "TNT");
         set("flag.frame", "Frame");
+        set("flag.bed", "Bed");
 
     }
 
@@ -181,6 +190,10 @@ public class Locale {
         set("commands.space-8", "&f");
         set("commands.bottom", "&8&m                              ");
 
+        set("update-check.invalid", "无法检查更新: ");
+        set("update-check.latest", "暂时没有任何更新 你的版本为最新版!");
+        set("update-check.outdate", "有版本更新 请前往MCBBS或SpigotMC下载!");
+
         set("list-1", "&7启用本插件的世界:");
         set("list-2", "&9%list%");
 
@@ -196,6 +209,10 @@ public class Locale {
         set("flags-list", "&7属性列表: &fbreak&7(%break%), &fbuild&7(%build%), &fuse&7(%use%), &fcontainer&7(%container%), &fmove&7(%move%), &fmob-damage&7(%mob-damage%), &fmob-explode&7(%mob-explode%), &fpvp&7(%pvp%), &ftnt&7(%tnt%), &fframe&7(%frame%)");
         set("invalid-boolean", "&c错误, 请输入true或false代表是否开启");
         set("flag-set-success", "&a你成功将 &9%world% &a的属性 &e%flag% &a设置为 &b%boolean%");
+        set("loc-not-set", "&c你没有为你的世界设置出生点");
+        set("loc-set-success", "&a你成功为 &9%world%&a 设置了出生点!");
+        set("not-player", "&c你必须为一名玩家");
+        set("tp-success", "&a你传送了 &9%world% &a的出生点!");
 
         set("flag.break", "破坏");
         set("flag.build", "建造");
@@ -207,6 +224,7 @@ public class Locale {
         set("flag.pvp", "PVP");
         set("flag.tnt", "TNT");
         set("flag.frame", "展示框保护");
+        set("flag.bed", "床");
 
     }
 

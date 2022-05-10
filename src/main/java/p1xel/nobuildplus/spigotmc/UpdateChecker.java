@@ -3,6 +3,7 @@ package p1xel.nobuildplus.spigotmc;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import p1xel.nobuildplus.Storage.Locale;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +28,7 @@ public class UpdateChecker {
                     consumer.accept(scanner.next());
                 }
             } catch (IOException exception) {
-                plugin.getLogger().info("Unable to check for updates: " + exception.getMessage());
+                plugin.getLogger().info(Locale.getMessage("update-check.invalid") + exception.getMessage());
             }
         });
     }

@@ -12,7 +12,7 @@ public class Locale {
 
     public static void createLocaleFile() {
 
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("lang-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "locale.yml");
 
         if (!file.exists()) {
             try {
@@ -33,12 +33,12 @@ public class Locale {
     }
 
     public static FileConfiguration get() {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("lang-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "locale.yml");
         return YamlConfiguration.loadConfiguration(file);
     }
 
     public static void set(String path, Object value) {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("lang-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "locale.yml");
         FileConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
         yaml.set(path,value);
@@ -95,31 +95,21 @@ public class Locale {
         set("Language", "en");
         set("plugin-name", "NoBuildPlus");
         set("commands-plugin-name", "nbp");
-        set("commands.top", "&8&m                              ");
-        set("commands.plugin", "         &2&lNoBuildPlus");
+        set("commands.top", "&8&m                                                   ");
+        set("commands.plugin", "                &2&lNoBuildPlus");
         set("commands.space-1", "&f");
-        set("commands.help", "&7/%prefix% help");
-        set("commands.help-2", "&7View help");
-        set("commands.list", "&7/%prefix% list");
-        set("commands.list-2", "&7List of the enable worlds");
-        set("commands.add", "&7/%prefix% add <world>");
-        set("commands.add-2", "&7Add world name to list");
-        set("commands.remove", "&7/%prefix% remove <world>");
-        set("commands.remove-2", "&7Remove world name from list");
-        set("commands.clear", "&7/%prefix% clear");
-        set("commands.clear-2", "&7Clear worlds from list");
-        set("commands.flag", "&7/%prefix% flag <world> <flag> <true/false>");
-        set("commands.flag-2", "&7Set world's flag");
-        set("commands.reload", "&7/%prefix% reload");
-        set("commands.reload-2", "&7Reload the config");
-        set("commands.flaglist", "&7/%prefix% flag list");
-        set("commands.flaglist-2", "&7View flags list");
-        set("commands.setspawn", "&7/%prefix% setspawn");
-        set("commands.setspawn-2", "&7Set the spawn location of current world");
-        set("commands.tp", "&7/%prefix% tp");
-        set("commands.tp-2", "&7Teleport to the spawn of current world");
+        set("commands.help", "&7/%prefix% help &6View help.");
+        set("commands.list", "&7/%prefix% list &6List of the enable worlds.");
+        set("commands.add", "&7/%prefix% add <world> &6Add world name to list.");
+        set("commands.remove", "&7/%prefix% remove <world> &6Remove world name from list.");
+        set("commands.clear", "&7/%prefix% clear &6Clear worlds from list.");
+        set("commands.flag", "&7/%prefix% flag <world> <flag> <true/false> &6Set world's flag.");
+        set("commands.reload", "&7/%prefix% reload &6Reload the config.");
+        set("commands.flaglist", "&7/%prefix% flag list &6View flags list.");
+        set("commands.setspawn", "&7/%prefix% setspawn &6Set the spawn location of current world.");
+        set("commands.tp", "&7/%prefix% tp &6Teleport to the spawn of current world.");
         set("commands.space-8", "&f");
-        set("commands.bottom", "&8&m                              ");
+        set("commands.bottom", "&8&m                                                   ");
 
         set("update-check.invalid", "Unable to check for updates: ");
         set("update-check.latest", "There is not a new update available.");
@@ -156,6 +146,8 @@ public class Locale {
         set("flag.tnt", "TNT");
         set("flag.frame", "Frame");
         set("flag.bed", "Bed");
+        set("flag.villager", "Villager Interaction");
+        set("flag.command", "Command Use");
 
     }
 
@@ -164,31 +156,21 @@ public class Locale {
         set("Language", "zh_CN");
         set("plugin-name", "NoBuildPlus");
         set("commands-plugin-name", "nbp");
-        set("commands.top", "&8&m                              ");
-        set("commands.plugin", "         &2&lNoBuildPlus");
+        set("commands.top", "&8&m                                                   ");
+        set("commands.plugin", "                &2&lNoBuildPlus");
         set("commands.space-1", "&f");
-        set("commands.help", "&7/%prefix% help");
-        set("commands.help-2", "&7查看帮助");
-        set("commands.list", "&7/%prefix% list");
-        set("commands.list-2", "&7查看启用本插件的世界列表");
-        set("commands.add", "&7/%prefix% add <world>");
-        set("commands.add-2", "&7将世界加至列表中");
-        set("commands.remove", "&7/%prefix% remove <world>");
-        set("commands.remove-2", "&7从列表中移除世界");
-        set("commands.clear", "&7/%prefix% clear");
-        set("commands.clear-2", "&7清空列表");
-        set("commands.flag", "&7/%prefix% flag <world> <flag> <true/false>");
-        set("commands.flag-2", "&7设置世界的属性");
-        set("commands.flaglist", "&7/%prefix% flag list");
-        set("commands.flaglist-2", "&7查看属性列表");
-        set("commands.setspawn", "&7/%prefix% setspawn");
-        set("commands.setspawn-2", "&7设置世界的出生点");
-        set("commands.tp", "&7/%prefix% tp");
-        set("commands.tp-2", "&7前往当前世界的出生点");
-        set("commands.reload", "&7/%prefix% reload");
-        set("commands.reload-2", "&7重载配置文件");
+        set("commands.help", "&7/%prefix% help &6查看帮助");
+        set("commands.list", "&7/%prefix% list &6查看启用本插件的世界列表");
+        set("commands.add", "&7/%prefix% add <world> &6将世界加至列表中");
+        set("commands.remove", "&7/%prefix% remove <world> &6从列表中移除世界");
+        set("commands.clear", "&7/%prefix% clear &6清空列表");
+        set("commands.flag", "&7/%prefix% flag <world> <flag> <true/false> &6设置世界的属性");
+        set("commands.flaglist", "&7/%prefix% flag list &6查看属性列表");
+        set("commands.setspawn", "&7/%prefix% setspawn &6设置世界的出生点");
+        set("commands.tp", "&7/%prefix% tp &6前往当前世界的出生点");
+        set("commands.reload", "&7/%prefix% reload &6重载配置文件");
         set("commands.space-8", "&f");
-        set("commands.bottom", "&8&m                              ");
+        set("commands.bottom", "&8&m                                                   ");
 
         set("update-check.invalid", "无法检查更新: ");
         set("update-check.latest", "暂时没有任何更新 你的版本为最新版!");
@@ -225,6 +207,8 @@ public class Locale {
         set("flag.tnt", "TNT");
         set("flag.frame", "展示框保护");
         set("flag.bed", "床");
+        set("flag.villager", "村民交互");
+        set("flag.command", "指令");
 
     }
 

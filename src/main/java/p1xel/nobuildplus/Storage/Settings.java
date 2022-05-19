@@ -12,28 +12,21 @@ public class Settings {
 
     public static void createWorldsFile() {
 
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("settings-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "settings.yml");
 
         if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-
-            defaultGlobalSettings();
-
+            NoBuildPlus.getInstance().saveResource("settings.yml", false);
         }
 
     }
 
     public static FileConfiguration get() {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("settings-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "settings.yml");
         return YamlConfiguration.loadConfiguration(file);
     }
 
     public static void set(String path, Object value) {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("settings-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "settings.yml");
         FileConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
         yaml.set(path,value);
@@ -42,27 +35,6 @@ public class Settings {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-
-    }
-
-    public static void defaultGlobalSettings() {
-
-        set("global-settings.flags.break", false);
-        set("global-settings.flags.build", false);
-        set("global-settings.flags.use", true);
-        set("global-settings.flags.container", false);
-        set("global-settings.flags.move", true);
-        set("global-settings.flags.mob-damage", true);
-        set("global-settings.flags.mob-explode", false);
-        set("global-settings.flags.pvp", false);
-        set("global-settings.flags.tnt", false);
-        set("global-settings.flags.frame",false);
-        set("global-settings.flags.bed",false);
-        set("global-settings.flags.voidtp",false);
-        set("global-settings.permission", "nobuildplus.bypass");
-        set("global-settings.deny-message", Locale.getMessage("not-allow"));
-
-        set("enable-worlds", "[]");
 
     }
 

@@ -29,16 +29,9 @@
 ## My name on SpigotMC is p1xEL_mc
 
 # The version of the plugin.
-Version: 1.0.4
-Id: 5
+Version: 1.0.5
+Id: 6
 type: Release
-
-# Files
-# They are the file's name. I don't recommend you to change them.
-settings-file: settings.yml
-worlds-data-file: worlds.yml
-lang-file: locale.yml
-flags-file: flags.yml
 
 # Language of the file.
 # Languages list: en(English) zh_CN(Simplified Chinese).

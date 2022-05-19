@@ -1,0 +1,75 @@
+FlagsList:
+  - break
+  - build
+  - use
+  - container
+  - move
+  - mob-damage
+  - mob-explode
+  - pvp
+  - tnt
+  - frame
+  - bed
+  - villager
+  - command
+flags:
+  break:
+    enable: true
+    type: all
+    list:
+      - GRASS_BLOCK
+  build:
+    enable: true
+    type: all
+    list:
+      - GRASS_BLOCK
+  use:
+    enable: true
+    type: list
+    list:
+      - ENCHANTING_TABLE
+      - CRAFTING_TABLE
+      - ANVIL
+      - CHIPPED_ANVIL
+      - DAMAGED_ANVIL
+  container:
+    enable: true
+    type: list
+    list:
+      - CHEST
+      - ENDER_CHEST
+      - TRAPPED_CHEST
+      - FURNACE
+  move:
+    enable: true
+    list:
+      - s1mple
+  mob-damage:
+    enable: true
+    type: all
+    list:
+      - ZOMBIE
+  mob-explode:
+    enable: true
+    type: all
+    list:
+      - CREEPER
+  pvp:
+    enable: true
+  tnt:
+    enable: false
+  frame:
+    enable: true
+    # 1.17+
+    include-glow-frame: false
+  bed:
+    enable: true
+  voidtp:
+    enable: true
+  villager:
+    enable: true
+  command:
+    enable: true
+    type: list
+    list:
+      - 'spawn'

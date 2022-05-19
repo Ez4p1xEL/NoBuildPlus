@@ -9,10 +9,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
-import org.bukkit.event.player.PlayerBedEnterEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.*;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -344,6 +341,7 @@ public class WorldProtect implements Listener {
     }
 
     // Flag: frame(move)
+    // Flag: villager
     @EventHandler
     public void onInteractEntity(PlayerInteractEntityEvent e) {
 
@@ -381,6 +379,27 @@ public class WorldProtect implements Listener {
 
             }
 
+        }
+
+        if (e.getRightClicked().getType() == EntityType.VILLAGER) {
+
+            if (FlagsManager.getFlagsIsEnabled("villager")) {
+
+                if (Settings.getEnableWorldList().contains(world)) {
+
+                    if (!Worlds.getFlag(world, "villager")) {
+
+                        if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                            e.setCancelled(true);
+
+                        }
+                    }
+
+                }
+
+            }
         }
     }
 
@@ -504,6 +523,45 @@ public class WorldProtect implements Listener {
             }
         }
 
+
+    }
+
+    // Flag: Command
+    @EventHandler
+    public void onChat(PlayerCommandPreprocessEvent e) {
+
+        String world = e.getPlayer().getWorld().getName();
+        Player p = e.getPlayer();
+
+        if (FlagsManager.getFlagsIsEnabled("command")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "command")) {
+
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                        if (FlagsManager.getFlagsType("command").equalsIgnoreCase("all")) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                            e.setCancelled(true);
+                        }
+
+                        if (FlagsManager.getFlagsType("command").equalsIgnoreCase("list")) {
+                            for (String cmd : FlagsManager.getFlagsList("command")) {
+                                if (e.getMessage().equalsIgnoreCase("/" + cmd)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                    e.setCancelled(true);
+                                }
+                            }
+                        }
+
+
+
+                    }
+                }
+
+            }
+        }
 
     }
 

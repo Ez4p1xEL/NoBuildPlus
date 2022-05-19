@@ -13,7 +13,7 @@ public class Worlds {
 
     public static void createWorldsFile() {
 
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("worlds-data-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "worlds.yml");
 
         if (!file.exists()) {
             try {
@@ -25,12 +25,12 @@ public class Worlds {
     }
 
     public static FileConfiguration get() {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("worlds-data-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "worlds.yml");
         return YamlConfiguration.loadConfiguration(file);
     }
 
     public static void set(String path, Object value) {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getString("worlds-data-file"));
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "worlds.yml");
         FileConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
         yaml.set(path,value);
@@ -79,6 +79,8 @@ public class Worlds {
         set(world + ".flags.frame", Settings.getDefaultFlag("frame"));
         set(world + ".flags.bed", Settings.getDefaultFlag("bed"));
         set(world + ".flags.voidtp", Settings.getDefaultFlag("voidtp"));
+        set(world + ".flags.villager", Settings.getDefaultFlag("villager"));
+        set(world + ".flags.command", Settings.getDefaultFlag("command"));
         set(world + ".permission", Settings.getPermission());
         set(world + ".deny-message", Settings.getDenyMessageString());
         Settings.addEnableWorldToList(world);

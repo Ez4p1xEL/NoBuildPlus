@@ -8,11 +8,13 @@ FlagsList:
   - mob-explode
   - pvp
   - tnt
+  - tnt-damage
   - frame
   - bed
   - villager
   - command
   - chat
+  - leaf-decay
 flags:
   break:
     enable: true

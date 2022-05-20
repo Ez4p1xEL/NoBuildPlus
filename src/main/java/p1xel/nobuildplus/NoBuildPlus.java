@@ -45,5 +45,4 @@ public class NoBuildPlus extends JavaPlugin {
 
     }
 
-
 }

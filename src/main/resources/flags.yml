@@ -12,6 +12,7 @@ FlagsList:
   - bed
   - villager
   - command
+  - chat
 flags:
   break:
     enable: true
@@ -57,7 +58,9 @@ flags:
   pvp:
     enable: true
   tnt:
-    enable: false
+    enable: true
+  tnt-damage:
+    enable: true
   frame:
     enable: true
     # 1.17+
@@ -73,3 +76,7 @@ flags:
     type: list
     list:
       - 'spawn'
+  chat:
+    enable: true
+  leaf-decay:
+    enable: true

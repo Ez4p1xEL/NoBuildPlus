@@ -78,7 +78,7 @@ public class FlagsManager {
 
     public static void checkFlag() {
 
-        if (Config.getInt("Id") < 6) {
+        if (Config.getInt("Id") < Config.getInt("Id")) {
             if (!isInTheFlagsList("mob-explode")) {
                 set("flags.mob-explode.enable", true);
                 set("flags.mob-explode.type", "all");
@@ -112,6 +112,21 @@ public class FlagsManager {
                 set("flags.command.type", "all");
                 set("flags.command.list", "spawn");
                 addToTheFlagsList("command");
+            }
+
+            if (!isInTheFlagsList("chat")) {
+                set("flags.chat.enable", true);
+                addToTheFlagsList("chat");
+            }
+
+            if (!isInTheFlagsList("tnt-damage")) {
+                set("flags.tnt-damage.enable", true);
+                addToTheFlagsList("tnt-damage");
+            }
+
+            if (!isInTheFlagsList("leaf-decay")) {
+                set("flags.leaf-decay.enable", true);
+                addToTheFlagsList("leaf-decay");
             }
 
         }

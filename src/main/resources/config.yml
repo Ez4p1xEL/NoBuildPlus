@@ -14,9 +14,6 @@
 #############################################################################
 ## How to use the plugin
 ##
-## settings.yml is the global settings file which includes the default settings of the world and enable worlds list.
-## If you want to change the world's default settings. just change the boolean for the frag which is in the file.
-##
 ## worlds.yml is the worlds data file. You can change each world's flag and deny message.
 ## You can change the flag for world with command. However, you have to change the deny message by yourself. (Or it will use the default settings')
 ##
@@ -29,8 +26,8 @@
 ## My name on SpigotMC is p1xEL_mc
 
 # The version of the plugin.
-Version: 1.0.5
-Id: 6
+Version: 1.0.6
+Id: 7
 type: Release
 
 # Language of the file.

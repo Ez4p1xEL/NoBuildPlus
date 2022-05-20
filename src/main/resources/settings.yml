@@ -9,11 +9,14 @@ global-settings:
     mob-explode: false
     pvp: false
     tnt: false
+    tnt-damage: false
     frame: false
     bed: false
     voidtp: false
     villager: true
     command: true
+    chat: true
+    leaf-decay: true
   permission: nobuildplus.bypass
   deny-message: §c§l! §7You cannot do that here.
 enable-worlds: []

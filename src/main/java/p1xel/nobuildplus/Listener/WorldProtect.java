@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
@@ -256,6 +257,23 @@ public class WorldProtect implements Listener {
                 }
             }
 
+        }
+
+        // Flag: tnt-damage
+        if (e.getDamager().getType() == EntityType.PRIMED_TNT || e.getDamager().getType() == EntityType.MINECART_TNT) {
+            if (FlagsManager.getFlagsIsEnabled("tnt-damage")) {
+
+                if (Settings.getEnableWorldList().contains(world)) {
+
+                    if (!Worlds.getFlag(world, "tnt-damage")) {
+
+                        p.sendMessage(Worlds.getDenyMessage(world));
+                        e.setCancelled(true);
+
+                    }
+                }
+
+            }
         }
 
         // Flag: Pvp
@@ -526,9 +544,35 @@ public class WorldProtect implements Listener {
 
     }
 
+    // Flag: Chat
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e) {
+
+        String world = e.getPlayer().getWorld().getName();
+        Player p = e.getPlayer();
+
+        if (FlagsManager.getFlagsIsEnabled("chat")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "chat")) {
+
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                        p.sendMessage(Worlds.getDenyMessage(world));
+                        e.setCancelled(true);
+
+                    }
+                }
+
+            }
+        }
+
+    }
+
     // Flag: Command
     @EventHandler
-    public void onChat(PlayerCommandPreprocessEvent e) {
+    public void onCommandExecute(PlayerCommandPreprocessEvent e) {
 
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
@@ -558,6 +602,27 @@ public class WorldProtect implements Listener {
 
 
                     }
+                }
+
+            }
+        }
+
+    }
+
+    // Flag: leaf-decay
+    @EventHandler
+    public void onLeafDecay(LeavesDecayEvent e) {
+
+        String world = e.getBlock().getWorld().getName();
+
+        if (FlagsManager.getFlagsIsEnabled("leaf-decay")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "leaf-decay")) {
+
+                    e.setCancelled(true);
+
                 }
 
             }

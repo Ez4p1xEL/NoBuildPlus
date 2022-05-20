@@ -23,7 +23,6 @@ public class Cmd implements CommandExecutor {
         if (args.length == 0) {
 
             sender.sendMessage(Locale.getCmdMessage("commands.help"));
-            sender.sendMessage(Locale.getCmdMessage("commands.help-2"));
             return true;
 
         }
@@ -206,30 +205,9 @@ public class Cmd implements CommandExecutor {
                 sender.sendMessage(Locale.getMessage("invalid-boolean"));
                 return true;
 
-
-
             }
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         return false;
     }

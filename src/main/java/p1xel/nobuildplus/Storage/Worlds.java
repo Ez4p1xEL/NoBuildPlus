@@ -75,6 +75,7 @@ public class Worlds {
         set(world + ".flags.mob-damage", Settings.getDefaultFlag("mob-damage"));
         set(world + ".flags.mob-explode", Settings.getDefaultFlag("mob-explode"));
         set(world + ".flags.pvp", Settings.getDefaultFlag("pvp"));
+        set(world + ".flags.shoot", Settings.getDefaultFlag("shoot"));
         set(world + ".flags.tnt", Settings.getDefaultFlag("tnt"));
         set(world + ".flags.tnt-damage", Settings.getDefaultFlag("tnt-damage"));
         set(world + ".flags.frame", Settings.getDefaultFlag("frame"));
@@ -84,6 +85,7 @@ public class Worlds {
         set(world + ".flags.command", Settings.getDefaultFlag("command"));
         set(world + ".flags.chat", Settings.getDefaultFlag("chat"));
         set(world + ".flags.leaf-decay", Settings.getDefaultFlag("leaf-decay"));
+        set(world + ".flags.melt", Settings.getDefaultFlag("melt"));
         set(world + ".permission", Settings.getPermission());
         set(world + ".deny-message", Settings.getDenyMessageString());
         Settings.addEnableWorldToList(world);

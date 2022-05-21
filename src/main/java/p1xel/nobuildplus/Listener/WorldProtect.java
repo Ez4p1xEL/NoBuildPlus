@@ -4,10 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
@@ -541,6 +538,21 @@ public class WorldProtect implements Listener {
             }
         }
 
+        if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            if (entity instanceof Player) {
+                if (FlagsManager.getFlagsIsEnabled("voidtp")) {
+                    if (Settings.getEnableWorldList().contains(world)) {
+                        if (Worlds.getFlag(world, "voidtp")) {
+                            if (Worlds.isSpawnLocationSet(world)) {
+                                Player p = (Player) e.getEntity();
+                                p.setFallDistance(0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 
     }
 
@@ -629,5 +641,68 @@ public class WorldProtect implements Listener {
         }
 
     }
+
+    // Flag: melt
+    @EventHandler
+    public void onBlockFade(BlockFadeEvent e) {
+
+        String world = e.getBlock().getWorld().getName();
+
+        if (e.getBlock().getType() == Material.SNOW || e.getBlock().getType() == Material.ICE || e.getBlock().getType() == Material.PACKED_ICE) {
+
+            if (FlagsManager.getFlagsIsEnabled("melt")) {
+
+                if (Settings.getEnableWorldList().contains(world)) {
+
+                    if (!Worlds.getFlag(world, "melt")) {
+
+                        e.setCancelled(true);
+
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    // Flag: shoot
+    @EventHandler
+    public void onShoot(EntityShootBowEvent e) {
+
+        String world = e.getEntity().getWorld().getName();
+        Entity p = e.getEntity();
+
+            if (FlagsManager.getFlagsIsEnabled("shoot")) {
+
+                if (Settings.getEnableWorldList().contains(world)) {
+
+                    if (!Worlds.getFlag(world, "shoot")) {
+
+                        if (p instanceof Player) {
+
+                            if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                                if (e.getBow().getType() == Material.BOW) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                    e.setCancelled(true);
+                                }
+                                if (FlagsManager.getBoolInFlag("shoot", "include-crossbow")) {
+                                    if (e.getBow().getType() == Material.CROSSBOW) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                        e.setCancelled(true);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+            }
+
+
+    }
+
 
 }

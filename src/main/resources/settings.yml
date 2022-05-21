@@ -8,6 +8,7 @@ global-settings:
     mob-damage: true
     mob-explode: false
     pvp: false
+    shoot: false
     tnt: false
     tnt-damage: false
     frame: false
@@ -17,6 +18,8 @@ global-settings:
     command: true
     chat: true
     leaf-decay: true
+    melt: true
+    fall-damage: true
   permission: nobuildplus.bypass
   deny-message: §c§l! §7You cannot do that here.
 enable-worlds: []

@@ -7,6 +7,7 @@ FlagsList:
   - mob-damage
   - mob-explode
   - pvp
+  - shoot
   - tnt
   - tnt-damage
   - frame
@@ -15,6 +16,8 @@ FlagsList:
   - command
   - chat
   - leaf-decay
+  - melt
+  - fall-damage
 flags:
   break:
     enable: true
@@ -59,6 +62,10 @@ flags:
       - CREEPER
   pvp:
     enable: true
+  shoot:
+    enable: true
+    # set true if your minecraft server version has crossbow.
+    include-crossbow: false
   tnt:
     enable: true
   tnt-damage:
@@ -81,4 +88,8 @@ flags:
   chat:
     enable: true
   leaf-decay:
+    enable: true
+  melt:
+    enable: true
+  fall-damage:
     enable: true

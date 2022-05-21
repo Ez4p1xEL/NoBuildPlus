@@ -72,6 +72,10 @@ public class FlagsManager {
 
     }
 
+    public static boolean getBoolInFlag(String flag, String path) {
+        return get().getBoolean("flags." + flag + "." + path);
+    }
+
     public static boolean FrameIsIncludingGlowFrame() {
         return get().getBoolean("flags.frame.include-glow-frame");
     }
@@ -127,6 +131,11 @@ public class FlagsManager {
             if (!isInTheFlagsList("leaf-decay")) {
                 set("flags.leaf-decay.enable", true);
                 addToTheFlagsList("leaf-decay");
+            }
+
+            if (!isInTheFlagsList("melt")) {
+                set("flags.melt.enable", true);
+                addToTheFlagsList("melt");
             }
 
         }

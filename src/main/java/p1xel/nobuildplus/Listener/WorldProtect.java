@@ -540,13 +540,11 @@ public class WorldProtect implements Listener {
 
         if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
             if (entity instanceof Player) {
-                if (FlagsManager.getFlagsIsEnabled("voidtp")) {
+                if (FlagsManager.getFlagsIsEnabled("fall-damage")) {
                     if (Settings.getEnableWorldList().contains(world)) {
-                        if (Worlds.getFlag(world, "voidtp")) {
-                            if (Worlds.isSpawnLocationSet(world)) {
+                        if (!Worlds.getFlag(world, "fall-damage")) {
                                 Player p = (Player) e.getEntity();
-                                p.setFallDistance(0);
-                            }
+                                e.setCancelled(true);
                         }
                     }
                 }

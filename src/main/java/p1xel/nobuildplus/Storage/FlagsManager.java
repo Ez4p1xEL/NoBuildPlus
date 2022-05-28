@@ -138,6 +138,11 @@ public class FlagsManager {
                 addToTheFlagsList("melt");
             }
 
+            if (!isInTheFlagsList("fall-damage")) {
+                set("flags.fall-damage.enable", true);
+                addToTheFlagsList("fall-damage");
+            }
+
         }
 
     }

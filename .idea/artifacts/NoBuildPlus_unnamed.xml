@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="NoBuildPlus-unnamed">
+    <output-path>$PROJECT_DIR$/out/artifacts/NoBuildPlus_unnamed</output-path>
+    <root id="archive" name="NoBuildPlus-unnamed.jar">
+      <element id="module-output" name="NoBuildPlus" />
+    </root>
+  </artifact>
+</component>

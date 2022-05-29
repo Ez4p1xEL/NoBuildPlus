@@ -82,7 +82,7 @@ public class FlagsManager {
 
     public static void checkFlag() {
 
-        if (Config.getInt("Id") < Config.getInt("Id")) {
+        if (Config.getInt("Id") < 10) {
             if (!isInTheFlagsList("mob-explode")) {
                 set("flags.mob-explode.enable", true);
                 set("flags.mob-explode.type", "all");

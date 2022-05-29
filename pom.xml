@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

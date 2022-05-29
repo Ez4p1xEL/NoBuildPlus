@@ -8,6 +8,7 @@ import org.bukkit.event.block.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
+import p1xel.nobuildplus.Hook.HRes;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -20,6 +21,10 @@ public class WorldProtect implements Listener {
 
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
+
+        if (HRes.isInRes(e.getBlock())) {
+            return;
+        }
 
         if (!FlagsManager.getFlagsIsEnabled("break")) {
             return;
@@ -65,6 +70,10 @@ public class WorldProtect implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
+        if (HRes.isInRes(e.getBlock())) {
+            return;
+        }
+
         if (!FlagsManager.getFlagsIsEnabled("build")) {
             return;
         }
@@ -109,6 +118,12 @@ public class WorldProtect implements Listener {
 
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
+
+        if (e.getClickedBlock() != null) {
+            if (HRes.isInRes(e.getClickedBlock())) {
+                return;
+            }
+        }
 
         // Flag: Use
         if (FlagsManager.getFlagsIsEnabled("use")) {
@@ -181,6 +196,10 @@ public class WorldProtect implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
         if (!FlagsManager.getFlagsIsEnabled("move")) {
             return;
         }
@@ -212,6 +231,15 @@ public class WorldProtect implements Listener {
         String world = e.getEntity().getWorld().getName();
         Entity p = e.getDamager();
         Entity target = e.getEntity();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
+        if (HRes.isInRes(target)) {
+            return;
+        }
+
         // Flag: Mob Damage
         if (FlagsManager.getFlagsIsEnabled("mob-damage")) {
 
@@ -306,6 +334,10 @@ public class WorldProtect implements Listener {
 
         String world = e.getEntity().getWorld().getName();
 
+        if (HRes.isInRes(e.getEntity())) {
+            return;
+        }
+
         if (FlagsManager.getFlagsIsEnabled("mob-explode")) {
 
             if (Settings.getEnableWorldList().contains(world)) {
@@ -362,6 +394,14 @@ public class WorldProtect implements Listener {
 
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
+        if (HRes.isInRes(e.getRightClicked())) {
+            return;
+        }
 
         if (FlagsManager.getFlagsIsEnabled("frame")) {
 
@@ -424,6 +464,10 @@ public class WorldProtect implements Listener {
 
         String world = e.getEntity().getWorld().getName();
 
+        if (HRes.isInRes(e.getEntity())) {
+            return;
+        }
+
         if (FlagsManager.getFlagsIsEnabled("frame")) {
 
             if (Settings.getEnableWorldList().contains(world)) {
@@ -458,6 +502,10 @@ public class WorldProtect implements Listener {
     public void onHangingBreakByEntity(HangingBreakByEntityEvent e) {
 
         String world = e.getEntity().getWorld().getName();
+
+        if (HRes.isInRes(e.getEntity())) {
+            return;
+        }
 
         if (FlagsManager.getFlagsIsEnabled("frame")) {
 
@@ -495,6 +543,10 @@ public class WorldProtect implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
         if (FlagsManager.getFlagsIsEnabled("bed")) {
 
             if (Settings.getEnableWorldList().contains(world)) {
@@ -521,6 +573,12 @@ public class WorldProtect implements Listener {
 
         String world = e.getEntity().getWorld().getName();
         Entity entity = e.getEntity();
+
+        if (entity instanceof Player) {
+            if (HRes.isInRes(entity)) {
+                return;
+            }
+        }
 
         if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
             if (FlagsManager.getFlagsIsEnabled("voidtp")) {
@@ -561,6 +619,10 @@ public class WorldProtect implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
         if (FlagsManager.getFlagsIsEnabled("chat")) {
 
             if (Settings.getEnableWorldList().contains(world)) {
@@ -586,6 +648,10 @@ public class WorldProtect implements Listener {
 
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
 
         if (FlagsManager.getFlagsIsEnabled("command")) {
 
@@ -625,6 +691,10 @@ public class WorldProtect implements Listener {
 
         String world = e.getBlock().getWorld().getName();
 
+        if (HRes.isInRes(e.getBlock())) {
+            return;
+        }
+
         if (FlagsManager.getFlagsIsEnabled("leaf-decay")) {
 
             if (Settings.getEnableWorldList().contains(world)) {
@@ -645,6 +715,10 @@ public class WorldProtect implements Listener {
     public void onBlockFade(BlockFadeEvent e) {
 
         String world = e.getBlock().getWorld().getName();
+
+        if (HRes.isInRes(e.getBlock())) {
+            return;
+        }
 
         if (e.getBlock().getType() == Material.SNOW || e.getBlock().getType() == Material.ICE || e.getBlock().getType() == Material.PACKED_ICE) {
 
@@ -670,6 +744,12 @@ public class WorldProtect implements Listener {
 
         String world = e.getEntity().getWorld().getName();
         Entity p = e.getEntity();
+
+        if (p instanceof Player) {
+            if (HRes.isInRes(p)) {
+                return;
+            }
+        }
 
             if (FlagsManager.getFlagsIsEnabled("shoot")) {
 

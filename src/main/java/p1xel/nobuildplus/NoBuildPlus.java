@@ -1,5 +1,9 @@
 package p1xel.nobuildplus;
 
+import com.bekvon.bukkit.residence.Residence;
+import com.bekvon.bukkit.residence.api.ResidenceApi;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.Command.Cmd;
 import p1xel.nobuildplus.Listener.WorldProtect;
@@ -15,6 +19,19 @@ public class NoBuildPlus extends JavaPlugin {
         return instance;
     }
 
+    public static Residence getRes() {
+        Plugin resPlug = Bukkit.getServer().getPluginManager().getPlugin("Residence");
+        if (resPlug != null) {
+            return Residence.getInstance();
+        } else {
+            return null;
+        }
+    }
+
+    public static boolean isResidenceEnabled() {
+        return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
+    }
+
     @Override
     public void onEnable() {
         instance = this;
@@ -27,6 +44,8 @@ public class NoBuildPlus extends JavaPlugin {
 
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
         getServer().getPluginManager().registerEvents(new WorldProtect(), this);
+
+
 
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());
 

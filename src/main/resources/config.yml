@@ -22,8 +22,8 @@
 ## My name on SpigotMC is p1xEL_mc
 
 # The version of the plugin.
-Version: 1.0.8
-Id: 9
+Version: 1.0.9
+Id: 10
 type: Release
 
 # Language of the file.
@@ -33,3 +33,6 @@ Language: en
 
 # Check update when the plugin loaded.
 check-update: true
+
+hook:
+  Residence: true

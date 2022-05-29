@@ -34,4 +34,8 @@ public class Config {
         return NoBuildPlus.getInstance().getConfig().getInt(path);
     }
 
+    public static boolean isResidenceEnabled() {
+        return getBool("hook.Residence");
+    }
+
 }

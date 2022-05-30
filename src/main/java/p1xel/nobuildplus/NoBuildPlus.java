@@ -1,12 +1,11 @@
 package p1xel.nobuildplus;
 
 import com.bekvon.bukkit.residence.Residence;
-import com.bekvon.bukkit.residence.api.ResidenceApi;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.Command.Cmd;
-import p1xel.nobuildplus.Listener.WorldProtect;
+import p1xel.nobuildplus.Listener.*;
 import p1xel.nobuildplus.Storage.*;
 import p1xel.nobuildplus.bStats.Metrics;
 import p1xel.nobuildplus.spigotmc.UpdateChecker;
@@ -43,7 +42,12 @@ public class NoBuildPlus extends JavaPlugin {
         FlagsManager.checkFlag();
 
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
-        getServer().getPluginManager().registerEvents(new WorldProtect(), this);
+        getServer().getPluginManager().registerEvents(new NoBuildPlusBlockListener(), this);
+        getServer().getPluginManager().registerEvents(new NoBuildPlusEntityListener(), this);
+        getServer().getPluginManager().registerEvents(new NoBuildPlusHangingListener(), this);
+        getServer().getPluginManager().registerEvents(new NoBuildPlusPlayerListener(), this);
+        getServer().getPluginManager().registerEvents(new NoBuildPlusServerListener(), this);
+
 
 
 

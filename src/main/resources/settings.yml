@@ -20,6 +20,7 @@ global-settings:
     leaf-decay: true
     melt: true
     fall-damage: true
+    armorstand: false
   permission: nobuildplus.bypass
-  deny-message: §c§l! §7You cannot do that here.
+  deny-message: '&c&l! &7You cannot do that here.'
 enable-worlds: []

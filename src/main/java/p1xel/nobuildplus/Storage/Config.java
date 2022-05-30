@@ -22,7 +22,6 @@ public class Config {
     public static void reloadConfig() {
 
         NoBuildPlus.getInstance().reloadConfig();
-        Locale.checkLanguage();
 
     }
 

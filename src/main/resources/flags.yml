@@ -18,6 +18,7 @@ FlagsList:
   - leaf-decay
   - melt
   - fall-damage
+  - armorstand
 flags:
   break:
     enable: true
@@ -92,4 +93,6 @@ flags:
   melt:
     enable: true
   fall-damage:
+    enable: true
+  armorstand:
     enable: true

@@ -56,6 +56,24 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         }
 
+        // Flag: farmbreak
+        if (e.getAction() == Action.PHYSICAL) {
+                if (FlagsManager.getFlagsIsEnabled("farmbreak")) {
+
+                    if (Settings.getEnableWorldList().contains(world)) {
+
+                        if (!Worlds.getFlag(world, "farmbreak")) {
+
+                            if (e.getClickedBlock().getType() == Material.matchMaterial("SOIL") || e.getClickedBlock().getType() == Material.matchMaterial("FARMLAND")) {
+                                    e.setCancelled(true);
+                            }
+
+                    }
+                }
+
+            }
+        }
+
 
 
         // Flag: Container

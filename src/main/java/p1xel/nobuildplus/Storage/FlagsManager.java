@@ -80,6 +80,8 @@ public class FlagsManager {
         return get().getBoolean("flags.frame.include-glow-frame");
     }
 
+    public static boolean FarmBreakIsForHighVersion() { return get().getBoolean("flags.farmbreak.isHighVersion"); }
+
     public static void checkFlag() {
 
         if (Config.getInt("Id") < 10) {
@@ -141,6 +143,16 @@ public class FlagsManager {
             if (!isInTheFlagsList("fall-damage")) {
                 set("flags.fall-damage.enable", true);
                 addToTheFlagsList("fall-damage");
+            }
+
+            if (!isInTheFlagsList("armorstand")) {
+                set("flags.armorstand.enable", true);
+                addToTheFlagsList("armorstand");
+            }
+
+            if (!isInTheFlagsList("farmbreak")) {
+                set("flags.farmbreak.enable", true);
+                addToTheFlagsList("farmbreak");
             }
 
         }

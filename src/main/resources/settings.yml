@@ -21,6 +21,7 @@ global-settings:
     melt: true
     fall-damage: true
     armorstand: false
+    farmbreak: false
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'
 enable-worlds: []

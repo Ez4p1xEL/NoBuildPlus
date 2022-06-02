@@ -19,6 +19,7 @@ FlagsList:
   - melt
   - fall-damage
   - armorstand
+  - farmbreak
 flags:
   break:
     enable: true
@@ -95,4 +96,6 @@ flags:
   fall-damage:
     enable: true
   armorstand:
+    enable: true
+  farmbreak:
     enable: true

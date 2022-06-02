@@ -87,6 +87,7 @@ public class Worlds {
         set(world + ".flags.leaf-decay", Settings.getDefaultFlag("leaf-decay"));
         set(world + ".flags.melt", Settings.getDefaultFlag("melt"));
         set(world + ".flags.armorstand", Settings.getDefaultFlag("armorstand"));
+        set(world + ".flags.farmbreak", Settings.getDefaultFlag("farmbreak"));
         set(world + ".permission", Settings.getPermission());
         set(world + ".deny-message", Settings.getDenyMessageString());
         Settings.addEnableWorldToList(world);

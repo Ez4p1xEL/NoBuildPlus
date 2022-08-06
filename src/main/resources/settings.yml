@@ -29,5 +29,15 @@ global-settings:
     bucket-place: false
     bucket-fill: false
     boat: false
+    button: true
+    door-interact: true
+    lever: true
+    trapdoor-interact: true
+    fencegate-interact: true
+    drop-item: true
+    egg-throw: true
+    snowball-throw: true
+    water-spread: true
+    lava-spread: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

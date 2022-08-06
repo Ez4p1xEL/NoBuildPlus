@@ -4,10 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockFadeEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.block.*;
 import p1xel.nobuildplus.Hook.HRes;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
@@ -162,6 +159,45 @@ public class NoBuildPlusBlockListener implements Listener {
             }
 
         }
+    }
+
+    @EventHandler
+    public void onLiquidSpread(BlockFromToEvent e) {
+
+        String world = e.getBlock().getWorld().getName();
+
+        // Flag: water-spread
+        if (e.getBlock().getType() == Material.WATER) {
+            if (FlagsManager.getFlagsIsEnabled("water-spread")) {
+
+                if (Settings.getEnableWorldList().contains(world)) {
+
+                    if (!Worlds.getFlag(world, "water-spread")) {
+
+                        e.setCancelled(true);
+
+                    }
+
+                }
+            }
+        }
+
+        // Flag: lava-spread
+        if (e.getBlock().getType() == Material.LAVA) {
+            if (FlagsManager.getFlagsIsEnabled("lava-spread")) {
+
+                if (Settings.getEnableWorldList().contains(world)) {
+
+                    if (!Worlds.getFlag(world, "lava-spread")) {
+
+                        e.setCancelled(true);
+
+                    }
+
+                }
+            }
+        }
+
     }
 
 }

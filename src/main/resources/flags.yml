@@ -92,6 +92,7 @@ flags:
     enable: true
   boat:
     enable: true
+    # list only
     type: list
     # For Boat Placing only
     list:
@@ -112,7 +113,9 @@ flags:
     chestBoatEnable: false
   button:
     enable: true
-    type:
+    # list only
+    type: list
+    list:
       - 'stone_button'
       - 'oak_button'
       - 'spruce_button'
@@ -124,3 +127,62 @@ flags:
       - 'crimson_button'
       - 'warped_button'
       - 'polished_blackstone_button'
+  door-interact:
+    enable: true
+    # list only
+    type: list
+    list:
+      - 'oak_door'
+      - 'spruce_door'
+      - 'birch_door'
+      - 'jungle_door'
+      - 'acacia_door'
+      - 'dark_oak_door'
+      - 'mangrove_door'
+      - 'crimson_door'
+      - 'warped_door'
+  lever:
+    enable: true
+  trapdoor-interact:
+    enable: true
+    # list only
+    type: list
+    list:
+      - 'oak_trapdoor'
+      - 'spruce_trapdoor'
+      - 'birch_trapdoor'
+      - 'jungle_trapdoor'
+      - 'acacia_trapdoor'
+      - 'dark_oak_trapdoor'
+      - 'mangrove_trapdoor'
+      - 'crimson_trapdoor'
+      - 'warped_trapdoor'
+  fencegate-interact:
+    enable: true
+    # list only
+    type: list
+    list:
+      - 'oak_fence_gate'
+      - 'spruce_fence_gate'
+      - 'birch_fence_gate'
+      - 'jungle_fence_gate'
+      - 'acacia_fence_gate'
+      - 'dark_oak_fence_gate'
+      - 'mangrove_fence_gate'
+      - 'crimson_fence_gate'
+      - 'warped_fence_gate'
+  # For Player
+  drop-item:
+    enable: true
+    type: all
+    list:
+      - 'STONE'
+  egg-throw:
+    enable: true
+  snowball-throw:
+    enable: true
+  water-spread:
+    enable: true
+  lava-spread:
+    enable: true
+

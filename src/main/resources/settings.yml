@@ -1,0 +1,33 @@
+global-settings:
+  # true = not prevent
+  # false = prevent
+  flags:
+    break: false
+    build: false
+    use: true
+    container: false
+    move: true
+    mob-damage: true
+    mob-explode: false
+    pvp: false
+    shoot: false
+    tnt: false
+    tnt-damage: false
+    frame: false
+    bed: false
+    voidtp: false
+    villager: true
+    command: true
+    chat: true
+    leaf-decay: true
+    melt: true
+    fall-damage: true
+    armorstand: false
+    farmbreak: false
+    ride: true
+    painting: true
+    bucket-place: false
+    bucket-fill: false
+    boat: false
+  permission: nobuildplus.bypass
+  deny-message: '&c&l! &7You cannot do that here.'

@@ -1,0 +1,37 @@
+#############################################################################
+##                                                                         ##
+##                                                                         ##
+##                                                                         ##
+##                           No Build Plus                                 ##
+##                          made by p1xEL_mc                               ##
+##                                                                         ##
+##                                                                         ##
+##                                                                         ##
+#############################################################################
+## How to use the plugin
+##
+## worlds.yml is the worlds data file. You can change each world's flag and deny message.
+## You can change the flag for world with command. However, you have to change the deny message by yourself. (Or it will use the default settings')
+##
+## flags.yml is a flags manager file. You can enable or disable the flag here.
+## There is a type for the flag. type: all (some flags are unavailable for type: all) type: list (Use the objects from the list.)
+##
+## Sorry for my bad english.
+##
+## Thanks for using my plugin
+## My name on SpigotMC is p1xEL_mc
+
+# The version of the plugin.
+Version: 1.1.7
+type: Release
+
+# Language of the file.
+# Languages list: en(English) zh_CN(Simplified Chinese).
+# It only changes the texts from language file if you change this.
+Language: en
+
+# Check update when the plugin loaded.
+check-update: true
+
+hook:
+  Residence: true

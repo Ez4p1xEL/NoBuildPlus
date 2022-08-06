@@ -1,0 +1,126 @@
+flags:
+  break:
+    enable: true
+    type: all
+    list:
+      - GRASS_BLOCK
+  build:
+    enable: true
+    type: all
+    list:
+      - GRASS_BLOCK
+  use:
+    enable: true
+    type: list
+    list:
+      - ENCHANTING_TABLE
+      - CRAFTING_TABLE
+      - ANVIL
+      - CHIPPED_ANVIL
+      - DAMAGED_ANVIL
+  container:
+    enable: true
+    type: list
+    list:
+      - CHEST
+      - ENDER_CHEST
+      - TRAPPED_CHEST
+      - FURNACE
+  move:
+    enable: true
+    list:
+      - s1mple
+  mob-damage:
+    enable: true
+    type: all
+    list:
+      - ZOMBIE
+  mob-explode:
+    enable: true
+    type: all
+    list:
+      - CREEPER
+  pvp:
+    enable: true
+  shoot:
+    enable: true
+    # set true if your minecraft server version has crossbow.
+    include-crossbow: false
+  tnt:
+    enable: true
+  tnt-damage:
+    enable: true
+  frame:
+    enable: true
+    # 1.17+
+    include-glow-frame: false
+  bed:
+    enable: true
+  voidtp:
+    enable: true
+  villager:
+    enable: true
+  command:
+    enable: true
+    type: list
+    list:
+      - 'spawn'
+  chat:
+    enable: true
+  leaf-decay:
+    enable: true
+  melt:
+    enable: true
+  fall-damage:
+    enable: true
+  armorstand:
+    enable: true
+  farmbreak:
+    enable: true
+  ride:
+    enable: true
+    # list only
+    type: list
+    list:
+      - HORSE
+      - MINECART
+  painting:
+    enable: true
+  bucket-place:
+    enable: true
+  bucket-fill:
+    enable: true
+  boat:
+    enable: true
+    type: list
+    # For Boat Placing only
+    list:
+      - 'OAK_BOAT'
+      - 'SPRUCE_BOAT'
+      - 'BIRCH_BOAT'
+      - 'JUNGLE_BOAT'
+      - 'ACACIA_BOAT'
+      - 'DARK_OAK_BOAT'
+      - 'MANGROVE_BOAT'
+      - 'OAK_CHEST_BOAT'
+      - 'SPRUCE_CHEST_BOAT'
+      - 'BIRCH_CHEST_BOAT'
+      - 'JUNGLE_CHEST_BOAT'
+      - 'ACACIA_CHEST_BOAT'
+      - 'DARK_OAK_CHEST_BOAT'
+      - 'MANGROVE_CHEST_BOAT'
+    chestBoatEnable: false
+  button:
+    enable: true
+    type:
+      - 'stone_button'
+      - 'oak_button'
+      - 'spruce_button'
+      - 'birch_button'
+      - 'jungle_button'
+      - 'acacia_button'
+      - 'dark_oak_button'
+      - 'mangrove_button'
+      - 'crimson_button'
+      - 'warped_button'
+      - 'polished_blackstone_button'

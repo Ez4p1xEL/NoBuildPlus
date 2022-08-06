@@ -1,0 +1,9 @@
+name: NoBuildPlus
+main: p1xel.nobuildplus.NoBuildPlus
+version: 1.1.7
+api-version: 1.13
+commands:
+  nobuildplus:
+    aliases:
+      - 'nobuild'
+      - 'nbp'

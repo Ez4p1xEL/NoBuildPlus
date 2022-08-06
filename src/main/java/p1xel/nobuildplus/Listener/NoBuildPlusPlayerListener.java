@@ -603,6 +603,10 @@ public class NoBuildPlusPlayerListener implements Listener {
         Player p = e.getPlayer();
         Item droppedItem = e.getItemDrop();
 
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
         // Flag: drop-item (For Player)
         if (FlagsManager.getFlagsIsEnabled("drop-item")) {
 

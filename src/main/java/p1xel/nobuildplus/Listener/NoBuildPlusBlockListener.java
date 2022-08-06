@@ -166,6 +166,10 @@ public class NoBuildPlusBlockListener implements Listener {
 
         String world = e.getBlock().getWorld().getName();
 
+        if (HRes.isInRes(e.getBlock())) {
+            return;
+        }
+
         // Flag: water-spread
         if (e.getBlock().getType() == Material.WATER) {
             if (FlagsManager.getFlagsIsEnabled("water-spread")) {

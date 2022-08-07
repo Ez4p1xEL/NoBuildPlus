@@ -190,4 +190,11 @@ flags:
   # For Player
   teleport:
     enable: true
+  mob-spawn:
+    enable: true
+    # List only
+    type: list
+    # Add entity here
+    list:
+      - ZOMBIE
 

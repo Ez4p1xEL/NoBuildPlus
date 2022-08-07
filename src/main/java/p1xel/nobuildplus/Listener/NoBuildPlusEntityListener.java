@@ -383,6 +383,9 @@ public class NoBuildPlusEntityListener implements Listener {
         String world = e.getEntity().getWorld().getName();
         Entity entity = e.getEntity();
 
+        String voidtpFlag = "voidtp";
+        String falldamageFlag = "fall-damage";
+
         if (entity instanceof Player) {
             if (HRes.isInRes(entity)) {
                 return;
@@ -390,9 +393,9 @@ public class NoBuildPlusEntityListener implements Listener {
         }
 
         if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
-            if (FlagsManager.getFlagsIsEnabled("voidtp")) {
+            if (FlagsManager.getFlagsIsEnabled(voidtpFlag)) {
                 if (Settings.getEnableWorldList().contains(world)) {
-                    if (Worlds.getFlag(world, "voidtp")) {
+                    if (Worlds.getFlag(world, voidtpFlag)) {
                         if (Worlds.isSpawnLocationSet(world)) {
                             if (entity instanceof Player) {
                                 Player p = (Player) e.getEntity();
@@ -407,9 +410,9 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
             if (entity instanceof Player) {
-                if (FlagsManager.getFlagsIsEnabled("fall-damage")) {
+                if (FlagsManager.getFlagsIsEnabled(falldamageFlag)) {
                     if (Settings.getEnableWorldList().contains(world)) {
-                        if (!Worlds.getFlag(world, "fall-damage")) {
+                        if (!Worlds.getFlag(world, falldamageFlag)) {
                             Player p = (Player) e.getEntity();
                             e.setCancelled(true);
                         }
@@ -432,17 +435,19 @@ public class NoBuildPlusEntityListener implements Listener {
         String world = e.getEntity().getWorld().getName();
         Entity p = e.getEntity();
 
+        String shootFlag = "shoot";
+
         if (p instanceof Player) {
             if (HRes.isInRes(p)) {
                 return;
             }
         }
 
-        if (FlagsManager.getFlagsIsEnabled("shoot")) {
+        if (FlagsManager.getFlagsIsEnabled(shootFlag)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "shoot")) {
+                if (!Worlds.getFlag(world, shootFlag)) {
 
                     if (p instanceof Player) {
 
@@ -452,7 +457,7 @@ public class NoBuildPlusEntityListener implements Listener {
                                 p.sendMessage(Worlds.getDenyMessage(world));
                                 e.setCancelled(true);
                             }
-                            if (FlagsManager.getBoolInFlag("shoot", "include-crossbow")) {
+                            if (FlagsManager.getBoolInFlag(shootFlag, "include-crossbow")) {
                                 if (e.getBow().getType() == Material.CROSSBOW) {
                                     p.sendMessage(Worlds.getDenyMessage(world));
                                     e.setCancelled(true);
@@ -474,17 +479,19 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String world = e.getEntity().getWorld().getName();
 
+        String armorstandFlag = "armorstand";
+
         if (HRes.isInRes(e.getEntity())) {
             return;
         }
 
         if (e.getEntityType() == EntityType.ARMOR_STAND) {
 
-            if (FlagsManager.getFlagsIsEnabled("armorstand")) {
+            if (FlagsManager.getFlagsIsEnabled(armorstandFlag)) {
 
                 if (Settings.getEnableWorldList().contains(world)) {
 
-                    if (!Worlds.getFlag(world, "armorstand")) {
+                    if (!Worlds.getFlag(world, armorstandFlag)) {
 
                         // 这个我弄不了给有权限的人放置
                         // 实在没有头绪了
@@ -506,6 +513,8 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
         String world = entity.getWorld().getName();
+        
+        String farmbreakFlag = "farmbreak";
 
         if (HRes.isInRes(entity)) {
             return;
@@ -515,11 +524,11 @@ public class NoBuildPlusEntityListener implements Listener {
 
             if (e.getBlock().getType() == Material.matchMaterial("SOIL") || e.getBlock().getType() == Material.matchMaterial("FARMLAND")) {
 
-                if (FlagsManager.getFlagsIsEnabled("farmbreak")) {
+                if (FlagsManager.getFlagsIsEnabled(farmbreakFlag)) {
 
                     if (Settings.getEnableWorldList().contains(world)) {
 
-                        if (!Worlds.getFlag(world, "farmbreak")) {
+                        if (!Worlds.getFlag(world, farmbreakFlag)) {
 
                             e.setCancelled(true);
 
@@ -531,5 +540,42 @@ public class NoBuildPlusEntityListener implements Listener {
         }
 
     }
+
+    @EventHandler
+    public void onEntitySpawn(EntitySpawnEvent e) {
+
+        Entity entity = e.getEntity();
+        String world = entity.getWorld().getName();
+
+        String mobSpawnFlag = "mob-spawn";
+
+        if (FlagsManager.getFlagsIsEnabled(mobSpawnFlag)) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, mobSpawnFlag)) {
+
+                    if (FlagsManager.getFlagsType(mobSpawnFlag).equalsIgnoreCase("list")) {
+
+                        for (String mob : FlagsManager.getFlagsList(mobSpawnFlag)) {
+
+                            if (e.getEntityType() == EntityType.valueOf(mob)) {
+
+                                e.setCancelled(true);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+
+            }
+        }
+
+    }
+
 
 }

@@ -48,7 +48,18 @@ public class NoBuildPlus extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoBuildPlusServerListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusVehicleListener(), this);
 
-
+        if (Config.getBool("hook.Residence")) {
+            Plugin res = getServer().getPluginManager().getPlugin("Residence");
+            Plugin cmilib = getServer().getPluginManager().getPlugin("CMILib");
+            if (res != null && cmilib != null) {
+                if (!cmilib.isEnabled()) {
+                    getServer().getPluginManager().enablePlugin(cmilib);
+                    getServer().getPluginManager().enablePlugin(res);
+                    getLogger().info("Residence is enabled by NoBuildPlus.");
+                }
+                getServer().getPluginManager().registerEvents(new ResidenceListener(), this);
+            }
+        }
 
 
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());

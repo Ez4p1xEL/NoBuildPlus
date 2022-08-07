@@ -41,6 +41,9 @@ public class FlagsManager {
     }
 
     public static boolean getFlagsIsEnabled(String flag) {
+        if (!get().isSet("flags." + flag + ".enable")) {
+            return false;
+        }
         return get().getBoolean("flags." + flag + ".enable");
     }
 

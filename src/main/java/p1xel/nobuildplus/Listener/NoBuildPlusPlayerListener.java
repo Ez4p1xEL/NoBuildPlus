@@ -643,5 +643,70 @@ public class NoBuildPlusPlayerListener implements Listener {
 
     }
 
+    @EventHandler
+    public void onFlightToggle(PlayerToggleFlightEvent e) {
+
+        String world = e.getPlayer().getWorld().getName();
+        Player p = e.getPlayer();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
+        // Flag: fly
+        if (p.getAllowFlight()) {
+
+            if (FlagsManager.getFlagsIsEnabled("fly")) {
+
+                if (Settings.getEnableWorldList().contains(world)) {
+
+                    if (!Worlds.getFlag(world, "fly")) {
+
+                        if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                            e.setCancelled(true);
+
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    @EventHandler
+    public void onPlayerTeleport(PlayerTeleportEvent e) {
+
+        String world = e.getPlayer().getWorld().getName();
+        Player p = e.getPlayer();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
+        // Flag: teleport (For Player)
+        if (FlagsManager.getFlagsIsEnabled("teleport")) {
+
+            if (Settings.getEnableWorldList().contains(world)) {
+
+                if (!Worlds.getFlag(world, "teleport")) {
+
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                        if (e.getFrom().getWorld().getName().equalsIgnoreCase(world) || e.getTo().getWorld().getName().equalsIgnoreCase(world)) {
+
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                            e.setCancelled(true);
+
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
 
 }

@@ -185,4 +185,9 @@ flags:
     enable: true
   lava-spread:
     enable: true
+  fly:
+    enable: true
+  # For Player
+  teleport:
+    enable: true
 

@@ -3,7 +3,7 @@ plugin-name: NoBuildPlus
 commands-plugin-name: nbp
 commands:
   top: '&8&m                                                   '
-  plugin: '                &2&lNoBuildPlus'
+  plugin: '                &2&lNoBuildPlus %version%'
   space-1: '&f'
   help: '&7/%prefix% help &6View help.'
   list: '&7/%prefix% list &6List of the enable worlds.'

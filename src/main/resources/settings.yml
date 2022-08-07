@@ -39,5 +39,7 @@ global-settings:
     snowball-throw: true
     water-spread: true
     lava-spread: true
+    fly: false
+    teleport: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

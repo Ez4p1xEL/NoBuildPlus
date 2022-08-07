@@ -22,11 +22,11 @@
 ## My name on SpigotMC is p1xEL_mc
 
 # The version of the plugin.
-Version: 1.1.8
+Version: 1.1.9
 type: Release
 
 # Language of the file.
-# Languages list: en(English) zh_CN(Simplified Chinese).
+# Languages list: en(English) zh_CN(Simplified Chinese) zh_TW(Traditional Chinese).
 # It only changes the texts from language file if you change this.
 Language: en
 

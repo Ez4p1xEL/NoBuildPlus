@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.1.8</version>
+    <version>1.1.9</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -26,13 +26,6 @@
             <artifactId>spigot-api</artifactId>
             <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.bekvon</groupId>
-            <artifactId>residence-api</artifactId>
-            <version>5.0.1.7</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/Residence5.0.1.7.jar</systemPath>
         </dependency>
     </dependencies>
 

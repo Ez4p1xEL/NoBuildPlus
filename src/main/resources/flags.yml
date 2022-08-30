@@ -26,8 +26,9 @@ flags:
       - ENDER_CHEST
       - TRAPPED_CHEST
       - FURNACE
+  # DO NOT ENABLE THIS (THIS IS VERY LAG)
   move:
-    enable: true
+    enable: false
     list:
       - s1mple
   mob-damage:

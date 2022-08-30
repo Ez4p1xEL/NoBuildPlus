@@ -1,6 +1,7 @@
 package p1xel.nobuildplus.Listener;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -165,13 +166,14 @@ public class NoBuildPlusBlockListener implements Listener {
     public void onLiquidSpread(BlockFromToEvent e) {
 
         String world = e.getBlock().getWorld().getName();
+        Block block = e.getBlock();
 
-        if (HRes.isInRes(e.getBlock())) {
+        if (HRes.isInRes(block)) {
             return;
         }
 
         // Flag: water-spread
-        if (e.getBlock().getType() == Material.WATER) {
+        if (block.getType() == Material.WATER) {
             if (FlagsManager.getFlagsIsEnabled("water-spread")) {
 
                 if (Settings.getEnableWorldList().contains(world)) {
@@ -179,6 +181,7 @@ public class NoBuildPlusBlockListener implements Listener {
                     if (!Worlds.getFlag(world, "water-spread")) {
 
                         e.setCancelled(true);
+                        return;
 
                     }
 
@@ -187,7 +190,7 @@ public class NoBuildPlusBlockListener implements Listener {
         }
 
         // Flag: lava-spread
-        if (e.getBlock().getType() == Material.LAVA) {
+        if (block.getType() == Material.LAVA) {
             if (FlagsManager.getFlagsIsEnabled("lava-spread")) {
 
                 if (Settings.getEnableWorldList().contains(world)) {

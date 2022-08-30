@@ -371,15 +371,11 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
-            return;
-        }
-
         if (!FlagsManager.getFlagsIsEnabled("move")) {
             return;
         }
 
-        if (!Settings.getEnableWorldList().contains(world)) {
+        if (HRes.isInRes(p)) {
             return;
         }
 
@@ -387,11 +383,15 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
+        if (!Settings.getEnableWorldList().contains(world)) {
+            return;
+        }
+
         if (p.hasPermission(Worlds.getPermission(world))) {
             return;
         }
 
-        if (!FlagsManager.getFlagsList("move").contains(p)) {
+        if (!FlagsManager.getFlagsList("move").contains(p.getName())) {
             p.sendMessage(Worlds.getDenyMessage(world));
             e.setCancelled(true);
         }

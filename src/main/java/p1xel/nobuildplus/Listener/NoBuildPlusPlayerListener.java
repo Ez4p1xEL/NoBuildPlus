@@ -391,10 +391,8 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (!FlagsManager.getFlagsList("move").contains(p.getName())) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-            e.setCancelled(true);
-        }
+        p.sendMessage(Worlds.getDenyMessage(world));
+        e.setCancelled(true);
 
     }
 

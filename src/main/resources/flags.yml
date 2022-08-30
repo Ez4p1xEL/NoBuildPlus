@@ -29,8 +29,6 @@ flags:
   # DO NOT ENABLE THIS (THIS IS VERY LAG)
   move:
     enable: false
-    list:
-      - s1mple
   mob-damage:
     enable: true
     type: all

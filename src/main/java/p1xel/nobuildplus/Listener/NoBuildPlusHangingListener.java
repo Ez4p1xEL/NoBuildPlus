@@ -165,13 +165,10 @@ public class NoBuildPlusHangingListener implements Listener {
             if (Settings.getEnableWorldList().contains(world)) {
 
                 if (!Worlds.getFlag(world, "boat")) {
-                    System.out.println("WORK1");
 
                     if (FlagsManager.BoatIsIncludingChestBoat()) {
-                        System.out.println("WORK2");
                         if (e.getEntity() instanceof ChestBoat) {
                             e.setCancelled(true);
-                            System.out.println("WORK3");
                             return;
                         }
                     }
@@ -180,7 +177,6 @@ public class NoBuildPlusHangingListener implements Listener {
                         // 这个我弄不了给有权限的人放置
                         // 实在没有头绪了
                         e.setCancelled(true);
-                        System.out.println("WORK4");
                     }
 
 

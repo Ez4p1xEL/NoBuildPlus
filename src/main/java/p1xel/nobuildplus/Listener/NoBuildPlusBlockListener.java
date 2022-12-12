@@ -19,12 +19,13 @@ public class NoBuildPlusBlockListener implements Listener {
 
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
+        String flag = "break";
 
         if (HRes.isInRes(e.getBlock())) {
             return;
         }
 
-        if (!FlagsManager.getFlagsIsEnabled("break")) {
+        if (!FlagsManager.getFlagsIsEnabled(flag)) {
             return;
         }
 
@@ -32,7 +33,7 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        if (Worlds.getFlag(world, "break")) {
+        if (Worlds.getFlag(world, flag)) {
             return;
         }
 
@@ -40,14 +41,14 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsType("break").equalsIgnoreCase("all")) {
+        if (FlagsManager.getFlagsType(flag).equalsIgnoreCase("all")) {
             p.sendMessage(Worlds.getDenyMessage(world));
             e.setCancelled(true);
         }
 
-        if (FlagsManager.getFlagsType("break").equalsIgnoreCase("list")) {
+        if (FlagsManager.getFlagsType(flag).equalsIgnoreCase("list")) {
 
-            for (String blockname : FlagsManager.getFlagsList("break")) {
+            for (String blockname : FlagsManager.getFlagsList(flag)) {
                 Material block = Material.matchMaterial(blockname);
                 if (block != null) {
                     if (e.getBlock().getType() == block) {
@@ -67,12 +68,13 @@ public class NoBuildPlusBlockListener implements Listener {
 
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
+        String flag = "build";
 
         if (HRes.isInRes(e.getBlock())) {
             return;
         }
 
-        if (!FlagsManager.getFlagsIsEnabled("build")) {
+        if (!FlagsManager.getFlagsIsEnabled(flag)) {
             return;
         }
 
@@ -80,7 +82,7 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        if (Worlds.getFlag(world, "build")) {
+        if (Worlds.getFlag(world, flag)) {
             return;
         }
 
@@ -88,14 +90,14 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsType("build").equalsIgnoreCase("all")) {
+        if (FlagsManager.getFlagsType(flag).equalsIgnoreCase("all")) {
             p.sendMessage(Worlds.getDenyMessage(world));
             e.setCancelled(true);
         }
 
-        if (FlagsManager.getFlagsType("build").equalsIgnoreCase("list")) {
+        if (FlagsManager.getFlagsType(flag).equalsIgnoreCase("list")) {
 
-            for (String blockname : FlagsManager.getFlagsList("build")) {
+            for (String blockname : FlagsManager.getFlagsList(flag)) {
                 Material block = Material.matchMaterial(blockname);
                 if (block != null) {
                     if (e.getBlock().getType() == block) {
@@ -119,11 +121,13 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("leaf-decay")) {
+        String flag = "leaf-decay";
+
+        if (FlagsManager.getFlagsIsEnabled(flag)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "leaf-decay")) {
+                if (!Worlds.getFlag(world, flag)) {
 
                     e.setCancelled(true);
 
@@ -144,13 +148,15 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
+        String flag = "melt";
+
         if (e.getBlock().getType() == Material.SNOW || e.getBlock().getType() == Material.ICE || e.getBlock().getType() == Material.PACKED_ICE) {
 
-            if (FlagsManager.getFlagsIsEnabled("melt")) {
+            if (FlagsManager.getFlagsIsEnabled(flag)) {
 
                 if (Settings.getEnableWorldList().contains(world)) {
 
-                    if (!Worlds.getFlag(world, "melt")) {
+                    if (!Worlds.getFlag(world, flag)) {
 
                         e.setCancelled(true);
 
@@ -167,18 +173,22 @@ public class NoBuildPlusBlockListener implements Listener {
 
         String world = e.getBlock().getWorld().getName();
         Block block = e.getBlock();
+        Material mat = block.getType();
 
         if (HRes.isInRes(block)) {
             return;
         }
 
+        String waterFlag = "water-spread";
+        boolean enableWater = FlagsManager.getFlagsIsEnabled(waterFlag);
+
         // Flag: water-spread
-        if (block.getType() == Material.WATER) {
-            if (FlagsManager.getFlagsIsEnabled("water-spread")) {
+        if (mat == Material.WATER) {
+            if (enableWater) {
 
                 if (Settings.getEnableWorldList().contains(world)) {
 
-                    if (!Worlds.getFlag(world, "water-spread")) {
+                    if (!Worlds.getFlag(world, waterFlag)) {
 
                         e.setCancelled(true);
                         return;
@@ -189,13 +199,16 @@ public class NoBuildPlusBlockListener implements Listener {
             }
         }
 
+        String lavaFlag = "lava-spread";
+        boolean enableLava = FlagsManager.getFlagsIsEnabled(lavaFlag);
+
         // Flag: lava-spread
-        if (block.getType() == Material.LAVA) {
-            if (FlagsManager.getFlagsIsEnabled("lava-spread")) {
+        if (mat == Material.LAVA) {
+            if (enableLava) {
 
                 if (Settings.getEnableWorldList().contains(world)) {
 
-                    if (!Worlds.getFlag(world, "lava-spread")) {
+                    if (!Worlds.getFlag(world, lavaFlag)) {
 
                         e.setCancelled(true);
 

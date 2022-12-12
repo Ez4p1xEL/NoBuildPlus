@@ -31,16 +31,17 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
+        String mobDamage = "mob-damage";
         // Flag: Mob Damage
-        if (FlagsManager.getFlagsIsEnabled("mob-damage")) {
+        if (FlagsManager.getFlagsIsEnabled(mobDamage)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "mob-damage")) {
+                if (!Worlds.getFlag(world, mobDamage)) {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (FlagsManager.getFlagsType("mob-damage").equalsIgnoreCase("all")) {
+                        if (FlagsManager.getFlagsType(mobDamage).equalsIgnoreCase("all")) {
 
                             if (p instanceof Player && !(target instanceof Player)) {
 
@@ -52,11 +53,11 @@ public class NoBuildPlusEntityListener implements Listener {
 
                         }
 
-                        if (FlagsManager.getFlagsType("mob-damage").equalsIgnoreCase("list")) {
+                        if (FlagsManager.getFlagsType(mobDamage).equalsIgnoreCase("list")) {
 
                             if (p instanceof Player && !(target instanceof Player)) {
 
-                                for (String string : FlagsManager.getFlagsList("mob-damage")) {
+                                for (String string : FlagsManager.getFlagsList(mobDamage)) {
 
                                     if (e.getEntityType() == EntityType.valueOf(string)) {
 
@@ -77,12 +78,14 @@ public class NoBuildPlusEntityListener implements Listener {
 
         }
 
+        String frame = "frame";
+
         // Flag: Frame (Damage)
-        if (FlagsManager.getFlagsIsEnabled("frame")) {
+        if (FlagsManager.getFlagsIsEnabled(frame)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "frame")) {
+                if (!Worlds.getFlag(world, frame)) {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
@@ -118,13 +121,14 @@ public class NoBuildPlusEntityListener implements Listener {
             }
         }
 
+        String tntDamage = "tnt-damage";
         // Flag: tnt-damage
         if (e.getDamager().getType() == EntityType.PRIMED_TNT || e.getDamager().getType() == EntityType.MINECART_TNT) {
-            if (FlagsManager.getFlagsIsEnabled("tnt-damage")) {
+            if (FlagsManager.getFlagsIsEnabled(tntDamage)) {
 
                 if (Settings.getEnableWorldList().contains(world)) {
 
-                    if (!Worlds.getFlag(world, "tnt-damage")) {
+                    if (!Worlds.getFlag(world, tntDamage)) {
 
                         p.sendMessage(Worlds.getDenyMessage(world));
                         e.setCancelled(true);
@@ -136,12 +140,14 @@ public class NoBuildPlusEntityListener implements Listener {
             }
         }
 
+        String armorstand = "armorstand";
+
         // Flag: Armor Stand (Damage)
-        if (FlagsManager.getFlagsIsEnabled("armorstand")) {
+        if (FlagsManager.getFlagsIsEnabled(armorstand)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "armorstand")) {
+                if (!Worlds.getFlag(world, armorstand)) {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
@@ -163,15 +169,15 @@ public class NoBuildPlusEntityListener implements Listener {
 
         }
 
-
+        String pvp = "pvp";
         // Flag: Pvp
-        if (FlagsManager.getFlagsIsEnabled("pvp")) {
+        if (FlagsManager.getFlagsIsEnabled(pvp)) {
 
             if (!Settings.getEnableWorldList().contains(world)) {
                 return;
             }
 
-            if (Worlds.getFlag(world, "pvp")) {
+            if (Worlds.getFlag(world, pvp)) {
                 return;
             }
 
@@ -201,22 +207,24 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("mob-explode")) {
+        String mobExplode = "mob-explode";
+
+        if (FlagsManager.getFlagsIsEnabled(mobExplode)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "mob-explode")) {
+                if (!Worlds.getFlag(world, mobExplode)) {
 
-                    if (FlagsManager.getFlagsType("mob-explode").equalsIgnoreCase("all")) {
+                    if (FlagsManager.getFlagsType(mobExplode).equalsIgnoreCase("all")) {
 
                         e.setCancelled(true);
                         return;
 
                     }
 
-                    if (FlagsManager.getFlagsType("mob-explode").equalsIgnoreCase("list")) {
+                    if (FlagsManager.getFlagsType(mobExplode).equalsIgnoreCase("list")) {
 
-                        for (String string : FlagsManager.getFlagsList("mob-explode")) {
+                        for (String string : FlagsManager.getFlagsList(mobExplode)) {
 
                             if (e.getEntityType() == EntityType.valueOf(string)) {
 
@@ -234,12 +242,14 @@ public class NoBuildPlusEntityListener implements Listener {
 
         }
 
+        String tnt = "tnt";
+
         // Flag: Tnt
-        if (FlagsManager.getFlagsIsEnabled("tnt")) {
+        if (FlagsManager.getFlagsIsEnabled(tnt)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "tnt")) {
+                if (!Worlds.getFlag(world, tnt)) {
 
                     if (e.getEntityType() == EntityType.PRIMED_TNT || e.getEntityType() == EntityType.MINECART_TNT) {
                         e.setCancelled(true);
@@ -269,11 +279,13 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("frame")) {
+        String frame = "frame";
+
+        if (FlagsManager.getFlagsIsEnabled(frame)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "frame")) {
+                if (!Worlds.getFlag(world, frame)) {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
@@ -304,18 +316,20 @@ public class NoBuildPlusEntityListener implements Listener {
 
         }
 
+        String ride = "ride";
+
         // Flag: Ride
-        if (FlagsManager.getFlagsIsEnabled("ride")) {
+        if (FlagsManager.getFlagsIsEnabled(ride)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "ride")) {
+                if (!Worlds.getFlag(world, ride)) {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (FlagsManager.getFlagsType("ride").equalsIgnoreCase("list")) {
+                        if (FlagsManager.getFlagsType(ride).equalsIgnoreCase("list")) {
 
-                            for (String name : FlagsManager.getFlagsList("ride")) {
+                            for (String name : FlagsManager.getFlagsList(ride)) {
                                 if (e.getRightClicked().getType() == EntityType.valueOf(name)) {
                                     p.sendMessage(Worlds.getDenyMessage(world));
                                     e.setCancelled(true);
@@ -331,11 +345,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         }
 
-        if (FlagsManager.getFlagsIsEnabled("armorstand")) {
+        String armorstand = "armorstand";
+
+        if (FlagsManager.getFlagsIsEnabled(armorstand)) {
 
             if (Settings.getEnableWorldList().contains(world)) {
 
-                if (!Worlds.getFlag(world, "armorstand")) {
+                if (!Worlds.getFlag(world, armorstand)) {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
@@ -356,11 +372,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (e.getRightClicked().getType() == EntityType.VILLAGER) {
 
-            if (FlagsManager.getFlagsIsEnabled("villager")) {
+            String villager = "villager";
+
+            if (FlagsManager.getFlagsIsEnabled(villager)) {
 
                 if (Settings.getEnableWorldList().contains(world)) {
 
-                    if (!Worlds.getFlag(world, "villager")) {
+                    if (!Worlds.getFlag(world, villager)) {
 
                         if (!p.hasPermission(Worlds.getPermission(world))) {
 
@@ -548,18 +566,21 @@ public class NoBuildPlusEntityListener implements Listener {
         String world = entity.getWorld().getName();
 
         String mobSpawnFlag = "mob-spawn";
+        boolean contain = Settings.getEnableWorldList().contains(world);
 
         if (FlagsManager.getFlagsIsEnabled(mobSpawnFlag)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (contain) {
 
                 if (!Worlds.getFlag(world, mobSpawnFlag)) {
 
                     if (FlagsManager.getFlagsType(mobSpawnFlag).equalsIgnoreCase("list")) {
 
+                        EntityType et = e.getEntityType();
+
                         for (String mob : FlagsManager.getFlagsList(mobSpawnFlag)) {
 
-                            if (e.getEntityType() == EntityType.valueOf(mob)) {
+                            if (et == EntityType.valueOf(mob)) {
 
                                 e.setCancelled(true);
 

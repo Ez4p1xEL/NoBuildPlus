@@ -281,7 +281,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                         if (!Worlds.getFlag(world, "snowball-throw")) {
 
                             if (!hasPerm) {
-                                if (e.getItem().getType() == Material.SNOWBALL) {
+                                if (e.getItem().getType() == Material.matchMaterial("SNOWBALL")) {
                                     p.sendMessage(Worlds.getDenyMessage(world));
                                     e.setCancelled(true);
                                     return;

@@ -49,7 +49,12 @@ public class NoBuildPlusPlayerListener implements Listener {
             boolean leverFlagBool = Worlds.getFlag(world, "lever");
             Material clicked = e.getClickedBlock().getType();
             boolean isLeverEnable = FlagsManager.getFlagsIsEnabled("lever");
-            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+            
+            boolean hasPerm = false;
+            
+            if (contain) {
+                hasPerm = p.hasPermission(Worlds.getPermission(world));
+            }
 
             // Flag: Use
             if (isUseEnable) {
@@ -227,7 +232,6 @@ public class NoBuildPlusPlayerListener implements Listener {
             if (item != null) {
 
                 boolean contain = Settings.getEnableWorldList().contains(world);
-                boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
 
                 // Flag: boat
                 for (String key : FlagsManager.getFlagsList("boat")) {
@@ -237,6 +241,8 @@ public class NoBuildPlusPlayerListener implements Listener {
                         if (FlagsManager.getFlagsIsEnabled("boat")) {
 
                             if (contain) {
+
+                                boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
 
                                 if (!Worlds.getFlag(world, "boat")) {
 
@@ -259,6 +265,8 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (Settings.getEnableWorldList().contains(world)) {
 
+                        boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+
                         if (!Worlds.getFlag(world, "egg-throw")) {
 
                             if (!hasPerm) {
@@ -277,6 +285,8 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (FlagsManager.getFlagsIsEnabled("snowball-throw")) {
 
                     if (Settings.getEnableWorldList().contains(world)) {
+
+                        boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
 
                         if (!Worlds.getFlag(world, "snowball-throw")) {
 
@@ -626,7 +636,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
         Item droppedItem = e.getItemDrop();
-        boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+
 
         if (HRes.isInRes(p)) {
             return;
@@ -636,6 +646,8 @@ public class NoBuildPlusPlayerListener implements Listener {
         if (FlagsManager.getFlagsIsEnabled("drop-item")) {
 
             if (Settings.getEnableWorldList().contains(world)) {
+
+                boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
 
                 if (!Worlds.getFlag(world, "drop-item")) {
 

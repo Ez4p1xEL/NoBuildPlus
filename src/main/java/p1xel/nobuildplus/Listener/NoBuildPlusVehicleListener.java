@@ -35,7 +35,9 @@ public class NoBuildPlusVehicleListener implements Listener {
 
                             if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
 
-                                p.sendMessage(Worlds.getDenyMessage(world));
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
                                 e.setCancelled(true);
 
 
@@ -70,7 +72,9 @@ public class NoBuildPlusVehicleListener implements Listener {
 
                             if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
 
-                                p.sendMessage(Worlds.getDenyMessage(world));
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
                                 e.setCancelled(true);
 
                             }

@@ -39,7 +39,9 @@ public class NoBuildPlusHangingListener implements Listener {
                                 if (e.getEntity() instanceof GlowItemFrame) {
 
                                     if (p instanceof Player) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(Worlds.getDenyMessage(world));
+                                        }
                                     }
                                     e.setCancelled(true);
                                     return;
@@ -51,7 +53,9 @@ public class NoBuildPlusHangingListener implements Listener {
                             if (e.getEntity() instanceof ItemFrame) {
 
                                 if (p instanceof Player) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                    }
                                 }
                                 e.setCancelled(true);
                                 return;
@@ -77,7 +81,9 @@ public class NoBuildPlusHangingListener implements Listener {
 
                             if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                                p.sendMessage(Worlds.getDenyMessage(world));
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
                                 e.setCancelled(true);
 
                             }
@@ -117,7 +123,9 @@ public class NoBuildPlusHangingListener implements Listener {
 
                             if (e.getEntity().getType() == EntityType.GLOW_ITEM_FRAME) {
 
-                                p.sendMessage(Worlds.getDenyMessage(world));
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
                                 e.setCancelled(true);
 
                             }
@@ -126,7 +134,9 @@ public class NoBuildPlusHangingListener implements Listener {
 
                         if (e.getEntity().getType() == EntityType.ITEM_FRAME) {
 
-                            p.sendMessage(Worlds.getDenyMessage(world));
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
                             e.setCancelled(true);
                             return;
 
@@ -148,7 +158,9 @@ public class NoBuildPlusHangingListener implements Listener {
 
                         if (e.getEntity().getType() == EntityType.PAINTING) {
 
-                            p.sendMessage(Worlds.getDenyMessage(world));
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
                             e.setCancelled(true);
                             return;
 

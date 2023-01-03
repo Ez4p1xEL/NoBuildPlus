@@ -42,6 +42,10 @@ public class Worlds {
 
     }
 
+    public static boolean isDenyMessageExist(String world) {
+        return get().get(world + ".deny-message") != null;
+    }
+
     public static String getDenyMessage(String world) {
         return ChatColor.translateAlternateColorCodes('&', get().getString(world + ".deny-message"));
     }

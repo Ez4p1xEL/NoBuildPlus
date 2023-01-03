@@ -42,7 +42,9 @@ public class NoBuildPlusBlockListener implements Listener {
         }
 
         if (FlagsManager.getFlagsType(flag).equalsIgnoreCase("all")) {
-            p.sendMessage(Worlds.getDenyMessage(world));
+            if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
             e.setCancelled(true);
         }
 
@@ -52,7 +54,11 @@ public class NoBuildPlusBlockListener implements Listener {
                 Material block = Material.matchMaterial(blockname);
                 if (block != null) {
                     if (e.getBlock().getType() == block) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        }
                         e.setCancelled(true);
                     }
                 }
@@ -91,7 +97,9 @@ public class NoBuildPlusBlockListener implements Listener {
         }
 
         if (FlagsManager.getFlagsType(flag).equalsIgnoreCase("all")) {
-            p.sendMessage(Worlds.getDenyMessage(world));
+            if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
             e.setCancelled(true);
         }
 
@@ -101,7 +109,9 @@ public class NoBuildPlusBlockListener implements Listener {
                 Material block = Material.matchMaterial(blockname);
                 if (block != null) {
                     if (e.getBlock().getType() == block) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
                         e.setCancelled(true);
                     }
                 }

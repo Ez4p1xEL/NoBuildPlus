@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -26,6 +26,13 @@
             <artifactId>spigot-api</artifactId>
             <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.bekvon</groupId>
+            <artifactId>residence-api</artifactId>
+            <version>5.0.1.7</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/Residence5.0.1.7.jar</systemPath>
         </dependency>
     </dependencies>
 

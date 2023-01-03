@@ -71,7 +71,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                                     Material block = Material.matchMaterial(name);
                                     if (block != null) {
                                         if (e.getClickedBlock().getType() == block) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
+                                            if (Worlds.isDenyMessageExist(world)) {
+                                                p.sendMessage(Worlds.getDenyMessage(world));
+                                            }
                                             e.setCancelled(true);
                                             return;
                                         }
@@ -101,7 +103,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                                     Material block = Material.matchMaterial(name);
                                     if (block != null) {
                                         if (e.getClickedBlock().getType() == block) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
+                                            if (Worlds.isDenyMessageExist(world)) {
+                                                p.sendMessage(Worlds.getDenyMessage(world));
+                                            }
                                             e.setCancelled(true);
                                             return;
                                         }
@@ -131,7 +135,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                                     Material block = Material.matchMaterial(name);
                                     if (block != null) {
                                         if (e.getClickedBlock().getType() == block) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
+                                            if (Worlds.isDenyMessageExist(world)) {
+                                                p.sendMessage(Worlds.getDenyMessage(world));
+                                            }
                                             e.setCancelled(true);
                                             return;
                                         }
@@ -155,7 +161,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                         if (!leverFlagBool) {
 
                             if (!hasPerm) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
                                 e.setCancelled(true);
                                 return;
                             }
@@ -180,7 +188,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                                     Material block = Material.matchMaterial(name);
                                     if (block != null) {
                                         if (e.getClickedBlock().getType() == block) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
+                                            if (Worlds.isDenyMessageExist(world)) {
+                                                p.sendMessage(Worlds.getDenyMessage(world));
+                                            }
                                             e.setCancelled(true);
                                             return;
                                         }
@@ -209,7 +219,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                                         Material block = Material.matchMaterial(name);
                                         if (block != null) {
                                             if (e.getClickedBlock().getType() == block) {
-                                                p.sendMessage(Worlds.getDenyMessage(world));
+                                                if (Worlds.isDenyMessageExist(world)) {
+                                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                                }
                                                 e.setCancelled(true);
                                                 return;
                                             }
@@ -248,7 +260,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                                     if (!hasPerm) {
 
-                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(Worlds.getDenyMessage(world));
+                                        }
                                         e.setCancelled(true);
                                         return;
 
@@ -271,7 +285,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                             if (!hasPerm) {
                                 if (e.getItem().getType() == Material.EGG) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                    }
                                     e.setCancelled(true);
                                     return;
                                 }
@@ -292,7 +308,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                             if (!hasPerm) {
                                 if (e.getItem().getType() == Material.matchMaterial("SNOWBALL")) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                    }
                                     e.setCancelled(true);
                                     return;
                                 }
@@ -348,7 +366,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                     Material block = Material.matchMaterial(name);
                     if (block != null) {
                         if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType() == block) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
                             e.setCancelled(true);
                         }
                     }
@@ -377,14 +397,18 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                                 if (e.getRightClicked() instanceof Boat) {
 
-                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                    }
                                     e.setCancelled(true);
                                     return;
                                 }
 
                                 if (FlagsManager.BoatIsIncludingChestBoat()) {
                                     if (e.getRightClicked() instanceof ChestBoat) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(Worlds.getDenyMessage(world));
+                                        }
                                         e.setCancelled(true);
                                         return;
                                     }
@@ -427,7 +451,9 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        p.sendMessage(Worlds.getDenyMessage(world));
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
         e.setCancelled(true);
 
     }
@@ -451,7 +477,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        p.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
                         e.setCancelled(true);
 
                     }
@@ -482,7 +510,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        p.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
                         e.setCancelled(true);
 
                     }
@@ -513,7 +543,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
                         if (FlagsManager.getFlagsType("command").equalsIgnoreCase("all")) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
                             e.setCancelled(true);
                             return;
                         }
@@ -521,7 +553,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                         if (FlagsManager.getFlagsType("command").equalsIgnoreCase("list")) {
                             for (String cmd : FlagsManager.getFlagsList("command")) {
                                 if (e.getMessage().equalsIgnoreCase("/" + cmd)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                    }
                                     e.setCancelled(true);
                                 }
                             }
@@ -555,7 +589,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        p.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
                         e.setCancelled(true);
 
                     }
@@ -586,7 +622,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        p.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
                         e.setCancelled(true);
 
                     }
@@ -617,7 +655,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        p.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
                         e.setCancelled(true);
 
                     }
@@ -657,7 +697,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                         String m = Worlds.getDenyMessage(world);
 
                         if (type.equalsIgnoreCase("all")) {
-                            p.sendMessage(m);
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(m);
+                            }
                             e.setCancelled(true);
                             return;
                         }
@@ -668,7 +710,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                                 Material item = Material.matchMaterial(itemName);
                                 if (item != null) {
                                     if (droppedItem.getItemStack().getType() == item) {
-                                        p.sendMessage(m);
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(m);
+                                        }
                                         e.setCancelled(true);
                                     }
                                 }
@@ -704,7 +748,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                         if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                            p.sendMessage(Worlds.getDenyMessage(world));
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
                             e.setCancelled(true);
 
                         }
@@ -737,7 +783,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                         if (e.getFrom().getWorld().getName().equalsIgnoreCase(world) || e.getTo().getWorld().getName().equalsIgnoreCase(world)) {
 
-                            p.sendMessage(Worlds.getDenyMessage(world));
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
                             e.setCancelled(true);
 
                         }

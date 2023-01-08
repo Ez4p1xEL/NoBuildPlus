@@ -590,14 +590,13 @@ public class NoBuildPlusEntityListener implements Listener {
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent e) {
 
-        Entity entity = e.getEntity();
-        String world = entity.getWorld().getName();
-
         String mobSpawnFlag = "mob-spawn";
-        boolean contain = Settings.getEnableWorldList().contains(world);
+
 
         if (FlagsManager.getFlagsIsEnabled(mobSpawnFlag)) {
-
+            Entity entity = e.getEntity();
+            String world = entity.getWorld().getName();
+            boolean contain = Settings.getEnableWorldList().contains(world);
             if (contain) {
 
                 if (!Worlds.getFlag(world, mobSpawnFlag)) {

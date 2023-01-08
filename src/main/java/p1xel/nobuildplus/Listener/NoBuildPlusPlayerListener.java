@@ -35,20 +35,8 @@ public class NoBuildPlusPlayerListener implements Listener {
         // RIGHT CLICK BLOCK
         if (action == Action.RIGHT_CLICK_BLOCK) {
 
-            boolean isUseEnable = FlagsManager.getFlagsIsEnabled("use");
-            boolean isButtonEnable = FlagsManager.getFlagsIsEnabled("button");
-            boolean isDoorInteractEnable = FlagsManager.getFlagsIsEnabled("door-interact");
-            boolean isTrapDoorEnable = FlagsManager.getFlagsIsEnabled("trapdoor-interact");
-            boolean isFenceGateEnable = FlagsManager.getFlagsIsEnabled("fencegate-interact");
             boolean contain = Settings.getEnableWorldList().contains(world);
-            boolean useFlagBool = Worlds.getFlag(world, "use");
-            boolean buttonFlagBool = Worlds.getFlag(world, "button");
-            boolean doorFlagBool = Worlds.getFlag(world, "door-interact");
-            boolean trapdoorFlagBool = Worlds.getFlag(world, "trapdoor-interact");
-            boolean fencegateFlagBool = Worlds.getFlag(world, "fencegate-interact");
-            boolean leverFlagBool = Worlds.getFlag(world, "lever");
             Material clicked = e.getClickedBlock().getType();
-            boolean isLeverEnable = FlagsManager.getFlagsIsEnabled("lever");
             
             boolean hasPerm = false;
             
@@ -57,11 +45,11 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
 
             // Flag: Use
-            if (isUseEnable) {
+            if (FlagsManager.getFlagsIsEnabled("use")) {
 
                 if (contain) {
 
-                    if (!useFlagBool) {
+                    if (!Worlds.getFlag(world, "use")) {
 
                         if (!hasPerm) {
 
@@ -70,7 +58,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                                 for (String name : FlagsManager.getFlagsList("use")) {
                                     Material block = Material.matchMaterial(name);
                                     if (block != null) {
-                                        if (e.getClickedBlock().getType() == block) {
+                                        if (clicked == block) {
                                             if (Worlds.isDenyMessageExist(world)) {
                                                 p.sendMessage(Worlds.getDenyMessage(world));
                                             }
@@ -89,11 +77,11 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
 
             // Flag: button
-            if (isButtonEnable) {
+            if (FlagsManager.getFlagsIsEnabled("button")) {
 
                 if (contain) {
 
-                    if (!buttonFlagBool) {
+                    if (!Worlds.getFlag(world, "button")) {
 
                         if (!hasPerm) {
 
@@ -102,7 +90,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                                 for (String name : FlagsManager.getFlagsList("button")) {
                                     Material block = Material.matchMaterial(name);
                                     if (block != null) {
-                                        if (e.getClickedBlock().getType() == block) {
+                                        if (clicked == block) {
                                             if (Worlds.isDenyMessageExist(world)) {
                                                 p.sendMessage(Worlds.getDenyMessage(world));
                                             }
@@ -121,11 +109,11 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
 
             // Flag: door-interact
-            if (isDoorInteractEnable) {
+            if (FlagsManager.getFlagsIsEnabled("door-interact")) {
 
                 if (contain) {
 
-                    if (!doorFlagBool) {
+                    if (!Worlds.getFlag(world, "door-interact")) {
 
                         if (!hasPerm) {
 
@@ -134,7 +122,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                                 for (String name : FlagsManager.getFlagsList("door-interact")) {
                                     Material block = Material.matchMaterial(name);
                                     if (block != null) {
-                                        if (e.getClickedBlock().getType() == block) {
+                                        if (clicked == block) {
                                             if (Worlds.isDenyMessageExist(world)) {
                                                 p.sendMessage(Worlds.getDenyMessage(world));
                                             }
@@ -154,11 +142,11 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             // Flag: lever
             if (clicked == Material.LEVER) {
-                if (isLeverEnable) {
+                if (FlagsManager.getFlagsIsEnabled("lever")) {
 
                     if (contain) {
 
-                        if (!leverFlagBool) {
+                        if (!Worlds.getFlag(world, "lever")) {
 
                             if (!hasPerm) {
                                 if (Worlds.isDenyMessageExist(world)) {
@@ -174,11 +162,11 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
 
             // Flag: trapdoor-interact
-            if (isTrapDoorEnable) {
+            if (FlagsManager.getFlagsIsEnabled("trapdoor-interact")) {
 
                 if (contain) {
 
-                    if (!trapdoorFlagBool) {
+                    if (!Worlds.getFlag(world, "trapdoor-interact")) {
 
                         if (!hasPerm) {
 
@@ -187,7 +175,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                                 for (String name : FlagsManager.getFlagsList("trapdoor-interact")) {
                                     Material block = Material.matchMaterial(name);
                                     if (block != null) {
-                                        if (e.getClickedBlock().getType() == block) {
+                                        if (clicked == block) {
                                             if (Worlds.isDenyMessageExist(world)) {
                                                 p.sendMessage(Worlds.getDenyMessage(world));
                                             }
@@ -205,11 +193,11 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
 
                 // Flag: fencegate-interact
-                if (isFenceGateEnable) {
+                if (FlagsManager.getFlagsIsEnabled("fencegate-interact")) {
 
                     if (contain) {
 
-                        if (!fencegateFlagBool) {
+                        if (!Worlds.getFlag(world, "fencegate-interact")) {
 
                             if (!hasPerm) {
 
@@ -218,7 +206,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                                     for (String name : FlagsManager.getFlagsList("fencegate-interact")) {
                                         Material block = Material.matchMaterial(name);
                                         if (block != null) {
-                                            if (e.getClickedBlock().getType() == block) {
+                                            if (clicked == block) {
                                                 if (Worlds.isDenyMessageExist(world)) {
                                                     p.sendMessage(Worlds.getDenyMessage(world));
                                                 }
@@ -426,35 +414,26 @@ public class NoBuildPlusPlayerListener implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
+        if (!FlagsManager.getFlagsIsEnabled("move")) {
+            return;
+        }
+
         Player p = e.getPlayer();
 
-        boolean enable = FlagsManager.getFlagsIsEnabled("move");
+        String world = e.getPlayer().getWorld().getName();
 
-        if (!enable) {
-            return;
+        if (!HRes.isInRes(p)) {
+            if (!Worlds.getFlag(world, "move")) {
+                if (Settings.getEnableWorldList().contains(world)) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                            e.setCancelled(true);
+                        }
+                    }
+                }
+            }
         }
-
-        if (HRes.isInRes(p)) {
-            return;
-        }
-
-        if (Worlds.getFlag(world, "move")) {
-            return;
-        }
-
-        if (!Settings.getEnableWorldList().contains(world)) {
-            return;
-        }
-
-        if (p.hasPermission(Worlds.getPermission(world))) {
-            return;
-        }
-
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
-        e.setCancelled(true);
 
     }
 

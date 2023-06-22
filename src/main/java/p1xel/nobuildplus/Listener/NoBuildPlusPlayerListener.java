@@ -238,6 +238,11 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (e.getItem().getType() == Material.matchMaterial(key)) {
 
+                        //spawn or ride boat inside
+                        if (HRes.isInRes(e.getClickedBlock())) {
+                            return;
+                        }
+
                         if (FlagsManager.getFlagsIsEnabled("boat")) {
 
                             if (contain) {
@@ -375,38 +380,41 @@ public class NoBuildPlusPlayerListener implements Listener {
         Player p = e.getPlayer();
 
         // Flag: boat (Use)
-                if (FlagsManager.getFlagsIsEnabled("boat")) {
+        if (HRes.isInRes(e.getRightClicked())) {
+            return;
+        }
 
-                    if (Settings.getEnableWorldList().contains(world)) {
+        if (FlagsManager.getFlagsIsEnabled("boat")) {
 
-                        if (!Worlds.getFlag(world, "boat")) {
+            if (Settings.getEnableWorldList().contains(world)) {
 
-                            if (!p.hasPermission(Worlds.getPermission(world))) {
+                if (!Worlds.getFlag(world, "boat")) {
 
-                                if (e.getRightClicked() instanceof Boat) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                    e.setCancelled(true);
-                                    return;
+                        if (e.getRightClicked() instanceof Boat) {
+
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                            e.setCancelled(true);
+                            return;
+                        }
+
+                        if (FlagsManager.BoatIsIncludingChestBoat()) {
+                            if (e.getRightClicked() instanceof ChestBoat) {
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
                                 }
-
-                                if (FlagsManager.BoatIsIncludingChestBoat()) {
-                                    if (e.getRightClicked() instanceof ChestBoat) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                        e.setCancelled(true);
-                                        return;
-                                    }
-                                }
-
+                                e.setCancelled(true);
                             }
                         }
-                    }
 
+                    }
                 }
+            }
+
+        }
 
     }
 

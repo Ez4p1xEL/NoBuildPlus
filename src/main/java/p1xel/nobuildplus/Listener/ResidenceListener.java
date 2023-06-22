@@ -48,30 +48,4 @@ public class ResidenceListener implements Listener {
         }
 
     }
-
-    @EventHandler
-    public void onUseBoat(PlayerInteractEntityEvent e){
-        Player player = e.getPlayer();
-        World world = player.getWorld();
-
-        if (!e.getRightClicked().getType().equals(EntityType.BOAT)) {
-            if (FlagsManager.getFlagsIsEnabled("boat")) {
-                if (Settings.getEnableWorldList().contains(world.getName())) {
-                    if (!Worlds.getFlag(world.getName(), "fly")) {
-
-                        if (!player.hasPermission(Worlds.getPermission(world.getName()))) {
-
-                            if (Worlds.isDenyMessageExist(world.getName())) {
-                                player.sendMessage(Worlds.getDenyMessage(world.getName()));
-                            }
-
-                            e.setCancelled(true);
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-
 }

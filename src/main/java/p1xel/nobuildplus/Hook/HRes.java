@@ -1,7 +1,6 @@
 package p1xel.nobuildplus.Hook;
 
 import com.bekvon.bukkit.residence.Residence;
-import com.bekvon.bukkit.residence.api.ResidenceApi;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -22,10 +21,7 @@ public class HRes {
         }
         Location loc = p.getLocation();
         ClaimedResidence res = get().getResidenceManager().getByLoc(loc);
-        if (res != null) {
-            return true;
-        }
-        return false;
+        return res != null;
     }
 
     public static boolean isInRes(Entity e) {
@@ -34,10 +30,7 @@ public class HRes {
         }
         Location loc = e.getLocation();
         ClaimedResidence res = get().getResidenceManager().getByLoc(loc);
-        if (res != null) {
-            return true;
-        }
-        return false;
+        return res != null;
     }
 
     public static boolean isInRes(Block b) {
@@ -46,10 +39,7 @@ public class HRes {
         }
         Location loc = b.getLocation();
         ClaimedResidence res = get().getResidenceManager().getByLoc(loc);
-        if (res != null) {
-            return true;
-        }
-        return false;
+        return res != null;
     }
 
     public static boolean isInRes(Location loc) {
@@ -57,10 +47,7 @@ public class HRes {
             return false;
         }
         ClaimedResidence res = get().getResidenceManager().getByLoc(loc);
-        if (res != null) {
-            return true;
-        }
-        return false;
+        return res != null;
     }
 
 }

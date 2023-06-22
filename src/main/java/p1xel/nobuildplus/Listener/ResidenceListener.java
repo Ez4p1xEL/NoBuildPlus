@@ -1,14 +1,9 @@
 package p1xel.nobuildplus.Listener;
 
 import com.bekvon.bukkit.residence.event.ResidenceChangedEvent;
-import com.bekvon.bukkit.residence.event.ResidenceTPEvent;
-import org.bukkit.World;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;

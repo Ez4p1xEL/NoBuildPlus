@@ -8,6 +8,8 @@ import p1xel.nobuildplus.NoBuildPlus;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Worlds {
 
@@ -42,6 +44,13 @@ public class Worlds {
 
     }
 
+    public static List<String> getWorldNames() {
+        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "worlds.yml");
+        FileConfiguration yaml = YamlConfiguration.loadConfiguration(file);
+
+        return new ArrayList<>(yaml.getKeys(false));
+    }
+
     public static boolean isDenyMessageExist(String world) {
         return get().get(world + ".deny-message") != null;
     }
@@ -55,10 +64,7 @@ public class Worlds {
     }
 
     public static boolean isSpawnLocationSet(String world) {
-        if (get().get(world + ".spawn-loc") != null) {
-            return true;
-        }
-        return false;
+        return get().get(world + ".spawn-loc") != null;
     }
 
     public static Location getSpawnLocation(String world) {

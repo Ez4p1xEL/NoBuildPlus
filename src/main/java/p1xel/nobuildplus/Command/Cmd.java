@@ -3,13 +3,16 @@ package p1xel.nobuildplus.Command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 import p1xel.nobuildplus.Storage.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Cmd implements CommandExecutor {
+public class Cmd implements TabExecutor {
 
     @Override
     @ParametersAreNonnullByDefault
@@ -137,12 +140,11 @@ public class Cmd implements CommandExecutor {
 
                     Worlds.createWorld(args[1]);
                     sender.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", args[1]));
-                    return true;
 
                 } else {
                     sender.sendMessage(Locale.getMessage("already-exists"));
-                    return true;
                 }
+                return true;
 
             }
 
@@ -152,12 +154,11 @@ public class Cmd implements CommandExecutor {
 
                     Worlds.removeWorld(args[1]);
                     sender.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%", args[1]));
-                    return true;
 
                 } else {
                     sender.sendMessage(Locale.getMessage("not-in-list"));
-                    return true;
                 }
+                return true;
 
             }
 
@@ -214,4 +215,19 @@ public class Cmd implements CommandExecutor {
         return false;
     }
 
+    @Override
+    @ParametersAreNonnullByDefault
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 2){
+            switch (args[0]) {
+                case "remove":
+                case "flag":
+                    return StringUtil.copyPartialMatches(args[1], Worlds.getWorldNames(), new ArrayList<>());
+            }
+
+        } else if (args.length == 3 & args[0].equals("flag")) {
+            return StringUtil.copyPartialMatches(args[2], FlagsManager.getFlags(), new ArrayList<>());
+        }
+        return null;
+    }
 }

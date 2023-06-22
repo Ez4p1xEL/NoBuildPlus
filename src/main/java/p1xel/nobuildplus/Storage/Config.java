@@ -1,9 +1,6 @@
 package p1xel.nobuildplus.Storage;
 
-import org.bukkit.ChatColor;
 import p1xel.nobuildplus.NoBuildPlus;
-
-import java.util.List;
 
 public class Config {
 

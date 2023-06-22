@@ -62,13 +62,7 @@ public class FlagsManager {
     }
 
     public static boolean isInTheFlagsList(String flag) {
-
-        if (getFlags().contains(flag)) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return getFlags().contains(flag);
     }
 
     public static boolean getBoolInFlag(String flag, String path) {

@@ -43,6 +43,9 @@ public class Worlds {
     }
 
     public static boolean isDenyMessageExist(String world) {
+        if (Config.getBool("deny-message-enable")) {
+            return false;
+        }
         return get().get(world + ".deny-message") != null;
     }
 

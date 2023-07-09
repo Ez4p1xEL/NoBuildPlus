@@ -189,11 +189,10 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        String waterFlag = "water-spread";
-        boolean enableWater = FlagsManager.getFlagsIsEnabled(waterFlag);
-
         // Flag: water-spread
         if (mat == Material.WATER) {
+            String waterFlag = "water-spread";
+            boolean enableWater = FlagsManager.getFlagsIsEnabled(waterFlag);
             if (enableWater) {
 
                 if (Settings.getEnableWorldList().contains(world)) {
@@ -209,11 +208,11 @@ public class NoBuildPlusBlockListener implements Listener {
             }
         }
 
-        String lavaFlag = "lava-spread";
-        boolean enableLava = FlagsManager.getFlagsIsEnabled(lavaFlag);
-
         // Flag: lava-spread
         if (mat == Material.LAVA) {
+
+            String lavaFlag = "lava-spread";
+            boolean enableLava = FlagsManager.getFlagsIsEnabled(lavaFlag);
             if (enableLava) {
 
                 if (Settings.getEnableWorldList().contains(world)) {

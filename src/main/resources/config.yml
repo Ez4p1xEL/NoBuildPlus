@@ -22,7 +22,7 @@
 ## My name on SpigotMC is p1xEL_mc
 
 # The version of the plugin.
-Version: 1.2.6
+Version: 1.2.7
 type: Release
 
 # Language of the file.
@@ -35,3 +35,6 @@ check-update: true
 
 hook:
   Residence: true
+
+# Set to true if you want to enable deny-message
+deny-message-enable: true

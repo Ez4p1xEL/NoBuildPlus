@@ -40,6 +40,7 @@ public class FlagsManager {
 
     }
 
+    @Deprecated
     public static boolean getFlagsIsEnabled(String flag) {
         if (!get().isSet("flags." + flag + ".enable")) {
             return false;

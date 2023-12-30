@@ -22,8 +22,12 @@
 ## My name on SpigotMC is p1xEL_mc
 
 # The version of the plugin.
-Version: 1.2.7
+Version: 1.2.8
 type: Release
+
+# The version of configuration.
+# DO NOT CHANGE THIS!!
+Configuration: 1
 
 # Language of the file.
 # Languages list: en(English) zh_CN(Simplified Chinese) zh_TW(Traditional Chinese).

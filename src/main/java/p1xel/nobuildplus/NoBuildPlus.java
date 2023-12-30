@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.Command.Cmd;
+import p1xel.nobuildplus.Command.TabList;
 import p1xel.nobuildplus.Listener.*;
 import p1xel.nobuildplus.Storage.*;
 import p1xel.nobuildplus.bStats.Metrics;
@@ -41,6 +42,7 @@ public class NoBuildPlus extends JavaPlugin {
         FlagsManager.createLocaleFile();
 
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
+        getServer().getPluginCommand("NoBuildPlus").setTabCompleter(new TabList());
         getServer().getPluginManager().registerEvents(new NoBuildPlusBlockListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusEntityListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusHangingListener(), this);
@@ -61,7 +63,7 @@ public class NoBuildPlus extends JavaPlugin {
             }
         }
 
-
+        Settings.defaultList();
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());
 
         int pluginId = 15126;

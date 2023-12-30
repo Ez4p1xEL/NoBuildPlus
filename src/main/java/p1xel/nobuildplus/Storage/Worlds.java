@@ -43,7 +43,7 @@ public class Worlds {
     }
 
     public static boolean isDenyMessageExist(String world) {
-        if (Config.getBool("deny-message-enable")) {
+        if (!Config.getBool("deny-message-enable")) {
             return false;
         }
         return get().get(world + ".deny-message") != null;
@@ -80,12 +80,14 @@ public class Worlds {
 
         set(world + ".permission", Settings.getPermission());
         set(world + ".deny-message", Settings.getDenyMessageString());
+        Settings.addWorld(world);
 
     }
 
     public static void removeWorld(String world) {
 
         set(world, null);
+        Settings.removeWorld(world);
 
     }
 

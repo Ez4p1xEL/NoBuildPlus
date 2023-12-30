@@ -42,11 +42,15 @@ public class Locale {
     }
 
     public static String getMessage(String path) {
-        return ChatColor.translateAlternateColorCodes('&', get().getString(path).replaceAll("%plugin%", get().getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
+        return ChatColor.translateAlternateColorCodes('&', get().getString(path).replaceAll("%prefix%", get().getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
 
     public static String getCmdMessage(String path) {
         return ChatColor.translateAlternateColorCodes('&', get().getString(path).replaceAll("%prefix%", get().getString("commands-plugin-name")).replaceAll("%version%", Config.getVersion()));
+    }
+
+    public static String translate(String message) {
+        return ChatColor.translateAlternateColorCodes('&', message.replaceAll("%prefix%", get().getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
 
 }

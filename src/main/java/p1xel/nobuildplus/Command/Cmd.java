@@ -3,11 +3,13 @@ package p1xel.nobuildplus.Command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import p1xel.nobuildplus.Storage.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cmd implements CommandExecutor {
 
@@ -31,21 +33,9 @@ public class Cmd implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("help")) {
 
-                sender.sendMessage(Locale.getCmdMessage("commands.top"));
-                sender.sendMessage(Locale.getCmdMessage("commands.plugin"));
-                sender.sendMessage(Locale.getCmdMessage("commands.space-1"));
-                sender.sendMessage(Locale.getCmdMessage("commands.help"));
-                sender.sendMessage(Locale.getCmdMessage("commands.list"));
-                sender.sendMessage(Locale.getCmdMessage("commands.add"));
-                sender.sendMessage(Locale.getCmdMessage("commands.remove"));
-                sender.sendMessage(Locale.getCmdMessage("commands.clear"));
-                sender.sendMessage(Locale.getCmdMessage("commands.flag"));
-                sender.sendMessage(Locale.getCmdMessage("commands.flaglist"));
-                sender.sendMessage(Locale.getCmdMessage("commands.setspawn"));
-                sender.sendMessage(Locale.getCmdMessage("commands.tp"));
-                sender.sendMessage(Locale.getCmdMessage("commands.reload"));
-                sender.sendMessage(Locale.getCmdMessage("commands.space-8"));
-                sender.sendMessage(Locale.getCmdMessage("commands.bottom"));
+                for (String m : Locale.get().getConfigurationSection("commands").getKeys(false)) {
+                    sender.sendMessage(Locale.getCmdMessage("commands." + m));
+                }
                 return true;
 
             }
@@ -188,7 +178,7 @@ public class Cmd implements CommandExecutor {
                     return true;
                 }
 
-                if (args[3].equalsIgnoreCase("true")) {
+                if (args[3].equalsIgnoreCase("true") || args[3].equalsIgnoreCase("t")) {
 
                     Worlds.setFlag(args[1], args[2], true);
                     sender.sendMessage(Locale.getMessage("flag-set-success").replaceAll("%world%",args[1]).replaceAll("%flag%",args[2]).replaceAll("%boolean%", args[3]));
@@ -196,7 +186,7 @@ public class Cmd implements CommandExecutor {
 
                 }
 
-                if (args[3].equalsIgnoreCase("false")) {
+                if (args[3].equalsIgnoreCase("false") || args[3].equalsIgnoreCase("f")) {
 
                     Worlds.setFlag(args[1], args[2], false);
                     sender.sendMessage(Locale.getMessage("flag-set-success").replaceAll("%world%",args[1]).replaceAll("%flag%",args[2]).replaceAll("%boolean%", args[3]));

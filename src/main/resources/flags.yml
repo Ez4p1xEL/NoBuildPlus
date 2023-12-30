@@ -18,6 +18,7 @@ flags:
       - ANVIL
       - CHIPPED_ANVIL
       - DAMAGED_ANVIL
+      - ENDER_PEARL
   container:
     enable: true
     type: list
@@ -26,9 +27,6 @@ flags:
       - ENDER_CHEST
       - TRAPPED_CHEST
       - FURNACE
-  # DO NOT ENABLE THIS (THIS IS VERY LAG)
-  move:
-    enable: false
   mob-damage:
     enable: true
     type: all
@@ -181,9 +179,9 @@ flags:
   snowball-throw:
     enable: true
   water-spread:
-    enable: true
+    enable: false
   lava-spread:
-    enable: true
+    enable: false
   fly:
     enable: true
   # For Player
@@ -196,4 +194,10 @@ flags:
     # Add entity here
     list:
       - ZOMBIE
-
+  minecart:
+    enable: true
+    # List only
+    type: list
+    # Item name
+    list:
+      - MINECART

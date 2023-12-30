@@ -26,76 +26,68 @@ public class NoBuildPlusHangingListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("frame")) {
+        if (Settings.canExecute(world, "frame")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "frame")) {
 
-                if (!Worlds.getFlag(world, "frame")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (FlagsManager.FrameIsIncludingGlowFrame()) {
 
-                            if (FlagsManager.FrameIsIncludingGlowFrame()) {
+                        if (e.getEntity() instanceof GlowItemFrame) {
 
-                                if (e.getEntity() instanceof GlowItemFrame) {
-
-                                    if (p instanceof Player) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                    }
-                                    e.setCancelled(true);
-                                    return;
-
+                            if (p instanceof Player) {
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
                                 }
-
                             }
+                            e.setCancelled(true);
+                            return;
 
-                            if (e.getEntity() instanceof ItemFrame) {
-
-                                if (p instanceof Player) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                }
-                                e.setCancelled(true);
-                                return;
-
-                            }
                         }
 
+                    }
+
+                    if (e.getEntity() instanceof ItemFrame) {
+
+                        if (p instanceof Player) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                        }
+                        e.setCancelled(true);
+                        return;
+
+                    }
                 }
 
             }
         }
 
         // Flag: Painting
-        if (FlagsManager.getFlagsIsEnabled("painting")) {
+        if (Settings.canExecute(world, "painting")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "painting")) {
 
-                if (!Worlds.getFlag(world, "painting")) {
+                if (e.getEntity() instanceof Painting) {
 
-                    if (e.getEntity() instanceof Painting) {
+                    if (p instanceof Player) {
 
-                        if (p instanceof Player) {
+                        if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                            if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
                             }
-
+                            e.setCancelled(true);
 
                         }
 
-                    } else {
-                        e.setCancelled(true);
-                    }
-                }
 
+                    }
+
+                } else {
+                    e.setCancelled(true);
+                }
             }
         }
 
@@ -111,88 +103,92 @@ public class NoBuildPlusHangingListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("frame")) {
+        if (Settings.canExecute(world, "frame")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "frame")) {
 
-                if (!Worlds.getFlag(world, "frame")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (FlagsManager.FrameIsIncludingGlowFrame()) {
 
-                        if (FlagsManager.FrameIsIncludingGlowFrame()) {
-
-                            if (e.getEntity().getType() == EntityType.GLOW_ITEM_FRAME) {
-
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-
-                            }
-
-                        }
-
-                        if (e.getEntity().getType() == EntityType.ITEM_FRAME) {
+                        if (e.getEntity().getType() == EntityType.GLOW_ITEM_FRAME) {
 
                             if (Worlds.isDenyMessageExist(world)) {
                                 p.sendMessage(Worlds.getDenyMessage(world));
                             }
                             e.setCancelled(true);
-                            return;
 
                         }
+
                     }
-                }
 
-            }
+                    if (e.getEntity().getType() == EntityType.ITEM_FRAME) {
 
-        }
-
-        if (FlagsManager.getFlagsIsEnabled("painting")) {
-
-            if (Settings.getEnableWorldList().contains(world)) {
-
-                if (!Worlds.getFlag(world, "painting")) {
-
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        if (e.getEntity().getType() == EntityType.PAINTING) {
-
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-                            return;
-
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
                         }
-                    }
-                }
-
-            }
-
-        }
-
-        if (FlagsManager.getFlagsIsEnabled("boat")) {
-
-            if (Settings.getEnableWorldList().contains(world)) {
-
-                if (!Worlds.getFlag(world, "boat")) {
-
-                    if (FlagsManager.BoatIsIncludingChestBoat()) {
-                        if (e.getEntity() instanceof ChestBoat) {
-                            e.setCancelled(true);
-                            return;
-                        }
-                    }
-
-                    if (e.getEntity() instanceof Boat) {
-                        // 这个我弄不了给有权限的人放置
-                        // 实在没有头绪了
                         e.setCancelled(true);
+                        return;
+
                     }
-
-
                 }
+            }
+
+
+        }
+
+        if (Settings.canExecute(world, "painting")) {
+
+            if (!Worlds.getFlag(world, "painting")) {
+
+                if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                    if (e.getEntity().getType() == EntityType.PAINTING) {
+
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                        return;
+
+                    }
+                }
+
+            }
+
+        }
+
+        if (Settings.canExecute(world, "boat")) {
+
+            if (!Worlds.getFlag(world, "boat")) {
+
+                if (FlagsManager.BoatIsIncludingChestBoat()) {
+                    if (e.getEntity() instanceof ChestBoat) {
+                        e.setCancelled(true);
+                        return;
+                    }
+                }
+
+                if (e.getEntity() instanceof Boat) {
+                    // 这个弄不了给有权限的人放置
+                    e.setCancelled(true);
+                }
+
+
+            }
+
+        }
+
+        // Flag: minecart
+        if (Settings.canExecute(world, "minecart")) {
+
+            if (!Worlds.getFlag(world, "minecart")) {
+
+                if (e.getEntity() instanceof Minecart) {
+                    // 这个弄不了给有权限的人放置
+                    e.setCancelled(true);
+                }
+
 
             }
 

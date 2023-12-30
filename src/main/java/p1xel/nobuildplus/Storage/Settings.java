@@ -39,10 +39,23 @@ public class Settings {
 
     }
 
-    public static List<String> getEnableWorldList() {
-        List<String> list = new java.util.ArrayList<>(Collections.emptyList());
+    public static List<String> list = new java.util.ArrayList<>(Collections.emptyList());
+
+    // 初始化
+    public static void defaultList() {
         list.addAll(Worlds.get().getKeys(false));
+    }
+
+    public static List<String> getEnableWorldList() {
         return list;
+    }
+
+    public static void addWorld(String world) {
+        list.add(world);
+    }
+
+    public static void removeWorld(String world) {
+        list.remove(world);
     }
 
     public static boolean getDefaultFlag(String flag) {
@@ -53,6 +66,13 @@ public class Settings {
 
     public static String getDenyMessageString() {
         return get().getString("global-settings.deny-message");
+    }
+
+
+    // 是否可以执行flag监测
+    // 这个方法包含了 FlagsManager.getFlagsIeEnabled() 和 Settings.getEnableWorldList().contains() 的功能
+    public static boolean canExecute(String world, String flag) {
+        return FlagsManager.get().getBoolean("flags." + flag + ".enable") && Settings.getEnableWorldList().contains(world);
     }
 
 }

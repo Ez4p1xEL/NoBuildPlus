@@ -37,39 +37,36 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             boolean contain = Settings.getEnableWorldList().contains(world);
             Material clicked = e.getClickedBlock().getType();
-            
+
             boolean hasPerm = false;
-            
+
             if (contain) {
                 hasPerm = p.hasPermission(Worlds.getPermission(world));
             }
 
             // Flag: Use
-            if (FlagsManager.getFlagsIsEnabled("use")) {
+            if (Settings.canExecute(world, "use")) {
 
-                if (contain) {
+                if (!Worlds.getFlag(world, "use")) {
 
-                    if (!Worlds.getFlag(world, "use")) {
+                    if (!hasPerm) {
 
-                        if (!hasPerm) {
+                        if (FlagsManager.getFlagsType("use").equalsIgnoreCase("list")) {
 
-                            if (FlagsManager.getFlagsType("use").equalsIgnoreCase("list")) {
-
-                                for (String name : FlagsManager.getFlagsList("use")) {
-                                    Material block = Material.matchMaterial(name);
-                                    if (block != null) {
-                                        if (clicked == block) {
-                                            if (Worlds.isDenyMessageExist(world)) {
-                                                p.sendMessage(Worlds.getDenyMessage(world));
-                                            }
-                                            e.setCancelled(true);
-                                            return;
+                            for (String name : FlagsManager.getFlagsList("use")) {
+                                Material block = Material.matchMaterial(name);
+                                if (block != null) {
+                                    if (clicked == block) {
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(Worlds.getDenyMessage(world));
                                         }
+                                        e.setCancelled(true);
+                                        return;
                                     }
-
                                 }
 
                             }
+
                         }
                     }
                 }
@@ -77,31 +74,28 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
 
             // Flag: button
-            if (FlagsManager.getFlagsIsEnabled("button")) {
+            if (Settings.canExecute(world, "button")) {
 
-                if (contain) {
+                if (!Worlds.getFlag(world, "button")) {
 
-                    if (!Worlds.getFlag(world, "button")) {
+                    if (!hasPerm) {
 
-                        if (!hasPerm) {
+                        if (FlagsManager.getFlagsType("button").equalsIgnoreCase("list")) {
 
-                            if (FlagsManager.getFlagsType("button").equalsIgnoreCase("list")) {
-
-                                for (String name : FlagsManager.getFlagsList("button")) {
-                                    Material block = Material.matchMaterial(name);
-                                    if (block != null) {
-                                        if (clicked == block) {
-                                            if (Worlds.isDenyMessageExist(world)) {
-                                                p.sendMessage(Worlds.getDenyMessage(world));
-                                            }
-                                            e.setCancelled(true);
-                                            return;
+                            for (String name : FlagsManager.getFlagsList("button")) {
+                                Material block = Material.matchMaterial(name);
+                                if (block != null) {
+                                    if (clicked == block) {
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(Worlds.getDenyMessage(world));
                                         }
+                                        e.setCancelled(true);
+                                        return;
                                     }
-
                                 }
 
                             }
+
                         }
                     }
                 }
@@ -109,31 +103,28 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
 
             // Flag: door-interact
-            if (FlagsManager.getFlagsIsEnabled("door-interact")) {
+            if (Settings.canExecute(world, "door-interact")) {
 
-                if (contain) {
+                if (!Worlds.getFlag(world, "door-interact")) {
 
-                    if (!Worlds.getFlag(world, "door-interact")) {
+                    if (!hasPerm) {
 
-                        if (!hasPerm) {
+                        if (FlagsManager.getFlagsType("door-interact").equalsIgnoreCase("list")) {
 
-                            if (FlagsManager.getFlagsType("door-interact").equalsIgnoreCase("list")) {
-
-                                for (String name : FlagsManager.getFlagsList("door-interact")) {
-                                    Material block = Material.matchMaterial(name);
-                                    if (block != null) {
-                                        if (clicked == block) {
-                                            if (Worlds.isDenyMessageExist(world)) {
-                                                p.sendMessage(Worlds.getDenyMessage(world));
-                                            }
-                                            e.setCancelled(true);
-                                            return;
+                            for (String name : FlagsManager.getFlagsList("door-interact")) {
+                                Material block = Material.matchMaterial(name);
+                                if (block != null) {
+                                    if (clicked == block) {
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(Worlds.getDenyMessage(world));
                                         }
+                                        e.setCancelled(true);
+                                        return;
                                     }
-
                                 }
 
                             }
+
                         }
                     }
                 }
@@ -142,19 +133,16 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             // Flag: lever
             if (clicked == Material.LEVER) {
-                if (FlagsManager.getFlagsIsEnabled("lever")) {
+                if (Settings.canExecute(world, "lever")) {
 
-                    if (contain) {
+                    if (!Worlds.getFlag(world, "lever")) {
 
-                        if (!Worlds.getFlag(world, "lever")) {
-
-                            if (!hasPerm) {
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-                                return;
+                        if (!hasPerm) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
                             }
+                            e.setCancelled(true);
+                            return;
                         }
                     }
 
@@ -162,66 +150,60 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
 
             // Flag: trapdoor-interact
-            if (FlagsManager.getFlagsIsEnabled("trapdoor-interact")) {
+            if (Settings.canExecute(world, "trapdoor-interact")) {
 
-                if (contain) {
+                if (!Worlds.getFlag(world, "trapdoor-interact")) {
 
-                    if (!Worlds.getFlag(world, "trapdoor-interact")) {
+                    if (!hasPerm) {
 
-                        if (!hasPerm) {
+                        if (FlagsManager.getFlagsType("trapdoor-interact").equalsIgnoreCase("list")) {
 
-                            if (FlagsManager.getFlagsType("trapdoor-interact").equalsIgnoreCase("list")) {
-
-                                for (String name : FlagsManager.getFlagsList("trapdoor-interact")) {
-                                    Material block = Material.matchMaterial(name);
-                                    if (block != null) {
-                                        if (clicked == block) {
-                                            if (Worlds.isDenyMessageExist(world)) {
-                                                p.sendMessage(Worlds.getDenyMessage(world));
-                                            }
-                                            e.setCancelled(true);
-                                            return;
+                            for (String name : FlagsManager.getFlagsList("trapdoor-interact")) {
+                                Material block = Material.matchMaterial(name);
+                                if (block != null) {
+                                    if (clicked == block) {
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(Worlds.getDenyMessage(world));
                                         }
+                                        e.setCancelled(true);
+                                        return;
                                     }
-
                                 }
 
                             }
+
                         }
                     }
                 }
             }
 
-                // Flag: fencegate-interact
-                if (FlagsManager.getFlagsIsEnabled("fencegate-interact")) {
+            // Flag: fencegate-interact
+            if (Settings.canExecute(world, "fencegate-interact")) {
 
-                    if (contain) {
+                if (!Worlds.getFlag(world, "fencegate-interact")) {
 
-                        if (!Worlds.getFlag(world, "fencegate-interact")) {
+                    if (!hasPerm) {
 
-                            if (!hasPerm) {
+                        if (FlagsManager.getFlagsType("fencegate-interact").equalsIgnoreCase("list")) {
 
-                                if (FlagsManager.getFlagsType("fencegate-interact").equalsIgnoreCase("list")) {
-
-                                    for (String name : FlagsManager.getFlagsList("fencegate-interact")) {
-                                        Material block = Material.matchMaterial(name);
-                                        if (block != null) {
-                                            if (clicked == block) {
-                                                if (Worlds.isDenyMessageExist(world)) {
-                                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                                }
-                                                e.setCancelled(true);
-                                                return;
-                                            }
+                            for (String name : FlagsManager.getFlagsList("fencegate-interact")) {
+                                Material block = Material.matchMaterial(name);
+                                if (block != null) {
+                                    if (clicked == block) {
+                                        if (Worlds.isDenyMessageExist(world)) {
+                                            p.sendMessage(Worlds.getDenyMessage(world));
                                         }
-
+                                        e.setCancelled(true);
+                                        return;
                                     }
-
                                 }
+
                             }
+
                         }
                     }
                 }
+            }
         } // THE END OF THE "RIGHT CLICK BLOCK"
 
         // RIGHT CLICK BLOCK OR RIGHT CLICK AIR
@@ -238,47 +220,69 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (e.getItem().getType() == Material.matchMaterial(key)) {
 
-                        if (FlagsManager.getFlagsIsEnabled("boat")) {
+                        if (Settings.canExecute(world, "boat")) {
 
-                            if (contain) {
+                            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
 
-                                boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+                            if (!Worlds.getFlag(world, "boat")) {
 
-                                if (!Worlds.getFlag(world, "boat")) {
+                                if (!hasPerm) {
 
-                                    if (!hasPerm) {
-
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                        e.setCancelled(true);
-                                        return;
-
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                }
-
-                // Flag: egg-throw
-                if (FlagsManager.getFlagsIsEnabled("egg-throw")) {
-
-                    if (Settings.getEnableWorldList().contains(world)) {
-
-                        boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
-
-                        if (!Worlds.getFlag(world, "egg-throw")) {
-
-                            if (!hasPerm) {
-                                if (e.getItem().getType() == Material.EGG) {
                                     if (Worlds.isDenyMessageExist(world)) {
                                         p.sendMessage(Worlds.getDenyMessage(world));
                                     }
                                     e.setCancelled(true);
                                     return;
+
                                 }
+                            }
+
+                        }
+                        return;
+                    }
+                }
+
+                // Flag: minecart
+                for (String key : FlagsManager.getFlagsList("minecart")) {
+
+                    if (e.getItem().getType() == Material.matchMaterial(key)) {
+
+                        if (Settings.canExecute(world, "minecart")) {
+
+                            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+
+                            if (!Worlds.getFlag(world, "minecart")) {
+
+                                if (!hasPerm) {
+
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
+                                    }
+                                    e.setCancelled(true);
+                                    return;
+
+                                }
+                            }
+                        }
+
+                        return;
+                    }
+                }
+
+                // Flag: egg-throw
+                if (Settings.canExecute(world, "egg-throw")) {
+
+                    boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+
+                    if (!Worlds.getFlag(world, "egg-throw")) {
+
+                        if (!hasPerm) {
+                            if (e.getItem().getType() == Material.EGG) {
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
+                                e.setCancelled(true);
+                                return;
                             }
                         }
                     }
@@ -286,26 +290,22 @@ public class NoBuildPlusPlayerListener implements Listener {
                 }
 
                 // Flag: snowball-throw
-                if (FlagsManager.getFlagsIsEnabled("snowball-throw")) {
+                if (Settings.canExecute(world, "snowball-throw")) {
 
-                    if (Settings.getEnableWorldList().contains(world)) {
+                    boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
 
-                        boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+                    if (!Worlds.getFlag(world, "snowball-throw")) {
 
-                        if (!Worlds.getFlag(world, "snowball-throw")) {
-
-                            if (!hasPerm) {
-                                if (e.getItem().getType() == Material.matchMaterial("SNOWBALL")) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                    e.setCancelled(true);
-                                    return;
+                        if (!hasPerm) {
+                            if (e.getItem().getType() == Material.matchMaterial("SNOWBALL")) {
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
                                 }
+                                e.setCancelled(true);
+                                return;
                             }
                         }
                     }
-
                 }
             }
 
@@ -313,32 +313,23 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         // Flag: farmbreak
         if (action == Action.PHYSICAL) {
-                if (FlagsManager.getFlagsIsEnabled("farmbreak")) {
+            if (Settings.canExecute(world, "farmbreak")) {
 
-                    if (Settings.getEnableWorldList().contains(world)) {
+                if (!Worlds.getFlag(world, "farmbreak")) {
+                    Material clicked = e.getClickedBlock().getType();
 
-                        if (!Worlds.getFlag(world, "farmbreak")) {
-                            Material clicked = e.getClickedBlock().getType();
-
-                            if (clicked == Material.matchMaterial("SOIL") || clicked == Material.matchMaterial("FARMLAND")) {
-                                    e.setCancelled(true);
-                                    return;
-                            }
-
+                    if (clicked == Material.matchMaterial("SOIL") || clicked == Material.matchMaterial("FARMLAND")) {
+                        e.setCancelled(true);
+                        return;
                     }
                 }
-
             }
         }
 
 
 
         // Flag: Container
-        if (FlagsManager.getFlagsIsEnabled("container")) {
-
-            if (!Settings.getEnableWorldList().contains(world)) {
-                return;
-            }
+        if (Settings.canExecute(world, "container")) {
 
             if (Worlds.getFlag(world, "container")) {
                 return;
@@ -375,66 +366,34 @@ public class NoBuildPlusPlayerListener implements Listener {
         Player p = e.getPlayer();
 
         // Flag: boat (Use)
-                if (FlagsManager.getFlagsIsEnabled("boat")) {
+        if (Settings.canExecute(world, "boat")) {
 
-                    if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "boat")) {
 
-                        if (!Worlds.getFlag(world, "boat")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                            if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (e.getRightClicked() instanceof Boat) {
 
-                                if (e.getRightClicked() instanceof Boat) {
-
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                    e.setCancelled(true);
-                                    return;
-                                }
-
-                                if (FlagsManager.BoatIsIncludingChestBoat()) {
-                                    if (e.getRightClicked() instanceof ChestBoat) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                        e.setCancelled(true);
-                                        return;
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-                }
-
-    }
-
-    // Flag: move
-    @EventHandler
-    public void onMove(PlayerMoveEvent e) {
-
-        if (!FlagsManager.getFlagsIsEnabled("move")) {
-            return;
-        }
-
-        Player p = e.getPlayer();
-
-        String world = e.getPlayer().getWorld().getName();
-
-        if (!HRes.isInRes(p)) {
-            if (!Worlds.getFlag(world, "move")) {
-                if (Settings.getEnableWorldList().contains(world)) {
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
                         if (Worlds.isDenyMessageExist(world)) {
                             p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                        return;
+                    }
+
+                    if (FlagsManager.BoatIsIncludingChestBoat()) {
+                        if (e.getRightClicked() instanceof ChestBoat) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
                             e.setCancelled(true);
+                            return;
                         }
                     }
+
                 }
             }
         }
-
     }
 
     // Flag: Bed
@@ -448,23 +407,21 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("bed")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+        if (Settings.canExecute(world, "bed")) {
 
-                if (!Worlds.getFlag(world, "bed")) {
+            if (!Worlds.getFlag(world, "bed")) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
                     }
-                }
+                    e.setCancelled(true);
 
+                }
             }
+
 
         }
 
@@ -481,23 +438,20 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("chat")) {
+        if (Settings.canExecute(world, "chat")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "chat")) {
 
-                if (!Worlds.getFlag(world, "chat")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
                     }
-                }
+                    e.setCancelled(true);
 
+                }
             }
+
         }
 
     }
@@ -513,41 +467,33 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("command")) {
+        if (Settings.canExecute(world, "command")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "command")) {
 
-                if (!Worlds.getFlag(world, "command")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        if (FlagsManager.getFlagsType("command").equalsIgnoreCase("all")) {
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-                            return;
+                    if (FlagsManager.getFlagsType("command").equalsIgnoreCase("all")) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
                         }
+                        e.setCancelled(true);
+                        return;
+                    }
 
-                        if (FlagsManager.getFlagsType("command").equalsIgnoreCase("list")) {
-                            for (String cmd : FlagsManager.getFlagsList("command")) {
-                                if (e.getMessage().equalsIgnoreCase("/" + cmd)) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                    e.setCancelled(true);
+                    if (FlagsManager.getFlagsType("command").equalsIgnoreCase("list")) {
+                        for (String cmd : FlagsManager.getFlagsList("command")) {
+                            if (e.getMessage().equalsIgnoreCase("/" + cmd)) {
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
                                 }
+                                e.setCancelled(true);
                             }
                         }
-
-
-
                     }
                 }
-
             }
         }
-
     }
 
     @EventHandler
@@ -560,20 +506,16 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("armorstand")) {
+        if (Settings.canExecute(world, "armorstand")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "armorstand")) {
 
-                if (!Worlds.getFlag(world, "armorstand")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
                     }
+                    e.setCancelled(true);
 
                 }
 
@@ -593,20 +535,16 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("bucket-place")) {
+        if (Settings.canExecute(world, "bucket-place")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "bucket-place")) {
 
-                if (!Worlds.getFlag(world, "bucket-place")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
                     }
+                    e.setCancelled(true);
 
                 }
 
@@ -626,27 +564,19 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (FlagsManager.getFlagsIsEnabled("bucket-fill")) {
+        if (Settings.canExecute(world, "bucket-fill")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "bucket-fill")) {
 
-                if (!Worlds.getFlag(world, "bucket-fill")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
                     }
-
+                    e.setCancelled(true);
                 }
-
             }
-
         }
-
     }
 
     @EventHandler
@@ -662,48 +592,42 @@ public class NoBuildPlusPlayerListener implements Listener {
         }
 
         // Flag: drop-item (For Player)
-        if (FlagsManager.getFlagsIsEnabled("drop-item")) {
+        if (Settings.canExecute(world, "drop-item")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
 
-                boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+            if (!Worlds.getFlag(world, "drop-item")) {
 
-                if (!Worlds.getFlag(world, "drop-item")) {
+                if (!hasPerm) {
 
-                    if (!hasPerm) {
+                    String type = FlagsManager.getFlagsType("drop-item");
+                    String m = Worlds.getDenyMessage(world);
 
-                        String type = FlagsManager.getFlagsType("drop-item");
-                        String m = Worlds.getDenyMessage(world);
-
-                        if (type.equalsIgnoreCase("all")) {
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(m);
-                            }
-                            e.setCancelled(true);
-                            return;
+                    if (type.equalsIgnoreCase("all")) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(m);
                         }
+                        e.setCancelled(true);
+                        return;
+                    }
 
-                        if (type.equalsIgnoreCase("list")) {
+                    if (type.equalsIgnoreCase("list")) {
 
-                            for (String itemName : FlagsManager.getFlagsList("drop-item")) {
-                                Material item = Material.matchMaterial(itemName);
-                                if (item != null) {
-                                    if (droppedItem.getItemStack().getType() == item) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(m);
-                                        }
-                                        e.setCancelled(true);
+                        for (String itemName : FlagsManager.getFlagsList("drop-item")) {
+                            Material item = Material.matchMaterial(itemName);
+                            if (item != null) {
+                                if (droppedItem.getItemStack().getType() == item) {
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(m);
                                     }
+                                    e.setCancelled(true);
                                 }
                             }
-
                         }
                     }
                 }
             }
-
         }
-
     }
 
     @EventHandler
@@ -719,23 +643,19 @@ public class NoBuildPlusPlayerListener implements Listener {
         // Flag: fly
         if (p.getAllowFlight()) {
 
-            if (FlagsManager.getFlagsIsEnabled("fly")) {
+            if (Settings.canExecute(world, "fly")) {
 
-                if (Settings.getEnableWorldList().contains(world)) {
+                if (!Worlds.getFlag(world, "fly")) {
 
-                    if (!Worlds.getFlag(world, "fly")) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
                         }
+                        e.setCancelled(true);
+
                     }
                 }
-
             }
 
         }
@@ -752,25 +672,24 @@ public class NoBuildPlusPlayerListener implements Listener {
         }
 
         // Flag: teleport (For Player)
-        if (FlagsManager.getFlagsIsEnabled("teleport")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+        if (Settings.canExecute(world, "teleport")) {
 
-                if (!Worlds.getFlag(world, "teleport")) {
+            if (!Worlds.getFlag(world, "teleport")) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (e.getFrom().getWorld().getName().equalsIgnoreCase(world) || e.getTo().getWorld().getName().equalsIgnoreCase(world)) {
+                    if (e.getFrom().getWorld().getName().equalsIgnoreCase(world) || e.getTo().getWorld().getName().equalsIgnoreCase(world)) {
 
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
                         }
+                        e.setCancelled(true);
 
                     }
+
                 }
+
             }
         }
     }

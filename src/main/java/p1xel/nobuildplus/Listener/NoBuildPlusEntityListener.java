@@ -33,49 +33,46 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String mobDamage = "mob-damage";
         // Flag: Mob Damage
-        if (FlagsManager.getFlagsIsEnabled(mobDamage)) {
+        if (Settings.canExecute(world, mobDamage)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, mobDamage)) {
 
-                if (!Worlds.getFlag(world, mobDamage)) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (FlagsManager.getFlagsType(mobDamage).equalsIgnoreCase("all")) {
 
-                        if (FlagsManager.getFlagsType(mobDamage).equalsIgnoreCase("all")) {
+                        if (p instanceof Player && !(target instanceof Player)) {
 
-                            if (p instanceof Player && !(target instanceof Player)) {
-
-                                if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                                e.setCancelled(true);
-                                return;
-
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
                             }
+                            e.setCancelled(true);
+                            return;
 
                         }
 
-                        if (FlagsManager.getFlagsType(mobDamage).equalsIgnoreCase("list")) {
+                    }
 
-                            if (p instanceof Player && !(target instanceof Player)) {
+                    if (FlagsManager.getFlagsType(mobDamage).equalsIgnoreCase("list")) {
 
-                                for (String string : FlagsManager.getFlagsList(mobDamage)) {
+                        if (p instanceof Player && !(target instanceof Player)) {
 
-                                    if (e.getEntityType() == EntityType.valueOf(string)) {
+                            for (String string : FlagsManager.getFlagsList(mobDamage)) {
 
-                                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                                        e.setCancelled(true);
-                                        return;
+                                if (e.getEntityType() == EntityType.valueOf(string)) {
 
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
                                     }
+                                    e.setCancelled(true);
+                                    return;
 
                                 }
 
                             }
 
                         }
+
                     }
                 }
             }
@@ -85,44 +82,40 @@ public class NoBuildPlusEntityListener implements Listener {
         String frame = "frame";
 
         // Flag: Frame (Damage)
-        if (FlagsManager.getFlagsIsEnabled(frame)) {
+        if (Settings.canExecute(world, frame)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, frame)) {
 
-                if (!Worlds.getFlag(world, frame)) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (FlagsManager.FrameIsIncludingGlowFrame()) {
 
-                        if (FlagsManager.FrameIsIncludingGlowFrame()) {
-
-                            if (target instanceof GlowItemFrame) {
-
-                                if (p instanceof Player) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                                }
-                                e.setCancelled(true);
-                                return;
-
-                            }
-
-                        }
-
-                        if (target instanceof ItemFrame) {
+                        if (target instanceof GlowItemFrame) {
 
                             if (p instanceof Player) {
                                 if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
                             }
                             e.setCancelled(true);
                             return;
 
                         }
 
+                    }
+
+                    if (target instanceof ItemFrame) {
+
+                        if (p instanceof Player) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                        }
+                        e.setCancelled(true);
+                        return;
 
                     }
+
 
                 }
 
@@ -132,50 +125,43 @@ public class NoBuildPlusEntityListener implements Listener {
         String tntDamage = "tnt-damage";
         // Flag: tnt-damage
         if (e.getDamager().getType() == EntityType.PRIMED_TNT || e.getDamager().getType() == EntityType.MINECART_TNT) {
-            if (FlagsManager.getFlagsIsEnabled(tntDamage)) {
+            if (Settings.canExecute(world, tntDamage)) {
 
-                if (Settings.getEnableWorldList().contains(world)) {
+                if (!Worlds.getFlag(world, tntDamage)) {
 
-                    if (!Worlds.getFlag(world, tntDamage)) {
-
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-                        return;
-
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
                     }
-                }
+                    e.setCancelled(true);
+                    return;
 
+                }
             }
         }
 
         String armorstand = "armorstand";
 
         // Flag: Armor Stand (Damage)
-        if (FlagsManager.getFlagsIsEnabled(armorstand)) {
+        if (Settings.canExecute(world, armorstand)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, armorstand)) {
 
-                if (!Worlds.getFlag(world, armorstand)) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (p instanceof Player) {
 
-                        if (p instanceof Player) {
+                        if (target instanceof ArmorStand || target.getType() == EntityType.ARMOR_STAND) {
 
-                            if (target instanceof ArmorStand || target.getType() == EntityType.ARMOR_STAND) {
-
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-                                return;
-
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
                             }
+                            e.setCancelled(true);
+                            return;
 
                         }
 
                     }
+
                 }
             }
 
@@ -183,11 +169,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String pvp = "pvp";
         // Flag: Pvp
-        if (FlagsManager.getFlagsIsEnabled(pvp)) {
-
-            if (!Settings.getEnableWorldList().contains(world)) {
-                return;
-            }
+        if (Settings.canExecute(world, pvp)) {
 
             if (Worlds.getFlag(world, pvp)) {
                 return;
@@ -200,8 +182,8 @@ public class NoBuildPlusEntityListener implements Listener {
             if (p instanceof Player && target instanceof Player) {
 
                 if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
+                    p.sendMessage(Worlds.getDenyMessage(world));
+                }
                 e.setCancelled(true);
 
             }
@@ -223,34 +205,31 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String mobExplode = "mob-explode";
 
-        if (FlagsManager.getFlagsIsEnabled(mobExplode)) {
+        if (Settings.canExecute(world, mobExplode)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, mobExplode)) {
 
-                if (!Worlds.getFlag(world, mobExplode)) {
+                if (FlagsManager.getFlagsType(mobExplode).equalsIgnoreCase("all")) {
 
-                    if (FlagsManager.getFlagsType(mobExplode).equalsIgnoreCase("all")) {
+                    e.setCancelled(true);
+                    return;
 
-                        e.setCancelled(true);
-                        return;
+                }
 
-                    }
+                if (FlagsManager.getFlagsType(mobExplode).equalsIgnoreCase("list")) {
 
-                    if (FlagsManager.getFlagsType(mobExplode).equalsIgnoreCase("list")) {
+                    for (String string : FlagsManager.getFlagsList(mobExplode)) {
 
-                        for (String string : FlagsManager.getFlagsList(mobExplode)) {
+                        if (e.getEntityType() == EntityType.valueOf(string)) {
 
-                            if (e.getEntityType() == EntityType.valueOf(string)) {
-
-                                e.setCancelled(true);
-                                return;
-
-                            }
+                            e.setCancelled(true);
+                            return;
 
                         }
 
-
                     }
+
+
                 }
             }
 
@@ -259,19 +238,15 @@ public class NoBuildPlusEntityListener implements Listener {
         String tnt = "tnt";
 
         // Flag: Tnt
-        if (FlagsManager.getFlagsIsEnabled(tnt)) {
+        if (Settings.canExecute(world, tnt)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, tnt)) {
 
-                if (!Worlds.getFlag(world, tnt)) {
-
-                    if (e.getEntityType() == EntityType.PRIMED_TNT || e.getEntityType() == EntityType.MINECART_TNT) {
-                        e.setCancelled(true);
-                    }
-
+                if (e.getEntityType() == EntityType.PRIMED_TNT || e.getEntityType() == EntityType.MINECART_TNT) {
+                    e.setCancelled(true);
                 }
-            }
 
+            }
         }
 
     }
@@ -295,39 +270,36 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String frame = "frame";
 
-        if (FlagsManager.getFlagsIsEnabled(frame)) {
+        if (Settings.canExecute(world, frame)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, frame)) {
 
-                if (!Worlds.getFlag(world, frame)) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (FlagsManager.FrameIsIncludingGlowFrame()) {
 
-                        if (FlagsManager.FrameIsIncludingGlowFrame()) {
-
-                            if (e.getRightClicked().getType() == EntityType.GLOW_ITEM_FRAME) {
-
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                                e.setCancelled(true);
-                                return;
-
-                            }
-
-                        }
-
-                        if (e.getRightClicked().getType() == EntityType.ITEM_FRAME) {
+                        if (e.getRightClicked().getType() == EntityType.GLOW_ITEM_FRAME) {
 
                             if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
                             e.setCancelled(true);
                             return;
 
                         }
 
                     }
+
+                    if (e.getRightClicked().getType() == EntityType.ITEM_FRAME) {
+
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                        return;
+
+                    }
+
                 }
 
             }
@@ -337,28 +309,25 @@ public class NoBuildPlusEntityListener implements Listener {
         String ride = "ride";
 
         // Flag: Ride
-        if (FlagsManager.getFlagsIsEnabled(ride)) {
+        if (Settings.canExecute(world, ride)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, ride)) {
 
-                if (!Worlds.getFlag(world, ride)) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (FlagsManager.getFlagsType(ride).equalsIgnoreCase("list")) {
 
-                        if (FlagsManager.getFlagsType(ride).equalsIgnoreCase("list")) {
-
-                            for (String name : FlagsManager.getFlagsList(ride)) {
-                                if (e.getRightClicked().getType() == EntityType.valueOf(name)) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                                    e.setCancelled(true);
-                                    return;
+                        for (String name : FlagsManager.getFlagsList(ride)) {
+                            if (e.getRightClicked().getType() == EntityType.valueOf(name)) {
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
                                 }
-
+                                e.setCancelled(true);
+                                return;
                             }
 
                         }
+
                     }
                 }
             }
@@ -367,25 +336,22 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String armorstand = "armorstand";
 
-        if (FlagsManager.getFlagsIsEnabled(armorstand)) {
+        if (Settings.canExecute(world, armorstand)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, armorstand)) {
 
-                if (!Worlds.getFlag(world, armorstand)) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (e.getRightClicked().getType() == EntityType.ARMOR_STAND || e.getRightClicked() instanceof ArmorStand) {
 
-                        if (e.getRightClicked().getType() == EntityType.ARMOR_STAND || e.getRightClicked() instanceof ArmorStand) {
-
-                            if (Worlds.isDenyMessageExist(world)) {
+                        if (Worlds.isDenyMessageExist(world)) {
                             p.sendMessage(Worlds.getDenyMessage(world));
                         }
-                            e.setCancelled(true);
-                            return;
-
-                        }
+                        e.setCancelled(true);
+                        return;
 
                     }
+
                 }
 
             }
@@ -396,22 +362,18 @@ public class NoBuildPlusEntityListener implements Listener {
 
             String villager = "villager";
 
-            if (FlagsManager.getFlagsIsEnabled(villager)) {
+            if (Settings.canExecute(world, villager)) {
 
-                if (Settings.getEnableWorldList().contains(world)) {
+                if (!Worlds.getFlag(world, villager)) {
 
-                    if (!Worlds.getFlag(world, villager)) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                            if (Worlds.isDenyMessageExist(world)) {
+                        if (Worlds.isDenyMessageExist(world)) {
                             p.sendMessage(Worlds.getDenyMessage(world));
                         }
-                            e.setCancelled(true);
+                        e.setCancelled(true);
 
-                        }
                     }
-
                 }
 
             }
@@ -435,15 +397,13 @@ public class NoBuildPlusEntityListener implements Listener {
         }
 
         if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
-            if (FlagsManager.getFlagsIsEnabled(voidtpFlag)) {
-                if (Settings.getEnableWorldList().contains(world)) {
-                    if (Worlds.getFlag(world, voidtpFlag)) {
-                        if (Worlds.isSpawnLocationSet(world)) {
-                            if (entity instanceof Player) {
-                                Player p = (Player) e.getEntity();
-                                p.teleport(Worlds.getSpawnLocation(world));
-                                p.setFallDistance(0);
-                            }
+            if (Settings.canExecute(world, voidtpFlag)) {
+                if (Worlds.getFlag(world, voidtpFlag)) {
+                    if (Worlds.isSpawnLocationSet(world)) {
+                        if (entity instanceof Player) {
+                            Player p = (Player) e.getEntity();
+                            p.teleport(Worlds.getSpawnLocation(world));
+                            p.setFallDistance(0);
                         }
                     }
                 }
@@ -452,12 +412,10 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
             if (entity instanceof Player) {
-                if (FlagsManager.getFlagsIsEnabled(falldamageFlag)) {
-                    if (Settings.getEnableWorldList().contains(world)) {
-                        if (!Worlds.getFlag(world, falldamageFlag)) {
-                            Player p = (Player) e.getEntity();
-                            e.setCancelled(true);
-                        }
+                if (Settings.canExecute(world, falldamageFlag)) {
+                    if (!Worlds.getFlag(world, falldamageFlag)) {
+                        Player p = (Player) e.getEntity();
+                        e.setCancelled(true);
                     }
                 }
             }
@@ -485,34 +443,31 @@ public class NoBuildPlusEntityListener implements Listener {
             }
         }
 
-        if (FlagsManager.getFlagsIsEnabled(shootFlag)) {
+        if (Settings.canExecute(world, shootFlag)) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, shootFlag)) {
 
-                if (!Worlds.getFlag(world, shootFlag)) {
+                if (p instanceof Player) {
 
-                    if (p instanceof Player) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                            if (e.getBow().getType() == Material.BOW) {
-                                if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                                e.setCancelled(true);
+                        if (e.getBow().getType() == Material.BOW) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
                             }
-                            if (FlagsManager.getBoolInFlag(shootFlag, "include-crossbow")) {
-                                if (e.getBow().getType() == Material.CROSSBOW) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
+                            e.setCancelled(true);
                         }
-                                    e.setCancelled(true);
+                        if (FlagsManager.getBoolInFlag(shootFlag, "include-crossbow")) {
+                            if (e.getBow().getType() == Material.CROSSBOW) {
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
                                 }
+                                e.setCancelled(true);
                             }
                         }
                     }
-
                 }
+
 
             }
         }
@@ -533,18 +488,14 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (e.getEntityType() == EntityType.ARMOR_STAND) {
 
-            if (FlagsManager.getFlagsIsEnabled(armorstandFlag)) {
+            if (Settings.canExecute(world, armorstandFlag)) {
 
-                if (Settings.getEnableWorldList().contains(world)) {
+                if (!Worlds.getFlag(world, armorstandFlag)) {
 
-                    if (!Worlds.getFlag(world, armorstandFlag)) {
+                    // 这个我弄不了给有权限的人放置
+                    // 实在没有头绪了
+                    e.setCancelled(true);
 
-                        // 这个我弄不了给有权限的人放置
-                        // 实在没有头绪了
-                        e.setCancelled(true);
-
-
-                    }
 
                 }
 
@@ -559,7 +510,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
         String world = entity.getWorld().getName();
-        
+
         String farmbreakFlag = "farmbreak";
 
         if (HRes.isInRes(entity)) {
@@ -568,20 +519,17 @@ public class NoBuildPlusEntityListener implements Listener {
 
         // Flag: farmbreak
 
-            if (e.getBlock().getType() == Material.matchMaterial("SOIL") || e.getBlock().getType() == Material.matchMaterial("FARMLAND")) {
+        if (e.getBlock().getType() == Material.matchMaterial("SOIL") || e.getBlock().getType() == Material.matchMaterial("FARMLAND")) {
 
-                if (FlagsManager.getFlagsIsEnabled(farmbreakFlag)) {
+            if (Settings.canExecute(world, farmbreakFlag)) {
 
-                    if (Settings.getEnableWorldList().contains(world)) {
+                if (!Worlds.getFlag(world, farmbreakFlag)) {
 
-                        if (!Worlds.getFlag(world, farmbreakFlag)) {
-
-                            e.setCancelled(true);
-
-                    }
-
+                    e.setCancelled(true);
 
                 }
+
+
             }
         }
 
@@ -591,27 +539,22 @@ public class NoBuildPlusEntityListener implements Listener {
     public void onEntitySpawn(EntitySpawnEvent e) {
 
         String mobSpawnFlag = "mob-spawn";
+        Entity entity = e.getEntity();
+        String world = entity.getWorld().getName();
 
+        if (Settings.canExecute(world, mobSpawnFlag)) {
 
-        if (FlagsManager.getFlagsIsEnabled(mobSpawnFlag)) {
-            Entity entity = e.getEntity();
-            String world = entity.getWorld().getName();
-            boolean contain = Settings.getEnableWorldList().contains(world);
-            if (contain) {
+            if (!Worlds.getFlag(world, mobSpawnFlag)) {
 
-                if (!Worlds.getFlag(world, mobSpawnFlag)) {
+                if (FlagsManager.getFlagsType(mobSpawnFlag).equalsIgnoreCase("list")) {
 
-                    if (FlagsManager.getFlagsType(mobSpawnFlag).equalsIgnoreCase("list")) {
+                    EntityType et = e.getEntityType();
 
-                        EntityType et = e.getEntityType();
+                    for (String mob : FlagsManager.getFlagsList(mobSpawnFlag)) {
 
-                        for (String mob : FlagsManager.getFlagsList(mobSpawnFlag)) {
+                        if (et == EntityType.valueOf(mob)) {
 
-                            if (et == EntityType.valueOf(mob)) {
-
-                                e.setCancelled(true);
-
-                            }
+                            e.setCancelled(true);
 
                         }
 
@@ -619,8 +562,8 @@ public class NoBuildPlusEntityListener implements Listener {
 
                 }
 
-
             }
+
         }
 
     }

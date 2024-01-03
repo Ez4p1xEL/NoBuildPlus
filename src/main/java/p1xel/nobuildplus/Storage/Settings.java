@@ -10,25 +10,29 @@ import java.util.Collections;
 import java.util.List;
 
 public class Settings {
+    
+    public static File file;
+    public static FileConfiguration yaml;
 
-    public static void createWorldsFile() {
+    public static void createSettingsFile() {
 
         File file = new File(NoBuildPlus.getInstance().getDataFolder(), "settings.yml");
 
         if (!file.exists()) {
             NoBuildPlus.getInstance().saveResource("settings.yml", false);
         }
+        
+        upload(file);
 
     }
 
-    public static FileConfiguration get() {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "settings.yml");
-        return YamlConfiguration.loadConfiguration(file);
+    // Upload the settings.yml file
+    public static void upload(File settings) {
+        file = settings;
+        yaml = YamlConfiguration.loadConfiguration(settings);
     }
 
     public static void set(String path, Object value) {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "settings.yml");
-        FileConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
         yaml.set(path,value);
         try {
@@ -43,7 +47,7 @@ public class Settings {
 
     // 初始化
     public static void defaultList() {
-        list.addAll(Worlds.get().getKeys(false));
+        list.addAll(Worlds.yaml.getKeys(false));
     }
 
     public static List<String> getEnableWorldList() {
@@ -59,20 +63,20 @@ public class Settings {
     }
 
     public static boolean getDefaultFlag(String flag) {
-        return get().getBoolean("global-settings.flags." + flag);
+        return yaml.getBoolean("global-settings.flags." + flag);
     }
 
-    public static String getPermission() { return get().getString("global-settings.permission"); }
+    public static String getPermission() { return yaml.getString("global-settings.permission"); }
 
     public static String getDenyMessageString() {
-        return get().getString("global-settings.deny-message");
+        return yaml.getString("global-settings.deny-message");
     }
 
 
     // 是否可以执行flag监测
     // 这个方法包含了 FlagsManager.getFlagsIeEnabled() 和 Settings.getEnableWorldList().contains() 的功能
     public static boolean canExecute(String world, String flag) {
-        return FlagsManager.get().getBoolean("flags." + flag + ".enable") && Settings.getEnableWorldList().contains(world);
+        return FlagsManager.yaml.getBoolean("flags." + flag + ".enable") && Settings.getEnableWorldList().contains(world);
     }
 
 }

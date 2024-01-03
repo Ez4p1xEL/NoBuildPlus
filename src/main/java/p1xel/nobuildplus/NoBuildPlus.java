@@ -37,9 +37,9 @@ public class NoBuildPlus extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
         Locale.createLocaleFile();
-        Settings.createWorldsFile();
+        Settings.createSettingsFile();
         Worlds.createWorldsFile();
-        FlagsManager.createLocaleFile();
+        FlagsManager.createFlagsManagerFile();
 
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
         getServer().getPluginCommand("NoBuildPlus").setTabCompleter(new TabList());

@@ -1,22 +1,25 @@
 package p1xel.nobuildplus.Storage;
 
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.Configuration;
 import p1xel.nobuildplus.NoBuildPlus;
 
 import java.util.List;
 
 public class Config {
+    
+    static Configuration config = NoBuildPlus.getInstance().getConfig();
 
     public static String getString(String path) {
-        return NoBuildPlus.getInstance().getConfig().getString(path);
+        return config.getString(path);
     }
 
     public static boolean getBool(String path) {
-        return NoBuildPlus.getInstance().getConfig().getBoolean(path);
+        return config.getBoolean(path);
     }
 
     public static String getLanguage() {
-        return NoBuildPlus.getInstance().getConfig().getString("Language");
+        return config.getString("Language");
     }
 
     public static void reloadConfig() {
@@ -30,7 +33,7 @@ public class Config {
     }
 
     public static int getInt(String path) {
-        return NoBuildPlus.getInstance().getConfig().getInt(path);
+        return config.getInt(path);
     }
 
     public static boolean isResidenceEnabled() {

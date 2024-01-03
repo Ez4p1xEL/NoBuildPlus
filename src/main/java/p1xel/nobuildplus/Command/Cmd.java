@@ -33,7 +33,7 @@ public class Cmd implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("help")) {
 
-                for (String m : Locale.get().getConfigurationSection("commands").getKeys(false)) {
+                for (String m : Locale.yaml.getConfigurationSection("commands").getKeys(false)) {
                     sender.sendMessage(Locale.getCmdMessage("commands." + m));
                 }
                 return true;
@@ -52,7 +52,7 @@ public class Cmd implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("clear")) {
 
-                for (String key : Worlds.get().getKeys(false)) {
+                for (String key : Worlds.yaml.getKeys(false)) {
                     Worlds.set(key, null);
                 }
                 sender.sendMessage(Locale.getMessage("clear-success"));
@@ -63,6 +63,10 @@ public class Cmd implements CommandExecutor {
             if (args[0].equalsIgnoreCase("reload")) {
 
                 Config.reloadConfig();
+                FlagsManager.createFlagsManagerFile();
+                Locale.createLocaleFile();
+                Settings.createSettingsFile();
+                Worlds.createWorldsFile();
                 sender.sendMessage(Locale.getMessage("reload-success"));
                 return true;
 

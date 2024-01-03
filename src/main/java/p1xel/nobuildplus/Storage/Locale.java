@@ -12,6 +12,9 @@ import java.util.List;
 
 public class Locale {
 
+    public static File file;
+    public static FileConfiguration yaml;
+
     public static void createLocaleFile() {
 
         List<String> lang = Arrays.asList("en","zh_CN","zh_TW");
@@ -21,17 +24,16 @@ public class Locale {
                 NoBuildPlus.getInstance().saveResource(l + ".yml", false);
             }
         }
+        
+        upload(new File(NoBuildPlus.getInstance().getDataFolder(), Config.getLanguage() + ".yml"));
     }
 
-    public static FileConfiguration get() {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getLanguage() + ".yml");
-        return YamlConfiguration.loadConfiguration(file);
+    public static void upload(File locale) {
+        file = locale;
+        yaml = YamlConfiguration.loadConfiguration(locale);
     }
 
     public static void set(String path, Object value) {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), Config.getLanguage() + ".yml");
-        FileConfiguration yaml = YamlConfiguration.loadConfiguration(file);
-
         yaml.set(path,value);
         try {
             yaml.save(file);
@@ -42,15 +44,15 @@ public class Locale {
     }
 
     public static String getMessage(String path) {
-        return ChatColor.translateAlternateColorCodes('&', get().getString(path).replaceAll("%prefix%", get().getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
+        return ChatColor.translateAlternateColorCodes('&', yaml.getString(path).replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
 
     public static String getCmdMessage(String path) {
-        return ChatColor.translateAlternateColorCodes('&', get().getString(path).replaceAll("%prefix%", get().getString("commands-plugin-name")).replaceAll("%version%", Config.getVersion()));
+        return ChatColor.translateAlternateColorCodes('&', yaml.getString(path).replaceAll("%prefix%", yaml.getString("commands-plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
 
     public static String translate(String message) {
-        return ChatColor.translateAlternateColorCodes('&', message.replaceAll("%prefix%", get().getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
+        return ChatColor.translateAlternateColorCodes('&', message.replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
 
 }

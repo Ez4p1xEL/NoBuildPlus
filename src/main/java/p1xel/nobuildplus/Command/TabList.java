@@ -79,7 +79,7 @@ public class TabList implements TabCompleter {
             }
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
 }

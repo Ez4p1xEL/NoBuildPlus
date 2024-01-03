@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class Worlds {
 
+    public static File file;
+    public static FileConfiguration yaml;
     public static void createWorldsFile() {
 
         File file = new File(NoBuildPlus.getInstance().getDataFolder(), "worlds.yml");
@@ -22,17 +24,16 @@ public class Worlds {
                 ioException.printStackTrace();
             }
         }
+
+        upload(file);
     }
 
-    public static FileConfiguration get() {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "worlds.yml");
-        return YamlConfiguration.loadConfiguration(file);
+    public static void upload(File worlds) {
+        file = worlds;
+        yaml = YamlConfiguration.loadConfiguration(worlds);
     }
 
     public static void set(String path, Object value) {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "worlds.yml");
-        FileConfiguration yaml = YamlConfiguration.loadConfiguration(file);
-
         yaml.set(path,value);
         try {
             yaml.save(file);
@@ -46,26 +47,28 @@ public class Worlds {
         if (!Config.getBool("deny-message-enable")) {
             return false;
         }
-        return get().get(world + ".deny-message") != null;
+        return yaml.getString(world + ".deny-message") != null;
     }
 
     public static String getDenyMessage(String world) {
-        return ChatColor.translateAlternateColorCodes('&', get().getString(world + ".deny-message"));
+        String m = yaml.getString(world + ".deny-message");
+        if (m==null) {return null;}
+        return ChatColor.translateAlternateColorCodes('&', m);
     }
 
     public static String getPermission(String world) {
-        return get().getString(world + ".permission");
+        return yaml.getString(world + ".permission");
     }
 
     public static boolean isSpawnLocationSet(String world) {
-        if (get().get(world + ".spawn-loc") != null) {
+        if (yaml.get(world + ".spawn-loc") != null) {
             return true;
         }
         return false;
     }
 
     public static Location getSpawnLocation(String world) {
-        return (Location) get().get(world + ".spawn-loc");
+        return (Location) yaml.get(world + ".spawn-loc");
     }
 
     public static void setSpawnLocation(String world, Location loc) {
@@ -96,7 +99,7 @@ public class Worlds {
     }
 
     public static boolean getFlag(String world, String flag) {
-        return get().getBoolean(world + ".flags." + flag);
+        return yaml.getBoolean(world + ".flags." + flag);
     }
 
 

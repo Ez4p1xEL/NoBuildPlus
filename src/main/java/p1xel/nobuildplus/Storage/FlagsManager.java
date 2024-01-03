@@ -13,18 +13,22 @@ import java.util.List;
 
 public class FlagsManager {
 
-    public static void createLocaleFile() {
+    public static File file;
+    public static FileConfiguration yaml;
+    public static void createFlagsManagerFile() {
 
         File file = new File(NoBuildPlus.getInstance().getDataFolder(), "flags.yml");
 
         if (!file.exists()) {
             NoBuildPlus.getInstance().saveResource("flags.yml", false);
         }
+        
+        upload(file);
     }
 
-    public static FileConfiguration get() {
-        File file = new File(NoBuildPlus.getInstance().getDataFolder(), "flags.yml");
-        return YamlConfiguration.loadConfiguration(file);
+    public static void upload(File flags) {
+        file = flags;
+        yaml = YamlConfiguration.loadConfiguration(flags);
     }
 
     public static void set(String path, Object value) {
@@ -42,23 +46,23 @@ public class FlagsManager {
 
     @Deprecated
     public static boolean getFlagsIsEnabled(String flag) {
-        if (!get().isSet("flags." + flag + ".enable")) {
+        if (!yaml.isSet("flags." + flag + ".enable")) {
             return false;
         }
-        return get().getBoolean("flags." + flag + ".enable");
+        return yaml.getBoolean("flags." + flag + ".enable");
     }
 
     public static String getFlagsType(String flag) {
-        return get().getString("flags." + flag + ".type");
+        return yaml.getString("flags." + flag + ".type");
     }
 
     public static List<String> getFlagsList(String flag) {
-        return get().getStringList("flags."+flag+".list");
+        return yaml.getStringList("flags."+flag+".list");
     }
 
     public static List<String> getFlags() {
         List<String> list = new java.util.ArrayList<>(Collections.emptyList());
-        list.addAll(get().getConfigurationSection("flags").getKeys(false));
+        list.addAll(yaml.getConfigurationSection("flags").getKeys(false));
         return list;
     }
 
@@ -73,15 +77,15 @@ public class FlagsManager {
     }
 
     public static boolean getBoolInFlag(String flag, String path) {
-        return get().getBoolean("flags." + flag + "." + path);
+        return yaml.getBoolean("flags." + flag + "." + path);
     }
 
     public static boolean FrameIsIncludingGlowFrame() {
-        return get().getBoolean("flags.frame.include-glow-frame");
+        return yaml.getBoolean("flags.frame.include-glow-frame");
     }
 
     public static boolean BoatIsIncludingChestBoat() {
-        return get().getBoolean("flags.boat.chestBoatEnable");
+        return yaml.getBoolean("flags.boat.chestBoatEnable");
     }
 
 }

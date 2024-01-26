@@ -42,5 +42,6 @@ global-settings:
     teleport: true
     mob-spawn: true
     minecart: true
+    item-pickup: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

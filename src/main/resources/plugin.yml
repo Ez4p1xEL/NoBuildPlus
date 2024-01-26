@@ -1,7 +1,11 @@
 name: NoBuildPlus
 main: p1xel.nobuildplus.NoBuildPlus
-version: 1.2.9
+version: 1.3.0
 api-version: 1.13
 commands:
   nobuildplus:
     aliases: [nbp]
+permissions:
+  nobuildplus.use:
+    default: op
+    description: Using the commands

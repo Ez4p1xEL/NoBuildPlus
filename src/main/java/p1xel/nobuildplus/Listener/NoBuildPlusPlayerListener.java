@@ -1,13 +1,11 @@
 package p1xel.nobuildplus.Listener;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Boat;
-import org.bukkit.entity.ChestBoat;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Hook.HRes;
@@ -579,6 +577,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         }
     }
 
+    // Flag: drop-item
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e) {
 
@@ -617,6 +616,57 @@ public class NoBuildPlusPlayerListener implements Listener {
                             Material item = Material.matchMaterial(itemName);
                             if (item != null) {
                                 if (droppedItem.getItemStack().getType() == item) {
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(m);
+                                    }
+                                    e.setCancelled(true);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Flag: item-pickup
+    @EventHandler
+    public void onItemPickUp(EntityPickupItemEvent e) {
+
+        Entity p = e.getEntity();
+        Item item = e.getItem();
+        String world = p.getWorld().getName();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
+        // Flag: drop-item (For Player)
+        if (Settings.canExecute(world, "item-pickup")) {
+
+            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+
+            if (!Worlds.getFlag(world, "item-pickup")) {
+
+                if (!hasPerm) {
+
+                    String type = FlagsManager.getFlagsType("item-pickup");
+                    String m = Worlds.getDenyMessage(world);
+
+                    if (type.equalsIgnoreCase("all")) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(m);
+                        }
+                        e.setCancelled(true);
+                        return;
+                    }
+
+                    if (type.equalsIgnoreCase("list")) {
+
+                        for (String itemName : FlagsManager.getFlagsList("item-pickup")) {
+                            Material items = Material.matchMaterial(itemName);
+                            if (items != null) {
+                                if (item.getItemStack().getType() == items) {
                                     if (Worlds.isDenyMessageExist(world)) {
                                         p.sendMessage(m);
                                     }

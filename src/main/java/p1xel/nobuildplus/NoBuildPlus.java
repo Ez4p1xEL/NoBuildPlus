@@ -11,12 +11,22 @@ import p1xel.nobuildplus.Storage.*;
 import p1xel.nobuildplus.bStats.Metrics;
 import p1xel.nobuildplus.spigotmc.UpdateChecker;
 
+import java.io.File;
+
 public class NoBuildPlus extends JavaPlugin {
 
     private static NoBuildPlus instance;
 
     public static NoBuildPlus getInstance() {
         return instance;
+    }
+
+    // Will be adjusted
+    private void saveOtherConfigs() {
+        File file = new File(this.getDataFolder(), "config_zh_CN.yml");
+        if (!file.exists()) {
+            saveResource("config_zh_CN.yml", false);
+        }
     }
 
     public static Residence getRes() {
@@ -36,6 +46,7 @@ public class NoBuildPlus extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
+        saveOtherConfigs();
         Locale.createLocaleFile();
         Settings.createSettingsFile();
         Worlds.createWorldsFile();

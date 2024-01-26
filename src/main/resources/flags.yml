@@ -201,3 +201,10 @@ flags:
     # Item name
     list:
       - MINECART
+  # For Player
+  item-pickup:
+    enable: true
+    type: all
+    # Add what you're not hoping the player to pick up
+    list:
+      - 'STONE'

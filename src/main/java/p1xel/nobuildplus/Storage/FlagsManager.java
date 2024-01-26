@@ -7,6 +7,7 @@ import p1xel.nobuildplus.NoBuildPlus;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +25,7 @@ public class FlagsManager {
         }
         
         upload(file);
+        defaultFlagList();
     }
 
     public static void upload(File flags) {
@@ -60,10 +62,14 @@ public class FlagsManager {
         return yaml.getStringList("flags."+flag+".list");
     }
 
+    static List<String> flagList = new ArrayList<>();
+
+    public static void defaultFlagList() {
+        flagList.addAll(yaml.getConfigurationSection("flags").getKeys(false));
+    }
+
     public static List<String> getFlags() {
-        List<String> list = new java.util.ArrayList<>(Collections.emptyList());
-        list.addAll(yaml.getConfigurationSection("flags").getKeys(false));
-        return list;
+        return flagList;
     }
 
     public static boolean isInTheFlagsList(String flag) {

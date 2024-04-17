@@ -305,6 +305,29 @@ public class NoBuildPlusPlayerListener implements Listener {
                         }
                     }
                 }
+
+                if (Settings.canExecute(world, "potion")) {
+
+                    if (!Worlds.getFlag(world, "potion")) {
+
+                        Material mat = item.getType();
+
+                        if (mat == Material.LINGERING_POTION || mat == Material.SPLASH_POTION ) {
+
+                            if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                                e.setCancelled(true);
+                                p.sendMessage(Worlds.getDenyMessage(world));
+
+                            }
+
+                            return;
+                        }
+
+                    }
+
+                }
+
             }
 
         } // THE END OF THE "RIGHT CLICK BLOCK OR RIGHT CLICK AIR"
@@ -742,6 +765,40 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             }
         }
+    }
+
+    // Flag: potion
+    @EventHandler
+    public void onPotionEffect(PlayerItemConsumeEvent e) {
+
+        Player p = e.getPlayer();
+        String world = p.getWorld().getName();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
+        if (Settings.canExecute(world, "potion")) {
+
+            if (!Worlds.getFlag(world, "potion")) {
+
+                Material mat = e.getItem().getType();
+
+                if (mat == Material.POTION || mat == Material.SPLASH_POTION || mat == Material.LINGERING_POTION) {
+
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                        e.setCancelled(true);
+                        p.sendMessage(Worlds.getDenyMessage(world));
+
+                    }
+
+                }
+
+            }
+        }
+
+
     }
 
 

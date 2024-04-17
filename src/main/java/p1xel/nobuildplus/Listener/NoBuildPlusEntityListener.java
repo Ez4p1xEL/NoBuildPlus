@@ -401,7 +401,7 @@ public class NoBuildPlusEntityListener implements Listener {
                 if (Worlds.getFlag(world, voidtpFlag)) {
                     if (Worlds.isSpawnLocationSet(world)) {
                         if (entity instanceof Player) {
-                            Player p = (Player) e.getEntity();
+                            Player p = (Player) entity;
                             p.teleport(Worlds.getSpawnLocation(world));
                             p.setFallDistance(0);
                         }
@@ -414,7 +414,7 @@ public class NoBuildPlusEntityListener implements Listener {
             if (entity instanceof Player) {
                 if (Settings.canExecute(world, falldamageFlag)) {
                     if (!Worlds.getFlag(world, falldamageFlag)) {
-                        Player p = (Player) e.getEntity();
+                        Player p = (Player) entity;
                         e.setCancelled(true);
                     }
                 }
@@ -565,6 +565,40 @@ public class NoBuildPlusEntityListener implements Listener {
             }
 
         }
+
+    }
+
+    // Flag: potion
+    @EventHandler
+    public void onPotionEffect(EntityPotionEffectEvent e) {
+
+        Entity entity = e.getEntity();
+        String world = entity.getWorld().getName();
+
+        if (!(entity instanceof Player)) {
+            if (HRes.isInRes(entity)) {
+                return;
+            }
+            return;
+        }
+
+        if (Settings.canExecute(world, "potion")) {
+
+            if (!Worlds.getFlag(world, "potion")) {
+
+                Player p = (Player) entity;
+
+                if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                    e.setCancelled(true);
+                    p.sendMessage(Worlds.getDenyMessage(world));
+
+                }
+
+            }
+
+        }
+
 
     }
 

@@ -208,3 +208,6 @@ flags:
     # Add what you're not hoping the player to pick up
     list:
       - 'STONE'
+  # For player
+  potion:
+    enable: true

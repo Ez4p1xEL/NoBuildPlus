@@ -202,6 +202,29 @@ public class NoBuildPlusPlayerListener implements Listener {
                     }
                 }
             }
+
+            // Flag: bonemeal
+            if (Settings.canExecute(world, "bonemeal")) {
+
+                if (!Worlds.getFlag(world, "bonemeal")) {
+
+                    if (!hasPerm) {
+
+                        Material mat = e.getItem().getType();
+                        if (mat != null) {
+                            if (mat == Material.BONE_MEAL) {
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
+                                e.setCancelled(true);
+                                return;
+                            }
+
+                        }
+                    }
+                }
+            }
+
         } // THE END OF THE "RIGHT CLICK BLOCK"
 
         // RIGHT CLICK BLOCK OR RIGHT CLICK AIR

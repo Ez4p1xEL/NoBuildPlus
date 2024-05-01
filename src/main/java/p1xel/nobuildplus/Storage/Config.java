@@ -7,7 +7,7 @@ import p1xel.nobuildplus.NoBuildPlus;
 import java.util.List;
 
 public class Config {
-    
+
     static Configuration config = NoBuildPlus.getInstance().getConfig();
 
     public static String getString(String path) {
@@ -25,6 +25,7 @@ public class Config {
     public static void reloadConfig() {
 
         NoBuildPlus.getInstance().reloadConfig();
+        config = NoBuildPlus.getInstance().getConfig();
 
     }
 

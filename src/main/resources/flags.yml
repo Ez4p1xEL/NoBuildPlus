@@ -211,3 +211,5 @@ flags:
   # For player
   potion:
     enable: true
+  bonemeal:
+    enable: true

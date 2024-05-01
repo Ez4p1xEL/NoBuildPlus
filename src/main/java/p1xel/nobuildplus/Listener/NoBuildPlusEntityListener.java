@@ -591,12 +591,53 @@ public class NoBuildPlusEntityListener implements Listener {
                 if (!p.hasPermission(Worlds.getPermission(world))) {
 
                     e.setCancelled(true);
-                    p.sendMessage(Worlds.getDenyMessage(world));
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
+                    }
 
                 }
 
             }
 
+        }
+
+
+    }
+
+    // Flag: elytra
+    @EventHandler
+    public void onGlide(EntityToggleGlideEvent e) {
+
+        Entity entity = e.getEntity();
+        String world = entity.getWorld().getName();
+
+        if (!(entity instanceof Player)) {
+            return;
+        }
+
+        if (HRes.isInRes(entity)) {
+            return;
+        }
+
+        Player p = (Player) entity;
+
+        if (Settings.canExecute(world, "elytra")) {
+            if (!Worlds.getFlag(world, "elytra")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
+
+                    if (e.isGliding()) {
+                        if (p.getInventory().getChestplate().getType() == Material.ELYTRA) {
+
+                            e.setCancelled(true);
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+
+                        }
+                    }
+
+                }
+            }
         }
 
 

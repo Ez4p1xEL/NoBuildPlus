@@ -213,3 +213,5 @@ flags:
     enable: true
   bonemeal:
     enable: true
+  elytra:
+    enable: true

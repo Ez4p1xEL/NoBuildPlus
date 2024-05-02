@@ -1,16 +1,21 @@
 package p1xel.nobuildplus.Listener;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.world.PortalCreateEvent;
 import p1xel.nobuildplus.Hook.HRes;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
+
+import java.util.List;
 
 public class NoBuildPlusEntityListener implements Listener {
 
@@ -640,6 +645,51 @@ public class NoBuildPlusEntityListener implements Listener {
             }
         }
 
+
+    }
+
+    // Flag: nether
+    @EventHandler
+    public void onPortalCreate(PortalCreateEvent e) {
+
+        Entity entity = e.getEntity();
+        String world = entity.getWorld().getName();
+
+        if (HRes.isInRes(entity)) {
+            return;
+        }
+
+        List<BlockState> blocks = e.getBlocks();
+
+        for (BlockState block : blocks) {
+
+            if (block.getType() == Material.OBSIDIAN) {
+                if (Settings.canExecute(world, "nether")) {
+                    if (!Worlds.getFlag(world,"nether")) {
+
+                        if (entity instanceof Player) {
+                            Player p = (Player) entity;
+
+                            if (!p.hasPermission(Worlds.getPermission(world))) {
+                                e.setCancelled(true);
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
+                                }
+                                return;
+                            }
+                            return;
+                        }
+
+                        e.setCancelled(true);
+                        return;
+
+                    }
+                    return;
+                }
+                return;
+            }
+
+        }
 
     }
 

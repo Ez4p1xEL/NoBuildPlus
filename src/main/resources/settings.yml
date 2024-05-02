@@ -46,5 +46,6 @@ global-settings:
     potion: true
     bonemeal: true
     elytra: false
+    nether: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

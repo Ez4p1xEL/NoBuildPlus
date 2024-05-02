@@ -215,3 +215,5 @@ flags:
     enable: true
   elytra:
     enable: true
+  nether:
+    enable: true

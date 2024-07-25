@@ -7,7 +7,7 @@
 > ### Download Links and Feedback
 - SpigotMC: https://www.spigotmc.org/resources/nobuildplus.101815/
 - MCBBS: https://www.mcbbs.net/thread-1335807-1-1.html (Suspended)
-- MINEBBS: https://www.minebbs.com/threads/27591/
+- MINEBBS: https://www.minebbs.com/resources/nobuildplus.8101/
 - KLPBBS: https://klpbbs.com/thread-81274-1-12.html
 - Discord: https://discord.gg/UJNAGjuyhS
 

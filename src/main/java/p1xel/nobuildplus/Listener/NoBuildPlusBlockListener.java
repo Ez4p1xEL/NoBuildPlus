@@ -138,25 +138,39 @@ public class NoBuildPlusBlockListener implements Listener {
     // Flag: melt
     @EventHandler
     public void onBlockFade(BlockFadeEvent e) {
+        Block block = e.getBlock();
+        String world = block.getWorld().getName();
 
-        String world = e.getBlock().getWorld().getName();
-
-        if (HRes.isInRes(e.getBlock())) {
+        if (HRes.isInRes(block)) {
             return;
         }
 
-        String flag = "melt";
+        Material mat = block.getType();
 
-        if (e.getBlock().getType() == Material.SNOW || e.getBlock().getType() == Material.ICE || e.getBlock().getType() == Material.PACKED_ICE) {
+        // Flag: melt
+        if (mat == Material.SNOW || mat == Material.ICE || mat == Material.PACKED_ICE) {
 
-            if (Settings.canExecute(world, flag)) {
+            if (Settings.canExecute(world, "melt")) {
 
-                if (!Worlds.getFlag(world, flag)) {
+                if (!Worlds.getFlag(world, "melt")) {
 
                     e.setCancelled(true);
+                    return;
 
                 }
+                return;
+            }
+            return;
+        }
 
+        // Flag: coral-decay
+        if (FlagsManager.getFlagsList("coral-decay").contains(mat.toString())) {
+
+            if (Settings.canExecute(world, "coral-decay")) {
+
+                if (!Worlds.getFlag(world, "coral-decay")) {
+                    e.setCancelled(true);
+                }
             }
         }
     }

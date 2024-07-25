@@ -217,3 +217,23 @@ flags:
     enable: true
   nether:
     enable: true
+  coral-decay:
+    enable: true
+    # list only
+    type: list
+    list:
+      - 'TUBE_CORAL_BLOCK'
+      - 'BRAIN_CORAL_BLOCK'
+      - 'BUBBLE_CORAL_BLOCK'
+      - 'FIRE_CORAL_BLOCK'
+      - 'HORN_CORAL_BLOCK'
+      - 'TUBE_CORAL'
+      - 'BRAIN_CORAL'
+      - 'BUBBLE_CORAL'
+      - 'FIRE_CORAL'
+      - 'HORN_CORAL'
+      - 'TUBE_CORAL_FAN'
+      - 'BRAIN_CORAL_FAN'
+      - 'BUBBLE_CORAL_FAN'
+      - 'FIRE_CORAL_FAN'
+      - 'HORN_CORAL_FAN'

@@ -12,6 +12,10 @@ import p1xel.nobuildplus.bStats.Metrics;
 import p1xel.nobuildplus.spigotmc.UpdateChecker;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
 
 public class NoBuildPlus extends JavaPlugin {
 
@@ -43,7 +47,7 @@ public class NoBuildPlus extends JavaPlugin {
     }
 
     @Override
-    public void onEnable() {
+    public void onLoad() {
         instance = this;
         saveDefaultConfig();
         saveOtherConfigs();
@@ -51,6 +55,14 @@ public class NoBuildPlus extends JavaPlugin {
         Settings.createSettingsFile();
         Worlds.createWorldsFile();
         FlagsManager.createFlagsManagerFile();
+
+
+        updateConfig();
+    }
+
+    @Override
+    public void onEnable() {
+        Worlds.updateFromFlagsManager();
 
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
         getServer().getPluginCommand("NoBuildPlus").setTabCompleter(new TabList());
@@ -90,6 +102,27 @@ public class NoBuildPlus extends JavaPlugin {
             });
         }
 
+    }
+
+    void updateConfig() {
+        updateDefaultConfig(getResource("config.yml"), new File(getDataFolder(), "config.yml"), "config.yml");
+        updateDefaultConfig(getResource("flags.yml"), new File(getDataFolder(), "flags.yml"), "flags.yml");
+        updateDefaultConfig(getResource("settings.yml"), new File(getDataFolder(), "settings.yml"), "settings.yml");
+        String langFile = Config.getLanguage() + ".yml";
+        updateDefaultConfig(getResource(langFile), new File(getDataFolder(), langFile), langFile);
+    }
+
+    void updateDefaultConfig(InputStream input, File actual, String name) {
+        try (FileOutputStream output = new FileOutputStream(actual)) {
+            byte[] buf = new byte[8192];
+            int length;
+            while ((length = input.read(buf)) > 0) {
+                output.write(buf, 0, length);
+            }
+            getLogger().info("Updated to the latest: " + name);
+        } catch (IOException e) {
+            getLogger().log(Level.WARNING, "Failed to update the latest configuration!", e);
+        }
     }
 
 }

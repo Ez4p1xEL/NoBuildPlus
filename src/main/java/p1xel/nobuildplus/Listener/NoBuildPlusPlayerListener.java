@@ -210,8 +210,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (!hasPerm) {
 
-                        Material mat = e.getItem().getType();
-                        if (mat != null) {
+                        ItemStack item = e.getItem();
+                        if (item != null) {
+                            Material mat = item.getType();
                             if (mat == Material.BONE_MEAL) {
                                 if (Worlds.isDenyMessageExist(world)) {
                                     p.sendMessage(Worlds.getDenyMessage(world));

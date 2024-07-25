@@ -23,6 +23,7 @@ public class Worlds {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+
         }
 
         upload(file);
@@ -100,6 +101,22 @@ public class Worlds {
 
     public static boolean getFlag(String world, String flag) {
         return yaml.getBoolean(world + ".flags." + flag);
+    }
+
+    public static void updateFromFlagsManager() {
+
+        for (String world : Worlds.yaml.getKeys(false)) {
+
+            for (String flag : FlagsManager.getFlags()) {
+
+                if (!yaml.isSet(world + ".flags." + flag)) {
+                    setFlag(world, flag, Settings.getDefaultFlag(flag));
+                }
+
+            }
+
+        }
+
     }
 
 

@@ -19,13 +19,13 @@ public class Locale {
 
         List<String> lang = Arrays.asList("en","zh_CN","zh_TW");
         for (String l : lang) {
-            File file = new File(NoBuildPlus.getInstance().getDataFolder(), l + ".yml");
+            File file = new File(NoBuildPlus.getInstance().getDataFolder() + "/lang", l + ".yml");
             if (!file.exists()) {
-                NoBuildPlus.getInstance().saveResource(l + ".yml", false);
+                NoBuildPlus.getInstance().saveResource("lang/" + l + ".yml", false);
             }
         }
         
-        upload(new File(NoBuildPlus.getInstance().getDataFolder(), Config.getLanguage() + ".yml"));
+        upload(new File(NoBuildPlus.getInstance().getDataFolder() + "/lang", Config.getLanguage() + ".yml"));
     }
 
     public static void upload(File locale) {
@@ -54,5 +54,7 @@ public class Locale {
     public static String translate(String message) {
         return ChatColor.translateAlternateColorCodes('&', message.replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
+
+
 
 }

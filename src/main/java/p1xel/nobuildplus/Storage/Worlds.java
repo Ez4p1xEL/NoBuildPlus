@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import p1xel.nobuildplus.Listener.GUIManager;
 import p1xel.nobuildplus.NoBuildPlus;
 
 import java.io.File;
@@ -97,6 +98,7 @@ public class Worlds {
 
     public static void setFlag(String world, String flag, boolean bool) {
         set(world + ".flags." + flag, bool);
+        GUIManager.instance.updateFlag(world, flag, bool);
     }
 
     public static boolean getFlag(String world, String flag) {

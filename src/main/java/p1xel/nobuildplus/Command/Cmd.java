@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import p1xel.nobuildplus.Listener.GUIManager;
 import p1xel.nobuildplus.Storage.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -67,6 +68,7 @@ public class Cmd implements CommandExecutor {
                 Locale.createLocaleFile();
                 Settings.createSettingsFile();
                 Worlds.createWorldsFile();
+                GUIManager.instance.reloadGUIs();
                 sender.sendMessage(Locale.getMessage("reload-success"));
                 return true;
 
@@ -108,9 +110,6 @@ public class Cmd implements CommandExecutor {
                     return true;
                 }
 
-                System.out.println(Worlds.isSpawnLocationSet(world));
-                System.out.println(world);
-
                 if (!Worlds.isSpawnLocationSet(world)) {
                     sender.sendMessage(Locale.getMessage("loc-not-set"));
                     return true;
@@ -130,6 +129,7 @@ public class Cmd implements CommandExecutor {
                 if (!Settings.getEnableWorldList().contains(args[1])) {
 
                     Worlds.createWorld(args[1]);
+                    GUIManager.instance.createInventory(args[1]);
                     sender.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", args[1]));
                     return true;
 
@@ -145,6 +145,7 @@ public class Cmd implements CommandExecutor {
                 if (Settings.getEnableWorldList().contains(args[1])) {
 
                     Worlds.removeWorld(args[1]);
+                    GUIManager.instance.removeWorld(args[1]);
                     sender.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%", args[1]));
                     return true;
 
@@ -163,6 +164,39 @@ public class Cmd implements CommandExecutor {
                     return true;
 
                 }
+
+            }
+
+            if (args[0].equalsIgnoreCase("open")) {
+
+                if (!(sender instanceof Player)) {
+                    sender.sendMessage(Locale.getMessage("not-player"));
+                    return true;
+                }
+
+                if (!sender.hasPermission("nobuildplus.gui")) {
+                    sender.sendMessage(Locale.getMessage("no-perm"));
+                    return true;
+                }
+
+                String name = args[1];
+
+
+                if (!Worlds.yaml.getKeys(false).contains(name)) {
+                    sender.sendMessage(Locale.getMessage("not-in-list"));
+                    return true;
+                }
+
+                if (args[1].contains("_page2")) {
+                    sender.sendMessage(Locale.getMessage("name-not-allow"));
+                    return true;
+
+                }
+
+                Player p = (Player) sender;
+
+                p.openInventory(GUIManager.instance.getGUI(name));
+                return true;
 
             }
 

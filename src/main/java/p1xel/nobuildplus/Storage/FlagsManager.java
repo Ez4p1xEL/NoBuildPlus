@@ -94,4 +94,12 @@ public class FlagsManager {
         return yaml.getBoolean("flags.boat.chestBoatEnable");
     }
 
+    public static String getShowedItem(String flag) {
+        return yaml.getString("flags." + flag + ".show-item");
+    }
+
+    public static int getSlot(String flag) {
+        return yaml.getInt("flags." + flag + ".slot");
+    }
+
 }

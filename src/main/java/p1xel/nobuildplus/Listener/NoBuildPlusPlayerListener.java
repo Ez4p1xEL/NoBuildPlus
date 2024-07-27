@@ -1,6 +1,7 @@
 package p1xel.nobuildplus.Listener;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -184,16 +185,15 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                         if (FlagsManager.getFlagsType("fencegate-interact").equalsIgnoreCase("list")) {
 
-                            for (String name : FlagsManager.getFlagsList("fencegate-interact")) {
-                                Material block = Material.matchMaterial(name);
-                                if (block != null) {
-                                    if (clicked == block) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                        e.setCancelled(true);
-                                        return;
+                            Block block = e.getClickedBlock();
+                            if (block != null) {
+                                Material mat = block.getType();
+                                if (FlagsManager.getFlagsList("fencegate-interact").contains(mat.toString().toUpperCase())) {
+                                    if (Worlds.isDenyMessageExist(world)) {
+                                        p.sendMessage(Worlds.getDenyMessage(world));
                                     }
+                                    e.setCancelled(true);
+                                    return;
                                 }
 
                             }
@@ -386,19 +386,17 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             if (FlagsManager.getFlagsType("container").equalsIgnoreCase("list")) {
 
-                for (String name : FlagsManager.getFlagsList("container")) {
-                    Material block = Material.matchMaterial(name);
-                    if (block != null) {
-                        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType() == block) {
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
+                Block block = e.getClickedBlock();
+
+                if (block != null) {
+                    Material mat = block.getType();
+                    if (e.getAction() == Action.RIGHT_CLICK_BLOCK && FlagsManager.getFlagsList("container").contains(mat.toString().toUpperCase())) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
                         }
+                        e.setCancelled(true);
                     }
-
                 }
-
             }
 
         }
@@ -527,13 +525,11 @@ public class NoBuildPlusPlayerListener implements Listener {
                     }
 
                     if (FlagsManager.getFlagsType("command").equalsIgnoreCase("list")) {
-                        for (String cmd : FlagsManager.getFlagsList("command")) {
-                            if (e.getMessage().equalsIgnoreCase("/" + cmd)) {
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
+                        if (FlagsManager.getFlagsList("command").contains("/" + e.getMessage())) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
                             }
+                            e.setCancelled(true);
                         }
                     }
                 }
@@ -659,16 +655,12 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (type.equalsIgnoreCase("list")) {
 
-                        for (String itemName : FlagsManager.getFlagsList("drop-item")) {
-                            Material item = Material.matchMaterial(itemName);
-                            if (item != null) {
-                                if (droppedItem.getItemStack().getType() == item) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(m);
-                                    }
-                                    e.setCancelled(true);
-                                }
+                        Material mat = droppedItem.getItemStack().getType();
+                        if (FlagsManager.getFlagsList("drop-item").contains(mat.toString().toUpperCase())) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(m);
                             }
+                            e.setCancelled(true);
                         }
                     }
                 }
@@ -710,16 +702,13 @@ public class NoBuildPlusPlayerListener implements Listener {
 
                     if (type.equalsIgnoreCase("list")) {
 
-                        for (String itemName : FlagsManager.getFlagsList("item-pickup")) {
-                            Material items = Material.matchMaterial(itemName);
-                            if (items != null) {
-                                if (item.getItemStack().getType() == items) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(m);
-                                    }
-                                    e.setCancelled(true);
-                                }
+
+                        Material mat = item.getItemStack().getType();
+                        if (FlagsManager.getFlagsList("item-pickup").contains(mat.toString().toUpperCase())) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(m);
                             }
+                            e.setCancelled(true);
                         }
                     }
                 }

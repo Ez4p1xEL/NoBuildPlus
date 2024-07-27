@@ -23,7 +23,7 @@ public class TabList implements TabCompleter {
 
         if (args0.isEmpty()) {
             args0.add("help"); args0.add("list"); args0.add("add"); args0.add("remove"); args0.add("clear"); args0.add("flag");
-            args0.add("setspawn"); args0.add("tp"); args0.add("reload");
+            args0.add("setspawn"); args0.add("tp"); args0.add("open"); args0.add("reload");
         }
 
         if (flags.isEmpty()) {
@@ -42,7 +42,7 @@ public class TabList implements TabCompleter {
         }
 
         if (args.length == 2) {
-            if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("flag")) {
+            if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("flag") || args[0].equalsIgnoreCase("open")) {
                 List<String> result = new ArrayList<>();
                 for (String a : Settings.getEnableWorldList()) {
                     if (a.toLowerCase().startsWith(args[1].toLowerCase())) {

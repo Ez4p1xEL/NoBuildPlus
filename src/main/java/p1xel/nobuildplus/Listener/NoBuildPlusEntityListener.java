@@ -62,27 +62,26 @@ public class NoBuildPlusEntityListener implements Listener {
 
                         if (p instanceof Player && !(target instanceof Player)) {
 
-                            for (String string : FlagsManager.getFlagsList(mobDamage)) {
+                            EntityType type = e.getEntityType();
 
-                                if (e.getEntityType() == EntityType.valueOf(string)) {
+                            if (FlagsManager.getFlagsList("mob-damage").contains(type.toString().toUpperCase())) {
 
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                    e.setCancelled(true);
-                                    return;
-
+                                if (Worlds.isDenyMessageExist(world)) {
+                                    p.sendMessage(Worlds.getDenyMessage(world));
                                 }
+                                e.setCancelled(true);
+                                return;
 
                             }
 
                         }
 
                     }
+
                 }
             }
-
         }
+
 
         String frame = "frame";
 
@@ -223,19 +222,18 @@ public class NoBuildPlusEntityListener implements Listener {
 
                 if (FlagsManager.getFlagsType(mobExplode).equalsIgnoreCase("list")) {
 
-                    for (String string : FlagsManager.getFlagsList(mobExplode)) {
+                    EntityType type = e.getEntityType();
 
-                        if (e.getEntityType() == EntityType.valueOf(string)) {
+                    if (FlagsManager.getFlagsList("mob-explode").contains(type.toString().toUpperCase())) {
 
-                            e.setCancelled(true);
-                            return;
-
-                        }
+                        e.setCancelled(true);
+                        return;
 
                     }
 
-
                 }
+
+
             }
 
         }
@@ -322,15 +320,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
                     if (FlagsManager.getFlagsType(ride).equalsIgnoreCase("list")) {
 
-                        for (String name : FlagsManager.getFlagsList(ride)) {
-                            if (e.getRightClicked().getType() == EntityType.valueOf(name)) {
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-                                return;
+                        EntityType type = e.getRightClicked().getType();
+                        if (FlagsManager.getFlagsList("ride").contains(type.toString().toUpperCase())) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
                             }
-
+                            e.setCancelled(true);
+                            return;
                         }
 
                     }
@@ -555,13 +551,9 @@ public class NoBuildPlusEntityListener implements Listener {
 
                     EntityType et = e.getEntityType();
 
-                    for (String mob : FlagsManager.getFlagsList(mobSpawnFlag)) {
+                    if (FlagsManager.getFlagsList("mob-spawn").contains(et.toString().toUpperCase())) {
 
-                        if (et == EntityType.valueOf(mob)) {
-
-                            e.setCancelled(true);
-
-                        }
+                        e.setCancelled(true);
 
                     }
 

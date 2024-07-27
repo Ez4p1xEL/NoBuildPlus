@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Settings {
-    
+
     public static File file;
     public static FileConfiguration yaml;
 
@@ -21,7 +21,7 @@ public class Settings {
         if (!file.exists()) {
             NoBuildPlus.getInstance().saveResource("settings.yml", false);
         }
-        
+
         upload(file);
 
     }
@@ -77,6 +77,19 @@ public class Settings {
     // 这个方法包含了 FlagsManager.getFlagsIeEnabled() 和 Settings.getEnableWorldList().contains() 的功能
     public static boolean canExecute(String world, String flag) {
         return FlagsManager.yaml.getBoolean("flags." + flag + ".enable") && Settings.getEnableWorldList().contains(world);
+    }
+
+    // Update from SETTINGS
+    public static void updateFromFlagsManager() {
+
+        for (String flag : FlagsManager.getFlags()) {
+
+            if (!yaml.isSet("global-settings.flags." + flag)) {
+                set("global-settings.flags." + flag, true);
+            }
+
+        }
+
     }
 
 }

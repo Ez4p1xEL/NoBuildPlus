@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.logging.Level;
 
 public class NoBuildPlus extends JavaPlugin {
@@ -56,22 +58,27 @@ public class NoBuildPlus extends JavaPlugin {
         Worlds.createWorldsFile();
         FlagsManager.createFlagsManagerFile();
 
+        GUIManager.instance.initialization();
 
-        updateConfig();
     }
 
     @Override
     public void onEnable() {
+        Settings.updateFromFlagsManager();
         Worlds.updateFromFlagsManager();
 
+        getLogger().info("[NBP] START LOADING ...");
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
         getServer().getPluginCommand("NoBuildPlus").setTabCompleter(new TabList());
+        getLogger().info("[NBP] CMD LOADED.");
         getServer().getPluginManager().registerEvents(new NoBuildPlusBlockListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusEntityListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusHangingListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusPlayerListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusServerListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusVehicleListener(), this);
+        getServer().getPluginManager().registerEvents(new GUIManager(), this);
+        getLogger().info("[NBP] LISTENERS LOADED.");
 
         if (Config.getBool("hook.Residence")) {
             Plugin res = getServer().getPluginManager().getPlugin("Residence");
@@ -85,6 +92,8 @@ public class NoBuildPlus extends JavaPlugin {
                 getServer().getPluginManager().registerEvents(new ResidenceListener(), this);
             }
         }
+
+        getLogger().info("[NBP] HOOKED FUNCTIONS LOADED.");
 
         Settings.defaultList();
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());
@@ -104,12 +113,17 @@ public class NoBuildPlus extends JavaPlugin {
 
     }
 
-    void updateConfig() {
+
+    // bruh
+
+    /* void updateConfig() {
         updateDefaultConfig(getResource("config.yml"), new File(getDataFolder(), "config.yml"), "config.yml");
         updateDefaultConfig(getResource("flags.yml"), new File(getDataFolder(), "flags.yml"), "flags.yml");
         updateDefaultConfig(getResource("settings.yml"), new File(getDataFolder(), "settings.yml"), "settings.yml");
         String langFile = Config.getLanguage() + ".yml";
-        updateDefaultConfig(getResource(langFile), new File(getDataFolder(), langFile), langFile);
+        updateDefaultConfig(getResource("lang/" + langFile), new File(getDataFolder() + "/lang", langFile), langFile);
+        int oldVersion = 1;
+        new ConfigUpdater(this).checkUpdate(oldVersion);
     }
 
     void updateDefaultConfig(InputStream input, File actual, String name) {
@@ -124,5 +138,6 @@ public class NoBuildPlus extends JavaPlugin {
             getLogger().log(Level.WARNING, "Failed to update the latest configuration!", e);
         }
     }
+    */
 
 }

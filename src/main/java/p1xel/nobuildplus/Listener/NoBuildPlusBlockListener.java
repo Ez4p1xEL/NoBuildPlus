@@ -46,21 +46,18 @@ public class NoBuildPlusBlockListener implements Listener {
 
         if (FlagsManager.getFlagsType(flag).equalsIgnoreCase("list")) {
 
-            for (String blockname : FlagsManager.getFlagsList(flag)) {
-                Material block = Material.matchMaterial(blockname);
-                if (block != null) {
-                    if (e.getBlock().getType() == block) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-                    }
+            Block block = e.getBlock();
+            Material mat = block.getType();
+            if (FlagsManager.getFlagsList("break").contains(mat.toString().toUpperCase())) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
                 }
+                e.setCancelled(true);
             }
-
         }
 
     }
+
 
     // Flag: Build
     @EventHandler
@@ -95,16 +92,14 @@ public class NoBuildPlusBlockListener implements Listener {
 
         if (FlagsManager.getFlagsType(flag).equalsIgnoreCase("list")) {
 
-            for (String blockname : FlagsManager.getFlagsList(flag)) {
-                Material block = Material.matchMaterial(blockname);
-                if (block != null) {
-                    if (e.getBlock().getType() == block) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-                    }
+            Material mat = e.getBlock().getType();
+
+            if (FlagsManager.getFlagsList(flag).contains(mat.toString().toUpperCase())) {
+
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
                 }
+                e.setCancelled(true);
             }
 
         }

@@ -1,12 +1,10 @@
 package p1xel.nobuildplus.Listener;
 
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.world.PortalCreateEvent;
@@ -426,9 +424,6 @@ public class NoBuildPlusEntityListener implements Listener {
     }
 
 
-
-
-
     // Flag: shoot
     @EventHandler
     public void onShoot(EntityShootBowEvent e) {
@@ -657,7 +652,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
             if (block.getType() == Material.OBSIDIAN) {
                 if (Settings.canExecute(world, "nether")) {
-                    if (!Worlds.getFlag(world,"nether")) {
+                    if (!Worlds.getFlag(world, "nether")) {
 
                         if (entity instanceof Player) {
                             Player p = (Player) entity;
@@ -685,5 +680,19 @@ public class NoBuildPlusEntityListener implements Listener {
 
     }
 
+    // Flag: Fire
+    @EventHandler
+    public void onProjectileHit(ProjectileHitEvent e) {
+        String mobSpawnFlag = "fire-spawn";
+        Entity entity = e.getEntity();
+        String world = entity.getWorld().getName();
 
+        if (Settings.canExecute(world, mobSpawnFlag)) {
+            if (!Worlds.getFlag(world, mobSpawnFlag)) {
+                if (e instanceof Blaze) {
+                    e.setCancelled(true);
+                }
+            }
+        }
+    }
 }

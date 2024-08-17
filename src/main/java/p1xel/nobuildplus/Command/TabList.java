@@ -5,7 +5,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
-import p1xel.nobuildplus.Storage.Worlds;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;

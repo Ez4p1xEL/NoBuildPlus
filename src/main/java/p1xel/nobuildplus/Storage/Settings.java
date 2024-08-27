@@ -43,7 +43,7 @@ public class Settings {
 
     }
 
-    public static List<String> list = new java.util.ArrayList<>(Collections.emptyList());
+    static List<String> list = new java.util.ArrayList<>(Collections.emptyList());
 
     // 初始化
     public static void defaultList() {

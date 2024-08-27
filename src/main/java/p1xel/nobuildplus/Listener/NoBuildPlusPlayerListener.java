@@ -226,25 +226,14 @@ public class NoBuildPlusPlayerListener implements Listener {
                 }
             }
 
-        } // THE END OF THE "RIGHT CLICK BLOCK"
-
-        // RIGHT CLICK BLOCK OR RIGHT CLICK AIR
-        if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
-
+            // Flag: boat
             ItemStack item = e.getItem();
-
             if (item != null) {
-
-                boolean contain = Settings.getEnableWorldList().contains(world);
-
-                // Flag: boat
                 for (String key : FlagsManager.getFlagsList("boat")) {
 
-                    if (e.getItem().getType() == Material.matchMaterial(key)) {
+                    if (item.getType() == Material.matchMaterial(key)) {
 
                         if (Settings.canExecute(world, "boat")) {
-
-                            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
 
                             if (!Worlds.getFlag(world, "boat")) {
 
@@ -263,6 +252,16 @@ public class NoBuildPlusPlayerListener implements Listener {
                         return;
                     }
                 }
+            }
+
+        } // THE END OF THE "RIGHT CLICK BLOCK"
+
+        // RIGHT CLICK BLOCK OR RIGHT CLICK AIR
+        if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
+
+            ItemStack item = e.getItem();
+
+            if (item != null) {
 
                 // Flag: minecart
                 for (String key : FlagsManager.getFlagsList("minecart")) {
@@ -814,10 +813,9 @@ public class NoBuildPlusPlayerListener implements Listener {
 
     }
 
-    // Flag: sign-change
+    // Flag: sign-edit
     @EventHandler
     public void onSignOpen(PlayerSignOpenEvent e) {
-        String mobSpawnFlag = "sign-change";
         Player player = e.getPlayer();
         String world = player.getWorld().getName();
 
@@ -825,8 +823,8 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
         if (e.getCause() == PlayerSignOpenEvent.Cause.INTERACT) {
-            if (Settings.canExecute(world, mobSpawnFlag)) {
-                if (!Worlds.getFlag(world, mobSpawnFlag)) {
+            if (Settings.canExecute(world, "sign-edit")) {
+                if (!Worlds.getFlag(world, "sign-edit")) {
                     if (!player.hasPermission(Worlds.getPermission(world))) {
                         e.setCancelled(true);
                         player.sendMessage(Worlds.getDenyMessage(world));

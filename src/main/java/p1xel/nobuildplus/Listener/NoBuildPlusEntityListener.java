@@ -683,12 +683,11 @@ public class NoBuildPlusEntityListener implements Listener {
     // Flag: Fire
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent e) {
-        String mobSpawnFlag = "fire-spawn";
         Entity entity = e.getEntity();
         String world = entity.getWorld().getName();
 
-        if (Settings.canExecute(world, mobSpawnFlag)) {
-            if (!Worlds.getFlag(world, mobSpawnFlag)) {
+        if (Settings.canExecute(world, "fire-spawn")) {
+            if (!Worlds.getFlag(world, "fire-spawn")) {
                 if (e instanceof Blaze) {
                     e.setCancelled(true);
                 }

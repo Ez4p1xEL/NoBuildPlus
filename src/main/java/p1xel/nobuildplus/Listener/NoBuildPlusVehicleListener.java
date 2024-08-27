@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
+import p1xel.nobuildplus.Hook.HRes;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -15,11 +16,15 @@ import p1xel.nobuildplus.Storage.Worlds;
 public class NoBuildPlusVehicleListener implements Listener {
 
     @EventHandler
-    public void onVehiclePlace(VehicleDamageEvent e) {
+    public void onVehicleDamage(VehicleDamageEvent e) {
 
         String world = e.getVehicle().getWorld().getName();
         Entity p = e.getAttacker();
         Vehicle vehicle = e.getVehicle();
+
+        if (HRes.isInRes(vehicle)) {
+            return;
+        }
 
         // Flag: Boat
         if (FlagsManager.getFlagsIsEnabled("boat")) {
@@ -57,6 +62,10 @@ public class NoBuildPlusVehicleListener implements Listener {
         String world = e.getVehicle().getWorld().getName();
         Entity p = e.getAttacker();
         Vehicle vehicle = e.getVehicle();
+
+        if (HRes.isInRes(vehicle)) {
+            return;
+        }
 
         // Flag: Boat
         if (FlagsManager.getFlagsIsEnabled("boat")) {

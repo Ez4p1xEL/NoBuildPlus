@@ -51,6 +51,13 @@ public class GUIManager implements Listener {
             int slot = e.getSlot();
             ItemStack item = e.getCurrentItem();
 
+            // If it's the first slot
+            if (slot == 0 || slot == 8) {
+                e.setCancelled(true);
+                return;
+
+            }
+
             // If it is page2
             if (slot == 45) {
                 if (item == null) {

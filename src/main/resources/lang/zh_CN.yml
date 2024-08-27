@@ -99,6 +99,8 @@ gui:
     elytra: '玩家使用鞘翅'
     nether: '地狱门的创建'
     coral-decay: '珊瑚失活'
+    fire-spawn: '生成火焰'
+    sign-change: '修改告示牌'
 
 true: '&a允许'
 false: '&c禁止'

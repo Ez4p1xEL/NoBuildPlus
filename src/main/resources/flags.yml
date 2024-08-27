@@ -421,3 +421,15 @@ flags:
       - 'BUBBLE_CORAL_FAN'
       - 'FIRE_CORAL_FAN'
       - 'HORN_CORAL_FAN'
+  fire-spawn:
+    enable: true
+    # Item material showed on GUI.
+    show-item: FIRE_CHARGE
+    # Slot on GUI
+    slot: 32
+  sign-change:
+    enable: true
+    # Item material showed on GUI.
+    show-item: OAK_SIGN
+    # Slot on GUI
+    slot: 33

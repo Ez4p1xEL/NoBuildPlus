@@ -99,6 +99,8 @@ gui:
     elytra: 'Gliding from using elytra'
     nether: 'Nether portal creation'
     coral-decay: 'Coral decaying'
+    fire-spawn: 'Spawn fire'
+    sign-change: 'Change sign text'
 
 true: '&aALLOW'
 false: '&cPREVENT'

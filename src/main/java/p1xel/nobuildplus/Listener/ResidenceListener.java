@@ -1,7 +1,6 @@
 package p1xel.nobuildplus.Listener;
 
 import com.bekvon.bukkit.residence.event.ResidenceChangedEvent;
-import com.bekvon.bukkit.residence.event.ResidenceTPEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

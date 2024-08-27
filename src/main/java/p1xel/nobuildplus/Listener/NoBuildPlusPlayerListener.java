@@ -814,5 +814,25 @@ public class NoBuildPlusPlayerListener implements Listener {
 
     }
 
+    // Flag: sign-change
+    @EventHandler
+    public void onSignOpen(PlayerSignOpenEvent e) {
+        String mobSpawnFlag = "sign-change";
+        Player player = e.getPlayer();
+        String world = player.getWorld().getName();
 
+        if (HRes.isInRes(player)) {
+            return;
+        }
+        if (e.getCause() == PlayerSignOpenEvent.Cause.INTERACT) {
+            if (Settings.canExecute(world, mobSpawnFlag)) {
+                if (!Worlds.getFlag(world, mobSpawnFlag)) {
+                    if (!player.hasPermission(Worlds.getPermission(world))) {
+                        e.setCancelled(true);
+                        player.sendMessage(Worlds.getDenyMessage(world));
+                    }
+                }
+            }
+        }
+    }
 }

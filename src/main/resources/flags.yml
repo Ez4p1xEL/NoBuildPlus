@@ -433,3 +433,15 @@ flags:
     show-item: OAK_SIGN
     # Slot on GUI
     slot: 33
+  dye:
+    enable: true
+    # Item material showed on GUI.
+    show-item: BLUE_DYE
+    # Slot on GUI
+    slot: 34
+  piston:
+    enable: true
+    # Item material showed on GUI.
+    show-item: PISTON
+    # Slot on GUI
+    slot: 37

@@ -213,4 +213,25 @@ public class NoBuildPlusBlockListener implements Listener {
 
     }
 
+    // Flag: piston
+    @EventHandler
+    public void onPistonTrigger(BlockPistonRetractEvent e) {
+        Block b = e.getBlock();
+        String world = b.getWorld().getName();
+
+        if (HRes.isInRes(b)) {
+            return;
+        }
+
+        if (Settings.canExecute(world, "piston")) {
+
+            if (!Worlds.getFlag(world, "piston")) {
+
+                e.setCancelled(true);
+
+            }
+
+        }
+    }
+
 }

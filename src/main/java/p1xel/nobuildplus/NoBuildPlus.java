@@ -90,6 +90,7 @@ public class NoBuildPlus extends JavaPlugin {
         getLogger().info("[NBP] HOOKED FUNCTIONS LOADED.");
 
         Settings.defaultList();
+        updateVersion();
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());
 
         int pluginId = 15126;
@@ -105,6 +106,10 @@ public class NoBuildPlus extends JavaPlugin {
             });
         }
 
+    }
+
+    void updateVersion() {
+        getConfig().set("Version", getDescription().getVersion());
     }
 
 

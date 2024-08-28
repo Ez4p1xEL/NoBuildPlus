@@ -118,6 +118,9 @@ public class Cmd implements CommandExecutor {
                 return true;
             }
 
+            sender.sendMessage(Locale.getMessage("wrong-arg"));
+            return true;
+
         }
 
         if (args.length == 2) {
@@ -198,6 +201,9 @@ public class Cmd implements CommandExecutor {
 
             }
 
+            sender.sendMessage(Locale.getMessage("wrong-arg"));
+            return true;
+
         }
 
         if (args.length == 4) {
@@ -234,6 +240,9 @@ public class Cmd implements CommandExecutor {
                 return true;
 
             }
+
+            sender.sendMessage(Locale.getMessage("wrong-arg"));
+            return true;
 
         }
 

@@ -41,6 +41,7 @@ loc-set-success: '&7&l%prefix% &8&l>> &a你成功為 &9%world%&a 設定了出生
 not-player: '&c你必須為一名玩家'
 tp-success: '&7&l%prefix% &8&l>> &a你傳送至 &9%world% &a的出生點!'
 name-not-allow: '&7&l%prefix% &8&l>> &c該名稱不被允許!'
+wrong-arg: '&7&l%prefix% &8&l>> &c參數錯誤'
 
 gui:
   title: '世界規則 '
@@ -101,6 +102,8 @@ gui:
     coral-decay: '珊瑚失活'
     fire-spawn: '火焰生成'
     sign-change: '修改告示牌'
+    dye: '羊毛染色'
+    piston: '活塞觸發'
 
 true: '&a允許'
 false: '&c禁止'

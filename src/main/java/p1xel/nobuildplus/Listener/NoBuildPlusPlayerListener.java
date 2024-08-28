@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Hook.HRes;
@@ -801,7 +802,9 @@ public class NoBuildPlusPlayerListener implements Listener {
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
                         e.setCancelled(true);
-                        p.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
 
                     }
 
@@ -816,20 +819,48 @@ public class NoBuildPlusPlayerListener implements Listener {
     // Flag: sign-edit
     @EventHandler
     public void onSignOpen(PlayerSignOpenEvent e) {
-        Player player = e.getPlayer();
-        String world = player.getWorld().getName();
+        Player p = e.getPlayer();
+        String world = p.getWorld().getName();
 
-        if (HRes.isInRes(player)) {
+        if (HRes.isInRes(p)) {
             return;
         }
         if (e.getCause() == PlayerSignOpenEvent.Cause.INTERACT) {
             if (Settings.canExecute(world, "sign-edit")) {
                 if (!Worlds.getFlag(world, "sign-edit")) {
-                    if (!player.hasPermission(Worlds.getPermission(world))) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
                         e.setCancelled(true);
-                        player.sendMessage(Worlds.getDenyMessage(world));
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+
                     }
                 }
+            }
+        }
+    }
+
+    // Flag: dye
+    @EventHandler
+    public void onSheepDye(SheepDyeWoolEvent e) {
+        Player p = e.getPlayer();
+        String world = p.getWorld().getName();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
+        if (Settings.canExecute(world, "dye")) {
+            if (!Worlds.getFlag(world, "dye")) {
+
+                if (!p.hasPermission(Worlds.getPermission(world))) {
+                    e.setCancelled(true);
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
+                    }
+
+                }
+
             }
         }
     }

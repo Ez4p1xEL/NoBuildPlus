@@ -50,5 +50,7 @@ global-settings:
     coral-decay: true
     fire-spawn: false
     sign-edit: false
+    dye: false
+    piston: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

@@ -680,7 +680,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
     }
 
-    // Flag: Fire
+    // Flag: fire-spawn
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent e) {
         Entity entity = e.getEntity();

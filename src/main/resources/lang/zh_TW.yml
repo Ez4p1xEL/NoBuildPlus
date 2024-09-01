@@ -104,6 +104,9 @@ gui:
     sign-change: '修改告示牌'
     dye: '羊毛染色'
     piston: '活塞觸發'
+    ice-form: '冰的形成'
+    hook: '使用魚竿鈎住玩家'
+    fish: '釣魚'
 
 true: '&a允許'
 false: '&c禁止'

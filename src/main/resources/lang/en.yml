@@ -104,6 +104,9 @@ gui:
     sign-edit: 'Sign text editing'
     dye: 'Sheep wool dyeing'
     piston: 'Piston triggering'
+    ice-form: 'Ice formation'
+    hook: 'Hooking player with fishing rod'
+    fish: 'Fishing'
 
 true: '&aALLOW'
 false: '&cPREVENT'

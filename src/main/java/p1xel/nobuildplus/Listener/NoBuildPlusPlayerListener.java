@@ -864,4 +864,51 @@ public class NoBuildPlusPlayerListener implements Listener {
             }
         }
     }
+
+    // Flag: fish
+    // Flag: hook
+    @EventHandler
+    public void onFish(PlayerFishEvent e) {
+
+        Player p = e.getPlayer();
+        String world = p.getWorld().getName();
+
+        if (HRes.isInRes(p)) {
+            return;
+        }
+
+        Entity target = e.getCaught();
+
+        // Flag: hook (To Players, NOT Fish)
+        if (target instanceof Player) {
+
+            if (Settings.canExecute(world, "hook")) {
+                if (!Worlds.getFlag(world, "hook")) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                    }
+                }
+            }
+            return;
+        }
+
+        // Flag: fish
+
+        if (Settings.canExecute(world, "fish")) {
+
+            if (!Worlds.getFlag(world, "fish")) {
+                if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
+                    }
+                    e.setCancelled(true);
+                }
+            }
+
+        }
+
+    }
 }

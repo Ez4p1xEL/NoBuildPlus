@@ -194,6 +194,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
                 }
             }
+            return;
         }
 
         // Flag: lava-spread
@@ -209,7 +210,28 @@ public class NoBuildPlusBlockListener implements Listener {
                 }
 
             }
+            return;
         }
+
+        Material newMat = e.getToBlock().getType();
+
+        // Flag: ice-form
+        if (newMat == Material.ICE) {
+
+            if (Settings.canExecute(world, "ice-form")) {
+
+                if (!Worlds.getFlag(world, "ice-form")) {
+
+                    e.setCancelled(true);
+
+                }
+
+            }
+
+            return;
+
+        }
+
 
     }
 

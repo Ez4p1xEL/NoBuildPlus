@@ -137,7 +137,7 @@ flags:
   melt:
     enable: true
     # Item material showed on GUI.
-    show-item: ICE
+    show-item: PACKED_ICE
     # Slot on GUI
     slot: 31
   fall-damage:
@@ -445,3 +445,21 @@ flags:
     show-item: PISTON
     # Slot on GUI
     slot: 37
+  ice-form:
+    enable: true
+    # Item material showed on GUI.
+    show-item: ICE
+    # Slot on GUI
+    slot: 38
+  fish:
+    enable: true
+    # Item material showed on GUI.
+    show-item: COD
+    # Slot on GUI
+    slot: 39
+  hook:
+    enable: true
+    # Item material showed on GUI.
+    show-item: FISHING_ROD
+    # Slot on GUI
+    slot: 40

@@ -48,9 +48,9 @@ public class NoBuildPlus extends JavaPlugin {
         saveDefaultConfig();
         saveOtherConfigs();
         Locale.createLocaleFile();
+        FlagsManager.createFlagsManagerFile();
         Settings.createSettingsFile();
         Worlds.createWorldsFile();
-        FlagsManager.createFlagsManagerFile();
 
         GUIManager.instance.initialization();
 

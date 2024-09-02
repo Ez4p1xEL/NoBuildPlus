@@ -55,5 +55,6 @@ global-settings:
     ice-form: true
     hook: false
     fish: true
+    crystal: false
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

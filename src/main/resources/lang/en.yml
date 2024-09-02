@@ -107,6 +107,7 @@ gui:
     ice-form: 'Ice formation'
     hook: 'Hooking player with fishing rod'
     fish: 'Fishing'
+    crystal: 'Ender crystal interacting'
 
 true: '&aALLOW'
 false: '&cPREVENT'

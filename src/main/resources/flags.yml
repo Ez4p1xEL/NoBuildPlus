@@ -463,3 +463,9 @@ flags:
     show-item: FISHING_ROD
     # Slot on GUI
     slot: 40
+  crystal:
+    enable: true
+    # Item material showed on GUI.
+    show-item: END_CRYSTAL
+    # Slot on GUI
+    slot: 41

@@ -1,9 +1,6 @@
 package p1xel.nobuildplus.Listener;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Vehicle;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
@@ -27,17 +24,44 @@ public class NoBuildPlusVehicleListener implements Listener {
         }
 
         // Flag: Boat
-        if (FlagsManager.getFlagsIsEnabled("boat")) {
+        if (Settings.canExecute(world, "boat")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "boat")) {
 
-                if (!Worlds.getFlag(world, "boat")) {
+                if (p instanceof Player) {
 
-                    if (p instanceof Player) {
+
+                    if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
 
                         if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                            if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                            e.setCancelled(true);
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+        }
+
+        // Flag: minecart
+        if (Settings.canExecute(world, "minecart")) {
+
+            if (!Worlds.getFlag(world, "minecart")) {
+
+                if (p instanceof Player) {
+
+                    for (String stype : FlagsManager.getFlagsList("minecart")) {
+                        if (vehicle.getType() == EntityType.valueOf(stype)) {
+
+                            if (!p.hasPermission(Worlds.getPermission(world))) {
 
                                 if (Worlds.isDenyMessageExist(world)) {
                                     p.sendMessage(Worlds.getDenyMessage(world));
@@ -46,8 +70,10 @@ public class NoBuildPlusVehicleListener implements Listener {
 
 
                             }
-
                         }
+
+                        break;
+
                     }
                 }
             }
@@ -68,17 +94,43 @@ public class NoBuildPlusVehicleListener implements Listener {
         }
 
         // Flag: Boat
-        if (FlagsManager.getFlagsIsEnabled("boat")) {
+        if (Settings.canExecute(world, "boat")) {
 
-            if (Settings.getEnableWorldList().contains(world)) {
+            if (!Worlds.getFlag(world, "boat")) {
 
-                if (!Worlds.getFlag(world, "boat")) {
+                if (p instanceof Player) {
 
-                    if (p instanceof Player) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                            if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
+                        if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
+
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                            e.setCancelled(true);
+
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+
+        // Flag: minecart
+        if (Settings.canExecute(world, "minecart")) {
+
+            if (!Worlds.getFlag(world, "boat")) {
+
+                if (p instanceof Player) {
+
+                    for (String stype : FlagsManager.getFlagsList("boat")) {
+
+                        if (vehicle.getType() == EntityType.valueOf(stype)) {
+
+                            if (!p.hasPermission(Worlds.getPermission(world))) {
 
                                 if (Worlds.isDenyMessageExist(world)) {
                                     p.sendMessage(Worlds.getDenyMessage(world));
@@ -88,6 +140,8 @@ public class NoBuildPlusVehicleListener implements Listener {
                             }
 
                         }
+
+                        break;
                     }
                 }
             }

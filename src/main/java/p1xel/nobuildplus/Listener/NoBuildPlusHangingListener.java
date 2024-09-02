@@ -156,41 +156,6 @@ public class NoBuildPlusHangingListener implements Listener {
 
         }
 
-        if (Settings.canExecute(world, "boat")) {
-
-            if (!Worlds.getFlag(world, "boat")) {
-
-                if (FlagsManager.BoatIsIncludingChestBoat()) {
-                    if (e.getEntity() instanceof ChestBoat) {
-                        e.setCancelled(true);
-                        return;
-                    }
-                }
-
-                if (e.getEntity() instanceof Boat) {
-                    // 这个弄不了给有权限的人放置
-                    e.setCancelled(true);
-                }
-
-
-            }
-
-        }
-
-        // Flag: minecart
-        if (Settings.canExecute(world, "minecart")) {
-
-            if (!Worlds.getFlag(world, "minecart")) {
-
-                if (e.getEntity() instanceof Minecart) {
-                    // 这个弄不了给有权限的人放置
-                    e.setCancelled(true);
-                }
-
-
-            }
-
-        }
 
 
 

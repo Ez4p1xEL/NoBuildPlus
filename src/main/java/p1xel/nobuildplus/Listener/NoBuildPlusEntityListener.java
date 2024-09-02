@@ -169,6 +169,60 @@ public class NoBuildPlusEntityListener implements Listener {
 
         }
 
+        // Flag: crystal
+        if (Settings.canExecute(world, "crystal")) {
+            if (!Worlds.getFlag(world, "crystal")) {
+                if (p instanceof Player) {
+                    if (target.getType() == EntityType.ENDER_CRYSTAL || target instanceof EnderCrystal) {
+                        if (!p.hasPermission(Worlds.getPermission(world))) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                            e.setCancelled(true);
+                        }
+                    }
+                }
+
+            }
+            return;
+        }
+
+//        // Flag: boat
+//        if (Settings.canExecute(world, "boat")) {
+//            if (!Worlds.getFlag(world, "boat")) {
+//                if (p instanceof Player) {
+//                    if (target.getType() == ) {
+//                        if (!p.hasPermission(Worlds.getPermission(world))) {
+//                            if (Worlds.isDenyMessageExist(world)) {
+//                                p.sendMessage(Worlds.getDenyMessage(world));
+//                            }
+//                            e.setCancelled(true);
+//                        }
+//                    }
+//                }
+//
+//            }
+//            return;
+//        }
+//
+//        // Flag: minecart
+//        if (Settings.canExecute(world, "minecart")) {
+//            if (!Worlds.getFlag(world, "minecart")) {
+//                if (p instanceof Player) {
+//                    if (target instanceof Minecart) {
+//                        if (!p.hasPermission(Worlds.getPermission(world))) {
+//                            if (Worlds.isDenyMessageExist(world)) {
+//                                p.sendMessage(Worlds.getDenyMessage(world));
+//                            }
+//                            e.setCancelled(true);
+//                        }
+//                    }
+//                }
+//
+//            }
+//            return;
+//        }
+
         String pvp = "pvp";
         // Flag: Pvp
         if (Settings.canExecute(world, pvp)) {
@@ -253,8 +307,8 @@ public class NoBuildPlusEntityListener implements Listener {
     }
 
     // Flag: frame(move)
-    // Flag: Armor stand
-    // Flag: villager
+// Flag: Armor stand
+// Flag: villager
     @EventHandler
     public void onInteractEntity(PlayerInteractEntityEvent e) {
 
@@ -494,6 +548,108 @@ public class NoBuildPlusEntityListener implements Listener {
 
 
                 }
+
+            }
+
+        }
+
+    }
+
+    @EventHandler
+    public void onEntityPlace(EntityPlaceEvent e) {
+
+        Entity entity = e.getEntity();
+
+        if (HRes.isInRes(entity)) {
+            return;
+        }
+
+        EntityType type = e.getEntityType();
+        String world = entity.getWorld().getName();
+        Player p = e.getPlayer();
+
+        // Flag: armorstand (being created)
+
+        if (type == EntityType.ARMOR_STAND) {
+
+            if (Settings.canExecute(world, "armorstand")) {
+                if (!Worlds.getFlag(world, "armorstand")) {
+                    if (!p.hasPermission(Worlds.getDenyMessage(world))) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                    }
+                }
+            }
+
+            return;
+
+        }
+
+        // Flag: minecart (being created)
+
+        if (entity instanceof Minecart) {
+
+            if (Settings.canExecute(world, "minecart")) {
+                if (!Worlds.getFlag(world, "minecart")) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                    }
+                }
+            }
+
+            return;
+
+        }
+
+        // Flag: crystal
+        if (entity instanceof EnderCrystal) {
+            if (Settings.canExecute(world, "crystal")) {
+                if (!Worlds.getFlag(world, "crystal")) {
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                    }
+                }
+            }
+
+            return;
+        }
+
+        // Flag: boat (being placed)
+        if (Settings.canExecute(world, "boat")) {
+
+            if (!Worlds.getFlag(world, "boat")) {
+
+                if (FlagsManager.BoatIsIncludingChestBoat()) {
+                    if (entity instanceof ChestBoat) {
+
+                        if (!p.hasPermission(Worlds.getPermission(world))) {
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                            e.setCancelled(true);
+                        }
+                        return;
+                    }
+                }
+
+                if (e.getEntity() instanceof Boat) {
+
+                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                    }
+                }
+
 
             }
 

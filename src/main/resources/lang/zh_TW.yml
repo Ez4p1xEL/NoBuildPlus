@@ -107,6 +107,7 @@ gui:
     ice-form: '冰的形成'
     hook: '使用魚竿鈎住玩家'
     fish: '釣魚'
+    crystal: '與終界水晶互動'
 
 true: '&a允許'
 false: '&c禁止'

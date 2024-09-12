@@ -255,6 +255,54 @@ public class NoBuildPlusPlayerListener implements Listener {
                 }
             }
 
+
+            Material mat = e.getClickedBlock().getType();
+            // Flag: flower-pot
+            if (mat == Material.FLOWER_POT || mat == Material.LEGACY_FLOWER_POT || mat.name().startsWith("POTTED_")) {
+
+                if (Settings.canExecute(world, "flower-pot")) {
+
+                    if (!Worlds.getFlag(world, "flower-pot")) {
+
+                        if (!hasPerm) {
+
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                            e.setCancelled(true);
+                            return;
+
+                        }
+                    }
+
+                }
+                return;
+
+            }
+
+            // Flag: books-interact
+            if (e.getClickedBlock().getType() == Material.CHISELED_BOOKSHELF) {
+
+                if (Settings.canExecute(world, "books-interact")) {
+
+                    if (!Worlds.getFlag(world, "books-interact")) {
+
+                        if (!hasPerm) {
+
+                            if (Worlds.isDenyMessageExist(world)) {
+                                p.sendMessage(Worlds.getDenyMessage(world));
+                            }
+                            e.setCancelled(true);
+                            return;
+
+                        }
+                    }
+
+                }
+                return;
+
+            }
+
         } // THE END OF THE "RIGHT CLICK BLOCK"
 
         // RIGHT CLICK BLOCK OR RIGHT CLICK AIR

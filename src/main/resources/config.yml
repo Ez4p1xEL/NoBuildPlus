@@ -27,7 +27,7 @@ type: Release
 
 # The version of configuration.
 # DO NOT CHANGE THIS!!
-Configuration: 1
+Configuration: 2
 
 # Language of the file.
 # Languages list: en(English) zh_CN(Simplified Chinese) zh_TW(Traditional Chinese).
@@ -39,6 +39,7 @@ check-update: true
 
 hook:
   Residence: true
+  #Oraxen: true
 
 # Set to true if you want to enable deny-message
 deny-message-enable: true

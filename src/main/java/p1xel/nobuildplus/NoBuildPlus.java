@@ -42,11 +42,16 @@ public class NoBuildPlus extends JavaPlugin {
         return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
     }
 
+    public static boolean isOraxenEnabled() {
+        return Bukkit.getServer().getPluginManager().isPluginEnabled("Oraxen");
+    }
+
     @Override
     public void onLoad() {
         instance = this;
         saveDefaultConfig();
         saveOtherConfigs();
+        Config.update();
         Locale.createLocaleFile();
         FlagsManager.createFlagsManagerFile();
         Settings.createSettingsFile();
@@ -74,18 +79,7 @@ public class NoBuildPlus extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GUIManager(), this);
         getLogger().info("[NBP] LISTENERS LOADED.");
 
-        if (Config.getBool("hook.Residence")) {
-            Plugin res = getServer().getPluginManager().getPlugin("Residence");
-            Plugin cmilib = getServer().getPluginManager().getPlugin("CMILib");
-            if (res != null && cmilib != null) {
-                if (!cmilib.isEnabled()) {
-                    getServer().getPluginManager().enablePlugin(cmilib);
-                    getServer().getPluginManager().enablePlugin(res);
-                    getLogger().info("Residence is enabled by NoBuildPlus.");
-                }
-                getServer().getPluginManager().registerEvents(new ResidenceListener(), this);
-            }
-        }
+        checkHookPlugins();
 
         getLogger().info("[NBP] HOOKED FUNCTIONS LOADED.");
 
@@ -110,6 +104,31 @@ public class NoBuildPlus extends JavaPlugin {
 
     void updateVersion() {
         getConfig().set("Version", getDescription().getVersion());
+    }
+
+    void checkHookPlugins() {
+
+        if (Config.getBool("hook.Residence")) {
+            Plugin res = getServer().getPluginManager().getPlugin("Residence");
+            Plugin cmilib = getServer().getPluginManager().getPlugin("CMILib");
+            if (res != null && cmilib != null) {
+                if (!cmilib.isEnabled()) {
+                    getServer().getPluginManager().enablePlugin(cmilib);
+                    getServer().getPluginManager().enablePlugin(res);
+                    getLogger().info("Residence is enabled by NoBuildPlus.");
+                }
+                getServer().getPluginManager().registerEvents(new ResidenceListener(), this);
+            }
+        }
+
+//        if (Config.getBool("hook.Oraxen")) {
+//            Plugin oraxen = getServer().getPluginManager().getPlugin("Oraxen");
+//            if (oraxen != null) {
+//                getServer().getPluginManager().enablePlugin(oraxen);
+//                getLogger().info("Oraxen is enabled by NoBuildPlus.");
+//                getServer().getPluginManager().registerEvents(new OraxenListener(), this);
+//            }
+//        }
     }
 
 

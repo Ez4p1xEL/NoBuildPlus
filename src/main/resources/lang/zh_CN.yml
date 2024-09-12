@@ -108,6 +108,8 @@ gui:
     hook: '使用鱼竿钩住玩家'
     fish: '钓鱼'
     crystal: '与末地水晶互动'
+    flower-pot: ' 与花盆互动'
+    books-interact: '与雕纹书架互动'
 
 true: '&a允许'
 false: '&c禁止'

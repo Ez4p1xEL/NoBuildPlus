@@ -6,6 +6,8 @@ flags:
     # Slot on GUI
     slot: 10
     type: all
+    # For vanilla item, just enter its name like GRASS_BLOCK
+    # For Oraxen blocks, you need to enter like "oraxen:itemId" <- will be supported in the futuer!
     list:
       - GRASS_BLOCK
   build:
@@ -469,3 +471,15 @@ flags:
     show-item: END_CRYSTAL
     # Slot on GUI
     slot: 41
+  flower-pot:
+    enable: true
+    # Item material showed on GUI.
+    show-item: FLOWER_POT
+    # Slot on GUI
+    slot: 42
+  books-interact:
+    enable: true
+    # Item material showed on GUI.
+    show-item: CHISELED_BOOKSHELF
+    # Slot on GUI
+    slot: 43

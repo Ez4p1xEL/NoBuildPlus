@@ -108,6 +108,8 @@ gui:
     hook: 'Hooking player with fishing rod'
     fish: 'Fishing'
     crystal: 'Ender crystal interacting'
+    flower-pot: 'Flower pot interacting'
+    books-interact: 'Chiseled bookshelf interacting'
 
 true: '&aALLOW'
 false: '&cPREVENT'

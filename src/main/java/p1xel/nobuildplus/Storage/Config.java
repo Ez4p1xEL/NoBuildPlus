@@ -30,12 +30,17 @@ public class Config {
         return getString("Version");
     }
 
+    public static int getConfigurationVersion() {return getInt("Configuration");}
+
     public static int getInt(String path) {
         return config.getInt(path);
     }
 
     public static boolean isResidenceEnabled() {
         return getBool("hook.Residence");
+    }
+    public static boolean isDominionEnabled() {
+        return getBool("hook.Dominion");
     }
 
     public static boolean isOraxenEnabled() { return getBool("hook.Oraxen"); }

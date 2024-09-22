@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-import p1xel.nobuildplus.Hook.HRes;
+import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -27,7 +27,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Action action = e.getAction();
 
         if (e.getClickedBlock() != null) {
-            if (HRes.isInRes(e.getClickedBlock())) {
+            if (Hooks.cancel(e.getClickedBlock())) {
                 return;
             }
         }
@@ -494,7 +494,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -525,7 +525,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -554,7 +554,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -591,7 +591,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -620,7 +620,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -649,7 +649,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -677,7 +677,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Item droppedItem = e.getItemDrop();
 
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -724,7 +724,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Item item = e.getItem();
         String world = p.getWorld().getName();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -770,7 +770,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -801,7 +801,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -835,7 +835,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Player p = e.getPlayer();
         String world = p.getWorld().getName();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -870,9 +870,10 @@ public class NoBuildPlusPlayerListener implements Listener {
         Player p = e.getPlayer();
         String world = p.getWorld().getName();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
+
         if (e.getCause() == PlayerSignOpenEvent.Cause.INTERACT) {
             if (Settings.canExecute(world, "sign-edit")) {
                 if (!Worlds.getFlag(world, "sign-edit")) {
@@ -894,7 +895,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Player p = e.getPlayer();
         String world = p.getWorld().getName();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
@@ -921,7 +922,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Player p = e.getPlayer();
         String world = p.getWorld().getName();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 

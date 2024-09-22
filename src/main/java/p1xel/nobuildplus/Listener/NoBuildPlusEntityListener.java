@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.world.PortalCreateEvent;
-import p1xel.nobuildplus.Hook.HRes;
+import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -26,11 +26,11 @@ public class NoBuildPlusEntityListener implements Listener {
         Entity p = e.getDamager();
         Entity target = e.getEntity();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
-        if (HRes.isInRes(target)) {
+        if (Hooks.cancel(target)) {
             return;
         }
 
@@ -255,7 +255,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String world = e.getEntity().getWorld().getName();
 
-        if (HRes.isInRes(e.getEntity())) {
+        if (Hooks.cancel(e.getEntity())) {
             return;
         }
 
@@ -315,11 +315,11 @@ public class NoBuildPlusEntityListener implements Listener {
         String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(p)) {
+        if (Hooks.cancel(p)) {
             return;
         }
 
-        if (HRes.isInRes(e.getRightClicked())) {
+        if (Hooks.cancel(e.getRightClicked())) {
             return;
         }
 
@@ -444,7 +444,7 @@ public class NoBuildPlusEntityListener implements Listener {
         String falldamageFlag = "fall-damage";
 
         if (entity instanceof Player) {
-            if (HRes.isInRes(entity)) {
+            if (Hooks.cancel(entity)) {
                 return;
             }
         }
@@ -488,7 +488,7 @@ public class NoBuildPlusEntityListener implements Listener {
         String shootFlag = "shoot";
 
         if (p instanceof Player) {
-            if (HRes.isInRes(p)) {
+            if (Hooks.cancel(p)) {
                 return;
             }
         }
@@ -532,7 +532,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String armorstandFlag = "armorstand";
 
-        if (HRes.isInRes(e.getEntity())) {
+        if (Hooks.cancel(e.getEntity())) {
             return;
         }
 
@@ -560,7 +560,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (HRes.isInRes(entity)) {
+        if (Hooks.cancel(entity)) {
             return;
         }
 
@@ -665,7 +665,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         String farmbreakFlag = "farmbreak";
 
-        if (HRes.isInRes(entity)) {
+        if (Hooks.cancel(entity)) {
             return;
         }
 
@@ -724,7 +724,7 @@ public class NoBuildPlusEntityListener implements Listener {
         String world = entity.getWorld().getName();
 
         if (!(entity instanceof Player)) {
-            if (HRes.isInRes(entity)) {
+            if (Hooks.cancel(entity)) {
                 return;
             }
             return;
@@ -763,7 +763,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        if (HRes.isInRes(entity)) {
+        if (Hooks.cancel(entity)) {
             return;
         }
 
@@ -798,7 +798,7 @@ public class NoBuildPlusEntityListener implements Listener {
         Entity entity = e.getEntity();
         String world = entity.getWorld().getName();
 
-        if (HRes.isInRes(entity)) {
+        if (Hooks.cancel(entity)) {
             return;
         }
 

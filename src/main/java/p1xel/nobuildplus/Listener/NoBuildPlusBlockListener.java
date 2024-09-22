@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
-import p1xel.nobuildplus.Hook.HRes;
+import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -21,7 +21,7 @@ public class NoBuildPlusBlockListener implements Listener {
         Player p = e.getPlayer();
         String flag = "break";
 
-        if (HRes.isInRes(e.getBlock())) {
+        if (Hooks.cancel(e.getBlock())) {
             return;
         }
 
@@ -67,7 +67,7 @@ public class NoBuildPlusBlockListener implements Listener {
         Player p = e.getPlayer();
         String flag = "build";
 
-        if (HRes.isInRes(e.getBlock())) {
+        if (Hooks.cancel(e.getBlock())) {
             return;
         }
 
@@ -112,7 +112,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
         String world = e.getBlock().getWorld().getName();
 
-        if (HRes.isInRes(e.getBlock())) {
+        if (Hooks.cancel(e.getBlock())) {
             return;
         }
 
@@ -136,7 +136,7 @@ public class NoBuildPlusBlockListener implements Listener {
         Block block = e.getBlock();
         String world = block.getWorld().getName();
 
-        if (HRes.isInRes(block)) {
+        if (Hooks.cancel(block)) {
             return;
         }
 
@@ -177,7 +177,7 @@ public class NoBuildPlusBlockListener implements Listener {
         Block block = e.getBlock();
         Material mat = block.getType();
 
-        if (HRes.isInRes(block)) {
+        if (Hooks.cancel(block)) {
             return;
         }
 
@@ -241,7 +241,7 @@ public class NoBuildPlusBlockListener implements Listener {
         Block b = e.getBlock();
         String world = b.getWorld().getName();
 
-        if (HRes.isInRes(b)) {
+        if (Hooks.cancel(b)) {
             return;
         }
 

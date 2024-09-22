@@ -12,6 +12,7 @@ import p1xel.nobuildplus.bStats.Metrics;
 import p1xel.nobuildplus.spigotmc.UpdateChecker;
 
 import java.io.File;
+import java.io.IOException;
 
 public class NoBuildPlus extends JavaPlugin {
 
@@ -42,6 +43,11 @@ public class NoBuildPlus extends JavaPlugin {
         return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
     }
 
+    public static boolean isDominionEnabled() {
+        return Bukkit.getServer().getPluginManager().isPluginEnabled("Dominion");
+    }
+
+
     public static boolean isOraxenEnabled() {
         return Bukkit.getServer().getPluginManager().isPluginEnabled("Oraxen");
     }
@@ -65,6 +71,16 @@ public class NoBuildPlus extends JavaPlugin {
     public void onEnable() {
         Settings.updateFromFlagsManager();
         Worlds.updateFromFlagsManager();
+
+        if (Config.getConfigurationVersion() < 3) {
+            getConfig().set("Configuration", 3);
+            getConfig().set("hook.Dominion", true);
+            try {
+                getConfig().save("config.yml");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         getLogger().info("[NBP] START LOADING ...");
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
@@ -121,14 +137,14 @@ public class NoBuildPlus extends JavaPlugin {
             }
         }
 
-//        if (Config.getBool("hook.Oraxen")) {
-//            Plugin oraxen = getServer().getPluginManager().getPlugin("Oraxen");
-//            if (oraxen != null) {
-//                getServer().getPluginManager().enablePlugin(oraxen);
-//                getLogger().info("Oraxen is enabled by NoBuildPlus.");
-//                getServer().getPluginManager().registerEvents(new OraxenListener(), this);
-//            }
-//        }
+        if (Config.getBool("hook.Oraxen")) {
+            Plugin oraxen = getServer().getPluginManager().getPlugin("Oraxen");
+            if (oraxen != null) {
+                getServer().getPluginManager().enablePlugin(oraxen);
+                getLogger().info("Oraxen is enabled by NoBuildPlus.");
+                getServer().getPluginManager().registerEvents(new OraxenListener(), this);
+            }
+        }
     }
 
 
@@ -157,5 +173,16 @@ public class NoBuildPlus extends JavaPlugin {
         }
     }
     */
+
+//    // API?
+//    private NBPAPI nbp;
+//    public NBPAPI getNBPAPI() {
+//        return nbp;
+//    }
+//
+//    // The code you need to write into your onEnable()
+//    if (getServer().getPluginManager().getPlugin("NoBuildPlus") != null) {
+//        nbp = new NBPAPI();
+//    }
 
 }

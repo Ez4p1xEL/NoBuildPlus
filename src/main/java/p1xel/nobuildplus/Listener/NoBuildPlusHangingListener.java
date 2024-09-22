@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
-import p1xel.nobuildplus.Hook.HRes;
+import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -20,7 +20,7 @@ public class NoBuildPlusHangingListener implements Listener {
         String world = e.getEntity().getWorld().getName();
         Entity p = e.getRemover();
 
-        if (HRes.isInRes(e.getEntity())) {
+        if (Hooks.cancel(e.getEntity())) {
             return;
         }
 
@@ -97,7 +97,7 @@ public class NoBuildPlusHangingListener implements Listener {
         String world = e.getEntity().getWorld().getName();
         Player p = e.getPlayer();
 
-        if (HRes.isInRes(e.getEntity())) {
+        if (Hooks.cancel(e.getEntity())) {
             return;
         }
 

@@ -4,6 +4,7 @@ import com.bekvon.bukkit.residence.Residence;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import p1xel.nobuildplus.API.NBPAPI;
 import p1xel.nobuildplus.Command.Cmd;
 import p1xel.nobuildplus.Command.TabList;
 import p1xel.nobuildplus.Listener.*;
@@ -13,6 +14,7 @@ import p1xel.nobuildplus.spigotmc.UpdateChecker;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 public class NoBuildPlus extends JavaPlugin {
 
@@ -62,15 +64,14 @@ public class NoBuildPlus extends JavaPlugin {
         FlagsManager.createFlagsManagerFile();
         Settings.createSettingsFile();
         Worlds.createWorldsFile();
-
-        GUIManager.instance.initialization();
+        Settings.defaultList();
 
     }
 
     @Override
     public void onEnable() {
-        Settings.updateFromFlagsManager();
-        Worlds.updateFromFlagsManager();
+
+        updateFlags();
 
         if (Config.getConfigurationVersion() < 3) {
             getConfig().set("Configuration", 3);
@@ -81,6 +82,7 @@ public class NoBuildPlus extends JavaPlugin {
                 throw new RuntimeException(e);
             }
         }
+
 
         getLogger().info("[NBP] START LOADING ...");
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());
@@ -99,9 +101,19 @@ public class NoBuildPlus extends JavaPlugin {
 
         getLogger().info("[NBP] HOOKED FUNCTIONS LOADED.");
 
-        Settings.defaultList();
         updateVersion();
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());
+
+        NBPAPI api = new NBPAPI();
+        String message = api.getInfo() + api.getVersion();
+        getLogger().info("NBP API is loaded! " + message);
+
+        // Text from https://tools.miku.ac/taag/ (Font: Slant)
+        getLogger().info("    _   __      ____        _ __    ______  __          ");
+        getLogger().info("   / | / /___  / __ )__  __(_) /___/ / __ \\\\/ /_  _______");
+        getLogger().info("  /  |/ / __ \\\\/ __  / / / / / / __  / /_/ / / / / / ___/");
+        getLogger().info(" / /|  / /_/ / /_/ / /_/ / / / /_/ / ____/ / /_/ (__  ) ");
+        getLogger().info("/_/ |_/\\____/_____/\\__,_/_/_/\\__,_/_/   /_/\\__,_/____/  ");
 
         int pluginId = 15126;
         new Metrics(this, pluginId);
@@ -145,6 +157,59 @@ public class NoBuildPlus extends JavaPlugin {
                 getServer().getPluginManager().registerEvents(new OraxenListener(), this);
             }
         }
+    }
+
+    void updateFlags() {
+
+        for (Map.Entry<String, Flags> entry : Flags.getMaps().entrySet()) {
+
+            String key = entry.getKey();
+
+            if (!FlagsManager.yaml.getConfigurationSection("flags").getKeys(false).contains(key)) {
+
+                Flags flag = entry.getValue();
+
+                FlagsManager.yaml.set("flags." + key + ".enable", flag.getDefaultFlagEnabled());
+                FlagsManager.yaml.set("flags." + key + ".show-item", flag.getDefaultShowItem());
+                FlagsManager.yaml.set("flags." + key + ".slot", flag.getDefaultSlot());
+                FlagsManager.yaml.set("flags." + key + ".type", flag.getDefaultType());
+                FlagsManager.yaml.set("flags." + key + ".list", flag.getDefaultList());
+                getLogger().info("Flag " + key.toUpperCase() + " is updated to flags.yml!");
+
+                Settings.yaml.set("global-settings.flags."+key, true);
+                getLogger().info("Flag " + key.toUpperCase() + " is updated to settings.yml!");
+
+                for (String world : Settings.getEnableWorldList()) {
+
+                    Worlds.yaml.set(world + ".flags." + key, true);
+                    getLogger().info("Flag " + key.toUpperCase() + " is updated to " + world + " in worlds.yml!");
+
+                }
+
+            }
+
+        }
+
+        File flags = new File(getDataFolder(), "flags.yml");
+        File settings = new File(getDataFolder(), "settings.yml");
+        File worlds = new File(getDataFolder(), "worlds.yml");
+
+        try {
+            FlagsManager.yaml.save(flags);
+            Settings.yaml.save(settings);
+            Worlds.yaml.save(worlds);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        FlagsManager.upload(flags);
+        Settings.upload(settings);
+        Worlds.upload(worlds);
+
+        FlagsManager.defaultFlagList();
+        Settings.defaultList();
+        GUIManager.instance.initialization();
+
     }
 
 

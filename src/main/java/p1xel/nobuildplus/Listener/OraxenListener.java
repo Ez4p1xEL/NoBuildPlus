@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.Config;
 import p1xel.nobuildplus.Storage.FlagsManager;
@@ -20,12 +21,11 @@ public class OraxenListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBreak(final BlockBreakEvent e) {
 
-        Player p = e.getPlayer();
-        Block block = e.getBlock();
-
         if (!Config.isOraxenEnabled() || !NoBuildPlus.isOraxenEnabled()) {
             return;
         }
+        Block block = e.getBlock();
+
 
         if (!OraxenBlocks.isOraxenBlock(block)) {
             return;
@@ -33,20 +33,18 @@ public class OraxenListener implements Listener {
 
         String world = block.getWorld().getName();
 
-        if (!Settings.canExecute(world, "break")) {
+        if (!Flags.destroy.isEnabled(world)) {
             return;
         }
 
-        if (Worlds.getFlag(world, "break")) {
-            return;
-        }
+        Player p = e.getPlayer();
 
         if (p.hasPermission(Worlds.getPermission(world))) {
             return;
         }
 
         // When type is "all"
-        if (FlagsManager.getFlagsType("break").equalsIgnoreCase("all")) {
+        if (Flags.destroy.getType().equalsIgnoreCase("all")) {
 
             if (Worlds.isDenyMessageExist(world)) {
                 p.sendMessage(Worlds.getDenyMessage(world));
@@ -60,8 +58,8 @@ public class OraxenListener implements Listener {
 
         // When type is "list"
 
-       if (FlagsManager.getFlagsType("break").equalsIgnoreCase("list")) {
-           for (String item : FlagsManager.getFlagsList("break")) {
+       if (Flags.destroy.getType().equalsIgnoreCase("list")) {
+           for (String item : Flags.destroy.getList()) {
 
                if (!item.startsWith("oraxen:")) {
                    break;

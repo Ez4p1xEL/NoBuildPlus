@@ -80,6 +80,7 @@ public class Settings {
     }
 
     // Update from SETTINGS
+    @Deprecated
     public static void updateFromFlagsManager() {
 
         for (String flag : FlagsManager.getFlags()) {

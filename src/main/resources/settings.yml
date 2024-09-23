@@ -53,8 +53,8 @@ global-settings:
     dye: false
     piston: true
     ice-form: true
-    hook: false
     fish: true
+    hook: false
     crystal: false
     flower-pot: true
     books-interact: true

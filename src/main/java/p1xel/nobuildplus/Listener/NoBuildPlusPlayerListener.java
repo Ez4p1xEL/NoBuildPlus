@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
@@ -20,501 +21,680 @@ public class NoBuildPlusPlayerListener implements Listener {
     // Flag: Use
     // Flag: Container
     @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
+    public void onUse(PlayerInteractEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
-        Player p = e.getPlayer();
         Action action = e.getAction();
+        Block block = e.getClickedBlock();
 
-        if (e.getClickedBlock() != null) {
-            if (Hooks.cancel(e.getClickedBlock())) {
-                return;
-            }
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null) {
+            return;
         }
 
-        // RIGHT CLICK BLOCK
-        if (action == Action.RIGHT_CLICK_BLOCK) {
-
-            boolean contain = Settings.getEnableWorldList().contains(world);
-            Material clicked = e.getClickedBlock().getType();
-
-            boolean hasPerm = false;
-
-            if (contain) {
-                hasPerm = p.hasPermission(Worlds.getPermission(world));
-            }
-
-            // Flag: Use
-            if (Settings.canExecute(world, "use")) {
-
-                if (!Worlds.getFlag(world, "use")) {
-
-                    if (!hasPerm) {
-
-                        if (FlagsManager.getFlagsType("use").equalsIgnoreCase("list")) {
-
-                            for (String name : FlagsManager.getFlagsList("use")) {
-                                Material block = Material.matchMaterial(name);
-                                if (block != null) {
-                                    if (clicked == block) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                        e.setCancelled(true);
-                                        return;
-                                    }
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-
-            }
-
-            // Flag: button
-            if (Settings.canExecute(world, "button")) {
-
-                if (!Worlds.getFlag(world, "button")) {
-
-                    if (!hasPerm) {
-
-                        if (FlagsManager.getFlagsType("button").equalsIgnoreCase("list")) {
-
-                            for (String name : FlagsManager.getFlagsList("button")) {
-                                Material block = Material.matchMaterial(name);
-                                if (block != null) {
-                                    if (clicked == block) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                        e.setCancelled(true);
-                                        return;
-                                    }
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-
-            }
-
-            // Flag: door-interact
-            if (Settings.canExecute(world, "door-interact")) {
-
-                if (!Worlds.getFlag(world, "door-interact")) {
-
-                    if (!hasPerm) {
-
-                        if (FlagsManager.getFlagsType("door-interact").equalsIgnoreCase("list")) {
-
-                            for (String name : FlagsManager.getFlagsList("door-interact")) {
-                                Material block = Material.matchMaterial(name);
-                                if (block != null) {
-                                    if (clicked == block) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                        e.setCancelled(true);
-                                        return;
-                                    }
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-
-            }
-
-            // Flag: lever
-            if (clicked == Material.LEVER) {
-                if (Settings.canExecute(world, "lever")) {
-
-                    if (!Worlds.getFlag(world, "lever")) {
-
-                        if (!hasPerm) {
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-                            return;
-                        }
-                    }
-
-                }
-            }
-
-            // Flag: trapdoor-interact
-            if (Settings.canExecute(world, "trapdoor-interact")) {
-
-                if (!Worlds.getFlag(world, "trapdoor-interact")) {
-
-                    if (!hasPerm) {
-
-                        if (FlagsManager.getFlagsType("trapdoor-interact").equalsIgnoreCase("list")) {
-
-                            for (String name : FlagsManager.getFlagsList("trapdoor-interact")) {
-                                Material block = Material.matchMaterial(name);
-                                if (block != null) {
-                                    if (clicked == block) {
-                                        if (Worlds.isDenyMessageExist(world)) {
-                                            p.sendMessage(Worlds.getDenyMessage(world));
-                                        }
-                                        e.setCancelled(true);
-                                        return;
-                                    }
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            // Flag: fencegate-interact
-            if (Settings.canExecute(world, "fencegate-interact")) {
-
-                if (!Worlds.getFlag(world, "fencegate-interact")) {
-
-                    if (!hasPerm) {
-
-                        if (FlagsManager.getFlagsType("fencegate-interact").equalsIgnoreCase("list")) {
-
-                            Block block = e.getClickedBlock();
-                            if (block != null) {
-                                Material mat = block.getType();
-                                if (FlagsManager.getFlagsList("fencegate-interact").contains(mat.toString().toUpperCase())) {
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                    e.setCancelled(true);
-                                    return;
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            // Flag: bonemeal
-            if (Settings.canExecute(world, "bonemeal")) {
-
-                if (!Worlds.getFlag(world, "bonemeal")) {
-
-                    if (!hasPerm) {
-
-                        ItemStack item = e.getItem();
-                        if (item != null) {
-                            Material mat = item.getType();
-                            if (mat == Material.BONE_MEAL) {
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-                                return;
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            // Flag: boat
-            ItemStack item = e.getItem();
-            if (item != null) {
-                for (String key : FlagsManager.getFlagsList("boat")) {
-
-                    if (item.getType() == Material.matchMaterial(key)) {
-
-                        if (Settings.canExecute(world, "boat")) {
-
-                            if (!Worlds.getFlag(world, "boat")) {
-
-                                if (!hasPerm) {
-
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                    e.setCancelled(true);
-                                    return;
-
-                                }
-                            }
-
-                        }
-                        return;
-                    }
-                }
-            }
-
-
-            Material mat = e.getClickedBlock().getType();
-            // Flag: flower-pot
-            if (mat == Material.FLOWER_POT || mat == Material.LEGACY_FLOWER_POT || mat.name().startsWith("POTTED_")) {
-
-                if (Settings.canExecute(world, "flower-pot")) {
-
-                    if (!Worlds.getFlag(world, "flower-pot")) {
-
-                        if (!hasPerm) {
-
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-                            return;
-
-                        }
-                    }
-
-                }
-                return;
-
-            }
-
-            // Flag: books-interact
-            if (e.getClickedBlock().getType() == Material.CHISELED_BOOKSHELF) {
-
-                if (Settings.canExecute(world, "books-interact")) {
-
-                    if (!Worlds.getFlag(world, "books-interact")) {
-
-                        if (!hasPerm) {
-
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-                            return;
-
-                        }
-                    }
-
-                }
-                return;
-
-            }
-
-        } // THE END OF THE "RIGHT CLICK BLOCK"
-
-        // RIGHT CLICK BLOCK OR RIGHT CLICK AIR
-        if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
-
-            ItemStack item = e.getItem();
-
-            if (item != null) {
-
-                // Flag: minecart
-                for (String key : FlagsManager.getFlagsList("minecart")) {
-
-                    if (e.getItem().getType() == Material.matchMaterial(key)) {
-
-                        if (Settings.canExecute(world, "minecart")) {
-
-                            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
-
-                            if (!Worlds.getFlag(world, "minecart")) {
-
-                                if (!hasPerm) {
-
-                                    if (Worlds.isDenyMessageExist(world)) {
-                                        p.sendMessage(Worlds.getDenyMessage(world));
-                                    }
-                                    e.setCancelled(true);
-                                    return;
-
-                                }
-                            }
-                        }
-
-                        return;
-                    }
-                }
-
-                // Flag: egg-throw
-                if (Settings.canExecute(world, "egg-throw")) {
-
-                    boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
-
-                    if (!Worlds.getFlag(world, "egg-throw")) {
-
-                        if (!hasPerm) {
-                            if (e.getItem().getType() == Material.EGG) {
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-                                return;
-                            }
-                        }
-                    }
-
-                }
-
-                // Flag: snowball-throw
-                if (Settings.canExecute(world, "snowball-throw")) {
-
-                    boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
-
-                    if (!Worlds.getFlag(world, "snowball-throw")) {
-
-                        if (!hasPerm) {
-                            if (e.getItem().getType() == Material.matchMaterial("SNOWBALL")) {
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-                                return;
-                            }
-                        }
-                    }
-                }
-
-                if (Settings.canExecute(world, "potion")) {
-
-                    if (!Worlds.getFlag(world, "potion")) {
-
-                        Material mat = item.getType();
-
-                        if (mat == Material.LINGERING_POTION || mat == Material.SPLASH_POTION ) {
-
-                            if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                                e.setCancelled(true);
-                                p.sendMessage(Worlds.getDenyMessage(world));
-
-                            }
-
-                            return;
-                        }
-
-                    }
-
-                }
-
-            }
-
-        } // THE END OF THE "RIGHT CLICK BLOCK OR RIGHT CLICK AIR"
-
-        // Flag: farmbreak
-        if (action == Action.PHYSICAL) {
-            if (Settings.canExecute(world, "farmbreak")) {
-
-                if (!Worlds.getFlag(world, "farmbreak")) {
-                    Material clicked = e.getClickedBlock().getType();
-
-                    if (clicked == Material.matchMaterial("SOIL") || clicked == Material.matchMaterial("FARMLAND")) {
-                        e.setCancelled(true);
-                        return;
-                    }
-                }
-            }
+        if (Hooks.cancel(block)) {
+            return;
         }
 
-
-
-        // Flag: Container
-        if (Settings.canExecute(world, "container")) {
-
-            if (Worlds.getFlag(world, "container")) {
-                return;
-            }
-
-            if (p.hasPermission(Worlds.getPermission(world))) {
-                return;
-            }
-
-            if (FlagsManager.getFlagsType("container").equalsIgnoreCase("list")) {
-
-                Block block = e.getClickedBlock();
-
-                if (block != null) {
-                    Material mat = block.getType();
-                    if (e.getAction() == Action.RIGHT_CLICK_BLOCK && FlagsManager.getFlagsList("container").contains(mat.toString().toUpperCase())) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-                    }
-                }
-            }
-
+        String world = block.getWorld().getName();
+        if (!Flags.use.isEnabled(world)) {
+            return;
         }
-    }
 
-    @EventHandler
-    public void onInteractEntity(PlayerInteractEntityEvent e) {
-
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
 
-        // Flag: boat (Use)
-        if (Settings.canExecute(world, "boat")) {
+        if (Flags.use.getType().equalsIgnoreCase("list")) {
 
-            if (!Worlds.getFlag(world, "boat")) {
-
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                    if (e.getRightClicked() instanceof Boat) {
-
+            for (String name : Flags.use.getList()) {
+                Material material = Material.matchMaterial(name);
+                if (material != null) {
+                    Material mat = block.getType();
+                    if (mat == material) {
                         if (Worlds.isDenyMessageExist(world)) {
                             p.sendMessage(Worlds.getDenyMessage(world));
                         }
                         e.setCancelled(true);
                         return;
                     }
-
-                    if (FlagsManager.BoatIsIncludingChestBoat()) {
-                        if (e.getRightClicked() instanceof ChestBoat) {
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-                            return;
-                        }
-                    }
-
                 }
+
             }
+
+        }
+
+
+    }
+
+    // Flag: button
+    @EventHandler
+    public void onButtonUse(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.button.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Flags.button.getType().equalsIgnoreCase("list")) {
+
+            for (String name : Flags.button.getList()) {
+                Material material = Material.matchMaterial(name);
+                if (material != null) {
+                    Material mat = block.getType();
+                    if (mat == material) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                        return;
+                    }
+                }
+
+            }
+
         }
     }
 
-    // Flag: Bed
+    // Flag: door interact
     @EventHandler
-    public void onBed(PlayerBedEnterEvent e) {
+    public void onDoorInteract(PlayerInteractEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.door_interact.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Flags.door_interact.getType().equalsIgnoreCase("list")) {
+
+            for (String name : Flags.door_interact.getList()) {
+                Material material = Material.matchMaterial(name);
+                if (material != null) {
+                    Material mat = block.getType();
+                    if (mat == material) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                        return;
+                    }
+                }
+
+            }
+
+
+        }
+
+    }
+
+    // Flag: lever
+    @EventHandler
+    public void onLeverInteract(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null || block.getType() != Material.LEVER) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.lever.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+
+        e.setCancelled(true);
+
+    }
+
+    // Flag: trapdoor interact
+    @EventHandler
+    public void onTrapDoorInteract(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.trapdoor_interact.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+
+        if (Flags.trapdoor_interact.getType().equalsIgnoreCase("list")) {
+
+            for (String name : Flags.trapdoor_interact.getList()) {
+                Material material = Material.matchMaterial(name);
+                if (material != null) {
+                    Material mat = block.getType();
+                    if (mat == material) {
+                        if (Worlds.isDenyMessageExist(world)) {
+                            p.sendMessage(Worlds.getDenyMessage(world));
+                        }
+                        e.setCancelled(true);
+                        return;
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    // Flag: fence gate interact
+    @EventHandler
+    public void onFenceGateInteract(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.fencegate_interact.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Flags.fencegate_interact.getType().equalsIgnoreCase("list")) {
+
+            Material mat = block.getType();
+            if (Flags.fencegate_interact.getList().contains(mat.toString().toUpperCase())) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
+                }
+                e.setCancelled(true);
+            }
+
+
+        }
+    }
+
+    // Flag: bone meal
+    @EventHandler
+    public void onBoneMealUse(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+        ItemStack item = e.getItem();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null || item == null || item.getType() != Material.BONE_MEAL) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.bonemeal.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+
+        e.setCancelled(true);
+    }
+
+    // Flag: boat
+    @EventHandler
+    public void onBoatInteract(PlayerInteractEvent e) {
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+        ItemStack item = e.getItem();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null || item == null) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.boat.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Flags.boat.getType().equalsIgnoreCase("list")) {
+
+            Material mat = item.getType();
+            if (Flags.boat.getList().contains(mat.toString().toUpperCase())) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
+                }
+                e.setCancelled(true);
+            }
+
+
+        }
+    }
+
+    // Flag: flower pot
+    @EventHandler
+    public void onFlowerPotUse(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.flower_pot.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        Material mat = block.getType();
+
+        if (mat == Material.FLOWER_POT || mat == Material.LEGACY_FLOWER_POT || mat.name().startsWith("POTTED_")) {
+
+            if (Worlds.isDenyMessageExist(world)) {
+                p.sendMessage(Worlds.getDenyMessage(world));
+            }
+            e.setCancelled(true);
+
+        }
+    }
+
+    // Flag: books(helf) interact
+    @EventHandler
+    public void onBookShelfInteract(PlayerInteractEvent e) {
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null || block.getType() != Material.CHISELED_BOOKSHELF) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.books_interact.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+
+        e.setCancelled(true);
+    }
+
+    // Flag: minecart
+    @EventHandler
+    public void onMinecartInteract(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+        ItemStack item = e.getItem();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null || item == null) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.minecart.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Flags.minecart.getType().equalsIgnoreCase("list")) {
+
+            Material mat = item.getType();
+            if (Flags.minecart.getList().contains(mat.toString().toUpperCase())) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
+                }
+                e.setCancelled(true);
+            }
+
+
+        }
+    }
+
+    // Flag: egg throw
+    @EventHandler
+    public void onEggThrow(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        ItemStack item = e.getItem();
+
+        if (!(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) || item == null || item.getType() != Material.EGG) {
+            return;
+        }
+
         Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
+        String world = p.getWorld().getName();
+        if (!Flags.egg_throw.isEnabled(world)) {
+            return;
+        }
 
-        if (Settings.canExecute(world, "bed")) {
 
-            if (!Worlds.getFlag(world, "bed")) {
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
 
-                if (!p.hasPermission(Worlds.getPermission(world))) {
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
 
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
-                    e.setCancelled(true);
+    }
 
+    // Flag: snowball throw
+    @EventHandler
+    public void onSnowBallThrow(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        ItemStack item = e.getItem();
+
+        if (!(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) || item == null || item.getType() != Material.SNOWBALL) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+
+        if (Hooks.cancel(p)) {
+            return;
+        }
+
+        String world = p.getWorld().getName();
+        if (!Flags.snowball_throw.isEnabled(world)) {
+            return;
+        }
+
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
+
+    }
+
+    // Flag: potion
+    @EventHandler
+    public void onPotionUse(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        ItemStack item = e.getItem();
+
+        if (!(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)
+                || item == null || !(item.getType() == Material.POTION
+                || item.getType() == Material.SPLASH_POTION)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+
+        if (Hooks.cancel(p)) {
+            return;
+        }
+
+        String world = p.getWorld().getName();
+        if (!Flags.potion.isEnabled(world)) {
+            return;
+        }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
+
+    }
+
+    // Flag: farmbreak
+    @EventHandler
+    public void onFarmInteract(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.PHYSICAL || block == null
+                || !(block.getType() == Material.matchMaterial("SOIL") || block.getType() == Material.matchMaterial("FARMLAND"))) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.farmbreak.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+
+        e.setCancelled(true);
+
+    }
+
+    // Flag: container
+    @EventHandler
+    public void onContainerInteract(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.container.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Flags.container.getType().equalsIgnoreCase("list")) {
+
+            Material mat = block.getType();
+            if (Flags.container.getList().contains(mat.toString().toUpperCase())) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
                 }
+                e.setCancelled(true);
             }
 
 
         }
+
+    }
+
+    // Flag: boat
+    @EventHandler
+    public void onInteractEntity(PlayerInteractEntityEvent e) {
+
+        Player p = e.getPlayer();
+
+        if (Hooks.cancel(p)) {
+            return;
+        }
+
+        String world = p.getWorld().getName();
+        if (!Flags.boat.isEnabled(world)) {
+            return;
+        }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (e.getRightClicked() instanceof Boat) {
+
+            if (Worlds.isDenyMessageExist(world)) {
+                p.sendMessage(Worlds.getDenyMessage(world));
+            }
+            e.setCancelled(true);
+            return;
+        }
+
+        if (FlagsManager.BoatIsIncludingChestBoat()) {
+            if (e.getRightClicked() instanceof ChestBoat) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
+                }
+                e.setCancelled(true);
+            }
+        }
+
+    }
+
+    // Flag: Bed
+    @EventHandler
+    public void onBed(PlayerBedEnterEvent e) {
+
+        Player p = e.getPlayer();
+
+        if (Hooks.cancel(p)) {
+            return;
+        }
+
+        String world = p.getWorld().getName();
+        if (!Flags.bed.isEnabled(world)) {
+            return;
+        }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
 
     }
 
@@ -522,28 +702,25 @@ public class NoBuildPlusPlayerListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        if (Settings.canExecute(world, "chat")) {
-
-            if (!Worlds.getFlag(world, "chat")) {
-
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
-                    e.setCancelled(true);
-
-                }
-            }
-
+        String world = p.getWorld().getName();
+        if (!Flags.chat.isEnabled(world)) {
+            return;
         }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
 
     }
 
@@ -551,167 +728,153 @@ public class NoBuildPlusPlayerListener implements Listener {
     @EventHandler
     public void onCommandExecute(PlayerCommandPreprocessEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        if (Settings.canExecute(world, "command")) {
+        String world = p.getWorld().getName();
+        if (!Flags.command.isEnabled(world)) {
+            return;
+        }
 
-            if (!Worlds.getFlag(world, "command")) {
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
 
-                if (!p.hasPermission(Worlds.getPermission(world))) {
+        if (Flags.command.getType().equalsIgnoreCase("all")) {
+            if (Worlds.isDenyMessageExist(world)) {
+                p.sendMessage(Worlds.getDenyMessage(world));
+            }
+            e.setCancelled(true);
+            return;
+        }
 
-                    if (FlagsManager.getFlagsType("command").equalsIgnoreCase("all")) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-                        return;
-                    }
-
-                    if (FlagsManager.getFlagsType("command").equalsIgnoreCase("list")) {
-                        if (FlagsManager.getFlagsList("command").contains("/" + e.getMessage())) {
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-                        }
-                    }
+        if (Flags.command.getType().equalsIgnoreCase("list")) {
+            if (Flags.command.getList().contains("/" + e.getMessage())) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
                 }
+                e.setCancelled(true);
             }
         }
     }
 
+    // Flag: armor stand
     @EventHandler
     public void ArmorStand(PlayerArmorStandManipulateEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        if (Settings.canExecute(world, "armorstand")) {
-
-            if (!Worlds.getFlag(world, "armorstand")) {
-
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
-                    e.setCancelled(true);
-
-                }
-
-            }
-
+        String world = p.getWorld().getName();
+        if (!Flags.armorstand.isEnabled(world)) {
+            return;
         }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
 
     }
 
+    // Flag: bucket place
     @EventHandler
     public void onBucketUse(PlayerBucketEmptyEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        if (Settings.canExecute(world, "bucket-place")) {
-
-            if (!Worlds.getFlag(world, "bucket-place")) {
-
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
-                    e.setCancelled(true);
-
-                }
-
-            }
-
+        String world = p.getWorld().getName();
+        if (!Flags.bucket_place.isEnabled(world)) {
+            return;
         }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
 
     }
 
     @EventHandler
     public void onBucketFill(PlayerBucketFillEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        if (Settings.canExecute(world, "bucket-fill")) {
-
-            if (!Worlds.getFlag(world, "bucket-fill")) {
-
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
-                    e.setCancelled(true);
-                }
-            }
+        String world = p.getWorld().getName();
+        if (!Flags.bucket_fill.isEnabled(world)) {
+            return;
         }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
+
     }
 
     // Flag: drop-item
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
-        Item droppedItem = e.getItemDrop();
-
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        // Flag: drop-item (For Player)
-        if (Settings.canExecute(world, "drop-item")) {
+        String world = p.getWorld().getName();
+        if (!Flags.drop_item.isEnabled(world)) {
+            return;
+        }
 
-            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
 
-            if (!Worlds.getFlag(world, "drop-item")) {
+        Item droppedItem = e.getItemDrop();
 
-                if (!hasPerm) {
+        if (Flags.drop_item.getType().equalsIgnoreCase("all")) {
+            if (Worlds.isDenyMessageExist(world)) {
+                p.sendMessage(Worlds.getDenyMessage(world));
+            }
+            e.setCancelled(true);
+            return;
+        }
 
-                    String type = FlagsManager.getFlagsType("drop-item");
-                    String m = Worlds.getDenyMessage(world);
+        if (Flags.drop_item.getType().equalsIgnoreCase("list")) {
 
-                    if (type.equalsIgnoreCase("all")) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(m);
-                        }
-                        e.setCancelled(true);
-                        return;
-                    }
-
-                    if (type.equalsIgnoreCase("list")) {
-
-                        Material mat = droppedItem.getItemStack().getType();
-                        if (FlagsManager.getFlagsList("drop-item").contains(mat.toString().toUpperCase())) {
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(m);
-                            }
-                            e.setCancelled(true);
-                        }
-                    }
+            Material mat = droppedItem.getItemStack().getType();
+            if (Flags.drop_item.getList().contains(mat.toString().toUpperCase())) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
                 }
+                e.setCancelled(true);
             }
         }
     }
@@ -721,110 +884,102 @@ public class NoBuildPlusPlayerListener implements Listener {
     public void onItemPickUp(EntityPickupItemEvent e) {
 
         Entity p = e.getEntity();
-        Item item = e.getItem();
-        String world = p.getWorld().getName();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        // Flag: drop-item (For Player)
-        if (Settings.canExecute(world, "item-pickup")) {
+        if (!(p instanceof Player)) {
+            return;
+        }
 
-            boolean hasPerm = p.hasPermission(Worlds.getPermission(world));
+        String world = p.getWorld().getName();
+        if (!Flags.item_pickup.isEnabled(world)) {
+            return;
+        }
 
-            if (!Worlds.getFlag(world, "item-pickup")) {
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
 
-                if (!hasPerm) {
+        Item item = e.getItem();
 
-                    String type = FlagsManager.getFlagsType("item-pickup");
-                    String m = Worlds.getDenyMessage(world);
+        if (Flags.item_pickup.getType().equalsIgnoreCase("all")) {
+            if (Worlds.isDenyMessageExist(world)) {
+                p.sendMessage(Worlds.getDenyMessage(world));
+            }
+            e.setCancelled(true);
+            return;
+        }
 
-                    if (type.equalsIgnoreCase("all")) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(m);
-                        }
-                        e.setCancelled(true);
-                        return;
-                    }
+        if (Flags.item_pickup.getType().equalsIgnoreCase("list")) {
 
-                    if (type.equalsIgnoreCase("list")) {
-
-
-                        Material mat = item.getItemStack().getType();
-                        if (FlagsManager.getFlagsList("item-pickup").contains(mat.toString().toUpperCase())) {
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(m);
-                            }
-                            e.setCancelled(true);
-                        }
-                    }
+            Material mat = item.getItemStack().getType();
+            if (Flags.item_pickup.getList().contains(mat.toString().toUpperCase())) {
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
                 }
+                e.setCancelled(true);
             }
         }
     }
 
+    // Flag: fly
     @EventHandler
     public void onFlightToggle(PlayerToggleFlightEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        // Flag: fly
-        if (p.getAllowFlight()) {
-
-            if (Settings.canExecute(world, "fly")) {
-
-                if (!Worlds.getFlag(world, "fly")) {
-
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-
-                    }
-                }
-            }
-
+        if (!p.getAllowFlight()) {
+            return;
         }
+
+        String world = p.getWorld().getName();
+        if (!Flags.fly.isEnabled(world)) {
+            return;
+        }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
+
     }
 
+    // Flag: teleport (For Player)
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent e) {
 
-        String world = e.getPlayer().getWorld().getName();
         Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        // Flag: teleport (For Player)
+        String world = p.getWorld().getName();
+        if (!Flags.teleport.isEnabled(world)) {
+            return;
+        }
 
-        if (Settings.canExecute(world, "teleport")) {
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
 
-            if (!Worlds.getFlag(world, "teleport")) {
+        if (e.getFrom().getWorld().getName().equalsIgnoreCase(world) || e.getTo().getWorld().getName().equalsIgnoreCase(world)) {
 
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                    if (e.getFrom().getWorld().getName().equalsIgnoreCase(world) || e.getTo().getWorld().getName().equalsIgnoreCase(world)) {
-
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-
-                    }
-
-                }
-
+            if (Worlds.isDenyMessageExist(world)) {
+                p.sendMessage(Worlds.getDenyMessage(world));
             }
+            e.setCancelled(true);
+
         }
     }
 
@@ -833,131 +988,147 @@ public class NoBuildPlusPlayerListener implements Listener {
     public void onPotionEffect(PlayerItemConsumeEvent e) {
 
         Player p = e.getPlayer();
-        String world = p.getWorld().getName();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        if (Settings.canExecute(world, "potion")) {
-
-            if (!Worlds.getFlag(world, "potion")) {
-
-                Material mat = e.getItem().getType();
-
-                if (mat == Material.POTION || mat == Material.SPLASH_POTION || mat == Material.LINGERING_POTION) {
-
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        e.setCancelled(true);
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-
-                    }
-
-                }
-
-            }
+        String world = p.getWorld().getName();
+        if (!Flags.potion.isEnabled(world)) {
+            return;
         }
 
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        Material mat = e.getItem().getType();
+
+        if (mat == Material.POTION || mat == Material.SPLASH_POTION || mat == Material.LINGERING_POTION) {
+
+            e.setCancelled(true);
+            if (Worlds.isDenyMessageExist(world)) {
+                p.sendMessage(Worlds.getDenyMessage(world));
+            }
+
+        }
 
     }
 
     // Flag: sign-edit
     @EventHandler
     public void onSignOpen(PlayerSignOpenEvent e) {
+
         Player p = e.getPlayer();
-        String world = p.getWorld().getName();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        if (e.getCause() == PlayerSignOpenEvent.Cause.INTERACT) {
-            if (Settings.canExecute(world, "sign-edit")) {
-                if (!Worlds.getFlag(world, "sign-edit")) {
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-                        e.setCancelled(true);
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-
-                    }
-                }
-            }
+        if (e.getCause() != PlayerSignOpenEvent.Cause.INTERACT) {
+            return;
         }
+
+        String world = p.getWorld().getName();
+        if (!Flags.sign_edit.isEnabled(world)) {
+            return;
+        }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
+
     }
 
     // Flag: dye
     @EventHandler
     public void onSheepDye(SheepDyeWoolEvent e) {
+
+        Entity entity = e.getEntity();
+
+        if (Hooks.cancel(entity)) {
+            return;
+        }
+
+        String world = entity.getWorld().getName();
+        if (!Flags.dye.isEnabled(world)) {
+            return;
+        }
+
         Player p = e.getPlayer();
-        String world = p.getWorld().getName();
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
+
+    }
+
+    // Flag: hook (To Players, NOT Fish)
+    @EventHandler
+    public void onHook(PlayerFishEvent e) {
+
+        Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        if (Settings.canExecute(world, "dye")) {
-            if (!Worlds.getFlag(world, "dye")) {
-
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-                    e.setCancelled(true);
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
-
-                }
-
-            }
+        if (!(e.getCaught() instanceof Player)) {
+            return;
         }
+
+        String world = p.getWorld().getName();
+        if (!Flags.hook.isEnabled(world)) {
+            return;
+        }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
+
     }
 
-    // Flag: fish
-    // Flag: hook
+    // Flag: fish (To fish, NOT players)
     @EventHandler
     public void onFish(PlayerFishEvent e) {
 
         Player p = e.getPlayer();
-        String world = p.getWorld().getName();
 
         if (Hooks.cancel(p)) {
             return;
         }
 
-        Entity target = e.getCaught();
-
-        // Flag: hook (To Players, NOT Fish)
-        if (target instanceof Player) {
-
-            if (Settings.canExecute(world, "hook")) {
-                if (!Worlds.getFlag(world, "hook")) {
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
-                        e.setCancelled(true);
-                    }
-                }
-            }
+        if (e.getCaught() instanceof Player) {
             return;
         }
 
-        // Flag: fish
-
-        if (Settings.canExecute(world, "fish")) {
-
-            if (!Worlds.getFlag(world, "fish")) {
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
-                    e.setCancelled(true);
-                }
-            }
-
+        String world = p.getWorld().getName();
+        if (!Flags.fish.isEnabled(world)) {
+            return;
         }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Worlds.isDenyMessageExist(world)) {
+            p.sendMessage(Worlds.getDenyMessage(world));
+        }
+        e.setCancelled(true);
 
     }
 }

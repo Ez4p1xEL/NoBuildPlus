@@ -105,6 +105,7 @@ public class Worlds {
         return yaml.getBoolean(world + ".flags." + flag);
     }
 
+    @Deprecated
     public static void updateFromFlagsManager() {
 
         for (String world : Worlds.yaml.getKeys(false)) {

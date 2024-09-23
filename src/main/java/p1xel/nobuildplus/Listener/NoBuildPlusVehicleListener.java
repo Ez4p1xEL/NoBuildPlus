@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
+import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.HRes;
 import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.FlagsManager;
@@ -13,141 +14,159 @@ import p1xel.nobuildplus.Storage.Worlds;
 
 public class NoBuildPlusVehicleListener implements Listener {
 
+    // Flag: Boat
     @EventHandler
-    public void onVehicleDamage(VehicleDamageEvent e) {
+    public void onBoatDamaged(VehicleDamageEvent e) {
 
-        String world = e.getVehicle().getWorld().getName();
-        Entity p = e.getAttacker();
         Vehicle vehicle = e.getVehicle();
 
         if (Hooks.cancel(vehicle)) {
             return;
         }
 
-        // Flag: Boat
-        if (Settings.canExecute(world, "boat")) {
+        String world = vehicle.getWorld().getName();
 
-            if (!Worlds.getFlag(world, "boat")) {
+        if (!Flags.boat.isEnabled(world)) {
+            return;
+        }
 
-                if (p instanceof Player) {
+        if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
 
+            Entity p = e.getAttacker();
 
-                    if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
+            if (p instanceof Player) {
 
-                        if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-
-
-                        }
-
-                    }
-
-
+                if (p.hasPermission(Worlds.getPermission(world))) {
+                    return;
                 }
+
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
+                }
+
             }
+
+            e.setCancelled(true);
 
         }
 
-        // Flag: minecart
-        if (Settings.canExecute(world, "minecart")) {
+    }
 
-            if (!Worlds.getFlag(world, "minecart")) {
+    // Flag: minecart
+    @EventHandler
+    public void onMinecartDamaged(VehicleDamageEvent e) {
+
+        Vehicle vehicle = e.getVehicle();
+
+        if (Hooks.cancel(vehicle)) {
+            return;
+        }
+
+        String world = vehicle.getWorld().getName();
+
+        if (!Flags.minecart.isEnabled(world)) {
+            return;
+        }
+
+        for (String stype : Flags.minecart.getList()) {
+            if (vehicle.getType() == EntityType.valueOf(stype)) {
+
+                Entity p = e.getAttacker();
 
                 if (p instanceof Player) {
-
-                    for (String stype : FlagsManager.getFlagsList("minecart")) {
-                        if (vehicle.getType() == EntityType.valueOf(stype)) {
-
-                            if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-
-
-                            }
-                        }
-
-                        break;
-
+                    if (p.hasPermission(Worlds.getPermission(world))) {
+                        return;
+                    }
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
                     }
                 }
+
+                e.setCancelled(true);
+                break;
+
             }
 
         }
 
     }
 
+    // Flag: boat
     @EventHandler
-    public void onVehicleDestroy(VehicleDestroyEvent e) {
+    public void onBoatDestroyed(VehicleDestroyEvent e) {
 
-        String world = e.getVehicle().getWorld().getName();
-        Entity p = e.getAttacker();
         Vehicle vehicle = e.getVehicle();
 
         if (Hooks.cancel(vehicle)) {
             return;
         }
 
-        // Flag: Boat
-        if (Settings.canExecute(world, "boat")) {
+        String world = vehicle.getWorld().getName();
 
-            if (!Worlds.getFlag(world, "boat")) {
+        if (!Flags.boat.isEnabled(world)) {
+            return;
+        }
+
+        if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
+
+            Entity p = e.getAttacker();
+
+            if (p instanceof Player) {
+
+                if (p.hasPermission(Worlds.getPermission(world))) {
+                    return;
+                }
+                if (Worlds.isDenyMessageExist(world)) {
+                    p.sendMessage(Worlds.getDenyMessage(world));
+                }
+
+            }
+
+            e.setCancelled(true);
+
+        }
+    }
+
+    // Flag: minecart
+    @EventHandler
+    public void onMinecartDestroyed(VehicleDestroyEvent e) {
+
+        Vehicle vehicle = e.getVehicle();
+
+        if (Hooks.cancel(vehicle)) {
+            return;
+        }
+
+        String world = vehicle.getWorld().getName();
+
+        if (!Flags.minecart.isEnabled(world)) {
+            return;
+        }
+
+        for (String stype : Flags.minecart.getList()) {
+
+            if (vehicle.getType() == EntityType.valueOf(stype)) {
+
+                Entity p = e.getAttacker();
 
                 if (p instanceof Player) {
 
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
+                    if (p.hasPermission(Worlds.getPermission(world))) {
+                        return;
+                    }
 
-
-                        if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
-
-                            if (Worlds.isDenyMessageExist(world)) {
-                                p.sendMessage(Worlds.getDenyMessage(world));
-                            }
-                            e.setCancelled(true);
-
-                        }
-
+                    if (Worlds.isDenyMessageExist(world)) {
+                        p.sendMessage(Worlds.getDenyMessage(world));
                     }
 
                 }
+
+                e.setCancelled(true);
+                break;
             }
 
         }
 
-        // Flag: minecart
-        if (Settings.canExecute(world, "minecart")) {
-
-            if (!Worlds.getFlag(world, "boat")) {
-
-                if (p instanceof Player) {
-
-                    for (String stype : FlagsManager.getFlagsList("boat")) {
-
-                        if (vehicle.getType() == EntityType.valueOf(stype)) {
-
-                            if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                                if (Worlds.isDenyMessageExist(world)) {
-                                    p.sendMessage(Worlds.getDenyMessage(world));
-                                }
-                                e.setCancelled(true);
-
-                            }
-
-                        }
-
-                        break;
-                    }
-                }
-            }
-
-        }
 
     }
 

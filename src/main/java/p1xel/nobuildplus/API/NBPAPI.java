@@ -8,6 +8,22 @@ import java.util.List;
 
 public class NBPAPI {
 
+    private String info;
+    private String version;
+
+    public NBPAPI() {
+        this.info = "This is a testing API at ";
+        this.version = "v0.1";
+    }
+
+    public String getInfo() {
+        return this.info;
+    }
+
+    public String getVersion() {
+        return this.version;
+    }
+
     // Add flag to NoBuildPlus (with no type: option)
     public void addFlag(String flag, String item, int slot, boolean def) {
         if (FlagsManager.yaml.get("flags." + flag + ".enable") == null) {

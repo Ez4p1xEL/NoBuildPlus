@@ -24,6 +24,9 @@ SpigotMC is the most official platform with the latest NoBuildPlus.
 
 Give me feedback on [Discord](https://discord.gg/UJNAGjuyhS) or [Issues](https://github.com/Ez4p1xEL/NoBuildPlus/issues)!
 
+> ### License
+See the [LICENSE](https://github.com/Ez4p1xEL/NoBuildPlus/blob/master/LICENSE) file for license rights and limitations (MIT).
+
 > ### bStats
 ![NoBuildPlus's bStats](https://bstats.org/signatures/bukkit/nobuildplus.svg)
 

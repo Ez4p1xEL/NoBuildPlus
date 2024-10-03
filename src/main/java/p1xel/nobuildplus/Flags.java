@@ -64,7 +64,8 @@ public enum Flags {
     hook(true, "FISHING_ROD", 40, null, null),
     crystal(true, "END_CRYSTAL", 41, null, null),
     flower_pot(true, "FLOWER_POT", 42, null, null),
-    books_interact(true, "CHISELED_BOOKSHELF", 43, null, null);
+    books_interact(true, "CHISELED_BOOKSHELF", 43, null, null),
+    hunger(true, "COOKED_CHICKEN", 10, null, null);
 
     private boolean enabled;
     private String show_item;

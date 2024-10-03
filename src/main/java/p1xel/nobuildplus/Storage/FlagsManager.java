@@ -22,7 +22,6 @@ public class FlagsManager {
         }
         
         upload(file);
-        defaultFlagList();
     }
 
     public static void upload(File flags) {

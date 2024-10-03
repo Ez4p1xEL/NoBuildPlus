@@ -1,6 +1,6 @@
 name: NoBuildPlus
 main: p1xel.nobuildplus.NoBuildPlus
-version: 1.4.3
+version: 1.4.4
 api-version: 1.13
 commands:
   nobuildplus:

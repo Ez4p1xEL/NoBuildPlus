@@ -110,6 +110,7 @@ gui:
     crystal: 'Ender crystal interacting'
     flower-pot: 'Flower pot interacting'
     books-interact: 'Chiseled bookshelf interacting'
+    hunger: 'Player being hungry'
 
 true: '&aALLOW'
 false: '&cPREVENT'

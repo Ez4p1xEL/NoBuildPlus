@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
@@ -1128,6 +1129,29 @@ public class NoBuildPlusPlayerListener implements Listener {
         if (Worlds.isDenyMessageExist(world)) {
             p.sendMessage(Worlds.getDenyMessage(world));
         }
+        e.setCancelled(true);
+
+    }
+
+    // Flag: hunger
+    @EventHandler
+    public void onHungerLost(FoodLevelChangeEvent e) {
+
+        Player p = (Player) e.getEntity();
+
+        if (Hooks.cancel(p)) {
+            return;
+        }
+
+        String world = p.getWorld().getName();
+        if (!Flags.hunger.isEnabled(world)) {
+            return;
+        }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
         e.setCancelled(true);
 
     }

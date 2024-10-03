@@ -58,12 +58,31 @@ public class GUIManager implements Listener {
 
             }
 
-            // If it is page2
+            // If it is page2+
             if (slot == 45) {
                 if (item == null) {
                     e.setCancelled(true);
                     return;
                 }
+
+                NamespacedKey key = new NamespacedKey(NoBuildPlus.getInstance(), "page");
+                ItemStack nb = inventory.getItem(8);
+                if (nb != null) {
+                    String page = nb.getItemMeta().getPersistentDataContainer().get(key, PersistentDataType.STRING);
+                    // If the current page is 3
+                    // Back to page 2
+                    if (page != null && page.equalsIgnoreCase("3")) {
+
+                        p.openInventory(GUIManager.instance.getGUI(world + "_page2"));
+                        e.setCancelled(true);
+                        return;
+
+                    }
+
+                }
+
+                // If current page is 2
+                // Back to page 1
 
                 p.openInventory(GUIManager.instance.getGUI(world));
                 e.setCancelled(true);
@@ -71,12 +90,30 @@ public class GUIManager implements Listener {
 
             }
 
-            // Go Next (If it is page1)
+
+            // Go Next (If it is page1+)
             if (slot == 53) {
                 if (item == null) {
                     e.setCancelled(true);
                     return;
                 }
+
+                NamespacedKey key = new NamespacedKey(NoBuildPlus.getInstance(), "page");
+                ItemStack nb = inventory.getItem(8);
+                if ( nb != null) {
+                    String page = nb.getItemMeta().getPersistentDataContainer().get(key, PersistentDataType.STRING);
+                    // If the current page is 2
+                    // Go to page 3
+                    if (page != null && page.equalsIgnoreCase("2")) {
+
+                        p.openInventory(GUIManager.instance.getGUI(world + "_page3"));
+                        e.setCancelled(true);
+                        return;
+
+                    }
+                }
+                // If the current page is 1
+                // Go to page 2
 
                 p.openInventory(GUIManager.instance.getGUI(world+"_page2"));
                 e.setCancelled(true);
@@ -141,6 +178,7 @@ public class GUIManager implements Listener {
         List<String> flags = FlagsManager.getFlags();
         Inventory gui = Bukkit.createInventory(null, 54, Locale.getMessage("gui.title") + " " + world);
         Inventory gui2 = Bukkit.createInventory(null, 54, Locale.getMessage("gui.title") + " " + world);
+        Inventory gui3 = Bukkit.createInventory(null, 54, Locale.getMessage("gui.title") + " " + world);
 
         int a = 1;
 
@@ -218,6 +256,43 @@ public class GUIManager implements Listener {
 
             }
 
+            // Page 3
+
+            if (a > 56 && a <= 84) {
+
+                Material mat = Material.matchMaterial(FlagsManager.getShowedItem(flag).toUpperCase());
+                if (mat == null) {
+                    Bukkit.getLogger().info("[NBP] Could not find show-item for " + flag + "!");
+                    break;
+                }
+                ItemStack item = new ItemStack(mat);
+                ItemMeta meta = item.getItemMeta();
+
+                boolean bool = Worlds.getFlag(world, flag);
+
+                assert meta != null;
+                meta.setDisplayName(Locale.getMessage("gui.display_name").replaceAll("%flag%", flag).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
+                List<String> lores = new ArrayList<>();
+                for (String l : Locale.yaml.getStringList("gui.lore")) {
+
+                    l = Locale.translate(l);
+                    l = l.replaceAll("%flag%", flag);
+                    l = l.replaceAll("%bool%", String.valueOf(bool));
+                    l = l.replaceAll("%description%", Locale.getMessage("gui.description." + flag));
+                    lores.add(l);
+
+                }
+
+                meta.setLore(lores);
+
+                NamespacedKey key = new NamespacedKey(NoBuildPlus.getInstance(), "flag");
+                meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, flag);
+
+                item.setItemMeta(meta);
+                gui3.setItem(slot, item);
+
+            }
+
             a++;
 
         }
@@ -241,6 +316,8 @@ public class GUIManager implements Listener {
         // Set NEXT & PREVIOUS button
         gui.setItem(53, next);
         gui2.setItem(45, previous);
+        gui2.setItem(53, next);
+        gui3.setItem(45, previous);
 
         // Set item to be identified (World)
         ItemStack id = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
@@ -256,13 +333,23 @@ public class GUIManager implements Listener {
         page2Meta.getPersistentDataContainer().set(keypage2, PersistentDataType.STRING, "2");
         page2.setItemMeta(page2Meta);
 
+        // Set item to be identified (Page) For Page 3
+        ItemStack page3 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        ItemMeta page3Meta = page3.getItemMeta();
+        NamespacedKey keypage3 = new NamespacedKey(NoBuildPlus.getInstance(), "page");
+        page3Meta.getPersistentDataContainer().set(keypage3, PersistentDataType.STRING, "3");
+        page3.setItemMeta(page3Meta);
+
         gui.setItem(0, id);
         gui2.setItem(0, id);
         gui2.setItem(8, page2);
+        gui3.setItem(0, id);
+        gui3.setItem(8, page3);
 
 
         guis.putIfAbsent(world, gui);
         guis.putIfAbsent(world+"_page2", gui2);
+        guis.putIfAbsent(world+"_page3", gui3);
 
         if (guis.get(world) != null) {
             guis.replace(world, gui);
@@ -270,6 +357,10 @@ public class GUIManager implements Listener {
 
         if (guis.get(world + "_page2") != null) {
             guis.replace(world+"_page2", gui2);
+        }
+
+        if (guis.get(world + "_page3") != null) {
+            guis.replace(world+"_page3", gui3);
         }
 
     }
@@ -336,12 +427,42 @@ public class GUIManager implements Listener {
             }
         }
 
+        Inventory gui3 = guis.get(world+ "_page3");
+
+        for (ItemStack item : gui3.getContents()) {
+            if (item != null) {
+                ItemMeta meta = item.getItemMeta();
+                if (meta != null) {
+                    NamespacedKey key = new NamespacedKey(NoBuildPlus.getInstance(), "flag");
+                    if (meta.getPersistentDataContainer().has(key, PersistentDataType.STRING) && Objects.equals(meta.getPersistentDataContainer().get(key, PersistentDataType.STRING), flag)) {
+                        meta.setDisplayName(Locale.getMessage("gui.display_name").replaceAll("%flag%", flag).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
+                        List<String> lores = new ArrayList<>();
+                        for (String l : Locale.yaml.getStringList("gui.lore")) {
+
+                            l = Locale.translate(l);
+                            l = l.replaceAll("%flag%", flag);
+                            l = l.replaceAll("%bool%", String.valueOf(bool));
+                            l = l.replaceAll("%description%", Locale.getMessage("gui.description." + flag));
+                            lores.add(l);
+
+                        }
+                        meta.setLore(lores);
+                        item.setItemMeta(meta);
+                        gui3.setItem(FlagsManager.getSlot(flag), item);
+                        guis.replace(world+"_page3", gui3);
+                        return;
+                    }
+                }
+            }
+        }
+
     }
 
     public void removeWorld(String world) {
 
         guis.remove(world);
         guis.remove(world+"_page2");
+        guis.remove(world+"_page3");
 
     }
 

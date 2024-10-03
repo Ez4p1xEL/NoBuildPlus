@@ -483,3 +483,9 @@ flags:
     show-item: CHISELED_BOOKSHELF
     # Slot on GUI
     slot: 43
+  hunger:
+    enable: true
+    # Item material showed on GUI.
+    show-item: COOKED_CHICKEN
+    # Slot on GUI
+    slot: 10

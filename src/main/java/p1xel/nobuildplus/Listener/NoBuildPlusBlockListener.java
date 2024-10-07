@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
+import org.bukkit.event.player.PlayerHarvestBlockEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -29,8 +30,7 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        Player p = e.getPlayer();
-        String world = p.getWorld().getName();
+        String world = block.getWorld().getName();
 
         // Check if the flag listener should continue its work
         // If the flag is not enabled, then it is FALSE
@@ -38,6 +38,8 @@ public class NoBuildPlusBlockListener implements Listener {
         if (!Flags.destroy.isEnabled(world)) {
             return;
         }
+
+        Player p = e.getPlayer();
 
         // Check if the player has permission to bypass that.
         if (p.hasPermission(Worlds.getPermission(world))) {
@@ -78,12 +80,13 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        Player p = e.getPlayer();
-        String world = p.getWorld().getName();
+        String world = block.getWorld().getName();
 
         if (!Flags.build.isEnabled(world)) {
             return;
         }
+
+        Player p = e.getPlayer();
 
         if (p.hasPermission(Worlds.getPermission(world))) {
             return;
@@ -271,6 +274,39 @@ public class NoBuildPlusBlockListener implements Listener {
         }
 
         e.setCancelled(true);
+
+    }
+
+    // Flag: berries
+    @EventHandler
+    public void onHarvest(PlayerHarvestBlockEvent e) {
+
+        Block block = e.getHarvestedBlock();
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+
+        if (!Flags.berries.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        Material harvested = block.getType();
+
+        if (harvested.equals(Material.matchMaterial("CAVE_VINES")) || harvested.equals(Material.matchMaterial("CAVE_VINES_PLANT"))) {
+            if (Worlds.isDenyMessageExist(world)) {
+                p.sendMessage(Worlds.getDenyMessage(world));
+            }
+            e.setCancelled(true);
+        }
 
     }
 

@@ -111,6 +111,7 @@ gui:
     flower-pot: 'Flower pot interacting'
     books-interact: 'Chiseled bookshelf interacting'
     hunger: 'Player being hungry'
+    berries: 'Harvesting Glow Berries'
 
 true: '&aALLOW'
 false: '&cPREVENT'

@@ -239,7 +239,7 @@ public class NoBuildPlus extends JavaPlugin {
     }
     */
 
-//    // API?
+//    // API? (unfinished)
 //    private NBPAPI nbp;
 //    public NBPAPI getNBPAPI() {
 //        return nbp;

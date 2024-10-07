@@ -59,5 +59,6 @@ global-settings:
     flower-pot: true
     books-interact: true
     hunger: true
+    berries: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

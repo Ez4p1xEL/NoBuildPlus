@@ -489,3 +489,9 @@ flags:
     show-item: COOKED_CHICKEN
     # Slot on GUI
     slot: 10
+  berries:
+    enable: true
+    # item material showed on GUI.
+    show-item: GLOW_BERRIES
+    # Slot on GUI
+    slot: 11

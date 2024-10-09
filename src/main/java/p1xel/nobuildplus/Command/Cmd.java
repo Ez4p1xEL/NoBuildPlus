@@ -130,7 +130,7 @@ public class Cmd implements CommandExecutor {
                 if (!Settings.getEnableWorldList().contains(args[1])) {
 
                     Worlds.createWorld(args[1]);
-                    GUIManager.instance.createInventory(args[1]);
+                    GUIManager.instance.createInv(args[1]);
                     sender.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", args[1]));
                     return true;
 
@@ -196,7 +196,7 @@ public class Cmd implements CommandExecutor {
 
                 Player p = (Player) sender;
 
-                p.openInventory(GUIManager.instance.getGUI(name));
+                p.openInventory(GUIManager.instance.getGUI(name+"_page1"));
                 return true;
 
             }

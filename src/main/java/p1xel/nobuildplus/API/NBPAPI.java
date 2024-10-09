@@ -1,5 +1,6 @@
 package p1xel.nobuildplus.API;
 
+import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -94,7 +95,10 @@ public class NBPAPI {
     }
 
     // Get if the flag is able to be executed in the world.
-    public boolean canExecute(String world, String flag) {
-        return Settings.canExecute(world, flag);
+    // TRUE == start to prevent
+    // FALSE == no need to prevent
+    public boolean canExecute(String world, Flags flag) {
+        return flag.isEnabled(world);
     }
+
 }

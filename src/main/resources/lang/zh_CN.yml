@@ -53,6 +53,8 @@ gui:
     - '&a点击切换'
   page_next: '&a下一页'
   page_previous: '&a上一页'
+  world: '&7规则设置菜单'
+  page: '&7规则设置菜单'
   description:
     break: '玩家破坏方块'
     build: '玩家放置方块'

@@ -53,6 +53,8 @@ gui:
     - '&aClick to switch'
   page_next: '&aNext Page'
   page_previous: '&aPrevious Page'
+  world: '&7Flags Setting Menu'
+  page: '&7Flags Setting Menu'
   description:
     break: 'Block destroying'
     build: 'Block place'

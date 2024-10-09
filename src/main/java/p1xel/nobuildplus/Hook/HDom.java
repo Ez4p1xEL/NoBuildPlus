@@ -1,6 +1,9 @@
 package p1xel.nobuildplus.Hook;
 
-import cn.lunadeer.dominion.Cache;
+import cn.lunadeer.dominion.api.Dominion;
+import cn.lunadeer.dominion.api.DominionAPI;
+import cn.lunadeer.dominion.api.dtos.DominionDTO;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -16,8 +19,12 @@ public class HDom {
             return false;
         }
 
-        if (Cache.instance.getDominionByLoc(loc) != null) {
-            return true;
+        try {
+            DominionAPI dominionAPI = Dominion.getInstance();
+            DominionDTO d = dominionAPI.getDominionByLoc(loc);
+            return d != null;
+        } catch (Exception e) {
+            Bukkit.getLogger().info("There is some error");
         }
 
         return false;
@@ -29,8 +36,12 @@ public class HDom {
         }
 
         Location loc = p.getLocation();
-        if (Cache.instance.getDominionByLoc(loc) != null) {
-            return true;
+        try {
+            DominionAPI dominionAPI = Dominion.getInstance();
+            DominionDTO d = dominionAPI.getDominionByLoc(loc);
+            return d != null;
+        } catch (Exception e) {
+            Bukkit.getLogger().info("There is some error");
         }
 
         return false;
@@ -42,8 +53,12 @@ public class HDom {
         }
 
         Location loc = b.getLocation();
-        if (Cache.instance.getDominionByLoc(loc) != null) {
-            return true;
+        try {
+            DominionAPI dominionAPI = Dominion.getInstance();
+            DominionDTO d = dominionAPI.getDominionByLoc(loc);
+            return d != null;
+        } catch (Exception e) {
+            Bukkit.getLogger().info("There is some error");
         }
 
         return false;
@@ -55,8 +70,12 @@ public class HDom {
         }
 
         Location loc = e.getLocation();
-        if (Cache.instance.getDominionByLoc(loc) != null) {
-            return true;
+        try {
+            DominionAPI dominionAPI = Dominion.getInstance();
+            DominionDTO d = dominionAPI.getDominionByLoc(loc);
+            return d != null;
+        } catch (Exception ex) {
+            Bukkit.getLogger().info("There is some error");
         }
 
         return false;

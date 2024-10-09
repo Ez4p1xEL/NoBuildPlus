@@ -98,4 +98,8 @@ public class FlagsManager {
         return yaml.getInt("flags." + flag + ".slot");
     }
 
+    public static int getMaxPage(List<String> flags) {
+        return (int) Math.ceil(((double) flags.size() / 28));
+    }
+
 }

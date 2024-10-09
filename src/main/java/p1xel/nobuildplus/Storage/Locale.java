@@ -7,6 +7,8 @@ import p1xel.nobuildplus.NoBuildPlus;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,8 +22,27 @@ public class Locale {
         List<String> lang = Arrays.asList("en","zh_CN","zh_TW");
         for (String l : lang) {
             File file = new File(NoBuildPlus.getInstance().getDataFolder() + "/lang", l + ".yml");
+            YamlConfiguration exist_file = YamlConfiguration.loadConfiguration(file);
             if (!file.exists()) {
                 NoBuildPlus.getInstance().saveResource("lang/" + l + ".yml", false);
+            } else {
+                InputStreamReader newFile = new InputStreamReader(NoBuildPlus.getInstance().getResource("lang/"+ l +".yml"), StandardCharsets.UTF_8);
+                YamlConfiguration latest_file = YamlConfiguration.loadConfiguration(newFile);
+
+                // Gets all the keys inside the internal file and iterates through all of it's key pairs
+                for (String string : latest_file.getKeys(true)) {
+                    // Checks if the external file contains the key already.
+                    if (!exist_file.contains(string)) {
+                        // If it doesn't contain the key, we set the key based off what was found inside the plugin jar
+                        exist_file.set(string, latest_file.get(string));
+                    }
+                }
+
+                try {
+                    exist_file.save(file);
+                } catch (IOException io) {
+                    io.printStackTrace();
+                }
             }
         }
         

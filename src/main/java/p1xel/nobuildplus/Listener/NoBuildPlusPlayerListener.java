@@ -283,7 +283,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Block block = e.getClickedBlock();
         ItemStack item = e.getItem();
 
-        if (action != Action.RIGHT_CLICK_BLOCK || block == null || item == null || item.getType() != Material.BONE_MEAL) {
+        if (action != Action.RIGHT_CLICK_BLOCK || block == null || item == null || item.getType() != Material.matchMaterial("dye/15") || item.getType() != Material.BONE_MEAL) {
             return;
         }
 
@@ -465,7 +465,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Action action = e.getAction();
         ItemStack item = e.getItem();
 
-        if (!(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) || item == null || item.getType() != Material.SNOWBALL) {
+        if (!(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) || item == null || !(item.getType() == Material.matchMaterial("snowball") || item.getType() == Material.matchMaterial("snow_ball"))) {
             return;
         }
 
@@ -501,7 +501,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         if (!(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)
                 || item == null || !(item.getType() == Material.POTION
-                || item.getType() == Material.SPLASH_POTION)) {
+                || item.getType() == Material.matchMaterial("SPLASH_POTION"))) {
             return;
         }
 

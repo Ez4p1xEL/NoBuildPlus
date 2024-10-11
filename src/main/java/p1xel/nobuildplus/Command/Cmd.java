@@ -133,7 +133,9 @@ public class Cmd implements CommandExecutor {
                 if (!Settings.getEnableWorldList().contains(args[1])) {
 
                     Worlds.createWorld(args[1]);
-                    GUIManager.instance.createInv(args[1]);
+                    if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
+                        GUIManager.instance.createInv(args[1]);
+                    }
                     sender.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", args[1]));
                     return true;
 
@@ -149,7 +151,9 @@ public class Cmd implements CommandExecutor {
                 if (Settings.getEnableWorldList().contains(args[1])) {
 
                     Worlds.removeWorld(args[1]);
-                    GUIManager.instance.removeWorld(args[1]);
+                    if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
+                        GUIManager.instance.removeWorld(args[1]);
+                    }
                     sender.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%", args[1]));
                     return true;
 
@@ -175,6 +179,11 @@ public class Cmd implements CommandExecutor {
 
                 if (!(sender instanceof Player)) {
                     sender.sendMessage(Locale.getMessage("not-player"));
+                    return true;
+                }
+
+                if (NoBuildPlus.getInstance().getBukkitVersion() < 15) {
+                    sender.sendMessage(Locale.getMessage("gui-not-support"));
                     return true;
                 }
 

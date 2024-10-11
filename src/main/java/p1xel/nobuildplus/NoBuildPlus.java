@@ -2,7 +2,6 @@ package p1xel.nobuildplus;
 
 import com.bekvon.bukkit.residence.Residence;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.API.NBPAPI;
@@ -15,8 +14,6 @@ import p1xel.nobuildplus.spigotmc.UpdateChecker;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class NoBuildPlus extends JavaPlugin {

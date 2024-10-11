@@ -98,7 +98,9 @@ public class Worlds {
 
     public static void setFlag(String world, String flag, boolean bool) {
         set(world + ".flags." + flag, bool);
-        GUIManager.instance.updateFlag(world, flag, bool);
+        if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
+            GUIManager.instance.updateFlag(world, flag, bool);
+        }
     }
 
     public static boolean getFlag(String world, String flag) {

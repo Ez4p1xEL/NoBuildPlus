@@ -42,6 +42,7 @@ not-player: '&c你必須為一名玩家'
 tp-success: '&7&l%prefix% &8&l>> &a你傳送至 &9%world% &a的出生點!'
 name-not-allow: '&7&l%prefix% &8&l>> &c該名稱不被允許!'
 wrong-arg: '&7&l%prefix% &8&l>> &c參數錯誤'
+gui-not-support: '&7&l%prefix% &8&l> &c你的伺服器版本並不兼容GUI功能'
 
 gui:
   title: '世界規則 '

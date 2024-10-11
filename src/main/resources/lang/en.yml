@@ -42,6 +42,7 @@ not-player: '&cYou must be a player to do that.'
 tp-success: '&7&l%prefix% &8&l>> &aYou teleport to spawn of &9%world%&a.'
 name-not-allow: '&7&l%prefix% &8&l>> &cThis name is not allowed!'
 wrong-arg: '&7&l%prefix% &8&l>> &cWrong argument!'
+gui-not-support: '&7&l%prefix% &8&l> &cYour server version does not support GUI feature.'
 
 gui:
   title: 'World flags of'

@@ -4,20 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.4.6 Update - Code Optimization">
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPBlockListener_1_17.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPEntityListener_1_13.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPEntityListener_1_9.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPPlayerListener_1_20.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPPlayerListener_1_8.java" afterDir="false" />
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.4.7 Update - Add low version compatibility">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Command/Cmd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Command/Cmd.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusBlockListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusBlockListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusEntityListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusEntityListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPPlayerListener_1_20.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPPlayerListener_1_20.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusPlayerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusPlayerListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728459356182</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="1.4.7 Update - Add low version compatibility">
+      <option name="closed" value="true" />
+      <created>1728634868819</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1728634868819</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +221,7 @@
     <MESSAGE value="1.4.4 Update - new flag &quot;hunger&quot;" />
     <MESSAGE value="1.4.5 Update - new flag &quot;berries&quot;" />
     <MESSAGE value="1.4.6 Update - Code Optimization" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.4.6 Update - Code Optimization" />
+    <MESSAGE value="1.4.7 Update - Add low version compatibility" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.4.7 Update - Add low version compatibility" />
   </component>
 </project>

@@ -384,37 +384,6 @@ public class NoBuildPlusPlayerListener implements Listener {
         }
     }
 
-    // Flag: books(helf) interact
-    @EventHandler
-    public void onBookShelfInteract(PlayerInteractEvent e) {
-        Action action = e.getAction();
-        Block block = e.getClickedBlock();
-
-        if (action != Action.RIGHT_CLICK_BLOCK || block == null || block.getType() != Material.CHISELED_BOOKSHELF) {
-            return;
-        }
-
-        if (Hooks.cancel(block)) {
-            return;
-        }
-
-        String world = block.getWorld().getName();
-        if (!Flags.books_interact.isEnabled(world)) {
-            return;
-        }
-
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
-            return;
-        }
-
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
-
-        e.setCancelled(true);
-    }
-
     // Flag: minecart
     @EventHandler
     public void onMinecartInteract(PlayerInteractEvent e) {

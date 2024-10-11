@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import p1xel.nobuildplus.Listener.GUIManager;
+import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -66,7 +67,9 @@ public class Cmd implements CommandExecutor {
                 Locale.createLocaleFile();
                 Settings.createSettingsFile();
                 Worlds.createWorldsFile();
-                GUIManager.instance.reloadGUIs();
+                if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
+                    GUIManager.instance.reloadGUIs();
+                }
                 sender.sendMessage(Locale.getMessage("reload-success"));
                 return true;
 

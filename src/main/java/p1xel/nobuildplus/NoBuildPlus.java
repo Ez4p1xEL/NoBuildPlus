@@ -103,7 +103,33 @@ public class NoBuildPlus extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoBuildPlusPlayerListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusServerListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusVehicleListener(), this);
-        getServer().getPluginManager().registerEvents(new GUIManager(), this);
+
+        if (getBukkitVersion() >= 9) {
+            getServer().getPluginManager().registerEvents(new NBPEntityListener_1_9(), this);
+            getLogger().info("NBP Player Listener for 1.9+ is registered!");
+        }
+
+        if (getBukkitVersion() < 13) {
+            getServer().getPluginManager().registerEvents(new NBPPlayerListener_1_8(), this);
+            getLogger().info("NBP Player Listener for 1.8-1.12 is registered!");
+        } else {
+            getServer().getPluginManager().registerEvents(new NBPEntityListener_1_13(), this);
+            getLogger().info("NBP Entity Listener for 1.13+ is registered!");
+        }
+
+        if (getBukkitVersion() >= 17) {
+            getServer().getPluginManager().registerEvents(new NBPBlockListener_1_17(), this);
+            getLogger().info("NBP Block Listener for 1.17+ is registered!");
+        }
+
+        if (getBukkitVersion() >= 20) {
+            getServer().getPluginManager().registerEvents(new NBPPlayerListener_1_20(), this);
+            getLogger().info("NBP Player Listener for 1.20+ is registered!");
+        }
+
+        if (getBukkitVersion() >= 15) {
+            getServer().getPluginManager().registerEvents(new GUIManager(), this);
+        }
         getLogger().info("[NBP] LISTENERS LOADED.");
 
         checkHookPlugins();
@@ -137,6 +163,11 @@ public class NoBuildPlus extends JavaPlugin {
             });
         }
 
+    }
+
+    public int getBukkitVersion() {
+        String v = Bukkit.getServer().getBukkitVersion().split("-")[0].split("\\.")[1];
+        return Integer.parseInt(v);
     }
 
     void updateVersion() {
@@ -217,7 +248,9 @@ public class NoBuildPlus extends JavaPlugin {
 
         FlagsManager.defaultFlagList();
         Settings.defaultList();
-        GUIManager.instance.initialization();
+        if (getBukkitVersion() >= 15) {
+            GUIManager.instance.initialization();
+        }
 
     }
 

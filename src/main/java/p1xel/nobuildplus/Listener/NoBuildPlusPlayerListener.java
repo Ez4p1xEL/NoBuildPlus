@@ -6,7 +6,6 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.player.*;
@@ -14,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.FlagsManager;
-import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NoBuildPlusPlayerListener implements Listener {
@@ -882,15 +880,11 @@ public class NoBuildPlusPlayerListener implements Listener {
 
     // Flag: item-pickup
     @EventHandler
-    public void onItemPickUp(EntityPickupItemEvent e) {
+    public void onItemPickUp(PlayerPickupItemEvent e) {
 
-        Entity p = e.getEntity();
+        Player p = e.getPlayer();
 
         if (Hooks.cancel(p)) {
-            return;
-        }
-
-        if (!(p instanceof Player)) {
             return;
         }
 
@@ -1016,35 +1010,6 @@ public class NoBuildPlusPlayerListener implements Listener {
 
     }
 
-    // Flag: sign-edit
-    @EventHandler
-    public void onSignOpen(PlayerSignOpenEvent e) {
-
-        Player p = e.getPlayer();
-
-        if (Hooks.cancel(p)) {
-            return;
-        }
-
-        if (e.getCause() != PlayerSignOpenEvent.Cause.INTERACT) {
-            return;
-        }
-
-        String world = p.getWorld().getName();
-        if (!Flags.sign_edit.isEnabled(world)) {
-            return;
-        }
-
-        if (p.hasPermission(Worlds.getPermission(world))) {
-            return;
-        }
-
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
-        e.setCancelled(true);
-
-    }
 
     // Flag: dye
     @EventHandler

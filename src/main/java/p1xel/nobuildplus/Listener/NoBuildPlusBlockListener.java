@@ -277,37 +277,4 @@ public class NoBuildPlusBlockListener implements Listener {
 
     }
 
-    // Flag: berries
-    @EventHandler
-    public void onHarvest(PlayerHarvestBlockEvent e) {
-
-        Block block = e.getHarvestedBlock();
-
-        if (Hooks.cancel(block)) {
-            return;
-        }
-
-        String world = block.getWorld().getName();
-
-        if (!Flags.berries.isEnabled(world)) {
-            return;
-        }
-
-        Player p = e.getPlayer();
-
-        if (p.hasPermission(Worlds.getPermission(world))) {
-            return;
-        }
-
-        Material harvested = block.getType();
-
-        if (harvested.equals(Material.matchMaterial("CAVE_VINES")) || harvested.equals(Material.matchMaterial("CAVE_VINES_PLANT"))) {
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
-            e.setCancelled(true);
-        }
-
-    }
-
 }

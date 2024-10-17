@@ -115,6 +115,7 @@ gui:
     books-interact: '与雕纹书架互动'
     hunger: '使玩家感受饥饿'
     berries: '采集发光浆果'
+    craft: '玩家合成'
 
 true: '&a允许'
 false: '&c禁止'

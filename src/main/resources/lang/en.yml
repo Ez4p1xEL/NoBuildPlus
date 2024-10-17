@@ -115,6 +115,7 @@ gui:
     books-interact: 'Chiseled bookshelf interacting'
     hunger: 'Player being hungry'
     berries: 'Harvesting Glow Berries'
+    craft: 'Player crafting'
 
 true: '&aALLOW'
 false: '&cPREVENT'

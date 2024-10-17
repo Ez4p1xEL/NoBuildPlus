@@ -115,6 +115,7 @@ gui:
     books-interact: '與浮雕書櫃互動'
     hunger: '使玩家感受飢餓'
     berries: '采集螢光莓'
+    craft: '玩家合成'
 
 true: '&a允許'
 false: '&c禁止'

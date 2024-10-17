@@ -1046,8 +1046,8 @@ public class NoBuildPlusPlayerListener implements Listener {
             if (Flags.craft.getList().contains(e.getRecipe().getResult().getType().toString().toUpperCase())) {
                 Worlds.sendMessage(p, world);
                 e.setCancelled(true);
-                return;
             }
+            return;
         }
 
         Worlds.sendMessage(p,world);

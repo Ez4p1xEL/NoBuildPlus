@@ -30,7 +30,7 @@ type: Release
 
 # 配置文件版本
 # 请勿更改
-Configuration: 1
+Configuration: 4
 
 # 消息显示语言
 # 语言列表: en(英文) zh_CN(简体中文) zh_TW(繁体中文).
@@ -41,7 +41,13 @@ check-update: true
 
 hook:
   Residence: true
+  Dominion: true
   #Oraxen: true
 
 # 设置为 false 如果你想关闭否定消息显示（或直接在worlds.yml删除deny-message项)
 deny-message-enable: true
+
+# 两种发送给玩家的消息类型
+# MESSAGE - 普通消息
+# ACTIONBAR - 物品栏上方的消息 (!! 仅支持1.12及以上!!)
+deny-message-type: ACTIONBAR

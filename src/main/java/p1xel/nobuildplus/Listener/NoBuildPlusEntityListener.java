@@ -47,9 +47,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
             if (p instanceof Player && !(target instanceof Player)) {
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage((Player) p, world);
                 e.setCancelled(true);
                 return;
 
@@ -65,9 +63,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
                 if (Flags.mob_damage.getList().contains(type.toString().toUpperCase())) {
 
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
+                    Worlds.sendMessage((Player) p, world);
                     e.setCancelled(true);
                     return;
 
@@ -149,9 +145,7 @@ public class NoBuildPlusEntityListener implements Listener {
             if (target instanceof GlowItemFrame) {
 
                 if (p instanceof Player) {
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
+                    Worlds.sendMessage((Player) p, world);
                 }
                 e.setCancelled(true);
                 return;
@@ -163,9 +157,7 @@ public class NoBuildPlusEntityListener implements Listener {
         if (target instanceof ItemFrame) {
 
             if (p instanceof Player) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage((Player) p, world);
             }
             e.setCancelled(true);
 
@@ -238,9 +230,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
             if (target instanceof ArmorStand || target.getType() == EntityType.ARMOR_STAND) {
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage((Player) p, world);
                 e.setCancelled(true);
 
             }
@@ -277,9 +267,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (p instanceof Player) {
             if (target.getType() == EntityType.ENDER_CRYSTAL || target instanceof EnderCrystal) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage((Player) p, world);
                 e.setCancelled(true);
             }
         }
@@ -415,9 +403,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
             if (clicked.getType() == EntityType.GLOW_ITEM_FRAME) {
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
                 return;
 
@@ -468,9 +454,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
             EntityType type = clicked.getType();
             if (Flags.ride.getList().contains(type.toString().toUpperCase())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
 
@@ -547,9 +531,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -649,9 +631,7 @@ public class NoBuildPlusEntityListener implements Listener {
         }
         if (FlagsManager.getBoolInFlag("shoot", "include-crossbow")) {
             if (mat == Material.CROSSBOW) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
         }
@@ -771,9 +751,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
             if (block.getType() == Material.OBSIDIAN) {
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
                 return;
             }

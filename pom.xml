@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.4.8</version>
+    <version>1.4.9</version>
 
 
 
@@ -25,6 +25,11 @@
         <repository>
             <id>lunadeer</id>
             <url>https://ssl.lunadeer.cn:14454/repository/maven-snapshots/</url>
+        </repository>
+
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
 
     </repositories>
@@ -104,5 +109,10 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.Slimefun</groupId>
+            <artifactId>Slimefun4</artifactId>
+            <version>RC-37</version>
+        </dependency>
     </dependencies>
 </project>

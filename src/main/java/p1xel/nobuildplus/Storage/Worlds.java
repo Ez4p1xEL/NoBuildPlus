@@ -1,9 +1,14 @@
 package p1xel.nobuildplus.Storage;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import p1xel.nobuildplus.Listener.GUIManager;
 import p1xel.nobuildplus.NoBuildPlus;
 
@@ -63,10 +68,7 @@ public class Worlds {
     }
 
     public static boolean isSpawnLocationSet(String world) {
-        if (yaml.get(world + ".spawn-loc") != null) {
-            return true;
-        }
-        return false;
+        return yaml.get(world + ".spawn-loc") != null;
     }
 
     public static Location getSpawnLocation(String world) {
@@ -120,6 +122,32 @@ public class Worlds {
 
             }
 
+        }
+
+    }
+
+    public static void sendMessage(Player player, String world) {
+
+        if (!Worlds.isDenyMessageExist(world)) {
+            return;
+        }
+
+        String sound = Config.getString("deny-message-sound.name");
+
+        if (Config.getString("deny-message-type").equalsIgnoreCase("ACTIONBAR")) {
+            if (NoBuildPlus.getInstance().getBukkitVersion() < 12) {
+                return;
+            }
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Worlds.getDenyMessage(world)));
+            if (sound != null) {
+                player.playSound(player, Sound.valueOf(sound), 1f, 1f);
+            }
+            return;
+        }
+
+        player.sendMessage(Worlds.getDenyMessage(world));
+        if (sound != null) {
+            player.playSound(player, Sound.valueOf(sound), 1f, 1f);
         }
 
     }

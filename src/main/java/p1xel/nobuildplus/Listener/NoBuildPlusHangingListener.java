@@ -38,9 +38,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
             if (e.getEntity() instanceof GlowItemFrame) {
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
                 return;
 
@@ -119,9 +117,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
             if (type == EntityType.GLOW_ITEM_FRAME) {
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
                 return;
 

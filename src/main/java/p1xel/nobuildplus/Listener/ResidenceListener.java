@@ -24,9 +24,7 @@ public class ResidenceListener implements Listener {
 
                     if (!p.hasPermission(Worlds.getPermission(world))) {
 
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
+                        Worlds.sendMessage(p, world);
                         p.setAllowFlight(false);
 
                     }

@@ -48,9 +48,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
         // If the flag type is ALL, then the listener will prevent all blocks breaking.
         if (Flags.destroy.getType().equalsIgnoreCase("all")) {
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
         }
 
@@ -59,9 +57,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
             Material mat = block.getType();
             if (Flags.destroy.getList().contains(mat.toString().toUpperCase())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
         }
@@ -93,9 +89,7 @@ public class NoBuildPlusBlockListener implements Listener {
         }
 
         if (Flags.build.getType().equalsIgnoreCase("all")) {
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
         }
 
@@ -105,9 +99,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
             if (Flags.build.getList().contains(mat.toString().toUpperCase())) {
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
 

@@ -66,7 +66,8 @@ public enum Flags {
     flower_pot(true, "FLOWER_POT", 42, null, null),
     books_interact(true, "CHISELED_BOOKSHELF", 43, null, null),
     hunger(true, "COOKED_CHICKEN", 10, null, null),
-    berries(true, "GLOW_BERRIES", 11, null, null);
+    berries(true, "GLOW_BERRIES", 11, null, null),
+    craft(true, "CRAFTING_TABLE", 12, "all", Collections.singletonList("DIAMOND_SWORD"));
 
     private boolean enabled;
     private String show_item;

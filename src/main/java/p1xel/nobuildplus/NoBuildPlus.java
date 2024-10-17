@@ -31,9 +31,9 @@ public class NoBuildPlus extends JavaPlugin {
 
     // Will be adjusted
     private void saveOtherConfigs() {
-        File file = new File(this.getDataFolder(), "config_zh_CN.yml");
+        File file = new File(this.getDataFolder(), "lang/config_zh_CN.yml");
         if (!file.exists()) {
-            saveResource("config_zh_CN.yml", false);
+            saveResource("lang/config_zh_CN.yml", false);
         }
     }
 
@@ -79,11 +79,15 @@ public class NoBuildPlus extends JavaPlugin {
 
         updateFlags();
 
-        if (Config.getConfigurationVersion() < 3) {
-            getConfig().set("Configuration", 3);
-            getConfig().set("hook.Dominion", true);
+        if (Config.getConfigurationVersion() < 4) {
+            getConfig().set("Configuration", 4);
+            if (Config.getConfigurationVersion() < 3) {
+                getConfig().set("hook.Dominion", true);
+            }
+            getConfig().set("deny-message-type", "MESSAGE");
+            getConfig().set("deny-message-sound.name", "ENTITY_VILLAGER_NO");
             try {
-                getConfig().save("config.yml");
+                getConfig().save(new File(getDataFolder(), "config.yml"));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -142,8 +146,8 @@ public class NoBuildPlus extends JavaPlugin {
 
         // Text from https://tools.miku.ac/taag/ (Font: Slant)
         getLogger().info("    _   __      ____        _ __    ______  __          ");
-        getLogger().info("   / | / /___  / __ )__  __(_) /___/ / __ \\\\/ /_  _______");
-        getLogger().info("  /  |/ / __ \\\\/ __  / / / / / / __  / /_/ / / / / / ___/");
+        getLogger().info("   / | / /___  / __ )__  __(_) /___/ / __ \\/ /_  _______");
+        getLogger().info("  /  |/ / __ \\/ __  / / / / / / __  / /_/ / / / / / ___/");
         getLogger().info(" / /|  / /_/ / /_/ / /_/ / / / /_/ / ____/ / /_/ (__  ) ");
         getLogger().info("/_/ |_/\\____/_____/\\__,_/_/_/\\__,_/_/   /_/\\__,_/____/  ");
 
@@ -186,14 +190,14 @@ public class NoBuildPlus extends JavaPlugin {
             }
         }
 
-        if (Config.getBool("hook.Oraxen")) {
-            Plugin oraxen = getServer().getPluginManager().getPlugin("Oraxen");
-            if (oraxen != null) {
-                getServer().getPluginManager().enablePlugin(oraxen);
-                getLogger().info("Oraxen is enabled by NoBuildPlus.");
-                getServer().getPluginManager().registerEvents(new OraxenListener(), this);
-            }
-        }
+//        if (Config.getBool("hook.Oraxen")) {
+//            Plugin oraxen = getServer().getPluginManager().getPlugin("Oraxen");
+//            if (oraxen != null) {
+//                getServer().getPluginManager().enablePlugin(oraxen);
+//                getLogger().info("Oraxen is enabled by NoBuildPlus.");
+//                getServer().getPluginManager().registerEvents(new OraxenListener(), this);
+//            }
+//        }
     }
 
     void updateFlags() {

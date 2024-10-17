@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Flags;
@@ -50,9 +51,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (material != null) {
                     Material mat = block.getType();
                     if (mat == material) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
+                        Worlds.sendMessage(p, world);
                         e.setCancelled(true);
                         return;
                     }
@@ -97,9 +96,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (material != null) {
                     Material mat = block.getType();
                     if (mat == material) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
+                        Worlds.sendMessage(p, world);
                         e.setCancelled(true);
                         return;
                     }
@@ -142,9 +139,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (material != null) {
                     Material mat = block.getType();
                     if (mat == material) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
+                        Worlds.sendMessage(p, world);
                         e.setCancelled(true);
                         return;
                     }
@@ -182,9 +177,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
 
         e.setCancelled(true);
 
@@ -223,9 +216,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (material != null) {
                     Material mat = block.getType();
                     if (mat == material) {
-                        if (Worlds.isDenyMessageExist(world)) {
-                            p.sendMessage(Worlds.getDenyMessage(world));
-                        }
+                        Worlds.sendMessage(p, world);
                         e.setCancelled(true);
                         return;
                     }
@@ -265,9 +256,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = block.getType();
             if (Flags.fencegate_interact.getList().contains(mat.toString().toUpperCase())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
 
@@ -301,9 +290,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
 
         e.setCancelled(true);
     }
@@ -337,9 +324,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = item.getType();
             if (Flags.boat.getList().contains(mat.toString().toUpperCase())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
 
@@ -376,9 +361,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         if (mat == Material.FLOWER_POT || mat == Material.LEGACY_FLOWER_POT || mat.name().startsWith("POTTED_")) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
 
         }
@@ -414,9 +397,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = item.getType();
             if (Flags.minecart.getList().contains(mat.toString().toUpperCase())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
 
@@ -451,9 +432,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -485,9 +464,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -520,9 +497,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -553,9 +528,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
 
         e.setCancelled(true);
 
@@ -590,9 +563,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = block.getType();
             if (Flags.container.getList().contains(mat.toString().toUpperCase())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
 
@@ -622,18 +593,14 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         if (e.getRightClicked() instanceof Boat) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
             return;
         }
 
         if (FlagsManager.BoatIsIncludingChestBoat()) {
             if (e.getRightClicked() instanceof ChestBoat) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
         }
@@ -659,9 +626,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -685,9 +650,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -712,18 +675,14 @@ public class NoBuildPlusPlayerListener implements Listener {
         }
 
         if (Flags.command.getType().equalsIgnoreCase("all")) {
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
             return;
         }
 
         if (Flags.command.getType().equalsIgnoreCase("list")) {
             if (Flags.command.getList().contains("/" + e.getMessage())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
         }
@@ -748,9 +707,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -774,9 +731,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -799,9 +754,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -828,9 +781,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Item droppedItem = e.getItemDrop();
 
         if (Flags.drop_item.getType().equalsIgnoreCase("all")) {
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
             return;
         }
@@ -839,9 +790,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = droppedItem.getItemStack().getType();
             if (Flags.drop_item.getList().contains(mat.toString().toUpperCase())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
         }
@@ -869,9 +818,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         Item item = e.getItem();
 
         if (Flags.item_pickup.getType().equalsIgnoreCase("all")) {
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
             return;
         }
@@ -880,9 +827,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = item.getItemStack().getType();
             if (Flags.item_pickup.getList().contains(mat.toString().toUpperCase())) {
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
             }
         }
@@ -911,9 +856,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -939,9 +882,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         if (e.getFrom().getWorld().getName().equalsIgnoreCase(world) || e.getTo().getWorld().getName().equalsIgnoreCase(world)) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
 
         }
@@ -971,9 +912,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         if (mat == Material.POTION || mat == Material.SPLASH_POTION || mat == Material.LINGERING_POTION) {
 
             e.setCancelled(true);
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
 
         }
 
@@ -1000,9 +939,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -1030,9 +967,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -1060,9 +995,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -1086,6 +1019,38 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
+        e.setCancelled(true);
+
+    }
+
+    // Flag: craft
+    @EventHandler
+    public void onCraft(CraftItemEvent e) {
+
+        Player p = (Player) e.getWhoClicked();
+
+        if (Hooks.cancel(p)) {
+            return;
+        }
+
+        String world = p.getWorld().getName();
+        if (!Flags.craft.isEnabled(world)) {
+            return;
+        }
+
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        if (Flags.craft.getType().equalsIgnoreCase("list")) {
+            if (Flags.craft.getList().contains(e.getRecipe().getResult().getType().toString().toUpperCase())) {
+                Worlds.sendMessage(p, world);
+                e.setCancelled(true);
+                return;
+            }
+        }
+
+        Worlds.sendMessage(p,world);
         e.setCancelled(true);
 
     }

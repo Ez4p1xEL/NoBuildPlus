@@ -495,3 +495,9 @@ flags:
     show-item: GLOW_BERRIES
     # Slot on GUI
     slot: 11
+  craft:
+    enable: true
+    # item material showed on GUI.
+    show-item: CRAFTING_TABLE
+    # Slot on GUI
+    slot: 12

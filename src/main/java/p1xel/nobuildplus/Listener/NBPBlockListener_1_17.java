@@ -37,9 +37,7 @@ public class NBPBlockListener_1_17 implements Listener {
         Material harvested = block.getType();
 
         if (harvested.equals(Material.matchMaterial("CAVE_VINES")) || harvested.equals(Material.matchMaterial("CAVE_VINES_PLANT"))) {
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
         }
 

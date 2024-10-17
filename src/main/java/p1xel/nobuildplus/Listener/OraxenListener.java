@@ -10,8 +10,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.Config;
-import p1xel.nobuildplus.Storage.FlagsManager;
-import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class OraxenListener implements Listener {

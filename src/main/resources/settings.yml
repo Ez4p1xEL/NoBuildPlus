@@ -60,5 +60,6 @@ global-settings:
     books-interact: true
     hunger: true
     berries: true
+    craft: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

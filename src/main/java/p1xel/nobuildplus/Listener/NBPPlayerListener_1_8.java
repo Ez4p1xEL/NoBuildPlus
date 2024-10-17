@@ -53,9 +53,7 @@ public class NBPPlayerListener_1_8 implements Listener {
         }
 
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }
@@ -95,9 +93,7 @@ public class NBPPlayerListener_1_8 implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
 
         e.setCancelled(true);
 
@@ -141,9 +137,7 @@ public class NBPPlayerListener_1_8 implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
 
         e.setCancelled(true);
 
@@ -184,9 +178,7 @@ public class NBPPlayerListener_1_8 implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
 
         e.setCancelled(true);
     }

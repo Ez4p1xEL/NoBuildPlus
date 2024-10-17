@@ -42,9 +42,7 @@ public class NBPEntityListener_1_9 implements Listener {
         if (e.isGliding()) {
             if (p.getInventory().getChestplate().getType() == Material.ELYTRA) {
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage(p, world);
                 e.setCancelled(true);
 
             }

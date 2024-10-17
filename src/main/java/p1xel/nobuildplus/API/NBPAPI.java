@@ -33,7 +33,7 @@ public class NBPAPI {
             FlagsManager.yaml.set("flags." + flag + ".slot", slot);
             FlagsManager.defaultFlagList();
         }
-        if (Settings.yaml.get("globa-settings." + flag) == null) {
+        if (Settings.yaml.get("global-settings." + flag) == null) {
             Settings.yaml.set("global-settings." + flag, def);
             Settings.defaultList();
         }
@@ -60,7 +60,7 @@ public class NBPAPI {
             FlagsManager.yaml.set("flags." + flag + ".list", list);
             FlagsManager.defaultFlagList();
         }
-        if (Settings.yaml.get("globa-settings." + flag) == null) {
+        if (Settings.yaml.get("global-settings." + flag) == null) {
             Settings.yaml.set("global-settings." + flag, def);
             Settings.defaultList();
         }

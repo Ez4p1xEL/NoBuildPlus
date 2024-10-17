@@ -40,9 +40,7 @@ public class NoBuildPlusVehicleListener implements Listener {
                     return;
                 }
 
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage((Player)p, world);
 
             }
 
@@ -77,9 +75,7 @@ public class NoBuildPlusVehicleListener implements Listener {
                     if (p.hasPermission(Worlds.getPermission(world))) {
                         return;
                     }
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
+                    Worlds.sendMessage((Player)p, world);
                 }
 
                 e.setCancelled(true);
@@ -116,9 +112,7 @@ public class NoBuildPlusVehicleListener implements Listener {
                 if (p.hasPermission(Worlds.getPermission(world))) {
                     return;
                 }
-                if (Worlds.isDenyMessageExist(world)) {
-                    p.sendMessage(Worlds.getDenyMessage(world));
-                }
+                Worlds.sendMessage((Player)p, world);
 
             }
 
@@ -155,9 +149,7 @@ public class NoBuildPlusVehicleListener implements Listener {
                         return;
                     }
 
-                    if (Worlds.isDenyMessageExist(world)) {
-                        p.sendMessage(Worlds.getDenyMessage(world));
-                    }
+                    Worlds.sendMessage((Player)p, world);
 
                 }
 

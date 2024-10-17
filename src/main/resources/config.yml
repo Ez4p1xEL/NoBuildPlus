@@ -27,7 +27,7 @@ type: Release
 
 # The version of configuration.
 # DO NOT CHANGE THIS!!
-Configuration: 3
+Configuration: 4
 
 # Language of the file.
 # Languages list: en(English) zh_CN(Simplified Chinese) zh_TW(Traditional Chinese).
@@ -44,3 +44,11 @@ hook:
 
 # Set to true if you want to enable deny-message
 deny-message-enable: true
+
+# Two types of message sending to the player
+# MESSAGE - normal message
+# ACTIONBAR - actionbar message (!! Only available at 1.12 and above!!)
+deny-message-type: ACTIONBAR
+deny-message-sound:
+  name: ENTITY_VILLAGER_NO
+

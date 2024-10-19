@@ -48,9 +48,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         if (e.getEntity() instanceof ItemFrame) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
 
         }
@@ -82,9 +80,7 @@ public class NoBuildPlusHangingListener implements Listener {
                 return;
             }
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
         }
         e.setCancelled(true);
     }
@@ -127,9 +123,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         if (type == EntityType.ITEM_FRAME) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
 
         }
@@ -162,9 +156,7 @@ public class NoBuildPlusHangingListener implements Listener {
             return;
         }
 
-        if (Worlds.isDenyMessageExist(world)) {
-            p.sendMessage(Worlds.getDenyMessage(world));
-        }
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }

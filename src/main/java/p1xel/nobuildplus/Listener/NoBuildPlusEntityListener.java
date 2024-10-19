@@ -191,9 +191,6 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (p.getType() == EntityType.PRIMED_TNT || p.getType() == EntityType.MINECART_TNT) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
             e.setCancelled(true);
 
         }
@@ -302,9 +299,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (p instanceof Player && target instanceof Player) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage((Player)p, world);
             e.setCancelled(true);
 
         }
@@ -413,9 +408,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (clicked.getType() == EntityType.ITEM_FRAME) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
 
         }
@@ -492,9 +485,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (clicked.getType() == EntityType.ARMOR_STAND || clicked instanceof ArmorStand) {
 
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
 
         }
@@ -624,9 +615,7 @@ public class NoBuildPlusEntityListener implements Listener {
         Material mat = e.getBow().getType();
 
         if (mat == Material.BOW) {
-            if (Worlds.isDenyMessageExist(world)) {
-                p.sendMessage(Worlds.getDenyMessage(world));
-            }
+            Worlds.sendMessage(p, world);
             e.setCancelled(true);
         }
         if (FlagsManager.getBoolInFlag("shoot", "include-crossbow")) {

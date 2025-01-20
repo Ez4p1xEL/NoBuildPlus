@@ -771,4 +771,29 @@ public class NoBuildPlusEntityListener implements Listener {
         e.setCancelled(true);
 
     }
+
+    // Flag: heal
+    @EventHandler
+    public void onPlayerRegain(EntityRegainHealthEvent e) {
+
+        Entity entity = e.getEntity();
+        if (Hooks.cancel(entity)) {
+            return;
+        }
+
+        if (!(entity instanceof Player)) {
+            return;
+        }
+
+        String world = entity.getWorld().getName();
+
+        if (!Flags.heal.isEnabled(world)) {
+            return;
+        }
+
+        e.setCancelled(true);
+
+
+
+    }
 }

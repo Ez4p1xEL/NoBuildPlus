@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.player.PlayerHarvestBlockEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;

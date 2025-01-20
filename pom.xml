@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.4.9</version>
+    <version>1.5.0</version>
 
 
 
@@ -110,9 +110,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.Slimefun</groupId>
-            <artifactId>Slimefun4</artifactId>
-            <version>RC-37</version>
+            <groupId>nl.aurorion</groupId>
+            <artifactId>blockregan-api</artifactId>
+            <version>3.16.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/BlockRegen-3.16.5.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

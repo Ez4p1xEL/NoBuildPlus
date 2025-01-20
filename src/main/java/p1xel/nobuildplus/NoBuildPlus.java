@@ -46,19 +46,6 @@ public class NoBuildPlus extends JavaPlugin {
         }
     }
 
-    public static boolean isResidenceEnabled() {
-        return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
-    }
-
-    public static boolean isDominionEnabled() {
-        return Bukkit.getServer().getPluginManager().isPluginEnabled("Dominion");
-    }
-
-
-    public static boolean isOraxenEnabled() {
-        return Bukkit.getServer().getPluginManager().isPluginEnabled("Oraxen");
-    }
-
     @Override
     public void onLoad() {
         instance = this;
@@ -253,6 +240,23 @@ public class NoBuildPlus extends JavaPlugin {
             GUIManager.instance.initialization();
         }
 
+    }
+
+    public static boolean isResidenceEnabled() {
+        return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
+    }
+
+    public static boolean isDominionEnabled() {
+        return Bukkit.getServer().getPluginManager().isPluginEnabled("Dominion");
+    }
+
+
+    public static boolean isOraxenEnabled() {
+        return Bukkit.getServer().getPluginManager().isPluginEnabled("Oraxen");
+    }
+
+    public static boolean isBlockRegenEnabled() {
+        return Bukkit.getServer().getPluginManager().isPluginEnabled("BlockRegen");
     }
 
 

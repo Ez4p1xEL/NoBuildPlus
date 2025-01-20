@@ -140,7 +140,7 @@ public class Worlds {
             }
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Worlds.getDenyMessage(world)));
             if (sound != null) {
-                player.playSound(player, Sound.valueOf(sound), 1f, 1f);
+                player.playSound(player.getLocation(), Sound.valueOf(sound), 1f, 1f);
             }
             return;
         }

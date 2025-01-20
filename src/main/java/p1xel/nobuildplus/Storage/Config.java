@@ -42,6 +42,9 @@ public class Config {
     public static boolean isDominionEnabled() {
         return getBool("hook.Dominion");
     }
+    public static boolean isBlockRegenEnabled() {
+        return getBool("hook.BlockRegen");
+    }
 
     public static boolean isOraxenEnabled() { return getBool("hook.Oraxen"); }
 

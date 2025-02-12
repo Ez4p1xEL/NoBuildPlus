@@ -1,6 +1,5 @@
 package p1xel.nobuildplus.Hook;
 
-import cn.lunadeer.dominion.api.Dominion;
 import cn.lunadeer.dominion.api.DominionAPI;
 import cn.lunadeer.dominion.api.dtos.DominionDTO;
 import org.bukkit.Bukkit;
@@ -20,7 +19,7 @@ public class HDom {
         }
 
         try {
-            DominionAPI dominionAPI = Dominion.getInstance();
+            DominionAPI dominionAPI = DominionAPI.getInstance();
             DominionDTO d = dominionAPI.getDominionByLoc(loc);
             return d != null;
         } catch (Exception e) {
@@ -37,7 +36,7 @@ public class HDom {
 
         Location loc = p.getLocation();
         try {
-            DominionAPI dominionAPI = Dominion.getInstance();
+            DominionAPI dominionAPI = DominionAPI.getInstance();
             DominionDTO d = dominionAPI.getDominionByLoc(loc);
             return d != null;
         } catch (Exception e) {
@@ -54,7 +53,7 @@ public class HDom {
 
         Location loc = b.getLocation();
         try {
-            DominionAPI dominionAPI = Dominion.getInstance();
+            DominionAPI dominionAPI = DominionAPI.getInstance();
             DominionDTO d = dominionAPI.getDominionByLoc(loc);
             return d != null;
         } catch (Exception e) {
@@ -71,7 +70,7 @@ public class HDom {
 
         Location loc = e.getLocation();
         try {
-            DominionAPI dominionAPI = Dominion.getInstance();
+            DominionAPI dominionAPI = DominionAPI.getInstance();
             DominionDTO d = dominionAPI.getDominionByLoc(loc);
             return d != null;
         } catch (Exception ex) {

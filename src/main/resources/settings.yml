@@ -62,5 +62,6 @@ global-settings:
     berries: true
     craft: true
     heal: true
+    turtle-egg: false
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

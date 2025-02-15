@@ -75,8 +75,6 @@ flags:
     show-item: BOW
     # Slot on GUI
     slot: 19
-    # set true if your minecraft server version has crossbow.
-    include-crossbow: false
   tnt:
     enable: true
     # Item material showed on GUI.
@@ -507,3 +505,9 @@ flags:
     show-item: GOLDEN_APPLE
     # Slot on GUI
     slot: 13
+  turtle-egg:
+    enable: true
+    # item material showed on GUI.
+    show-item: GOLDEN_APPLE
+    # Slot on GUI
+    slot: 14

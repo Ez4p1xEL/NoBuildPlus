@@ -116,6 +116,8 @@ gui:
     hunger: 'Player being hungry'
     berries: 'Harvesting Glow Berries'
     craft: 'Player crafting'
+    heal: 'Player healing'
+    turtle-egg: 'Turtle egg stepping'
 
 true: '&aALLOW'
 false: '&cPREVENT'

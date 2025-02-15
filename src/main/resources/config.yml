@@ -40,7 +40,6 @@ check-update: true
 hook:
   Residence: true
   Dominion: true
-  BlockRegen: true
 
 # Set to true if you want to enable deny-message
 deny-message-enable: true

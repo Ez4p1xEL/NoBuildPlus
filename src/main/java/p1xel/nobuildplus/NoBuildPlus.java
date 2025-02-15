@@ -105,6 +105,12 @@ public class NoBuildPlus extends JavaPlugin {
             getLogger().info("NBP Entity Listener for 1.13+ is registered!");
         }
 
+        if (getBukkitVersion() > 15) {
+            getLogger().info("In-game menu is enabled at 1.16+.");
+        } else {
+            getLogger().info("The version of your server does not support in-game menu.");
+        }
+
         if (getBukkitVersion() >= 17) {
             getServer().getPluginManager().registerEvents(new NBPBlockListener_1_17(), this);
             getLogger().info("NBP Block Listener for 1.17+ is registered!");

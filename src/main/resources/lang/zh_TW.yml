@@ -116,6 +116,8 @@ gui:
     hunger: '使玩家感受飢餓'
     berries: '采集螢光莓'
     craft: '玩家合成'
+    heal: '玩家治療'
+    turtle-egg: '海龜蛋踩踏'
 
 true: '&a允許'
 false: '&c禁止'

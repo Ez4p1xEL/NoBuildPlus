@@ -116,6 +116,8 @@ gui:
     hunger: '使玩家感受饥饿'
     berries: '采集发光浆果'
     craft: '玩家合成'
+    heal: '玩家治疗'
+    turtle-egg: '海龟蛋踩踏'
 
 true: '&a允许'
 false: '&c禁止'

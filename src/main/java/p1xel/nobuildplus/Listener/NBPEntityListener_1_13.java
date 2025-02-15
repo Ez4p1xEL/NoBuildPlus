@@ -1,10 +1,14 @@
 package p1xel.nobuildplus.Listener;
 
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPlaceEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.FlagsManager;
@@ -177,6 +181,38 @@ public class NBPEntityListener_1_13 implements Listener {
 
         Player p = (Player) entity;
 
+        if (p.hasPermission(Worlds.getPermission(world))) {
+            return;
+        }
+
+        Worlds.sendMessage(p, world);
+
+        e.setCancelled(true);
+
+    }
+
+    // Flag: turtle-egg
+    @EventHandler
+    public void onTurtleEggInteract(PlayerInteractEvent e) {
+
+        Action action = e.getAction();
+        Block block = e.getClickedBlock();
+
+        if (action != Action.PHYSICAL || block == null
+                || block.getType() != Material.matchMaterial("TURTLE_EGG")) {
+            return;
+        }
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+        if (!Flags.turtle_egg.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
         if (p.hasPermission(Worlds.getPermission(world))) {
             return;
         }

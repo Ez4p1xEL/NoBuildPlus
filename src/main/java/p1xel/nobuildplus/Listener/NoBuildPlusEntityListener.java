@@ -613,16 +613,11 @@ public class NoBuildPlusEntityListener implements Listener {
         }
 
         Material mat = e.getBow().getType();
+        Material crossbow = Material.matchMaterial("CROSSBOW");
 
-        if (mat == Material.BOW) {
+        if (mat == Material.BOW || (crossbow != null && mat == crossbow)) {
             Worlds.sendMessage(p, world);
             e.setCancelled(true);
-        }
-        if (FlagsManager.getBoolInFlag("shoot", "include-crossbow")) {
-            if (mat == Material.CROSSBOW) {
-                Worlds.sendMessage(p, world);
-                e.setCancelled(true);
-            }
         }
     }
 

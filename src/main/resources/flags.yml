@@ -508,6 +508,14 @@ flags:
   turtle-egg:
     enable: true
     # item material showed on GUI.
-    show-item: GOLDEN_APPLE
+    show-item: TURTLE_EGG
     # Slot on GUI
     slot: 14
+  lightning:
+    enable: true
+    # item material showed on GUI.
+    show-item: LIGHTNING_ROD
+    # Slot on GUI
+    slot: 15
+    # Set to true if you prefer lightning existing without taking damage from entities.
+    lightning-only: false

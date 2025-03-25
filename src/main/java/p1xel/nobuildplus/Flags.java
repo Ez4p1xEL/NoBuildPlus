@@ -69,7 +69,8 @@ public enum Flags {
     berries(true, "GLOW_BERRIES", 11, null, null),
     craft(true, "CRAFTING_TABLE", 12, "all", Collections.singletonList("DIAMOND_SWORD")),
     heal(true, "GOLDEN_APPLE", 13, null, null),
-    turtle_egg(true, "TURTLE_EGG", 14, null, null);
+    turtle_egg(true, "TURTLE_EGG", 14, null, null),
+    lightning(true, "LIGHTNING_ROD", 15, null, null);
 
     private boolean enabled;
     private String show_item;

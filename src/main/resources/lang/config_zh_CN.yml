@@ -44,7 +44,6 @@ check-update: true
 hook:
   Residence: true
   Dominion: true
-  #Oraxen: true
 
 # 设置为 false 如果你想关闭否定消息显示（或直接在worlds.yml删除deny-message项)
 deny-message-enable: true

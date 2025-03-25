@@ -2,16 +2,14 @@ package p1xel.nobuildplus.Storage;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import p1xel.nobuildplus.Listener.GUIManager;
 import p1xel.nobuildplus.NoBuildPlus;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 
@@ -71,8 +69,26 @@ public class Worlds {
         return yaml.get(world + ".spawn-loc") != null;
     }
 
-    public static Location getSpawnLocation(String world) {
-        return (Location) yaml.get(world + ".spawn-loc");
+    // This is for voidtp or other flag that getting location from the worlds.yml
+    @Nullable
+    public static Location getSpawnLocation(String w) {
+
+        World world;
+        double x,y,z;
+        float pitch,yaw;
+
+        try {
+            world = Bukkit.getWorld(yaml.getString(w + ".spawn-loc.world"));
+            x = yaml.getDouble(w + ".spawn-loc.x");
+            y = yaml.getDouble(w + ".spawn-loc.y");
+            z = yaml.getDouble(w + ".spawn-loc.z");
+            yaw = (Float) yaml.get(w + ".spawn-loc.yaw");
+            pitch = (Float) yaml.get(w + ".spawn-loc.pitch");
+        } catch (NullPointerException e) {
+            return null;
+        }
+
+        return new Location(world,x,y,z,yaw,pitch);
     }
 
     public static void setSpawnLocation(String world, Location loc) {
@@ -151,6 +167,8 @@ public class Worlds {
         }
 
     }
+
+
 
 
 

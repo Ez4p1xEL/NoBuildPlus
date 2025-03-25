@@ -17,6 +17,8 @@ public class Locale {
     public static File file;
     public static FileConfiguration yaml;
 
+
+
     public static void createLocaleFile() {
 
         List<String> lang = Arrays.asList("en","zh_CN","zh_TW");

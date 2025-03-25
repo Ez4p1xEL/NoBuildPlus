@@ -102,4 +102,5 @@ public class FlagsManager {
         return (int) Math.ceil(((double) flags.size() / 28));
     }
 
+
 }

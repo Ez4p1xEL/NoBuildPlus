@@ -6,10 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.HRes;
 import p1xel.nobuildplus.Hook.Hooks;
-import p1xel.nobuildplus.Storage.FlagsManager;
-import p1xel.nobuildplus.Storage.Settings;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NoBuildPlusVehicleListener implements Listener {

@@ -1,5 +1,6 @@
 package p1xel.nobuildplus.Listener;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.*;
@@ -7,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.weather.LightningStrikeEvent;
 import org.bukkit.event.world.PortalCreateEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;
@@ -788,7 +790,30 @@ public class NoBuildPlusEntityListener implements Listener {
 
         e.setCancelled(true);
 
+    }
 
+    // Flag: lightning
+    @EventHandler
+    public void onLightning(LightningStrikeEvent e) {
+
+        LightningStrike lightning = e.getLightning();
+        Location loc = lightning.getLocation();
+
+        if (Hooks.cancel(loc)) {
+            return;
+        }
+
+        String world = loc.getWorld().getName();
+
+        if (!Flags.lightning.isEnabled(world)) {
+            return;
+        }
+
+        if (FlagsManager.getBoolInFlag("lightning", "lightning-only")) {
+            lightning.setFireTicks(0);
+        } else {
+            e.setCancelled(true);
+        }
 
     }
 }

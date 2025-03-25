@@ -6,8 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.event.player.PlayerHarvestBlockEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;
 import p1xel.nobuildplus.Storage.Worlds;
@@ -263,6 +261,26 @@ public class NoBuildPlusBlockListener implements Listener {
         String world = block.getWorld().getName();
 
         if (!Flags.piston.isEnabled(world)) {
+            return;
+        }
+
+        e.setCancelled(true);
+
+    }
+
+    // Flag: fire spawn (block igniting)
+    @EventHandler
+    public void onIgnite(BlockIgniteEvent e) {
+
+        Block block = e.getIgnitingBlock();
+
+        if (Hooks.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+
+        if (!Flags.fire_spawn.isEnabled(world)) {
             return;
         }
 

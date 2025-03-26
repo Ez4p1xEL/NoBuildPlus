@@ -7,7 +7,7 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;
-import p1xel.nobuildplus.Storage.FlagsManager;
+import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NoBuildPlusHangingListener implements Listener {
@@ -34,7 +34,7 @@ public class NoBuildPlusHangingListener implements Listener {
         }
 
 
-        if (FlagsManager.FrameIsIncludingGlowFrame()) {
+        if (v >= 17) {
 
             if (e.getEntity() instanceof GlowItemFrame) {
 
@@ -85,6 +85,8 @@ public class NoBuildPlusHangingListener implements Listener {
         e.setCancelled(true);
     }
 
+    int v = NoBuildPlus.getInstance().getBukkitVersion();
+
     // Flag: frame (being placed)
     @EventHandler
     public void onFramePlaced(HangingPlaceEvent e) {
@@ -109,7 +111,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         EntityType type = entity.getType();
 
-        if (FlagsManager.FrameIsIncludingGlowFrame()) {
+        if (v >= 17) {
 
             if (type == EntityType.GLOW_ITEM_FRAME) {
 

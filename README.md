@@ -4,7 +4,7 @@ you are able to manage the world easily
 - Simple configuration to manage the certain worlds
 - Available to change the managed items, blocks or mobs for the flag
 - Able to change the boolean of different flags in global settings file
-- Permissions and deny message are able to adjusted or removed for each world
+- Permissions and deny message are able to be adjusted or removed for each world
 - GUI in game supported! More convenient way to enjoy the plugin
 - Description of flags on [Wiki](https://github.com/Ez4p1xEL/NoBuildPlus/wiki).
 

@@ -93,8 +93,6 @@ flags:
     show-item: ITEM_FRAME
     # Slot on GUI
     slot: 22
-    # 1.17+
-    include-glow-frame: false
   bed:
     enable: true
     # Item material showed on GUI.
@@ -211,7 +209,6 @@ flags:
       - 'ACACIA_CHEST_BOAT'
       - 'DARK_OAK_CHEST_BOAT'
       - 'MANGROVE_CHEST_BOAT'
-    chestBoatEnable: false
   button:
     enable: true
     # Item material showed on GUI.

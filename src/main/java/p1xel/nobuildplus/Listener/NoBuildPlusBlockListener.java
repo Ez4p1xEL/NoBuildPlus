@@ -272,7 +272,7 @@ public class NoBuildPlusBlockListener implements Listener {
     @EventHandler
     public void onIgnite(BlockIgniteEvent e) {
 
-        Block block = e.getIgnitingBlock();
+        Block block = e.getBlock();
 
         if (Hooks.cancel(block)) {
             return;

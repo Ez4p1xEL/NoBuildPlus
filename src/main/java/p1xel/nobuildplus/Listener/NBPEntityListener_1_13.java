@@ -11,10 +11,13 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NBPEntityListener_1_13 implements Listener {
+
+    int v = NoBuildPlus.getInstance().getBukkitVersion();
 
     // Flag: armor stand (being created)
     @EventHandler
@@ -131,7 +134,7 @@ public class NBPEntityListener_1_13 implements Listener {
             return;
         }
 
-        if (FlagsManager.BoatIsIncludingChestBoat()) {
+        if (v >= 19) {
             if (entity instanceof ChestBoat) {
 
                 Player p = e.getPlayer();

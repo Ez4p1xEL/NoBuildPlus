@@ -92,7 +92,12 @@ public class Worlds {
     }
 
     public static void setSpawnLocation(String world, Location loc) {
-        set(world + ".spawn-loc", loc);
+        set(world + ".spawn-loc.world", loc.getWorld().getName());
+        set(world + ".spawn-loc.x", loc.getX());
+        set(world + ".spawn-loc.y", loc.getY());
+        set(world + ".spawn-loc.z", loc.getZ());
+        set(world + ".spawn-loc.pitch", loc.getPitch());
+        set(world + ".spawn-loc.yaw", loc.getYaw());
     }
 
     public static void createWorld(String world) {

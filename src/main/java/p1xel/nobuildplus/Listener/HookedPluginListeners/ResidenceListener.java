@@ -1,4 +1,4 @@
-package p1xel.nobuildplus.Listener;
+package p1xel.nobuildplus.Listener.HookedPluginListeners;
 
 import com.bekvon.bukkit.residence.event.ResidenceChangedEvent;
 import org.bukkit.entity.Player;
@@ -34,5 +34,7 @@ public class ResidenceListener implements Listener {
         }
 
     }
+
+
 
 }

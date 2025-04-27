@@ -10,6 +10,7 @@ import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.Config;
 
 public class HRes {
+    
 
     public static Residence get() {
         return NoBuildPlus.getRes();

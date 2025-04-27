@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NoBuildPlus-1.4.2">
+    <output-path>$PROJECT_DIR$/artifacts/NoBuildPlus_1_4_2</output-path>
+    <root id="archive" name="NoBuildPlus-1.4.2.jar">
+      <element id="module-output" name="NoBuildPlus" />
+    </root>
+  </artifact>
+</component>

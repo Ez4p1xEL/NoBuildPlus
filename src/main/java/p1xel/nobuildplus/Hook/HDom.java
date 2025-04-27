@@ -1,6 +1,5 @@
 package p1xel.nobuildplus.Hook;
 
-import cn.lunadeer.dominion.api.DominionAPI;
 import cn.lunadeer.dominion.api.dtos.DominionDTO;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -19,8 +18,7 @@ public class HDom {
         }
 
         try {
-            DominionAPI dominionAPI = DominionAPI.getInstance();
-            DominionDTO d = dominionAPI.getDominionByLoc(loc);
+            DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
             return d != null;
         } catch (Exception e) {
             Bukkit.getLogger().info("There is some error");
@@ -36,8 +34,7 @@ public class HDom {
 
         Location loc = p.getLocation();
         try {
-            DominionAPI dominionAPI = DominionAPI.getInstance();
-            DominionDTO d = dominionAPI.getDominionByLoc(loc);
+            DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
             return d != null;
         } catch (Exception e) {
             Bukkit.getLogger().info("There is some error");
@@ -53,8 +50,7 @@ public class HDom {
 
         Location loc = b.getLocation();
         try {
-            DominionAPI dominionAPI = DominionAPI.getInstance();
-            DominionDTO d = dominionAPI.getDominionByLoc(loc);
+            DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
             return d != null;
         } catch (Exception e) {
             Bukkit.getLogger().info("There is some error");
@@ -70,8 +66,7 @@ public class HDom {
 
         Location loc = e.getLocation();
         try {
-            DominionAPI dominionAPI = DominionAPI.getInstance();
-            DominionDTO d = dominionAPI.getDominionByLoc(loc);
+            DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
             return d != null;
         } catch (Exception ex) {
             Bukkit.getLogger().info("There is some error");

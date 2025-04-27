@@ -1,5 +1,6 @@
 package p1xel.nobuildplus;
 
+import cn.lunadeer.dominion.api.DominionAPI;
 import com.bekvon.bukkit.residence.Residence;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -8,6 +9,8 @@ import p1xel.nobuildplus.API.NBPAPI;
 import p1xel.nobuildplus.Command.Cmd;
 import p1xel.nobuildplus.Command.TabList;
 import p1xel.nobuildplus.Listener.*;
+import p1xel.nobuildplus.Listener.HookedPluginListeners.DominionListener;
+import p1xel.nobuildplus.Listener.HookedPluginListeners.ResidenceListener;
 import p1xel.nobuildplus.Storage.*;
 import p1xel.nobuildplus.bStats.Metrics;
 import p1xel.nobuildplus.spigotmc.UpdateChecker;
@@ -183,6 +186,22 @@ public class NoBuildPlus extends JavaPlugin {
             }
         }
 
+        if (Config.getBool("hook.Dominion")) {
+            Plugin dom = getServer().getPluginManager().getPlugin("Dominion");
+            if (dom != null) {
+                if (!dom.isEnabled()) {
+                    getServer().getPluginManager().enablePlugin(dom);
+                    getLogger().info("Dominion is enabled by NoBuildPlus.");
+                }
+                try {
+                    dominionAPI = DominionAPI.getInstance();
+                } catch (Exception e) {
+                    getLogger().info("Dominion function loading failure.");
+                }
+                getServer().getPluginManager().registerEvents(new DominionListener(), this);
+            }
+        }
+
 //        if (Config.getBool("hook.Oraxen")) {
 //            Plugin oraxen = getServer().getPluginManager().getPlugin("Oraxen");
 //            if (oraxen != null) {
@@ -265,6 +284,8 @@ public class NoBuildPlus extends JavaPlugin {
         return Bukkit.getServer().getPluginManager().isPluginEnabled("BlockRegen");
     }
 
+    private static DominionAPI dominionAPI;
+    public static DominionAPI getDominionAPI() { return dominionAPI;}
 
     // bruh
 

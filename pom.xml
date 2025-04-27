@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.5.4</version>
+    <version>1.5.5</version>
 
     <properties>
         <java.version>21</java.version>
@@ -85,8 +85,7 @@
         <dependency>
             <groupId>cn.lunadeer</groupId>
             <artifactId>DominionAPI</artifactId>
-            <version>3.5</version>
-            <scope>provided</scope>
+            <version>4.3</version>
         </dependency>
     </dependencies>
 </project>

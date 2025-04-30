@@ -8,6 +8,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.API.NBPAPI;
 import p1xel.nobuildplus.Command.Cmd;
 import p1xel.nobuildplus.Command.TabList;
+import p1xel.nobuildplus.Hook.HDom;
+import p1xel.nobuildplus.Hook.HRes;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Listener.*;
 import p1xel.nobuildplus.Listener.HookedPluginListeners.DominionListener;
 import p1xel.nobuildplus.Listener.HookedPluginListeners.ResidenceListener;
@@ -183,6 +186,7 @@ public class NoBuildPlus extends JavaPlugin {
                     getLogger().info("Residence is enabled by NoBuildPlus.");
                 }
                 getServer().getPluginManager().registerEvents(new ResidenceListener(), this);
+                HookedPlugins.addHookPlugin(new HRes());
             }
         }
 
@@ -199,6 +203,7 @@ public class NoBuildPlus extends JavaPlugin {
                     getLogger().info("Dominion function loading failure.");
                 }
                 getServer().getPluginManager().registerEvents(new DominionListener(), this);
+                HookedPlugins.addHookPlugin(new HDom());
             }
         }
 
@@ -210,6 +215,7 @@ public class NoBuildPlus extends JavaPlugin {
 //                getServer().getPluginManager().registerEvents(new OraxenListener(), this);
 //            }
 //        }
+
     }
 
     void updateFlags() {

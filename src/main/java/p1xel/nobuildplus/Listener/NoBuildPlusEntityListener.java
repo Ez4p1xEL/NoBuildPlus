@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.weather.LightningStrikeEvent;
 import org.bukkit.event.world.PortalCreateEvent;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Worlds;
 
@@ -27,11 +27,11 @@ public class NoBuildPlusEntityListener implements Listener {
         Entity p = e.getDamager();
         Entity target = e.getEntity();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
-        if (Hooks.cancel(target)) {
+        if (HookedPlugins.cancel(target)) {
             return;
         }
 
@@ -120,13 +120,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity p = e.getDamager();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity target = e.getEntity();
 
-        if (Hooks.cancel(target)) {
+        if (HookedPlugins.cancel(target)) {
             return;
         }
 
@@ -175,13 +175,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity p = e.getDamager();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity target = e.getEntity();
 
-        if (Hooks.cancel(target)) {
+        if (HookedPlugins.cancel(target)) {
             return;
         }
 
@@ -204,13 +204,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity p = e.getDamager();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity target = e.getEntity();
 
-        if (Hooks.cancel(target)) {
+        if (HookedPlugins.cancel(target)) {
             return;
         }
 
@@ -244,13 +244,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity p = e.getDamager();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity target = e.getEntity();
 
-        if (Hooks.cancel(target)) {
+        if (HookedPlugins.cancel(target)) {
             return;
         }
 
@@ -279,13 +279,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity p = e.getDamager();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity target = e.getEntity();
 
-        if (Hooks.cancel(target)) {
+        if (HookedPlugins.cancel(target)) {
             return;
         }
 
@@ -313,7 +313,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -351,7 +351,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -375,13 +375,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity clicked = e.getRightClicked();
 
-        if (Hooks.cancel(clicked)) {
+        if (HookedPlugins.cancel(clicked)) {
             return;
         }
 
@@ -425,13 +425,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity clicked = e.getRightClicked();
 
-        if (Hooks.cancel(clicked)) {
+        if (HookedPlugins.cancel(clicked)) {
             return;
         }
 
@@ -464,13 +464,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity clicked = e.getRightClicked();
 
-        if (Hooks.cancel(clicked)) {
+        if (HookedPlugins.cancel(clicked)) {
             return;
         }
 
@@ -500,13 +500,13 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
         Entity clicked = e.getRightClicked();
 
-        if (Hooks.cancel(clicked)) {
+        if (HookedPlugins.cancel(clicked)) {
             return;
         }
 
@@ -536,7 +536,7 @@ public class NoBuildPlusEntityListener implements Listener {
         Entity entity = e.getEntity();
 
         if (entity instanceof Player) {
-            if (Hooks.cancel(entity)) {
+            if (HookedPlugins.cancel(entity)) {
                 return;
             }
         }
@@ -567,7 +567,7 @@ public class NoBuildPlusEntityListener implements Listener {
         Entity entity = e.getEntity();
 
         if (entity instanceof Player) {
-            if (Hooks.cancel(entity)) {
+            if (HookedPlugins.cancel(entity)) {
                 return;
             }
         }
@@ -598,7 +598,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -629,7 +629,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -655,7 +655,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -681,7 +681,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -715,7 +715,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -751,7 +751,7 @@ public class NoBuildPlusEntityListener implements Listener {
     public void onProjectileHit(ProjectileHitEvent e) {
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -774,7 +774,7 @@ public class NoBuildPlusEntityListener implements Listener {
     public void onPlayerRegain(EntityRegainHealthEvent e) {
 
         Entity entity = e.getEntity();
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -799,7 +799,7 @@ public class NoBuildPlusEntityListener implements Listener {
         LightningStrike lightning = e.getLightning();
         Location loc = lightning.getLocation();
 
-        if (Hooks.cancel(loc)) {
+        if (HookedPlugins.cancel(loc)) {
             return;
         }
 

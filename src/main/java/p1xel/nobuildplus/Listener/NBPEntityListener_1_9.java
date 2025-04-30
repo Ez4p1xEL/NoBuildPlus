@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NBPEntityListener_1_9 implements Listener {
@@ -22,7 +22,7 @@ public class NBPEntityListener_1_9 implements Listener {
             return;
         }
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 

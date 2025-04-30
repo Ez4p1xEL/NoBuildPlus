@@ -10,9 +10,8 @@ import org.bukkit.event.entity.EntityPlaceEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.NoBuildPlus;
-import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NBPEntityListener_1_13 implements Listener {
@@ -25,7 +24,7 @@ public class NBPEntityListener_1_13 implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -59,7 +58,7 @@ public class NBPEntityListener_1_13 implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -92,7 +91,7 @@ public class NBPEntityListener_1_13 implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -124,7 +123,7 @@ public class NBPEntityListener_1_13 implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -172,7 +171,7 @@ public class NBPEntityListener_1_13 implements Listener {
             return;
         }
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -206,7 +205,7 @@ public class NBPEntityListener_1_13 implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 

@@ -9,7 +9,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.Worlds;
 
@@ -25,7 +25,7 @@ public class NBPPlayerListener_1_8 implements Listener {
             return;
         }
 
-        if (Hooks.cancel(b)) {
+        if (HookedPlugins.cancel(b)) {
             return;
         }
 
@@ -66,7 +66,7 @@ public class NBPPlayerListener_1_8 implements Listener {
             return;
         }
 
-        if (Hooks.cancel(b)) {
+        if (HookedPlugins.cancel(b)) {
             return;
         }
 
@@ -110,7 +110,7 @@ public class NBPPlayerListener_1_8 implements Listener {
             return;
         }
 
-        if (Hooks.cancel(b)) {
+        if (HookedPlugins.cancel(b)) {
             return;
         }
 
@@ -151,7 +151,7 @@ public class NBPPlayerListener_1_8 implements Listener {
             return;
         }
 
-        if (Hooks.cancel(b)) {
+        if (HookedPlugins.cancel(b)) {
             return;
         }
 

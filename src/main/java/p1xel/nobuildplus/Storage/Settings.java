@@ -47,6 +47,7 @@ public class Settings {
 
     // 初始化
     public static void defaultList() {
+        list.clear();
         list.addAll(Worlds.yaml.getKeys(false));
     }
 

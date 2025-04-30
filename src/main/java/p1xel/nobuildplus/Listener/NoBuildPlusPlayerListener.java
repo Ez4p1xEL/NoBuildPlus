@@ -12,7 +12,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Storage.FlagsManager;
 import p1xel.nobuildplus.Storage.Worlds;
 
@@ -30,7 +30,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -75,7 +75,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -118,7 +118,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -163,7 +163,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -194,7 +194,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -238,7 +238,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -276,7 +276,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -306,7 +306,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -343,7 +343,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -379,7 +379,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -418,7 +418,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -450,7 +450,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -484,7 +484,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -514,7 +514,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -545,7 +545,7 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -578,7 +578,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -613,7 +613,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -637,7 +637,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -661,7 +661,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -694,7 +694,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -718,7 +718,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -741,7 +741,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -765,7 +765,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -802,7 +802,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -839,7 +839,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -867,7 +867,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -894,7 +894,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -925,7 +925,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -950,7 +950,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -978,7 +978,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -1006,7 +1006,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = (Player) e.getEntity();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -1029,7 +1029,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Player p = (Player) e.getWhoClicked();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 

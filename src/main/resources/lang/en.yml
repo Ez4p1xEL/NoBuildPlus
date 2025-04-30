@@ -118,6 +118,7 @@ gui:
     craft: 'Player crafting'
     heal: 'Player healing'
     turtle-egg: 'Turtle egg stepping'
+    lightning: 'Lightning'
 
 true: '&aALLOW'
 false: '&cPREVENT'

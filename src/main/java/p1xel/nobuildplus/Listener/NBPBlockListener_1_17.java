@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerHarvestBlockEvent;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NBPBlockListener_1_17 implements Listener {
@@ -18,7 +18,7 @@ public class NBPBlockListener_1_17 implements Listener {
 
         Block block = e.getHarvestedBlock();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 

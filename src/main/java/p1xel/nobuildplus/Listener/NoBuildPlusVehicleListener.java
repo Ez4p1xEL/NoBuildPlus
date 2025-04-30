@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NoBuildPlusVehicleListener implements Listener {
@@ -17,7 +17,7 @@ public class NoBuildPlusVehicleListener implements Listener {
 
         Vehicle vehicle = e.getVehicle();
 
-        if (Hooks.cancel(vehicle)) {
+        if (HookedPlugins.cancel(vehicle)) {
             return;
         }
 
@@ -53,7 +53,7 @@ public class NoBuildPlusVehicleListener implements Listener {
 
         Vehicle vehicle = e.getVehicle();
 
-        if (Hooks.cancel(vehicle)) {
+        if (HookedPlugins.cancel(vehicle)) {
             return;
         }
 
@@ -90,7 +90,7 @@ public class NoBuildPlusVehicleListener implements Listener {
 
         Vehicle vehicle = e.getVehicle();
 
-        if (Hooks.cancel(vehicle)) {
+        if (HookedPlugins.cancel(vehicle)) {
             return;
         }
 
@@ -124,7 +124,7 @@ public class NoBuildPlusVehicleListener implements Listener {
 
         Vehicle vehicle = e.getVehicle();
 
-        if (Hooks.cancel(vehicle)) {
+        if (HookedPlugins.cancel(vehicle)) {
             return;
         }
 

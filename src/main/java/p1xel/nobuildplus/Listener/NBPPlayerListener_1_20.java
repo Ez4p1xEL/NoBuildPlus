@@ -9,7 +9,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSignOpenEvent;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NBPPlayerListener_1_20 implements Listener {
@@ -20,7 +20,7 @@ public class NBPPlayerListener_1_20 implements Listener {
 
         Player p = e.getPlayer();
 
-        if (Hooks.cancel(p)) {
+        if (HookedPlugins.cancel(p)) {
             return;
         }
 
@@ -52,7 +52,7 @@ public class NBPPlayerListener_1_20 implements Listener {
             return;
         }
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 

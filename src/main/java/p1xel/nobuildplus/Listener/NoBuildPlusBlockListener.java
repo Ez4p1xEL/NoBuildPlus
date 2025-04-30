@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Storage.Worlds;
 
 public class NoBuildPlusBlockListener implements Listener {
@@ -25,7 +25,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
         // Check if the block location is in the controlled area of other plugins. e.g. Residence / Dominion
         // If it is in the area, discontinue the listener.
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -71,7 +71,7 @@ public class NoBuildPlusBlockListener implements Listener {
         Block block = e.getBlock();
 
         // Cancel if the block location is controlled by other plugins.
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -112,7 +112,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
         Block block = e.getBlock();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -132,7 +132,7 @@ public class NoBuildPlusBlockListener implements Listener {
         Block block = e.getBlock();
         String world = block.getWorld().getName();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -155,7 +155,7 @@ public class NoBuildPlusBlockListener implements Listener {
     public void onCoralDecay(BlockFadeEvent e) {
         Block block = e.getBlock();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -178,7 +178,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
         Block block = e.getBlock();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -205,7 +205,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
         Block block = e.getBlock();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -230,7 +230,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
         Block block = e.getBlock();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -254,7 +254,7 @@ public class NoBuildPlusBlockListener implements Listener {
     public void onPistonTrigger(BlockPistonRetractEvent e) {
         Block block = e.getBlock();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 
@@ -274,7 +274,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
         Block block = e.getBlock();
 
-        if (Hooks.cancel(block)) {
+        if (HookedPlugins.cancel(block)) {
             return;
         }
 

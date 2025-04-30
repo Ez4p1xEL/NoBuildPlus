@@ -10,10 +10,11 @@ import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.Config;
 
 
-public class HDom {
+public class HDom extends Hooks {
 
-    public static boolean isInDom(Location loc) {
-        if (!NoBuildPlus.isDominionEnabled() || !Config.isDominionEnabled()) {
+    @Override
+    public boolean cancel(Location loc) {
+        if (!Config.isDominionEnabled()) {
             return false;
         }
 
@@ -27,8 +28,9 @@ public class HDom {
         return false;
     }
 
-    public static boolean isInDom(Player p) {
-        if (!NoBuildPlus.isDominionEnabled() || !Config.isDominionEnabled()) {
+    @Override
+    public boolean cancel(Player p) {
+        if (!Config.isDominionEnabled()) {
             return false;
         }
 
@@ -43,8 +45,9 @@ public class HDom {
         return false;
     }
 
-    public static boolean isInDom(Block b) {
-        if (!NoBuildPlus.isDominionEnabled() || !Config.isDominionEnabled()) {
+    @Override
+    public boolean cancel(Block b) {
+        if (!Config.isDominionEnabled()) {
             return false;
         }
 
@@ -59,8 +62,9 @@ public class HDom {
         return false;
     }
 
-    public static boolean isInDom(Entity e) {
-        if (!NoBuildPlus.isDominionEnabled() || !Config.isDominionEnabled()) {
+    @Override
+    public boolean cancel(Entity e) {
+        if (!Config.isDominionEnabled()) {
             return false;
         }
 

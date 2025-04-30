@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
 import p1xel.nobuildplus.Flags;
-import p1xel.nobuildplus.Hook.Hooks;
+import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.Worlds;
 
@@ -18,7 +18,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         Entity entity = e.getRemover();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -60,7 +60,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         Entity entity = e.getRemover();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -93,7 +93,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 
@@ -138,7 +138,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (Hooks.cancel(entity)) {
+        if (HookedPlugins.cancel(entity)) {
             return;
         }
 

@@ -118,6 +118,7 @@ gui:
     craft: '玩家合成'
     heal: '玩家治疗'
     turtle-egg: '海龟蛋踩踏'
+    lightning: '闪电'
 
 true: '&a允许'
 false: '&c禁止'

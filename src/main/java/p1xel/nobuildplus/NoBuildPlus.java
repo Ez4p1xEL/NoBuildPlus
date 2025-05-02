@@ -273,22 +273,22 @@ public class NoBuildPlus extends JavaPlugin {
 
     }
 
-    public static boolean isResidenceEnabled() {
-        return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
-    }
+//    public static boolean isResidenceEnabled() {
+//        return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
+//    }
+//
+//    public static boolean isDominionEnabled() {
+//        return Bukkit.getServer().getPluginManager().isPluginEnabled("Dominion");
+//    }
 
-    public static boolean isDominionEnabled() {
-        return Bukkit.getServer().getPluginManager().isPluginEnabled("Dominion");
-    }
 
-
-    public static boolean isOraxenEnabled() {
-        return Bukkit.getServer().getPluginManager().isPluginEnabled("Oraxen");
-    }
-
-    public static boolean isBlockRegenEnabled() {
-        return Bukkit.getServer().getPluginManager().isPluginEnabled("BlockRegen");
-    }
+//    public static boolean isOraxenEnabled() {
+//        return Bukkit.getServer().getPluginManager().isPluginEnabled("Oraxen");
+//    }
+//
+//    public static boolean isBlockRegenEnabled() {
+//        return Bukkit.getServer().getPluginManager().isPluginEnabled("BlockRegen");
+//    }
 
     private static DominionAPI dominionAPI;
     public static DominionAPI getDominionAPI() { return dominionAPI;}

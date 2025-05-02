@@ -1,7 +1,6 @@
 package p1xel.nobuildplus.Hook;
 
 import cn.lunadeer.dominion.api.dtos.DominionDTO;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -18,14 +17,8 @@ public class HDom extends Hooks {
             return false;
         }
 
-        try {
-            DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
-            return d != null;
-        } catch (Exception e) {
-            Bukkit.getLogger().info("There is some error");
-        }
-
-        return false;
+        DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
+        return d != null;
     }
 
     @Override
@@ -34,15 +27,8 @@ public class HDom extends Hooks {
             return false;
         }
 
-        Location loc = p.getLocation();
-        try {
-            DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
-            return d != null;
-        } catch (Exception e) {
-            Bukkit.getLogger().info("There is some error");
-        }
-
-        return false;
+        DominionDTO d = NoBuildPlus.getDominionAPI().getPlayerCurrentDominion(p);
+        return d != null;
     }
 
     @Override
@@ -52,14 +38,8 @@ public class HDom extends Hooks {
         }
 
         Location loc = b.getLocation();
-        try {
-            DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
-            return d != null;
-        } catch (Exception e) {
-            Bukkit.getLogger().info("There is some error");
-        }
-
-        return false;
+        DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
+        return d != null;
     }
 
     @Override
@@ -69,14 +49,8 @@ public class HDom extends Hooks {
         }
 
         Location loc = e.getLocation();
-        try {
-            DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
-            return d != null;
-        } catch (Exception ex) {
-            Bukkit.getLogger().info("There is some error");
-        }
-
-        return false;
+        DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
+        return d != null;
     }
 
 

@@ -2,6 +2,7 @@ package p1xel.nobuildplus.spigotmc;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.Storage.Locale;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class UpdateChecker {
     }
 
     public void getVersion(final Consumer<String> consumer) {
-        Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
+        Runnable runnable = () -> {
             try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
                 if (scanner.hasNext()) {
                     consumer.accept(scanner.next());
@@ -29,6 +30,11 @@ public class UpdateChecker {
             } catch (IOException exception) {
                 plugin.getLogger().info(Locale.getMessage("update-check.invalid") + exception.getMessage());
             }
-        });
+        };
+        if (NoBuildPlus.getFoliaLib().isFolia()) {
+            NoBuildPlus.getFoliaLib().getScheduler().runAsync(wrappedTask -> runnable.run());
+        } else {
+            Bukkit.getScheduler().runTaskAsynchronously(this.plugin, runnable);
+        }
     }
 }

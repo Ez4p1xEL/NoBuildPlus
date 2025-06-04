@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import p1xel.nobuildplus.NoBuildPlus;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
@@ -77,7 +78,13 @@ public class Metrics {
                         enabled,
                         this::appendPlatformData,
                         this::appendServiceData,
-                        submitDataTask -> Bukkit.getScheduler().runTask(plugin, submitDataTask),
+                        submitDataTask -> {
+                            if (NoBuildPlus.getFoliaLib().isFolia()) {
+                                NoBuildPlus.getFoliaLib().getScheduler().runNextTick(wrappedTask -> submitDataTask.run());
+                            } else {
+                                Bukkit.getScheduler().runTask(plugin, submitDataTask);
+                            }
+                        },
                         plugin::isEnabled,
                         (message, error) -> this.plugin.getLogger().log(Level.WARNING, message, error),
                         (message) -> this.plugin.getLogger().log(Level.INFO, message),

@@ -2,6 +2,7 @@ package p1xel.nobuildplus;
 
 import cn.lunadeer.dominion.api.DominionAPI;
 import com.bekvon.bukkit.residence.Residence;
+import com.tcoded.folialib.FoliaLib;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class NoBuildPlus extends JavaPlugin {
 
     private static NoBuildPlus instance;
+    private static FoliaLib foliaLib;
 
     public static NoBuildPlus getInstance() {
         return instance;
@@ -34,6 +36,7 @@ public class NoBuildPlus extends JavaPlugin {
     public NBPAPI getAPI() {
         return api;
     }
+    public static FoliaLib getFoliaLib() {return foliaLib;}
 
     // Will be adjusted
     private void saveOtherConfigs() {
@@ -55,6 +58,7 @@ public class NoBuildPlus extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
+        foliaLib = new FoliaLib(this);
         api = new NBPAPI();
         saveDefaultConfig();
         saveOtherConfigs();

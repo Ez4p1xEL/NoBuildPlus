@@ -120,6 +120,9 @@ public class NoBuildPlus extends JavaPlugin {
         if (getBukkitVersion() >= 17) {
             getServer().getPluginManager().registerEvents(new NBPBlockListener_1_17(), this);
             getLogger().info("NBP Block Listener for 1.17+ is registered!");
+        } else {
+            getServer().getPluginManager().registerEvents(new NBPBlockListener_1_8(), this);
+            getLogger().info("NBP Block Listener for 1.8-1.16 is registered!");
         }
 
         if (getBukkitVersion() >= 20) {

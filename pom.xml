@@ -6,12 +6,8 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.5.7</version>
-
-    <properties>
-        <java.version>21</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <version>1.5.8</version>
+    
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -21,8 +17,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>

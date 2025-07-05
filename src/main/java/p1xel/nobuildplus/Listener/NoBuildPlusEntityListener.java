@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -317,6 +318,11 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
+        EntityType type = e.getEntityType();
+        if (type == EntityType.PRIMED_TNT || type == EntityType.MINECART_TNT) {
+            return;
+        }
+
         String world = entity.getWorld().getName();
 
         if (!Flags.mob_explode.isEnabled(world)) {
@@ -332,26 +338,28 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (Flags.mob_explode.getType().equalsIgnoreCase("list")) {
 
-            EntityType type = e.getEntityType();
-
             if (Flags.mob_explode.getList().contains(type.toString().toUpperCase())) {
 
                 e.setCancelled(true);
 
             }
 
-
         }
 
     }
 
     // Flag: tnt
-    @EventHandler
-    public void onTNTExplokde(EntityExplodeEvent e) {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onTNTExplode(EntityExplodeEvent e) {
 
         Entity entity = e.getEntity();
 
         if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        EntityType type = e.getEntityType();
+        if (type != EntityType.PRIMED_TNT && type != EntityType.MINECART_TNT) {
             return;
         }
 
@@ -361,11 +369,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        EntityType type = e.getEntityType();
-
-        if (type == EntityType.PRIMED_TNT || type == EntityType.MINECART_TNT) {
-            e.setCancelled(true);
-        }
+        e.setCancelled(true);
 
     }
 

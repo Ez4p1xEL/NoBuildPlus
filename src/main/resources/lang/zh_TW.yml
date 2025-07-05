@@ -119,6 +119,7 @@ gui:
     heal: '玩家治療'
     turtle-egg: '海龜蛋踩踏'
     lightning: '閃電'
+    tnt-prime: 'TNT點燃'
 
 true: '&a允許'
 false: '&c禁止'

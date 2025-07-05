@@ -119,6 +119,7 @@ gui:
     heal: 'Player healing'
     turtle-egg: 'Turtle egg stepping'
     lightning: 'Lightning'
+    tnt-prime: 'TNT Priming'
 
 true: '&aALLOW'
 false: '&cPREVENT'

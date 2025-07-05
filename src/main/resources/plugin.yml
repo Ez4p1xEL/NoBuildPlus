@@ -3,6 +3,7 @@ main: p1xel.nobuildplus.NoBuildPlus
 version: 1.5.8
 api-version: 1.13
 softdepend: [Residence, Dominion]
+folia-supported: true
 commands:
   nobuildplus:
     aliases: [nbp]

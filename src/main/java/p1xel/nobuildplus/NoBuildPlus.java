@@ -27,6 +27,7 @@ public class NoBuildPlus extends JavaPlugin {
 
     private static NoBuildPlus instance;
     private static FoliaLib foliaLib;
+    private static DominionAPI dominionAPI;
 
     public static NoBuildPlus getInstance() {
         return instance;
@@ -37,6 +38,7 @@ public class NoBuildPlus extends JavaPlugin {
         return api;
     }
     public static FoliaLib getFoliaLib() {return foliaLib;}
+    public static DominionAPI getDominionAPI() { return dominionAPI;}
 
     // Will be adjusted
     private void saveOtherConfigs() {
@@ -296,9 +298,6 @@ public class NoBuildPlus extends JavaPlugin {
 //    public static boolean isBlockRegenEnabled() {
 //        return Bukkit.getServer().getPluginManager().isPluginEnabled("BlockRegen");
 //    }
-
-    private static DominionAPI dominionAPI;
-    public static DominionAPI getDominionAPI() { return dominionAPI;}
 
     // bruh
 

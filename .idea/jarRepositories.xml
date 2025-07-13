@@ -22,6 +22,11 @@
       <option name="url" value="https://repo.oraxen.com/releases" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="tcoded-releases" />
+      <option name="name" value="tcoded-releases" />
+      <option name="url" value="https://repo.tcoded.com/releases" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="lunadeer" />
       <option name="name" value="lunadeer" />
       <option name="url" value="https://ssl.lunadeer.cn:14454/repository/maven-snapshots/" />

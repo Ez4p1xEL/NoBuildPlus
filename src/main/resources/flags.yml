@@ -516,3 +516,9 @@ flags:
     slot: 15
     # Set to true if you prefer lightning existing without taking damage from entities.
     lightning-only: false
+  tnt-prime:
+    enable: true
+    # item material showed on GUI.
+    show-item: TNT
+    # Slot on GUI
+    slot: 16

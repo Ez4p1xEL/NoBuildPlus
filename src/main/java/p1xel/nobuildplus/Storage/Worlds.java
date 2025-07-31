@@ -62,7 +62,9 @@ public class Worlds {
     }
 
     public static String getPermission(String world) {
-        return yaml.getString(world + ".permission");
+        String perm = yaml.getString(world + ".permission");
+        if (perm==null) { return "";}
+        return perm;
     }
 
     public static boolean isSpawnLocationSet(String world) {

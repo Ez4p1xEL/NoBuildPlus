@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.9">
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.11">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/Worlds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/Worlds.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/flags.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/flags.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/settings.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/settings.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -345,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752442555556</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="1.5.11">
+      <option name="closed" value="true" />
+      <created>1753962551062</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1753962551062</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +370,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.3.8 Update - new flags &quot;dye&quot; and &quot;piston&quot;" />
     <MESSAGE value="1.3.9 Update - new flags &quot;ice-form&quot;, &quot;fish&quot; and &quot;hook&quot;" />
     <MESSAGE value="1.4.0 Update - new flag &quot;crystal&quot; and code optimization" />
     <MESSAGE value="1.4.1 Update - new flag &quot;flower-pot&quot; and &quot;books-interact&quot; are added" />
@@ -391,6 +394,7 @@
     <MESSAGE value="1.5.7 update - Dominion hooked function fixed" />
     <MESSAGE value="1.5.7 update - New flag &quot;tnt-prime&quot;" />
     <MESSAGE value="1.5.9" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5.9" />
+    <MESSAGE value="1.5.11" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.5.11" />
   </component>
 </project>

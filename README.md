@@ -28,7 +28,9 @@ Give me feedback on [Discord](https://discord.gg/UJNAGjuyhS) or [Issues](https:/
 See the [LICENSE](https://github.com/Ez4p1xEL/NoBuildPlus/blob/master/LICENSE) file for license rights and limitations (MIT).
 
 > ### bStats
-![NoBuildPlus's bStats](https://bstats.org/signatures/bukkit/nobuildplus.svg)
+![NoBuildPlus's bStats](https://bstats.org/signatures/bukkit/nobuildplus.svg)  
+
+[![](https://jitpack.io/v/Ez4p1xEL/NoBuildPlus.svg)](https://jitpack.io/#Ez4p1xEL/NoBuildPlus)
 
 
 

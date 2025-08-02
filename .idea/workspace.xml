@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.12">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-    </list>
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.16" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -385,7 +381,23 @@
       <option name="project" value="LOCAL" />
       <updated>1754151053216</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="1.5.15">
+      <option name="closed" value="true" />
+      <created>1754152886944</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1754152886944</updated>
+    </task>
+    <task id="LOCAL-00035" summary="1.5.16">
+      <option name="closed" value="true" />
+      <created>1754153046446</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1754153046446</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,8 +418,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.4.0 Update - new flag &quot;crystal&quot; and code optimization" />
-    <MESSAGE value="1.4.1 Update - new flag &quot;flower-pot&quot; and &quot;books-interact&quot; are added" />
     <MESSAGE value="1.4.2 - Add compatibility to Dominion" />
     <MESSAGE value="1.4.2 - Add compatibility to Dominion and NBPAPI" />
     <MESSAGE value="1.4.3 - Adjust all the code of flag listeners, flags automatically update function and updated README.md" />
@@ -431,6 +441,8 @@
     <MESSAGE value="1.5.9" />
     <MESSAGE value="1.5.11" />
     <MESSAGE value="1.5.12" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5.12" />
+    <MESSAGE value="1.5.15" />
+    <MESSAGE value="1.5.16" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.5.16" />
   </component>
 </project>

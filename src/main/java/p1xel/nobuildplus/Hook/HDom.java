@@ -1,6 +1,7 @@
 package p1xel.nobuildplus.Hook;
 
 import cn.lunadeer.dominion.api.dtos.DominionDTO;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -27,7 +28,8 @@ public class HDom extends Hooks {
             return false;
         }
 
-        DominionDTO d = NoBuildPlus.getDominionAPI().getPlayerCurrentDominion(p);
+        Location loc = p.getLocation();
+        DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
         return d != null;
     }
 

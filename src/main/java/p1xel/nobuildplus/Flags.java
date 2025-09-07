@@ -71,7 +71,9 @@ public enum Flags {
     heal(true, "GOLDEN_APPLE", 13, null, null),
     turtle_egg(true, "TURTLE_EGG", 14, null, null),
     lightning(true, "LIGHTNING_ROD", 15, null, null),
-    tnt_prime(true, "TNT", 16, null, null);
+    tnt_prime(true, "TNT", 16, null, null),
+    pressure_plate(true, "OAK_PRESSURE_PLATE", 19, "list", Arrays.asList("OAK_PRESSURE_PLATE", "SPRUCE_PRESSURE_PLATE", "BIRCH_PRESSURE_PLATE", "JUNGLE_PRESSURE_PLATE", "ACACIA_PRESSURE_PLATE", "DARK_OAK_PRESSURE_PLATE", "MANGROVE_PRESSURE_PLATE", "CHERRY_PRESSURE_PLATE", "PALE_OAK_PRESSURE_PLATE", "BAMBOO_PRESSURE_PLATE", "CRIMSON_PRESSURE_PLATE", "WARPED_PRESSURE_PLATE", "STONE_PRESSURE_PLATE", "POLISHED_BLACKSTONE_PRESSURE_PLATE", "LIGHT_WEIGHTED_PRESSURE_PLATE", "HEAVY_WEIGHTED_PRESSURE_PLATE")),
+    fire_spread(true, "FLINT_AND_STEEL", 20, null, null);
 
     private boolean enabled;
     private String show_item;

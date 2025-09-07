@@ -120,6 +120,8 @@ gui:
     turtle-egg: '海龜蛋踩踏'
     lightning: '閃電'
     tnt-prime: 'TNT點燃'
+    pressure-plate: '壓力板被觸發'
+    fire-spread: '火焰蔓延'
 
 true: '&a允許'
 false: '&c禁止'

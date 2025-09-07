@@ -522,3 +522,34 @@ flags:
     show-item: TNT
     # Slot on GUI
     slot: 16
+  pressure_plate:
+    enable: true
+    # item material showed on GUI.
+    show-item: OAK_PRESSURE_PLATE
+    # Slot on GUI
+    slot: 19
+    # list only
+    type: list
+    list:
+      - OAK_PRESSURE_PLATE
+      - SPRUCE_PRESSURE_PLATE
+      - BIRCH_PRESSURE_PLATE
+      - JUNGLE_PRESSURE_PLATE
+      - ACACIA_PRESSURE_PLATE
+      - DARK_OAK_PRESSURE_PLATE
+      - MANGROVE_PRESSURE_PLATE
+      - CHERRY_PRESSURE_PLATE
+      - PALE_OAK_PRESSURE_PLATE
+      - BAMBOO_PRESSURE_PLATE
+      - CRIMSON_PRESSURE_PLATE
+      - WARPED_PRESSURE_PLATE
+      - STONE_PRESSURE_PLATE
+      - POLISHED_BLACKSTONE_PRESSURE_PLATE
+      - LIGHT_WEIGHTED_PRESSURE_PLATE
+      - HEAVY_WEIGHTED_PRESSURE_PLATE
+  fire-spread:
+    enable: true
+    # item material showed on GUI.
+    show-item: FLINT_AND_STEEL
+    # Slot on GUI
+    slot: 20

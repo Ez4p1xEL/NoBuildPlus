@@ -2,6 +2,7 @@ package p1xel.nobuildplus.Listener;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -369,7 +370,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        e.setCancelled(true);
+        e.blockList().clear();
 
     }
 
@@ -818,6 +819,28 @@ public class NoBuildPlusEntityListener implements Listener {
         } else {
             e.setCancelled(true);
         }
+
+    }
+
+    // Flag: pressure-plate
+    @EventHandler
+    public void onInteractEntity(EntityInteractEvent e) {
+        Block block = e.getBlock();
+        if (!Flags.pressure_plate.getList().contains(block.getType().toString())) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+
+        if (!Flags.pressure_plate.isEnabled(world)) {
+            return;
+        }
+
+        e.setCancelled(true);
 
     }
 }

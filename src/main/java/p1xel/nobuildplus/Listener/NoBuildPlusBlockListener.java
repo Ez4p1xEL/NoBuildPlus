@@ -154,23 +154,22 @@ public class NoBuildPlusBlockListener implements Listener {
     @EventHandler
     public void onCoralDecay(BlockFadeEvent e) {
         Block block = e.getBlock();
+        Material mat = block.getType();
+
+        if (!Flags.coral_decay.getList().contains(mat.toString())) {
+            return;
+        }
 
         if (HookedPlugins.cancel(block)) {
             return;
         }
 
-        Material mat = block.getType();
         // Flag: coral-decay
-        if (Flags.coral_decay.getList().contains(mat.toString())) {
-
-            String world = block.getWorld().getName();
-
-            if (!Flags.coral_decay.isEnabled(world)) {
-                return;
-            }
-
-            e.setCancelled(true);
+        if (!Flags.coral_decay.isEnabled(block.getWorld().getName())) {
+            return;
         }
+
+        e.setCancelled(true);
     }
 
     @EventHandler
@@ -286,6 +285,72 @@ public class NoBuildPlusBlockListener implements Listener {
 
         e.setCancelled(true);
 
+    }
+
+    // Flag: fire spread
+    @EventHandler
+    public void onSpread(BlockIgniteEvent e) {
+
+        if (e.getCause() != BlockIgniteEvent.IgniteCause.SPREAD) {
+            return;
+        }
+
+        Block block = e.getBlock();
+        String world = block.getWorld().getName();
+
+        if (!Flags.fire_spread.isEnabled(world)) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(block)) {
+            return;
+        }
+
+        e.setCancelled(true);
+
+    }
+
+//    @EventHandler
+//    public void onFireSpread(BlockSpreadEvent e) {
+//        Block block = e.getSource();
+//        System.out.println("Event called");
+//        System.out.println(e.getBlock().getType());
+//        System.out.println(e.getSource().getType());
+//        System.out.println(e.getNewState().getBlock().getType());
+//
+//        if (block.getType() != Material.FIRE) {
+//            return;
+//        }
+//
+//        System.out.println("PASS");
+//
+//        if (HookedPlugins.cancel(block)) {
+//            return;
+//        }
+//
+//        String world = block.getWorld().getName();
+//
+//        if (!Flags.fire_spread.isEnabled(world)) {
+//            return;
+//        }
+//
+//        e.setCancelled(true);
+//    }
+//
+    @EventHandler
+    public void onBlockBurn(BlockBurnEvent e) {
+        Block block = e.getIgnitingBlock();
+        String world = block.getWorld().getName();
+
+        if (!Flags.fire_spread.isEnabled(world)) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(block)) {
+            return;
+        }
+
+        e.setCancelled(true);
     }
 
 }

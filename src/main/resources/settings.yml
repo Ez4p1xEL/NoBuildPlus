@@ -65,5 +65,7 @@ global-settings:
     turtle-egg: false
     lightning: true
     tnt-prime: true
+    pressure-plate: true
+    fire-spread: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

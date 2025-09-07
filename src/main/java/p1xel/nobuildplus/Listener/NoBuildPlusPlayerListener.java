@@ -6,6 +6,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -1051,6 +1052,37 @@ public class NoBuildPlusPlayerListener implements Listener {
         }
 
         Worlds.sendMessage(p,world);
+        e.setCancelled(true);
+
+    }
+
+    // Flag: pressure-plate
+    @EventHandler
+    public void onInteractPressurePlate(PlayerInteractEvent e) {
+        Block block = e.getClickedBlock();
+        if (block == null) {
+            return;
+        }
+        if (!Flags.pressure_plate.getList().contains(block.getType().toString())) {
+            return;
+        }
+
+        if (e.getAction() != Action.PHYSICAL) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(block)) {
+            return;
+        }
+
+        String world = block.getWorld().getName();
+
+        if (!Flags.pressure_plate.isEnabled(world)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        Worlds.sendMessage(p, world);
         e.setCancelled(true);
 
     }

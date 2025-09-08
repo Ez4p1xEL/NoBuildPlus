@@ -81,6 +81,7 @@ public enum Flags {
     private String type;
     private List<String> list;
     private final static Map<String, Flags> NAMEMAP = Maps.newHashMap();
+    private final static Map<String, List<String>> LISTMAP = Maps.newHashMap();
 
     private Flags(boolean enabled, String show_item, int slot, String type, List<String> list) {
         this.enabled = enabled;
@@ -131,10 +132,7 @@ public enum Flags {
     }
 
     public List<String> getList() {
-        if (FlagsManager.yaml.isSet("flags." + getName() + ".list")) {
-            return FlagsManager.getFlagsList(getName());
-        }
-        return new ArrayList<>();
+        return getListMap().get(getName());
     }
 
     public static Flags matchFlag(final String name) {
@@ -150,6 +148,22 @@ public enum Flags {
 
     public static Map<String, Flags> getMaps() {
         return NAMEMAP;
+    }
+
+    public static Map<String, List<String>> getListMap() {
+        return LISTMAP;
+    }
+
+    public static void refreshMap() {
+        LISTMAP.clear();
+        for (String flag : NAMEMAP.keySet()) {
+            List<String> list = new ArrayList<>();
+            if (FlagsManager.yaml.isSet("flags." + flag + ".list")) {
+                list = FlagsManager.getFlagsList(flag);
+            }
+            LISTMAP.put(flag, list);
+        }
+
     }
 
     static {

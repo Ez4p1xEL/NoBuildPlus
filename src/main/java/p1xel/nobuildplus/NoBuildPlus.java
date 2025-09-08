@@ -70,6 +70,7 @@ public class NoBuildPlus extends JavaPlugin {
         Settings.createSettingsFile();
         Worlds.createWorldsFile();
         Settings.defaultList();
+        Flags.refreshMap();
 
     }
 

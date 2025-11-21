@@ -34,12 +34,12 @@ public enum Flags {
     painting(true, "PAINTING", 38, null, null),
     bucket_place(true, "BUCKET", 39, null, null),
     bucket_fill(true, "POWDER_SNOW_BUCKET", 40, null, null),
-    boat(true, "OAK_BOAT", 41, "list", Arrays.asList("OAK_BOAT", "SPRUCE_BOAT", "BIRCH_BOAT", "JUNGLE_BOAT", "ACACIA_BOAT", "DARK_OAK_BOAT", "MANGROVE_BOAT", "OAK_CHEST_BOAT", "SPRUCE_CHEST_BOAT", "BIRCH_CHEST_BOAT", "JUNGLE_CHEST_BOAT", "ACACIA_CHEST_BOAT", "DARK_OAK_CHEST_BOAT", "MANGROVE_CHEST_BOAT")),
-    button(true, "STONE_BUTTON", 42, "list", Arrays.asList("STONE_BUTTON", "OAK_BUTTON", "SPRUCE_BUTTON", "BIRCH_BUTTON", "JUNGLE_BUTTON", "ACACIA_BUTTON", "DARK_OAK_BUTTON", "MANGROVE_BUTTON", "CRIMSON_BUTTON", "WARPED_BUTTON", "POLISHED_BLACKSTONE_BUTTON")),
-    door_interact(true, "SPRUCE_DOOR", 43, "list", Arrays.asList("OAK_DOOR", "SPRUCE_DOOR", "BIRCH_DOOR", "JUNGLE_DOOR", "ACACIA_DOOR", "DARK_OAK_DOOR", "MANGROVE_DOOR", "CRIMSON_DOOR", "WARPED_DOOR")),
+    boat(true, "OAK_BOAT", 41, "list", Arrays.asList("OAK_BOAT", "SPRUCE_BOAT", "BIRCH_BOAT", "JUNGLE_BOAT", "ACACIA_BOAT", "DARK_OAK_BOAT", "MANGROVE_BOAT", "OAK_CHEST_BOAT", "SPRUCE_CHEST_BOAT", "BIRCH_CHEST_BOAT", "JUNGLE_CHEST_BOAT", "ACACIA_CHEST_BOAT", "DARK_OAK_CHEST_BOAT", "MANGROVE_CHEST_BOAT", "BOAT")),
+    button(true, "STONE_BUTTON", 42, "list", Arrays.asList("STONE_BUTTON", "OAK_BUTTON", "SPRUCE_BUTTON", "BIRCH_BUTTON", "JUNGLE_BUTTON", "ACACIA_BUTTON", "DARK_OAK_BUTTON", "MANGROVE_BUTTON", "CRIMSON_BUTTON", "WARPED_BUTTON", "POLISHED_BLACKSTONE_BUTTON", "BUTTON")),
+    door_interact(true, "SPRUCE_DOOR", 43, "list", Arrays.asList("OAK_DOOR", "SPRUCE_DOOR", "BIRCH_DOOR", "JUNGLE_DOOR", "ACACIA_DOOR", "DARK_OAK_DOOR", "MANGROVE_DOOR", "CRIMSON_DOOR", "WARPED_DOOR", "DOOR")),
     lever(true, "LEVER", 10, null, null),
-    trapdoor_interact(true, "ACACIA_TRAPDOOR", 11, "list", Arrays.asList("OAK_TRAPDOOR", "SPRUCE_TRAPDOOR", "BIRCH_TRAPDOOR", "JUNGLE_TRAPDOOR", "ACACIA_TRAPDOOR", "DARK_OAK_TRAPDOOR", "MANGROVE_TRAPDOOR", "CRIMSON_TRAPDOOR", "WARPED_TRAPDOOR")),
-    fencegate_interact(true, "JUNGLE_FENCE_GATE", 12, "list", Arrays.asList("OAK_FENCE_GATE", "SPRUCE_FENCE_GATE", "BIRCH_FENCE_GATE", "JUNGLE_FENCE_GATE", "ACACIA_FENCE_GATE", "DARK_OAK_FENCE_GATE", "MANGROVE_FENCE_GATE", "CRIMSON_FENCE_GATE", "WARPED_FENCE_GATE")),
+    trapdoor_interact(true, "ACACIA_TRAPDOOR", 11, "list", Arrays.asList("OAK_TRAPDOOR", "SPRUCE_TRAPDOOR", "BIRCH_TRAPDOOR", "JUNGLE_TRAPDOOR", "ACACIA_TRAPDOOR", "DARK_OAK_TRAPDOOR", "MANGROVE_TRAPDOOR", "CRIMSON_TRAPDOOR", "WARPED_TRAPDOOR", "TRAPDOOR")),
+    fencegate_interact(true, "JUNGLE_FENCE_GATE", 12, "list", Arrays.asList("OAK_FENCE_GATE", "SPRUCE_FENCE_GATE", "BIRCH_FENCE_GATE", "JUNGLE_FENCE_GATE", "ACACIA_FENCE_GATE", "DARK_OAK_FENCE_GATE", "MANGROVE_FENCE_GATE", "CRIMSON_FENCE_GATE", "WARPED_FENCE_GATE", "FENCE_GATE")),
     drop_item(true, "DIRT", 13, "all", Collections.singletonList("STONE")),
     egg_throw(true, "EGG", 14, null, null),
     snowball_throw(true, "SNOWBALL", 15, null, null),
@@ -72,7 +72,7 @@ public enum Flags {
     turtle_egg(true, "TURTLE_EGG", 14, null, null),
     lightning(true, "LIGHTNING_ROD", 15, null, null),
     tnt_prime(true, "TNT", 16, null, null),
-    pressure_plate(true, "OAK_PRESSURE_PLATE", 19, "list", Arrays.asList("OAK_PRESSURE_PLATE", "SPRUCE_PRESSURE_PLATE", "BIRCH_PRESSURE_PLATE", "JUNGLE_PRESSURE_PLATE", "ACACIA_PRESSURE_PLATE", "DARK_OAK_PRESSURE_PLATE", "MANGROVE_PRESSURE_PLATE", "CHERRY_PRESSURE_PLATE", "PALE_OAK_PRESSURE_PLATE", "BAMBOO_PRESSURE_PLATE", "CRIMSON_PRESSURE_PLATE", "WARPED_PRESSURE_PLATE", "STONE_PRESSURE_PLATE", "POLISHED_BLACKSTONE_PRESSURE_PLATE", "LIGHT_WEIGHTED_PRESSURE_PLATE", "HEAVY_WEIGHTED_PRESSURE_PLATE")),
+    pressure_plate(true, "OAK_PRESSURE_PLATE", 19, "list", Arrays.asList("OAK_PRESSURE_PLATE", "SPRUCE_PRESSURE_PLATE", "BIRCH_PRESSURE_PLATE", "JUNGLE_PRESSURE_PLATE", "ACACIA_PRESSURE_PLATE", "DARK_OAK_PRESSURE_PLATE", "MANGROVE_PRESSURE_PLATE", "CHERRY_PRESSURE_PLATE", "PALE_OAK_PRESSURE_PLATE", "BAMBOO_PRESSURE_PLATE", "CRIMSON_PRESSURE_PLATE", "WARPED_PRESSURE_PLATE", "STONE_PRESSURE_PLATE", "POLISHED_BLACKSTONE_PRESSURE_PLATE", "LIGHT_WEIGHTED_PRESSURE_PLATE", "HEAVY_WEIGHTED_PRESSURE_PLATE", "PRESSURE_PLATE")),
     fire_spread(true, "FLINT_AND_STEEL", 20, null, null);
 
     private boolean enabled;
@@ -112,7 +112,7 @@ public enum Flags {
     }
 
     public String getName() {
-        return this.name().replaceAll("_", "-").replaceAll("destroy", "break");
+        return this.name();
     }
 
     public boolean isEnabled(String world) {
@@ -132,7 +132,7 @@ public enum Flags {
     }
 
     public List<String> getList() {
-        return getListMap().get(getName());
+        return LISTMAP.get(getName());
     }
 
     public static Flags matchFlag(final String name) {
@@ -169,7 +169,7 @@ public enum Flags {
     static {
         for (Flags flag : values()) {
 
-            NAMEMAP.put(flag.getName(), flag);
+            NAMEMAP.put(flag.getName().replaceAll("_", "-").replaceAll("destroy", "break"), flag);
         }
     }
 

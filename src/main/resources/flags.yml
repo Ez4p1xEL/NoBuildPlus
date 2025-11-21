@@ -209,6 +209,7 @@ flags:
       - 'ACACIA_CHEST_BOAT'
       - 'DARK_OAK_CHEST_BOAT'
       - 'MANGROVE_CHEST_BOAT'
+      - 'BOAT'
   button:
     enable: true
     # Item material showed on GUI.
@@ -229,6 +230,7 @@ flags:
       - 'crimson_button'
       - 'warped_button'
       - 'polished_blackstone_button'
+      - 'button'
   door-interact:
     enable: true
     # Item material showed on GUI.
@@ -247,6 +249,7 @@ flags:
       - 'mangrove_door'
       - 'crimson_door'
       - 'warped_door'
+      - 'door'
   lever:
     enable: true
     # Item material showed on GUI.
@@ -271,6 +274,7 @@ flags:
       - 'mangrove_trapdoor'
       - 'crimson_trapdoor'
       - 'warped_trapdoor'
+      - 'trapdoor'
   fencegate-interact:
     enable: true
     # Item material showed on GUI.
@@ -289,6 +293,7 @@ flags:
       - 'mangrove_fence_gate'
       - 'crimson_fence_gate'
       - 'warped_fence_gate'
+      - 'fence_gate'
   # For Player
   drop-item:
     enable: true
@@ -547,6 +552,7 @@ flags:
       - POLISHED_BLACKSTONE_PRESSURE_PLATE
       - LIGHT_WEIGHTED_PRESSURE_PLATE
       - HEAVY_WEIGHTED_PRESSURE_PLATE
+      - PRESSURE_PLATE
   fire-spread:
     enable: true
     # item material showed on GUI.

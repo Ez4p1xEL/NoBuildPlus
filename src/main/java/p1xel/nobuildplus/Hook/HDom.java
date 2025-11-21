@@ -1,7 +1,6 @@
 package p1xel.nobuildplus.Hook;
 
 import cn.lunadeer.dominion.api.dtos.DominionDTO;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -12,47 +11,36 @@ import p1xel.nobuildplus.Storage.Config;
 
 public class HDom extends Hooks {
 
+    private boolean enabled = Config.isDominionEnabled();
+
     @Override
     public boolean cancel(Location loc) {
-        if (!Config.isDominionEnabled()) {
-            return false;
-        }
 
         DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
-        return d != null;
+        return d != null && enabled;
     }
 
     @Override
     public boolean cancel(Player p) {
-        if (!Config.isDominionEnabled()) {
-            return false;
-        }
 
         Location loc = p.getLocation();
         DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
-        return d != null;
+        return d != null && enabled;
     }
 
     @Override
     public boolean cancel(Block b) {
-        if (!Config.isDominionEnabled()) {
-            return false;
-        }
-
         Location loc = b.getLocation();
         DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
-        return d != null;
+        return d != null && enabled;
     }
 
     @Override
     public boolean cancel(Entity e) {
-        if (!Config.isDominionEnabled()) {
-            return false;
-        }
 
         Location loc = e.getLocation();
         DominionDTO d = NoBuildPlus.getDominionAPI().getDominion(loc);
-        return d != null;
+        return d != null && enabled;
     }
 
 

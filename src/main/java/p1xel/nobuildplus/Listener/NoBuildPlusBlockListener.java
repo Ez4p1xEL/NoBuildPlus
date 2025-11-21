@@ -10,6 +10,8 @@ import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.Hook.HookedPlugins;
 import p1xel.nobuildplus.Storage.Worlds;
 
+import static org.bukkit.event.EventPriority.LOWEST;
+
 public class NoBuildPlusBlockListener implements Listener {
 
     /*
@@ -107,7 +109,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: leaf-decay
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     public void onLeafDecay(LeavesDecayEvent e) {
 
         Block block = e.getBlock();
@@ -127,33 +129,38 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: melt
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     public void onSnowMelt(BlockFadeEvent e) {
         Block block = e.getBlock();
+        Material mat = block.getType();
+        // Flag: melt
+        if (mat != Material.SNOW && mat != Material.ICE && mat != Material.PACKED_ICE) {
+            return;
+        }
+
         String world = block.getWorld().getName();
+
+        if (!Flags.melt.isEnabled(world)) {
+            return;
+        }
 
         if (HookedPlugins.cancel(block)) {
             return;
         }
-
-        Material mat = block.getType();
-
-        // Flag: melt
-        if (mat == Material.SNOW || mat == Material.ICE || mat == Material.PACKED_ICE) {
-
-            if (!Flags.melt.isEnabled(world)) {
-                return;
-            }
-
-            e.setCancelled(true);
-        }
+        e.setCancelled(true);
 
     }
 
     // Coral Decay
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     public void onCoralDecay(BlockFadeEvent e) {
         Block block = e.getBlock();
+
+        // Flag: coral-decay
+        if (!Flags.coral_decay.isEnabled(block.getWorld().getName())) {
+            return;
+        }
+
         Material mat = block.getType();
 
         if (!Flags.coral_decay.getList().contains(mat.toString())) {
@@ -161,11 +168,6 @@ public class NoBuildPlusBlockListener implements Listener {
         }
 
         if (HookedPlugins.cancel(block)) {
-            return;
-        }
-
-        // Flag: coral-decay
-        if (!Flags.coral_decay.isEnabled(block.getWorld().getName())) {
             return;
         }
 

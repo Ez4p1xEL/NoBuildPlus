@@ -360,7 +360,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         Material mat = block.getType();
 
-        if (mat == Material.FLOWER_POT || mat == Material.LEGACY_FLOWER_POT || mat.name().startsWith("POTTED_")) {
+        if (mat == Material.FLOWER_POT || mat.name().startsWith("POTTED_")) {
 
             Worlds.sendMessage(p, world);
             e.setCancelled(true);

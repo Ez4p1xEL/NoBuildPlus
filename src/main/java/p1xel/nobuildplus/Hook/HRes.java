@@ -15,43 +15,33 @@ public class HRes extends Hooks{
         return NoBuildPlus.getRes();
     }
 
+    private boolean enabled = Config.isResidenceEnabled();
+
     @Override
     public boolean cancel(Player p) {
-        if (!Config.isResidenceEnabled()) {
-            return false;
-        }
         Location loc = p.getLocation();
         ClaimedResidence res = get().getResidenceManager().getByLoc(loc);
-        return res != null;
+        return res != null && enabled;
     }
 
     @Override
     public boolean cancel(Entity e) {
-        if (!Config.isResidenceEnabled()) {
-            return false;
-        }
         Location loc = e.getLocation();
         ClaimedResidence res = get().getResidenceManager().getByLoc(loc);
-        return res != null;
+        return res != null && enabled;
     }
 
     @Override
     public boolean cancel(Block b) {
-        if (!Config.isResidenceEnabled()) {
-            return false;
-        }
         Location loc = b.getLocation();
         ClaimedResidence res = get().getResidenceManager().getByLoc(loc);
-        return res != null;
+        return res != null && enabled;
     }
 
     @Override
     public boolean cancel(Location loc) {
-        if (!Config.isResidenceEnabled()) {
-            return false;
-        }
         ClaimedResidence res = get().getResidenceManager().getByLoc(loc);
-        return res != null;
+        return res != null && enabled;
     }
 
 }

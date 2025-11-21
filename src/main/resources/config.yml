@@ -49,5 +49,6 @@ deny-message-enable: true
 # ACTIONBAR - actionbar message (!! Only available at 1.12 and above!!)
 deny-message-type: ACTIONBAR
 deny-message-sound:
+  enable: true
   name: ENTITY_VILLAGER_NO
 

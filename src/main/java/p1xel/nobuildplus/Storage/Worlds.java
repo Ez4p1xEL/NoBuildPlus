@@ -156,20 +156,21 @@ public class Worlds {
         }
 
         String sound = Config.getString("deny-message-sound.name");
+        boolean enableSound = Config.getBool("deny-message-sound.enable");
 
         if (Config.getString("deny-message-type").equalsIgnoreCase("ACTIONBAR")) {
             if (NoBuildPlus.getInstance().getBukkitVersion() < 12) {
                 return;
             }
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Worlds.getDenyMessage(world)));
-            if (sound != null) {
+            if (enableSound && sound != null) {
                 player.playSound(player.getLocation(), Sound.valueOf(sound), 1f, 1f);
             }
             return;
         }
 
         player.sendMessage(Worlds.getDenyMessage(world));
-        if (sound != null) {
+        if (enableSound && sound != null) {
             player.playSound(player.getLocation(), Sound.valueOf(sound), 1f, 1f);
         }
 

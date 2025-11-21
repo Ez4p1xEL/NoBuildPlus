@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.19 - optimization of some codes">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.21 - optimization of some codes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Hook/HDom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Hook/HDom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Hook/HRes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Hook/HRes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusBlockListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusBlockListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusPlayerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusPlayerListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/Worlds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/Worlds.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/flags.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/flags.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -457,7 +449,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757324093402</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="1.5.21 - optimization of some codes">
+      <option name="closed" value="true" />
+      <created>1763744221692</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1763744221692</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,7 +478,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update README.md" />
     <MESSAGE value="1.4.4 Update - new flag &quot;hunger&quot;" />
     <MESSAGE value="1.4.5 Update - new flag &quot;berries&quot;" />
     <MESSAGE value="1.4.6 Update - Code Optimization" />
@@ -503,6 +502,7 @@
     <MESSAGE value="1.5.17 - fixed flag &quot;chat&quot; error in dominion area" />
     <MESSAGE value="1.5.18 - new flags &quot;pressure-plate&quot; and &quot;fire-spread&quot;" />
     <MESSAGE value="1.5.19 - optimization of some codes" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5.19 - optimization of some codes" />
+    <MESSAGE value="1.5.21 - optimization of some codes" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.5.21 - optimization of some codes" />
   </component>
 </project>

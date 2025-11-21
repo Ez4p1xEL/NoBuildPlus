@@ -16,8 +16,9 @@ I highly recommend you to use it on higher minecraft version.
 See full update logs [here](https://github.com/Ez4p1xEL/NoBuildPlus/wiki/Update-logs).
 
 > ### Download Links
-SpigotMC is the most official platform with the latest NoBuildPlus.
+SpigotMC and Modrinth are the most official platforms with the latest NoBuildPlus.
 - SpigotMC: https://www.spigotmc.org/resources/nobuildplus.101815/
+- Modrinth: https://modrinth.com/plugin/nobuildplus
 - MCBBS: https://www.mcbbs.net/thread-1335807-1-1.html (Suspended)
 - MINEBBS: https://www.minebbs.com/resources/nobuildplus.8101/
 - KLPBBS: https://klpbbs.com/thread-81274-1-12.html

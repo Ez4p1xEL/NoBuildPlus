@@ -169,7 +169,7 @@ public enum Flags {
     static {
         for (Flags flag : values()) {
 
-            NAMEMAP.put(flag.getName().replaceAll("_", "-").replaceAll("destroy", "break"), flag);
+            NAMEMAP.put(flag.getName(), flag);
         }
     }
 

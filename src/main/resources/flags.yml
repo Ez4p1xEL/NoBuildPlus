@@ -527,7 +527,7 @@ flags:
     show-item: TNT
     # Slot on GUI
     slot: 16
-  pressure_plate:
+  pressure-plate:
     enable: true
     # item material showed on GUI.
     show-item: OAK_PRESSURE_PLATE

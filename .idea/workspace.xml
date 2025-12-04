@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.22 - an option to disable the sound of deny message">
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.23 - fix an error">
+      <change afterPath="$PROJECT_DIR$/README_zh_CN.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/flags.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/flags.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -467,7 +465,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763754033655</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="1.5.23 - fix an error">
+      <option name="closed" value="true" />
+      <created>1764002715169</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1764002715169</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -488,7 +494,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.4.5 Update - new flag &quot;berries&quot;" />
     <MESSAGE value="1.4.6 Update - Code Optimization" />
     <MESSAGE value="1.4.7 Update - Add low version compatibility" />
     <MESSAGE value="1.4.8 Update - Fix bugs for lower minecraft version" />
@@ -513,6 +518,7 @@
     <MESSAGE value="1.5.19 - optimization of some codes" />
     <MESSAGE value="1.5.21 - optimization of some codes" />
     <MESSAGE value="1.5.22 - an option to disable the sound of deny message" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5.22 - an option to disable the sound of deny message" />
+    <MESSAGE value="1.5.23 - fix an error" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.5.23 - fix an error" />
   </component>
 </project>

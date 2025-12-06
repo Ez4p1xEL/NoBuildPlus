@@ -6,18 +6,20 @@ import com.tcoded.folialib.FoliaLib;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import p1xel.nobuildplus.API.NBPAPI;
-import p1xel.nobuildplus.Command.Cmd;
-import p1xel.nobuildplus.Command.TabList;
-import p1xel.nobuildplus.Hook.HDom;
-import p1xel.nobuildplus.Hook.HRes;
-import p1xel.nobuildplus.Hook.HookedPlugins;
-import p1xel.nobuildplus.Listener.*;
-import p1xel.nobuildplus.Listener.HookedPluginListeners.DominionListener;
-import p1xel.nobuildplus.Listener.HookedPluginListeners.ResidenceListener;
-import p1xel.nobuildplus.Storage.*;
-import p1xel.nobuildplus.bStats.Metrics;
-import p1xel.nobuildplus.spigotmc.UpdateChecker;
+import p1xel.nobuildplus.api.NBPAPI;
+import p1xel.nobuildplus.command.Cmd;
+import p1xel.nobuildplus.command.TabList;
+import p1xel.nobuildplus.hook.HDom;
+import p1xel.nobuildplus.hook.HRes;
+import p1xel.nobuildplus.hook.HookedPlugins;
+import p1xel.nobuildplus.listener.*;
+import p1xel.nobuildplus.listener.HookedPluginListeners.DominionListener;
+import p1xel.nobuildplus.listener.HookedPluginListeners.ResidenceListener;
+import p1xel.nobuildplus.listener.gui.GUIListener;
+import p1xel.nobuildplus.listener.gui.GUIManager;
+import p1xel.nobuildplus.storage.*;
+import p1xel.nobuildplus.tool.bstats.Metrics;
+import p1xel.nobuildplus.tool.spigotmc.UpdateChecker;
 
 import java.io.File;
 import java.io.IOException;
@@ -138,7 +140,7 @@ public class NoBuildPlus extends JavaPlugin {
         }
 
         if (getBukkitVersion() >= 15) {
-            getServer().getPluginManager().registerEvents(new GUIManager(), this);
+            getServer().getPluginManager().registerEvents(new GUIListener(), this);
         }
         getLogger().info("[NBP] LISTENERS LOADED.");
 
@@ -239,8 +241,8 @@ public class NoBuildPlus extends JavaPlugin {
                 Flags flag = entry.getValue();
 
                 FlagsManager.yaml.set("flags." + key + ".enable", flag.getDefaultFlagEnabled());
-                FlagsManager.yaml.set("flags." + key + ".show-item", flag.getDefaultShowItem());
-                FlagsManager.yaml.set("flags." + key + ".slot", flag.getDefaultSlot());
+                FlagsManager.yaml.set("flags." + key + ".show-item", flag.getShowItem());
+                FlagsManager.yaml.set("flags." + key + ".slot", flag.getSlot());
                 FlagsManager.yaml.set("flags." + key + ".type", flag.getDefaultType());
                 FlagsManager.yaml.set("flags." + key + ".list", flag.getDefaultList());
                 getLogger().info("Flag " + key.toUpperCase() + " is updated to flags.yml!");

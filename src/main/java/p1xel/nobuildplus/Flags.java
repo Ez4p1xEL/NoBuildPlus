@@ -1,9 +1,9 @@
 package p1xel.nobuildplus;
 
 import com.google.common.collect.Maps;
-import p1xel.nobuildplus.Storage.FlagsManager;
-import p1xel.nobuildplus.Storage.Settings;
-import p1xel.nobuildplus.Storage.Worlds;
+import p1xel.nobuildplus.storage.FlagsManager;
+import p1xel.nobuildplus.storage.Settings;
+import p1xel.nobuildplus.storage.Worlds;
 
 import java.util.*;
 
@@ -97,11 +97,11 @@ public enum Flags {
         return this.enabled;
     }
 
-    public String getDefaultShowItem() {
+    public String getShowItem() {
         return this.show_item;
     }
 
-    public int getDefaultSlot() {
+    public int getSlot() {
         return this.slot;
     }
 

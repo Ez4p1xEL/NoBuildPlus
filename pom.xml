@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.5.23</version>
+    <version>1.5.24</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>

@@ -70,6 +70,7 @@ public class Locale {
         try {
             return ChatColor.translateAlternateColorCodes('&', yaml.getString(path).replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
         } catch (NullPointerException event){
+            NoBuildPlus.getInstance().getLogger().warning("message of " + path + " is not found.");
             NoBuildPlus.getInstance().getLogger().warning("Your language file is not updated to the latest. Please delete it and let it to be re-generated.");
             return "Please update the language file.";
         }

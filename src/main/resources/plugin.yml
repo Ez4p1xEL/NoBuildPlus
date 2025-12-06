@@ -1,6 +1,6 @@
 name: NoBuildPlus
 main: p1xel.nobuildplus.NoBuildPlus
-version: 1.5.23
+version: 1.5.24
 api-version: 1.13
 softdepend: [Residence, Dominion]
 folia-supported: true

@@ -4,46 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="fix bug of error of language file">
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" afterDir="false" />
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="pom update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/API/NBPAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/api/NBPAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Command/Cmd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/command/Cmd.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Command/TabList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/command/TabList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Hook/HDom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HDom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Hook/HRes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HRes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Hook/HookedPlugins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HookedPlugins.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Hook/Hooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/Hooks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/GUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/HookedPluginListeners/DominionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/HookedPluginListeners/DominionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/HookedPluginListeners/ResidenceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/HookedPluginListeners/ResidenceListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPBlockListener_1_17.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPBlockListener_1_17.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPBlockListener_1_8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPBlockListener_1_8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPEntityListener_1_13.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPEntityListener_1_13.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPEntityListener_1_9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPEntityListener_1_9.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPPlayerListener_1_20.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPPlayerListener_1_20.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NBPPlayerListener_1_8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPPlayerListener_1_8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusBlockListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusBlockListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusEntityListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusEntityListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusHangingListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusHangingListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusPlayerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusPlayerListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusServerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusServerListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Listener/NoBuildPlusVehicleListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusVehicleListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/FlagsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/FlagsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/Locale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Locale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Storage/Worlds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Worlds.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/bStats/Metrics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/tool/bstats/Metrics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/spigotmc/UpdateChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/tool/spigotmc/UpdateChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/en.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/FlagsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/FlagsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/flags.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/flags.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +72,7 @@
     <option name="delegateBuildToMaven" value="true" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -116,32 +82,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Maven.NoBuildPlus [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.NoBuildPlus [install,--non-recursive].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.NoBuildPlus [package].executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Space/Projects/PVPMode&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Maven.NoBuildPlus [clean].executor": "Run",
+    "Maven.NoBuildPlus [install,--non-recursive].executor": "Run",
+    "Maven.NoBuildPlus [package].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Space/Projects/NoBuildPlus_legacy_package",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Space\Projects\NoBuildPlus\.mvn\wrapper" />
@@ -526,7 +492,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765023965312</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="menu update and package rename">
+      <option name="closed" value="true" />
+      <created>1765061593851</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1765061593851</updated>
+    </task>
+    <task id="LOCAL-00048" summary="pom update">
+      <option name="closed" value="true" />
+      <created>1765619132437</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1765619132437</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,8 +529,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.4.8 Update - Fix bugs for lower minecraft version" />
-    <MESSAGE value="1.4.9 Update - new flag &quot;craft&quot; and actionbar message supported" />
     <MESSAGE value="1.5.0 update - Add flag &quot;heal&quot; and fix play sound function in legacy version" />
     <MESSAGE value="1.5.1 update - new flag &quot;turtle-egg&quot; and &quot;shoot&quot; adjustment" />
     <MESSAGE value="." />
@@ -572,6 +552,8 @@
     <MESSAGE value="1.5.23 - fix an error" />
     <MESSAGE value="update README.md" />
     <MESSAGE value="fix bug of error of language file" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug of error of language file" />
+    <MESSAGE value="menu update and package rename" />
+    <MESSAGE value="pom update" />
+    <option name="LAST_COMMIT_MESSAGE" value="pom update" />
   </component>
 </project>

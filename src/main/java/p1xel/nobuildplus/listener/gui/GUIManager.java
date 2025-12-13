@@ -7,6 +7,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.storage.Locale;
@@ -92,15 +93,11 @@ public class GUIManager {
             for (int c =0;c < 28; c++) {
 
                 String flag = flags.get(a-1);
-
-                int slot = FlagsManager.getSlot(flag);
+                Flags f = Flags.matchFlag(flag);
+                int slot = f.getSlot();
 
                 // Each page
-                Material mat = Material.matchMaterial(FlagsManager.getShowedItem(flag).toUpperCase());
-                if (mat == null) {
-                    Bukkit.getLogger().info("[NBP] Could not find show-item for " + flag + "!");
-                    break;
-                }
+                Material mat = Material.valueOf(f.getShowItem());
                 ItemStack item = new ItemStack(mat);
                 ItemMeta meta = item.getItemMeta();
 

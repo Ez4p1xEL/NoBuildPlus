@@ -1,30 +1,17 @@
 flags:
   break:
     enable: true
-    # Item material showed on GUI.
-    show-item: IRON_PICKAXE
-    # Slot on GUI
-    slot: 10
     type: all
     # For vanilla item, just enter its name like GRASS_BLOCK
-    # For Oraxen blocks, you need to enter like "oraxen:itemId" <- will be supported in the futuer!
     list:
       - GRASS_BLOCK
   build:
     enable: true
-    # Item material showed on GUI.
-    show-item: GRASS_BLOCK
-    # Slot on GUI
-    slot: 11
     type: all
     list:
       - GRASS_BLOCK
   use:
     enable: true
-    # Item material showed on GUI.
-    show-item: CRAFTING_TABLE
-    # Slot on GUI
-    slot: 12
     type: list
     list:
       - ENCHANTING_TABLE
@@ -35,10 +22,6 @@ flags:
       - ENDER_PEARL
   container:
     enable: true
-    # Item material showed on GUI.
-    show-item: CHEST
-    # Slot on GUI
-    slot: 13
     type: list
     list:
       - CHEST
@@ -47,121 +30,49 @@ flags:
       - FURNACE
   mob-damage:
     enable: true
-    # Item material showed on GUI.
-    show-item: ZOMBIE_SPAWN_EGG
-    # Slot on GUI
-    slot: 14
     type: all
     list:
       - ZOMBIE
   mob-explode:
     enable: true
-    # Item material showed on GUI.
-    show-item: CREEPER_SPAWN_EGG
-    # Slot on GUI
-    slot: 15
     type: all
     list:
       - CREEPER
   pvp:
     enable: true
-    # Item material showed on GUI.
-    show-item: DIAMOND_SWORD
-    # Slot on GUI
-    slot: 16
   shoot:
     enable: true
-    # Item material showed on GUI.
-    show-item: BOW
-    # Slot on GUI
-    slot: 19
   tnt:
     enable: true
-    # Item material showed on GUI.
-    show-item: TNT
-    # Slot on GUI
-    slot: 20
   tnt-damage:
     enable: true
-    # Item material showed on GUI.
-    show-item: TNT_MINECART
-    # Slot on GUI
-    slot: 21
   frame:
     enable: true
-    # Item material showed on GUI.
-    show-item: ITEM_FRAME
-    # Slot on GUI
-    slot: 22
   bed:
     enable: true
-    # Item material showed on GUI.
-    show-item: RED_BED
-    # Slot on GUI
-    slot: 23
   voidtp:
     enable: true
-    # Item material showed on GUI.
-    show-item: ENDER_EYE
-    # Slot on GUI
-    slot: 24
   villager:
     enable: true
-    # Item material showed on GUI.
-    show-item: VILLAGER_SPAWN_EGG
-    # Slot on GUI
-    slot: 25
   command:
     enable: true
-    # Item material showed on GUI.
-    show-item: COMMAND_BLOCK
-    # Slot on GUI
-    slot: 28
     type: list
     list:
       - 'spawn'
   chat:
     enable: true
-    # Item material showed on GUI.
-    show-item: PLAYER_HEAD
-    # Slot on GUI
-    slot: 29
   leaf-decay:
     enable: true
-    # Item material showed on GUI.
-    show-item: OAK_LEAVES
-    # Slot on GUI
-    slot: 30
   melt:
     enable: true
-    # Item material showed on GUI.
-    show-item: PACKED_ICE
-    # Slot on GUI
-    slot: 31
   fall-damage:
     enable: true
-    # Item material showed on GUI.
-    show-item: LEATHER_BOOTS
-    # Slot on GUI
-    slot: 32
   armorstand:
     enable: true
-    # Item material showed on GUI.
-    show-item: ARMOR_STAND
-    # Slot on GUI
-    slot: 33
   farmbreak:
     enable: true
-    # Item material showed on GUI.
-    show-item: FARMLAND
-    # Slot on GUI
-    slot: 34
   ride:
     enable: true
-    # Item material showed on GUI.
-    show-item: SADDLE
-    # Slot on GUI
-    slot: 37
     # list only
     type: list
     list:
@@ -169,28 +80,12 @@ flags:
       - MINECART
   painting:
     enable: true
-    # Item material showed on GUI.
-    show-item: PAINTING
-    # Slot on GUI
-    slot: 38
   bucket-place:
     enable: true
-    # Item material showed on GUI.
-    show-item: BUCKET
-    # Slot on GUI
-    slot: 39
   bucket-fill:
     enable: true
-    # Item material showed on GUI.
-    show-item: POWDER_SNOW_BUCKET
-    # Slot on GUI
-    slot: 40
   boat:
     enable: true
-    # Item material showed on GUI.
-    show-item: OAK_BOAT
-    # Slot on GUI
-    slot: 41
     # list only
     type: list
     # For Boat Placing only
@@ -212,10 +107,6 @@ flags:
       - 'BOAT'
   button:
     enable: true
-    # Item material showed on GUI.
-    show-item: STONE_BUTTON
-    # Slot on GUI
-    slot: 42
     # list only
     type: list
     list:
@@ -233,10 +124,6 @@ flags:
       - 'button'
   door-interact:
     enable: true
-    # Item material showed on GUI.
-    show-item: SPRUCE_DOOR
-    # Slot on GUI
-    slot: 43
     # list only
     type: list
     list:
@@ -252,16 +139,8 @@ flags:
       - 'door'
   lever:
     enable: true
-    # Item material showed on GUI.
-    show-item: LEVER
-    # Slot on GUI
-    slot: 10
   trapdoor-interact:
     enable: true
-    # Item material showed on GUI.
-    show-item: ACACIA_TRAPDOOR
-    # Slot on GUI
-    slot: 11
     # list only
     type: list
     list:
@@ -277,10 +156,6 @@ flags:
       - 'trapdoor'
   fencegate-interact:
     enable: true
-    # Item material showed on GUI.
-    show-item: JUNGLE_FENCE_GATE
-    # Slot on GUI
-    slot: 12
     # list only
     type: list
     list:
@@ -297,67 +172,35 @@ flags:
   # For Player
   drop-item:
     enable: true
-    # Item material showed on GUI.
-    show-item: DIRT
-    # Slot on GUI
-    slot: 13
     type: all
     list:
       - 'STONE'
   egg-throw:
     enable: true
-    # Item material showed on GUI.
-    show-item: EGG
-    # Slot on GUI
-    slot: 14
   snowball-throw:
     enable: true
-    # Item material showed on GUI.
-    show-item: SNOWBALL
-    # Slot on GUI
-    slot: 15
   water-spread:
     enable: false
-    # Item material showed on GUI.
-    show-item: WATER_BUCKET
-    # Slot on GUI
-    slot: 16
   lava-spread:
     enable: false
-    # Item material showed on GUI.
-    show-item: LAVA_BUCKET
-    # Slot on GUI
-    slot: 19
   fly:
     enable: true
-    # Item material showed on GUI.
-    show-item: FEATHER
-    # Slot on GUI
-    slot: 20
   # For Player
   teleport:
     enable: true
-    # Item material showed on GUI.
-    show-item: ENDER_PEARL
-    # Slot on GUI
-    slot: 21
   mob-spawn:
     enable: true
-    # Item material showed on GUI.
-    show-item: PIG_SPAWN_EGG
-    # Slot on GUI
-    slot: 22
     # List only
     type: list
     # Add entity here
     list:
       - ZOMBIE
+      - SKELETON
+      - SPIDER
+      - CREEPER
+      - ENDERMAN
   minecart:
     enable: true
-    # Item material showed on GUI.
-    show-item: MINECART
-    # Slot on GUI
-    slot: 23
     # List only
     type: list
     # Item name
@@ -366,10 +209,6 @@ flags:
   # For Player
   item-pickup:
     enable: true
-    # Item material showed on GUI.
-    show-item: STONE
-    # Slot on GUI
-    slot: 24
     type: all
     # Add what you're not hoping the player to pick up
     list:
@@ -377,34 +216,14 @@ flags:
   # For player
   potion:
     enable: true
-    # Item material showed on GUI.
-    show-item: POTION
-    # Slot on GUI
-    slot: 25
   bonemeal:
     enable: true
-    # Item material showed on GUI.
-    show-item: BONE_MEAL
-    # Slot on GUI
-    slot: 28
   elytra:
     enable: true
-    # Item material showed on GUI.
-    show-item: ELYTRA
-    # Slot on GUI
-    slot: 29
   nether:
     enable: true
-    # Item material showed on GUI.
-    show-item: NETHER_BRICKS
-    # Slot on GUI
-    slot: 30
   coral-decay:
     enable: true
-    # Item material showed on GUI.
-    show-item: TUBE_CORAL_FAN
-    # Slot on GUI
-    slot: 31
     # list only
     type: list
     list:
@@ -425,114 +244,42 @@ flags:
       - 'HORN_CORAL_FAN'
   fire-spawn:
     enable: true
-    # Item material showed on GUI.
-    show-item: FIRE_CHARGE
-    # Slot on GUI
-    slot: 32
   sign-edit:
     enable: true
-    # Item material showed on GUI.
-    show-item: OAK_SIGN
-    # Slot on GUI
-    slot: 33
   dye:
     enable: true
-    # Item material showed on GUI.
-    show-item: BLUE_DYE
-    # Slot on GUI
-    slot: 34
   piston:
     enable: true
-    # Item material showed on GUI.
-    show-item: PISTON
-    # Slot on GUI
-    slot: 37
   ice-form:
     enable: true
-    # Item material showed on GUI.
-    show-item: ICE
-    # Slot on GUI
-    slot: 38
   fish:
     enable: true
-    # Item material showed on GUI.
-    show-item: COD
-    # Slot on GUI
-    slot: 39
   hook:
     enable: true
-    # Item material showed on GUI.
-    show-item: FISHING_ROD
-    # Slot on GUI
-    slot: 40
   crystal:
     enable: true
-    # Item material showed on GUI.
-    show-item: END_CRYSTAL
-    # Slot on GUI
-    slot: 41
   flower-pot:
     enable: true
-    # Item material showed on GUI.
-    show-item: FLOWER_POT
-    # Slot on GUI
-    slot: 42
   books-interact:
     enable: true
-    # Item material showed on GUI.
-    show-item: CHISELED_BOOKSHELF
-    # Slot on GUI
-    slot: 43
   hunger:
     enable: true
-    # Item material showed on GUI.
-    show-item: COOKED_CHICKEN
-    # Slot on GUI
-    slot: 10
   berries:
     enable: true
-    # item material showed on GUI.
-    show-item: GLOW_BERRIES
-    # Slot on GUI
-    slot: 11
   craft:
     enable: true
-    # item material showed on GUI.
-    show-item: CRAFTING_TABLE
-    # Slot on GUI
-    slot: 12
   heal:
     enable: true
-    # item material showed on GUI.
-    show-item: GOLDEN_APPLE
-    # Slot on GUI
-    slot: 13
   turtle-egg:
     enable: true
-    # item material showed on GUI.
-    show-item: TURTLE_EGG
-    # Slot on GUI
-    slot: 14
   lightning:
     enable: true
-    # item material showed on GUI.
-    show-item: LIGHTNING_ROD
-    # Slot on GUI
-    slot: 15
     # Set to true if you prefer lightning existing without taking damage from entities.
     lightning-only: false
   tnt-prime:
     enable: true
-    # item material showed on GUI.
-    show-item: TNT
-    # Slot on GUI
-    slot: 16
   pressure-plate:
     enable: true
-    # item material showed on GUI.
-    show-item: OAK_PRESSURE_PLATE
-    # Slot on GUI
-    slot: 19
     # list only
     type: list
     list:
@@ -555,7 +302,3 @@ flags:
       - PRESSURE_PLATE
   fire-spread:
     enable: true
-    # item material showed on GUI.
-    show-item: FLINT_AND_STEEL
-    # Slot on GUI
-    slot: 20

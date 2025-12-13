@@ -26,7 +26,7 @@ public enum Flags {
     command("command", true, "COMMAND_BLOCK", 28, "list", Collections.singletonList("spawn")),
     chat("chat", true, "PLAYER_HEAD", 29, null, null),
     leaf_decay("leaf-decay", true, "OAK_LEAVES", 30, null, null),
-    melt("melt", true, "LEATHER_BOOTS", 32, null, null),
+    melt("melt", true, "PACKED_ICE", 31, null, null),
     fall_damage("fall-damage", true, "LEATHER_BOOTS", 32, null, null),
     armorstand("armorstand", true, "ARMOR_STAND", 33, null, null),
     farmbreak("farmbreak", true, "FARMLAND", 34, null, null),
@@ -140,7 +140,7 @@ public enum Flags {
     public static Flags matchFlag(final String name) {
         Flags result;
 
-        String filtered = name.toUpperCase();
+        String filtered = name.toLowerCase();
 
         //filtered = filtered.replaceAll("-", "_");
         result = NAMEMAP.get(filtered);

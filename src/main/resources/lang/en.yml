@@ -146,7 +146,7 @@ gui:
       leaf-decay: 'Leaf decaying'
       melt: 'Block Melting'
       fall-damage: 'Fall damage'
-      armorstand: 'Armor stand interaction'
+      armorstand: 'Armor stand interaction and placement'
       farmbreak: 'Farm stepping'
       ride: 'Riding on entity'
       painting: 'Painting Destroying'

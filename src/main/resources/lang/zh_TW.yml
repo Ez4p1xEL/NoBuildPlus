@@ -145,7 +145,7 @@ gui:
       leaf-decay: '樹葉消失'
       melt: '冰塊融化'
       fall-damage: '跌倒傷害'
-      armorstand: '與盔甲架互動'
+      armorstand: '放置及與盔甲架互動'
       farmbreak: '耕地被踩踏'
       ride: '騎馬'
       painting: '與畫互動'

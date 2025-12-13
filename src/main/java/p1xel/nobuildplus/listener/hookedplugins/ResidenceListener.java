@@ -1,4 +1,4 @@
-package p1xel.nobuildplus.listener.HookedPluginListeners;
+package p1xel.nobuildplus.listener.hookedplugins;
 
 import com.bekvon.bukkit.residence.event.ResidenceChangedEvent;
 import org.bukkit.entity.Player;

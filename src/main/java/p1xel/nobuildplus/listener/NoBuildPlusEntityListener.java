@@ -646,7 +646,9 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (e.getEntityType() == EntityType.ARMOR_STAND) {
 
-            e.setCancelled(true);
+            if (FlagsManager.getBoolInFlag("armorstand", "placement")) {
+                e.setCancelled(true);
+            }
 
         }
 

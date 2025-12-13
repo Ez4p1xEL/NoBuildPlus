@@ -170,7 +170,7 @@ public class GUIManager {
                             }
                             meta.setLore(lores);
                             item.setItemMeta(meta);
-                            gui.setItem(FlagsManager.getSlot(flag), item);
+                            gui.setItem(Flags.matchFlag(flag).getSlot(), item);
                             worlds.replace(world+"_page"+i, gui);
                             return;
                         }

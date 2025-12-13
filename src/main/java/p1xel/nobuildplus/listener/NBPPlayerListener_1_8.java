@@ -11,11 +11,12 @@ import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.storage.Worlds;
 
 public class NBPPlayerListener_1_8 implements Listener {
 
-    // Flag: sign-edit
+    // Flag: armorstand
     @EventHandler
     public void onArmorStandPlace(PlayerInteractEvent e) {
 
@@ -50,9 +51,11 @@ public class NBPPlayerListener_1_8 implements Listener {
             return;
         }
 
+        if (FlagsManager.getBoolInFlag("armorstand", "placement")) {
 
-        Worlds.sendMessage(p, world);
-        e.setCancelled(true);
+            Worlds.sendMessage(p, world);
+            e.setCancelled(true);
+        }
 
     }
 

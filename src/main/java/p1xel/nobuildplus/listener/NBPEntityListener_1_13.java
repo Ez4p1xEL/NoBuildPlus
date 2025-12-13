@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.storage.Worlds;
 
 public class NBPEntityListener_1_13 implements Listener {
@@ -39,13 +40,15 @@ public class NBPEntityListener_1_13 implements Listener {
             return;
         }
 
+        if (!(FlagsManager.getBoolInFlag("armorstand", "placement"))) {
+            return;
+        }
+
         Player p = e.getPlayer();
         if (p != null) {
             if (p.hasPermission(Worlds.getPermission(world))) {
                 return;
             }
-
-
             Worlds.sendMessage(p, world);
         }
         e.setCancelled(true);

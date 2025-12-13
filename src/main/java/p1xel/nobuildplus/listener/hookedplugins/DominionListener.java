@@ -1,4 +1,4 @@
-package p1xel.nobuildplus.listener.HookedPluginListeners;
+package p1xel.nobuildplus.listener.hookedplugins;
 
 import cn.lunadeer.dominion.events.PlayerMoveOutDominionEvent;
 import org.bukkit.entity.Player;

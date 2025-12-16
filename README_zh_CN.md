@@ -1,7 +1,7 @@
 # NoBuildPlus
 [![Discord](https://img.shields.io/discord/937622491076108338?logo=Discord&label=discord)](https://discord.gg/UJNAGjuyhS)
 [![QQ](https://img.shields.io/badge/QQ-906136216-brightgreen?logo=qq)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=ZIfkm_tDAqWGbCZvcjQ6hhA-zGwkn_bm&authKey=ecCS9Tn8KTjJHwuCkMVqjaVFLFxue5q%2BXgHzLtYXjTiEb6mlmEJr%2FTq4Jz%2Bh94%2Fk&noverify=0&group_code=906136216)
-[![Wiki](https://img.shields.io/badge/wiki-available-brightgreen?logo=Gitee)](https://gitee.com/Ez4p1xEL/NoBuildPlus/wikis)
+[![Wiki](https://img.shields.io/badge/wiki-available-brightgreen?logo=readthedocs)](https://docs.p1mc.top/zh/)
 [![bStats](https://img.shields.io/badge/bstats-nobuildplus-blue?logo=google-analytics)](https://bstats.org/plugin/bukkit/NoBuildPlus/15126)  
 [![SpigotMC](https://img.shields.io/badge/To-SpigotMC-yellow)](https://www.spigotmc.org/resources/nobuildplus.101815)
 [![Modrinth](https://img.shields.io/badge/To-Modrinth-darkgreen)](https://modrinth.com/plugin/nobuildplus)  
@@ -23,7 +23,7 @@ NoBuildPlus提供了多种不同的规则来保护整个世界, 在简单与自�
 - 1.8+ (Spigot, Paper, Purpur)
 
 ## 文档帮助
-- 插件使用: [wiki](https://github.com/Ez4p1xEL/NoBuildPlus/wiki)
+- 插件使用: [PixelCraft使用文档](https://docs.p1mc.top/zh/)
 
 ## 插件下载
 ### 直接下载

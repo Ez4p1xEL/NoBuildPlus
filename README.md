@@ -1,6 +1,6 @@
 # NoBuildPlus
 [![Discord](https://img.shields.io/discord/937622491076108338?logo=Discord&label=discord)](https://discord.gg/UJNAGjuyhS)
-[![Wiki](https://img.shields.io/badge/wiki-available-brightgreen?logo=GitHub)](https://github.com/Ez4p1xEL/NoBuildPlus/wiki)
+[![Wiki](https://img.shields.io/badge/wiki-available-brightgreen?logo=readthedocs)](https://docs.p1mc.top/)
 [![bStats](https://img.shields.io/badge/bstats-nobuildplus-blue?logo=google-analytics)](https://bstats.org/plugin/bukkit/NoBuildPlus/15126)  
 [![SpigotMC](https://img.shields.io/badge/To-SpigotMC-yellow)](https://www.spigotmc.org/resources/nobuildplus.101815)
 [![Modrinth](https://img.shields.io/badge/To-Modrinth-darkgreen)](https://modrinth.com/plugin/nobuildplus)  
@@ -22,7 +22,7 @@ NoBuildPlus has provided different flags to protect your world. With simple and 
 - 1.8+ (Spigot, Paper, Purpur)
 
 ## Documentation
-- For the use of plugin: [wiki](https://github.com/Ez4p1xEL/NoBuildPlus/wiki)
+- For the use of plugin: [PixelCraft Documentation](https://docs.p1mc.top/)
 
 ## Downloads
 ### Direct links

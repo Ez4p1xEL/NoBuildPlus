@@ -17,15 +17,11 @@ public class DominionListener implements Listener {
         if (p.getAllowFlight()) {
 
             String world = p.getWorld().getName();
+            if (Flags.fly.isEnabled(world) && !p.hasPermission(Worlds.getPermission(world))) {
 
-            if (Flags.fly.isEnabled(world)) {
+                Worlds.sendMessage(p, world);
+                p.setAllowFlight(false);
 
-                if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                    Worlds.sendMessage(p, world);
-                    p.setAllowFlight(false);
-
-                }
             }
 
         }

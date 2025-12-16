@@ -14,23 +14,16 @@ public class ResidenceListener implements Listener {
 
         Player p = e.getPlayer();
 
-        if (e.getTo() == null) {
+        if (e.getTo() == null && p.getAllowFlight()) {
 
-            if (p.getAllowFlight()) {
+            String world = p.getWorld().getName();
+            if (Flags.fly.isEnabled(world) && !p.hasPermission(Worlds.getPermission(world))) {
 
-                String world = p.getWorld().getName();
-
-                if (Flags.fly.isEnabled(world)) {
-
-                    if (!p.hasPermission(Worlds.getPermission(world))) {
-
-                        Worlds.sendMessage(p, world);
-                        p.setAllowFlight(false);
-
-                    }
-                }
+                Worlds.sendMessage(p, world);
+                p.setAllowFlight(false);
 
             }
+
         }
 
     }

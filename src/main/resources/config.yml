@@ -27,7 +27,7 @@ type: Release
 
 # The version of configuration.
 # DO NOT CHANGE THIS!!
-Configuration: 4
+Configuration: 5
 
 # Language of the file.
 # Languages list: en(English) zh_CN(Simplified Chinese) zh_TW(Traditional Chinese).
@@ -37,6 +37,7 @@ Language: en
 # Check update when the plugin loaded.
 check-update: true
 
+# The plugin will only choose the first one that is enabled in your server!
 hook:
   Residence: true
   Dominion: true
@@ -51,4 +52,7 @@ deny-message-type: ACTIONBAR
 deny-message-sound:
   enable: true
   name: ENTITY_VILLAGER_NO
+
+text-edit-mode:
+  cancel: 'cancel'
 

@@ -41,6 +41,7 @@ Language: en
 # 更新提示
 check-update: true
 
+# 插件只会启用你服务器有的第一个插件的适配!
 hook:
   Residence: true
   Dominion: true

@@ -8,6 +8,7 @@ import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.listener.gui.GUIMain;
 import p1xel.nobuildplus.listener.gui.GUIManager;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.listener.gui.GUIWorld;
 import p1xel.nobuildplus.storage.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -67,13 +68,13 @@ public class Cmd implements CommandExecutor {
                         return true;
                     }
 
-                    if (args[1].contains("_page")) {
-                        sender.sendMessage(Locale.getMessage("name-not-allow"));
-                        return true;
+//                    if (args[1].contains("_page")) {
+//                        sender.sendMessage(Locale.getMessage("name-not-allow"));
+//                        return true;
+//
+//                    }
 
-                    }
-
-                    p.openInventory(GUIManager.instance.getGUI(name+"_page1"));
+                    p.openInventory(new GUIWorld(name, 1).getInventory());
                     return true;
 
                 }
@@ -123,9 +124,9 @@ public class Cmd implements CommandExecutor {
                 Settings.createSettingsFile();
                 Worlds.createWorldsFile();
                 Flags.refreshMap();
-                if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-                    GUIManager.instance.reloadGUIs();
-                }
+//                if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
+//                    GUIManager.instance.reloadGUIs();
+//                }
                 sender.sendMessage(Locale.getMessage("reload-success"));
                 return true;
 
@@ -189,9 +190,9 @@ public class Cmd implements CommandExecutor {
                 if (!Settings.getEnableWorldList().contains(args[1])) {
 
                     Worlds.createWorld(args[1]);
-                    if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-                        GUIManager.instance.createInv(args[1]);
-                    }
+//                    if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
+//                        GUIManager.instance.createInv(args[1]);
+//                    }
                     sender.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", args[1]));
                     return true;
 
@@ -207,9 +208,9 @@ public class Cmd implements CommandExecutor {
                 if (Settings.getEnableWorldList().contains(args[1])) {
 
                     Worlds.removeWorld(args[1]);
-                    if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-                        GUIManager.instance.removeWorld(args[1]);
-                    }
+//                    if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
+//                        GUIManager.instance.removeWorld(args[1]);
+//                    }
                     sender.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%", args[1]));
                     return true;
 

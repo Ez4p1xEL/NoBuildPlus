@@ -6,7 +6,6 @@ import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import p1xel.nobuildplus.listener.gui.GUIManager;
 import p1xel.nobuildplus.NoBuildPlus;
 
 import javax.annotation.Nullable;
@@ -67,6 +66,14 @@ public class Worlds {
         return perm;
     }
 
+    public static void setDenyMessage(String world, String message) {
+        set(world + ".deny-message", message);
+    }
+
+    public static void setPermission(String world, String permission) {
+        set(world + ".permission", permission);
+    }
+
     public static boolean isSpawnLocationSet(String world) {
         return yaml.get(world + ".spawn-loc") != null;
     }
@@ -123,9 +130,9 @@ public class Worlds {
 
     public static void setFlag(String world, String flag, boolean bool) {
         set(world + ".flags." + flag, bool);
-        if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-            GUIManager.instance.updateFlag(world, flag, bool);
-        }
+//        if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
+//            GUIManager.instance.updateFlag(world, flag, bool);
+//        }
     }
 
     public static boolean getFlag(String world, String flag) {

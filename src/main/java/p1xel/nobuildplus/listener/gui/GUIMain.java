@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GUIMain implements InventoryHolder {
+public class GUIMain extends GUIAbstract implements InventoryHolder {
 
     private Inventory inventory;
     private int page;
@@ -29,7 +29,8 @@ public class GUIMain implements InventoryHolder {
         init();
     }
 
-    void init() {
+    @Override
+    public void init() {
 
         boolean hasPreviousPage = false;
         boolean hasNextPage = false;
@@ -42,7 +43,7 @@ public class GUIMain implements InventoryHolder {
         if (worlds.size() >= page*28) {
             hasNextPage = true;
         }
-        worlds.subList(28 * (page-1), Math.min((page) * 28, worlds.size()));
+        worlds = worlds.subList(28 * (page-1), Math.min((page) * 28, worlds.size()));
 
         size = (int) Math.max(1,Math.ceil((double)worlds.size() / 7));
         Inventory inventory = Bukkit.createInventory(this, (size+2)*9, Locale.getMessage("gui.main.title"));
@@ -96,6 +97,17 @@ public class GUIMain implements InventoryHolder {
         add_container.set(menu_id_key, PersistentDataType.STRING, "add");
         add_item.setItemMeta(add_meta);
         inventory.setItem(4, add_item);
+
+        ItemStack edit_default_item = new ItemStack(Material.BOOK);
+        ItemMeta edit_default_meta = edit_default_item.getItemMeta();
+        edit_default_meta.setDisplayName(Locale.getMessage("gui.main.items.edit-default.display_name"));
+        List<String> edit_default_lore = Locale.yaml.getStringList("gui.main.items.edit-default.lore").stream()
+                .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
+        edit_default_meta.setLore(edit_default_lore);
+        PersistentDataContainer edit_default_container = edit_default_meta.getPersistentDataContainer();
+        edit_default_container.set(menu_id_key, PersistentDataType.STRING, "edit-default");
+        edit_default_item.setItemMeta(edit_default_meta);
+        inventory.setItem(3, edit_default_item);
 
         this.inventory = inventory;
         update(worlds);
@@ -163,6 +175,10 @@ public class GUIMain implements InventoryHolder {
         }
     }
 
+    @Override
+    public boolean check(Player player, String name) {return false;}
+
+    @Override
     public boolean check(Player player, String name, ClickType clickType) {
 
         switch (name) {
@@ -182,6 +198,10 @@ public class GUIMain implements InventoryHolder {
                 player.openInventory(new GUIWorldList(1).getInventory());
                 return true;
             }
+            case "edit-default": {
+                player.openInventory(new GUIDefaultTemplate(1).getInventory());
+                return true;
+            }
         }
 
         if (name.startsWith("world:")) {
@@ -192,7 +212,7 @@ public class GUIMain implements InventoryHolder {
                     player.openInventory(new GUIMain(1).getInventory());
                     return true;
                 }
-                player.openInventory(GUIManager.instance.getGUI(world+"_page1"));
+                player.openInventory(new GUIWorld(world, 1).getInventory());
             } else if (clickType == ClickType.RIGHT) {
                 if (!Settings.getEnableWorldList().contains(world)) {
                     player.sendMessage(Locale.getMessage("cant-find-world"));
@@ -200,7 +220,7 @@ public class GUIMain implements InventoryHolder {
                     return true;
                 }
                 Worlds.removeWorld(world);
-                GUIManager.instance.removeWorld(world);
+                //GUIManager.instance.removeWorld(world);
                 player.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%",world));
                 player.openInventory(new GUIMain(1).getInventory());
             }

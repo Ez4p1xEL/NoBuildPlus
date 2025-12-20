@@ -2,6 +2,7 @@ package p1xel.nobuildplus.listener.gui;
 
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -16,7 +17,7 @@ import p1xel.nobuildplus.storage.Worlds;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GUIWorldList implements InventoryHolder {
+public class GUIWorldList extends GUIAbstract implements InventoryHolder {
 
     private Inventory inventory;
     private int page;
@@ -28,8 +29,8 @@ public class GUIWorldList implements InventoryHolder {
         init();
     }
 
-
-    void init() {
+    @Override
+    public void init() {
 
         boolean hasPreviousPage = false;
         boolean hasNextPage = false;
@@ -47,7 +48,7 @@ public class GUIWorldList implements InventoryHolder {
             hasNextPage = true;
         }
 
-        worlds.subList(28 * (page-1), Math.min((page) * 28, worlds.size()));
+        worlds = worlds.subList(28 * (page-1), Math.min((page) * 28, worlds.size()));
 
         size = (int) Math.max(1,Math.ceil((double)worlds.size() / 7));
         Inventory inventory = Bukkit.createInventory(this, (size+2)*9, Locale.getMessage("gui.list.title"));
@@ -157,6 +158,10 @@ public class GUIWorldList implements InventoryHolder {
         }
     }
 
+    @Override
+    public boolean check(Player player, String name, ClickType type) { return false; }
+
+    @Override
     public boolean check(Player player, String name) {
 
         switch (name) {
@@ -165,7 +170,7 @@ public class GUIWorldList implements InventoryHolder {
                 return true;
             }
             case "previous_page": {
-                player.openInventory(new GUIWorldList(Math.min(1, page-1)).getInventory());
+                player.openInventory(new GUIWorldList(Math.max(1, page-1)).getInventory());
                 return true;
             }
             case "next_page": {
@@ -184,9 +189,6 @@ public class GUIWorldList implements InventoryHolder {
             if (!Settings.getEnableWorldList().contains(world)) {
 
                 Worlds.createWorld(world);
-                if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-                    GUIManager.instance.createInv(world);
-                }
                 player.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", world));
                 player.openInventory(new GUIWorldList(1).getInventory());
 

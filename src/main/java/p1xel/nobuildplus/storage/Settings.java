@@ -63,11 +63,17 @@ public class Settings {
         list.remove(world);
     }
 
+    public static void setDefaultFlag(String flag, boolean bool) { set("global-settings.flags." + flag, bool);}
+
     public static boolean getDefaultFlag(String flag) {
         return yaml.getBoolean("global-settings.flags." + flag);
     }
 
+    public static void setPermission(String permission) { set("global-settings.permission", permission);}
+
     public static String getPermission() { return yaml.getString("global-settings.permission"); }
+
+    public static void setDenyMessageString(String message) { set("global-settings.deny-message", message);}
 
     public static String getDenyMessageString() {
         return yaml.getString("global-settings.deny-message");

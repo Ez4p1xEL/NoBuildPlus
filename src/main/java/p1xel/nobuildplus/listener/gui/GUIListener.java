@@ -50,6 +50,18 @@ public class GUIListener implements Listener {
             return;
         }
 
+        if (holder instanceof GUIWorld) {
+
+            ItemStack item = inventory.getItem(e.getSlot());
+            PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
+            if (container.has(menu_id_key, PersistentDataType.STRING)) {
+                GUIWorld gui = (GUIWorld) holder;
+                gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getSlot());
+            }
+            e.setCancelled(true);
+            return;
+        }
+
         if (holder instanceof GUIWorldList) {
 
             ItemStack item = inventory.getItem(e.getSlot());
@@ -60,6 +72,19 @@ public class GUIListener implements Listener {
             }
             e.setCancelled(true);
             return;
+        }
+
+        if (holder instanceof GUIDefaultTemplate) {
+
+            ItemStack item = inventory.getItem(e.getSlot());
+            PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
+            if (container.has(menu_id_key, PersistentDataType.STRING)) {
+                GUIDefaultTemplate gui = (GUIDefaultTemplate) holder;
+                gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getSlot());
+            }
+            e.setCancelled(true);
+            return;
+
         }
 
         if (p.getOpenInventory().getTitle().contains(Locale.getMessage("gui.world.title"))) {

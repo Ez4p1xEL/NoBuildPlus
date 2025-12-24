@@ -15,6 +15,7 @@ import p1xel.nobuildplus.storage.Worlds;
 
 import java.util.*;
 
+@Deprecated
 public class GUIManager {
 
     public static GUIManager instance = new GUIManager();

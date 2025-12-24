@@ -20,14 +20,34 @@ flags:
       - CHIPPED_ANVIL
       - DAMAGED_ANVIL
       - ENDER_PEARL
+      - CAMPFIRE
   container:
     enable: true
     type: list
     list:
       - CHEST
-      - ENDER_CHEST
       - TRAPPED_CHEST
+      - ENDER_CHEST
+      - BARREL
       - FURNACE
+      - BLAST_FURNACE
+      - SMOKER
+      - BREWING_STAND
+      - CRAFTING_TABLE
+      - STONECUTTER
+      - LOOM
+      - CARTOGRAPHY_TABLE
+      - FLETCHING_TABLE
+      - GRINDSTONE
+      - HOPPER
+      - DROPPER
+      - DISPENSER
+      - SHULKER_BOX
+      - COMPOSTER
+      - JUKEBOX
+      - CHEST_MINECART
+      - HOPPER_MINECART
+      - FURNACE_MINECART
   mob-damage:
     enable: true
     type: all
@@ -58,7 +78,7 @@ flags:
     enable: true
     type: list
     list:
-      - 'spawn'
+      - 'help'
   chat:
     enable: true
   leaf-decay:
@@ -80,7 +100,15 @@ flags:
     type: list
     list:
       - HORSE
-      - MINECART
+      - DONKEY
+      - MULE
+      - SKELETON_HORSE
+      - ZOMBIE_HORSE
+      - CAMEL
+      - PIG
+      - LLAMA
+      - STRIDER
+      - PARROT
   painting:
     enable: true
   bucket-place:

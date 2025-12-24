@@ -4,27 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="clean maven package">
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIAbstract.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIDefaultTemplate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/text/TextEditMode.java" afterDir="false" />
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.4 update - world flag menu remake">
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HDefault.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/command/Cmd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/command/Cmd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HookedPlugins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HookedPlugins.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Worlds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Worlds.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/config_zh_CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/config_zh_CN.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/en.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/flags.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/flags.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,14 +127,6 @@
       <option name="presentableId" value="Default" />
       <updated>1723874925242</updated>
       <workItem from="1723874926713" duration="2956000" />
-    </task>
-    <task id="LOCAL-00004" summary="1.3.9 Update - new flags &quot;ice-form&quot;, &quot;fish&quot; and &quot;hook&quot;">
-      <option name="closed" value="true" />
-      <created>1725207103014</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1725207103014</updated>
     </task>
     <task id="LOCAL-00005" summary="1.4.0 Update - new flag &quot;crystal&quot; and code optimization">
       <option name="closed" value="true" />
@@ -531,7 +512,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765913768724</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="1.5.4 update - world flag menu remake">
+      <option name="closed" value="true" />
+      <created>1766226049460</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1766226049461</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +541,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="." />
     <MESSAGE value="1.5.2 update - &quot;fire-spawn&quot; fix &amp; new flag &quot;lightning&quot;" />
     <MESSAGE value="1.5.3 update - flags fix and adjustment" />
     <MESSAGE value="1.5.4 update - voidtp fix" />
@@ -577,6 +565,7 @@
     <MESSAGE value="lets make flags.yml clean again" />
     <MESSAGE value="update README.md" />
     <MESSAGE value="clean maven package" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean maven package" />
+    <MESSAGE value="1.5.4 update - world flag menu remake" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.5.4 update - world flag menu remake" />
   </component>
 </project>

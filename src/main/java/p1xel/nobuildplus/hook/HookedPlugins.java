@@ -14,35 +14,19 @@ public class HookedPlugins {
     }
 
     public static boolean cancel(Player player) {
-        boolean result = hookedPlugin.cancel(player);
-        if (result) {
-            return true;
-        }
-        return false;
+        return hookedPlugin.cancel(player);
     }
 
     public static boolean cancel(Block block) {
-        boolean result = hookedPlugin.cancel(block);
-        if (result) {
-            return true;
-        }
-        return false;
+        return hookedPlugin.cancel(block);
     }
 
     public static boolean cancel(Entity entity) {
-        boolean result = hookedPlugin.cancel(entity);
-        if (result) {
-            return true;
-        }
-        return false;
+        return hookedPlugin.cancel(entity);
     }
 
     public static boolean cancel(Location loc) {
-        boolean result = hookedPlugin.cancel(loc);
-        if (result) {
-            return true;
-        }
-        return false;
+        return hookedPlugin.cancel(loc);
     }
 
 

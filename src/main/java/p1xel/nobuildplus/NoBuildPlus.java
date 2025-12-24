@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.api.NBPAPI;
 import p1xel.nobuildplus.command.Cmd;
 import p1xel.nobuildplus.command.TabList;
+import p1xel.nobuildplus.hook.HDefault;
 import p1xel.nobuildplus.hook.HDom;
 import p1xel.nobuildplus.hook.HRes;
 import p1xel.nobuildplus.hook.HookedPlugins;
@@ -233,6 +234,10 @@ public class NoBuildPlus extends JavaPlugin {
                         HookedPlugins.addHookPlugin(new HDom());
                         return;
                     }
+                }
+
+                default: {
+                    HookedPlugins.addHookPlugin(new HDefault());
                 }
             }
 

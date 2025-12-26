@@ -11,12 +11,14 @@
 ## About NoBuildPlus
 
 ## Description
-NoBuildPlus has provided different flags to protect your world. With simple and customizable settings, you are able to manage the world easily.
-- Simple configuration to manage the certain worlds
-- Available to change the managed items, blocks or mobs for the flag
-- Able to change the boolean of different flags in global settings file
-- Permissions and deny message are able to be adjusted or removed for each world
-- Menu supported! More convenient way to enjoy the plugin
+NoBuildPlus provides a variety of flags to protect your worlds.  
+With simple and customizable settings, you can easily manage each world according to your needs.  
+
+- Easy configuration to manage specific worlds
+- Flexible options to modify items, blocks, or mobs associated with a flag
+- Ability to toggle flag booleans in the global settings file
+- World-specific permissions and deny messages can be customized or removed
+- Menu support for a more convenient and user-friendly experience
 
 ## Version Support
 - 1.8+ (Spigot, Paper, Purpur, Folia)

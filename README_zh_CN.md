@@ -20,7 +20,7 @@ NoBuildPlus提供了多种不同的规则来保护整个世界, 在简单与自�
 - 方便实用的菜单
 
 ## 版本支持
-- 1.8+ (Spigot, Paper, Purpur)
+- 1.8+ (Spigot, Paper, Purpur, Folia)
 
 ## 文档帮助
 - 插件使用: [PixelCraft使用文档](https://docs.p1mc.top/zh/)

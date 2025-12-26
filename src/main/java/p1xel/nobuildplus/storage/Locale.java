@@ -16,13 +16,11 @@ public class Locale {
 
     public static File file;
     public static FileConfiguration yaml;
-
-
+    private static final List<String> languages = Arrays.asList("en","zh_CN","zh_TW");
 
     public static void createLocaleFile() {
 
-        List<String> lang = Arrays.asList("en","zh_CN","zh_TW");
-        for (String l : lang) {
+        for (String l : languages) {
             File file = new File(NoBuildPlus.getInstance().getDataFolder() + "/lang", l + ".yml");
             YamlConfiguration exist_file = YamlConfiguration.loadConfiguration(file);
             if (!file.exists()) {
@@ -83,6 +81,8 @@ public class Locale {
     public static String translate(String message) {
         return ChatColor.translateAlternateColorCodes('&', message.replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
+
+    public List<String> getLanguages() { return languages; }
 
 
 }

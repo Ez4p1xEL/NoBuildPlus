@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.5.41</version>
+    <version>1.5.50</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -72,6 +72,11 @@
             <url>https://repo.tcoded.com/releases</url>
         </repository>
 
+        <repository>
+            <id>matteodev</id>
+            <url>https://maven.devs.beer/</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -83,6 +88,14 @@
         </dependency>
 
         <dependency>
+            <groupId>com.tcoded</groupId>
+            <artifactId>FoliaLib</artifactId>
+            <version>0.5.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--> Residence <!-->
+        <dependency>
             <groupId>com.bekvon</groupId>
             <artifactId>residence-api</artifactId>
             <version>5.1.6.4</version>
@@ -90,17 +103,20 @@
             <systemPath>${project.basedir}/lib/Residence5.1.6.4.jar</systemPath>
         </dependency>
 
-        <dependency>
-            <groupId>com.tcoded</groupId>
-            <artifactId>FoliaLib</artifactId>
-            <version>0.5.1</version>
-            <scope>compile</scope>
-        </dependency>
-
+        <!--> Dominion <!-->
         <dependency>
             <groupId>cn.lunadeer</groupId>
             <artifactId>DominionAPI</artifactId>
             <version>4.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--> ItemsAdder <!-->
+        <dependency>
+            <groupId>dev.lone</groupId>
+            <artifactId>api-itemsadder</artifactId>
+            <!-- Replace {version} with the latest version -->
+            <version>4.0.10</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

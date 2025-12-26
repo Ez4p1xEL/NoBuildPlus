@@ -286,6 +286,8 @@ flag:
     tnt-prime: 'TNT priming'
     pressure-plate: 'Pressure plate interacting'
     fire-spread: 'Fire spreading'
+    ia-furniture-sit: 'Sit on ItemsAdder furniture'
+    ia-campfire-interact: 'Interact with ItemsAdder campfire'
 
 true: '&aALLOW'
 false: '&cPREVENT'

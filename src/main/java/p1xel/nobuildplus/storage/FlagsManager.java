@@ -2,11 +2,14 @@ package p1xel.nobuildplus.storage;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import p1xel.nobuildplus.Flag;
+import p1xel.nobuildplus.FlagRegistry;
 import p1xel.nobuildplus.NoBuildPlus;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FlagsManager {
@@ -61,7 +64,9 @@ public class FlagsManager {
     static List<String> flagList = new ArrayList<>();
 
     public static void defaultFlagList() {
-        flagList.addAll(yaml.getConfigurationSection("flags").getKeys(false));
+        for (Flag flag : FlagRegistry.getAllFlags()) {
+            flagList.add(flag.getName());
+        }
     }
 
     public static List<String> getFlags() {
@@ -69,13 +74,7 @@ public class FlagsManager {
     }
 
     public static boolean isInTheFlagsList(String flag) {
-
-        if (getFlags().contains(flag)) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return getFlags().contains(flag);
     }
 
     public static boolean getBoolInFlag(String flag, String path) {

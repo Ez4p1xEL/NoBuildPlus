@@ -19,7 +19,7 @@ NoBuildPlus has provided different flags to protect your world. With simple and 
 - Menu supported! More convenient way to enjoy the plugin
 
 ## Version Support
-- 1.8+ (Spigot, Paper, Purpur)
+- 1.8+ (Spigot, Paper, Purpur, Folia)
 
 ## Documentation
 - For the use of plugin: [PixelCraft Documentation](https://docs.p1mc.top/)

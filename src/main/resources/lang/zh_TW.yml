@@ -284,6 +284,8 @@ flag:
     tnt-prime: 'TNT點燃'
     pressure-plate: '壓力板被觸發'
     fire-spread: '火焰蔓延'
+    ia-furniture-sit: '坐在ItemsAdder家具'
+    ia-campfire-interact: '與ItemsAdder營火互動'
 
 true: '&a允許'
 false: '&c禁止'

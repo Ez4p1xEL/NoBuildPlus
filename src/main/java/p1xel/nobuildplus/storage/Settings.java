@@ -79,11 +79,15 @@ public class Settings {
         return yaml.getString("global-settings.deny-message");
     }
 
+    public static boolean getEnableBool(String flag) {
+        return yaml.getBoolean("flags." + flag + ".enable", true);
+    }
+
 
     // 是否可以执行flag监测
     // 这个方法包含了 FlagsManager.getFlagsIeEnabled() 和 Settings.getEnableWorldList().contains() 的功能
     public static boolean canExecute(String world, String flag) {
-        return FlagsManager.yaml.getBoolean("flags." + flag + ".enable") && Settings.getEnableWorldList().contains(world);
+        return getEnableBool(flag) && Settings.getEnableWorldList().contains(world);
     }
 
     // Update from SETTINGS

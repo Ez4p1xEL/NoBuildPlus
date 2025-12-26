@@ -2,12 +2,11 @@ package p1xel.nobuildplus;
 
 import com.google.common.collect.Maps;
 import p1xel.nobuildplus.storage.FlagsManager;
-import p1xel.nobuildplus.storage.Settings;
-import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.storage.Locale;
 
 import java.util.*;
 
-public enum Flags {
+public enum Flags implements Flag {
     // Default value
     destroy("break", true, "IRON_PICKAXE", 10, "all", Collections.singletonList("GRASS_BLOCK")),
     build("build", true, "GRASS_BLOCK", 11, "all", Collections.singletonList("GRASS_BLOCK")),
@@ -76,11 +75,11 @@ public enum Flags {
     fire_spread("fire-spread", true, "FLINT_AND_STEEL", 20, null, null);
 
     private final String flag_name;
-    private boolean enabled;
+    private final boolean enabled;
     private final String show_item;
     private final int slot;
     private final String type;
-    private List<String> list;
+    private final List<String> list;
     private final static Map<String, Flags> NAMEMAP = Maps.newHashMap();
     private final static Map<String, List<String>> LISTMAP = Maps.newHashMap();
 
@@ -93,50 +92,47 @@ public enum Flags {
         this.list = list;
     }
 
+    @Deprecated
     public boolean getDefaultFlagEnabled() {
         return this.enabled;
     }
 
-    public String getShowItem() {
-        return this.show_item;
-    }
-
+    @Deprecated
     public int getSlot() {
         return this.slot;
     }
 
+    @Override
     public String getDefaultType() {
         return this.type;
     }
 
+    @Override
     public List<String> getDefaultList() {
         return this.list;
     }
 
+    @Override
     public String getName() {
         return this.flag_name;
     }
 
-    public boolean isEnabled(String world) {
-        if (!Settings.canExecute(world, getName())) {
-            return false;
-        }
-
-        if (Worlds.getFlag(world, getName())) {
-            return false;
-        }
-
+    @Override
+    public boolean inLocalFile() {
         return true;
     }
 
+    @Override
     public String getType() {
         return FlagsManager.getFlagsType(getName());
     }
 
+    @Override
     public List<String> getList() {
         return LISTMAP.get(getName());
     }
 
+    @Deprecated
     public static Flags matchFlag(final String name) {
         Flags result;
 
@@ -148,6 +144,7 @@ public enum Flags {
         return result;
     }
 
+    @Deprecated
     public static Map<String, Flags> getMaps() {
         return NAMEMAP;
     }
@@ -156,8 +153,8 @@ public enum Flags {
         return LISTMAP;
     }
 
-    public static void refreshMap() {
-        LISTMAP.clear();
+    @Override
+    public void refreshMap() {
         for (String flag : NAMEMAP.keySet()) {
             List<String> list = new ArrayList<>();
             if (FlagsManager.yaml.isSet("flags." + flag + ".list")) {
@@ -173,6 +170,16 @@ public enum Flags {
 
             NAMEMAP.put(flag.getName(), flag);
         }
+    }
+
+    @Override
+    public String getShowItem() {
+        return this.show_item;
+    }
+
+    @Override
+    public String getDescription(String language) {
+        return Locale.getMessage("flag.description." + flag_name);
     }
 
 }

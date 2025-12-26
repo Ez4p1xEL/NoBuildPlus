@@ -10,6 +10,9 @@ public class HookedPlugins {
     private static Hooks hookedPlugin;
 
     public static void addHookPlugin(Hooks hook) {
+        if (hookedPlugin != null) {
+            return;
+        }
         hookedPlugin = hook;
     }
 

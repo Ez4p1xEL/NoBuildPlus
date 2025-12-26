@@ -9,8 +9,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import p1xel.nobuildplus.Flag;
+import p1xel.nobuildplus.FlagRegistry;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.storage.Config;
 import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.storage.Locale;
 import p1xel.nobuildplus.storage.Worlds;
@@ -133,7 +136,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 slot+=2;
             }
 
-            Flags flag = Flags.matchFlag(f);
+            Flag flag = FlagRegistry.matchFlag(f);
             Material material = Material.valueOf(flag.getShowItem());
             String flagName = flag.getName();
             boolean bool = Worlds.getFlag(worldName, flagName);
@@ -144,7 +147,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                     .map(line -> ChatColor.translateAlternateColorCodes('&', line))
                     .map(line -> line.replaceAll("%flag%",flagName)
                             .replaceAll("%bool%", Locale.getMessage(String.valueOf(bool)))
-                            .replaceAll("%description%", Locale.getMessage("flag.description." + flagName)))
+                            .replaceAll("%description%", flag.getDescription(Config.getLanguage())))
                     .collect(Collectors.toList());
             meta.setLore(lore_list);
             PersistentDataContainer container = meta.getPersistentDataContainer();
@@ -175,13 +178,14 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
         String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+        Flag flag = FlagRegistry.matchFlag(flagName);
         boolean bool = Worlds.getFlag(worldName, flagName);
         meta.setDisplayName(Locale.getMessage("gui.world.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
         List<String> lore_list = Locale.yaml.getStringList("gui.world.items.flag.lore").stream()
                 .map(line -> ChatColor.translateAlternateColorCodes('&', line))
                 .map(line -> line.replaceAll("%flag%",flagName)
                         .replaceAll("%bool%", Locale.getMessage(String.valueOf(bool)))
-                        .replaceAll("%description%", Locale.getMessage("flag.description." + flagName)))
+                        .replaceAll("%description%", flag.getDescription(Config.getLanguage())))
                 .collect(Collectors.toList());
         meta.setLore(lore_list);
         item.setItemMeta(meta);

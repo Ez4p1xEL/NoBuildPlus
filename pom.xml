@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.5.50</version>
+    <version>1.5.51</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -118,6 +118,15 @@
             <!-- Replace {version} with the latest version -->
             <version>4.0.10</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!--> BlockRegen <!-->
+        <dependency>
+            <groupId>nl.aurorion.blockregen</groupId>
+            <artifactId>BlockRegen</artifactId>
+            <version>3.31.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/BlockRegen-3.31.0.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

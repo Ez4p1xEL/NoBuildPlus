@@ -9,15 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.api.NBPAPI;
 import p1xel.nobuildplus.command.Cmd;
 import p1xel.nobuildplus.command.TabList;
-import p1xel.nobuildplus.flag.ItemsAdderFlags;
-import p1xel.nobuildplus.hook.HDefault;
-import p1xel.nobuildplus.hook.HDom;
-import p1xel.nobuildplus.hook.HRes;
-import p1xel.nobuildplus.hook.HookedPlugins;
+import p1xel.nobuildplus.hook.loader.AreaProtectionLoader;
+import p1xel.nobuildplus.hook.loader.FlagRegistrationLoader;
 import p1xel.nobuildplus.listener.*;
-import p1xel.nobuildplus.listener.hookedplugins.DominionListener;
-import p1xel.nobuildplus.listener.hookedplugins.ItemsAdderListener;
-import p1xel.nobuildplus.listener.hookedplugins.ResidenceListener;
 import p1xel.nobuildplus.listener.gui.GUIListener;
 import p1xel.nobuildplus.listener.text.TextEditMode;
 import p1xel.nobuildplus.storage.*;
@@ -44,6 +38,7 @@ public class NoBuildPlus extends JavaPlugin {
         return api;
     }
     public static FoliaLib getFoliaLib() {return foliaLib;}
+    @Deprecated
     public static DominionAPI getDominionAPI() { return dominionAPI;}
     public static TextEditMode getTextEditMode() { return textEditMode; }
 
@@ -55,6 +50,7 @@ public class NoBuildPlus extends JavaPlugin {
         }
     }
 
+    @Deprecated
     public static Residence getRes() {
         Plugin resPlug = Bukkit.getServer().getPluginManager().getPlugin("Residence");
         if (resPlug != null) {
@@ -136,7 +132,8 @@ public class NoBuildPlus extends JavaPlugin {
         }
         getLogger().info("[NBP] LISTENERS LOADED.");
 
-        checkHookPlugins();
+        AreaProtectionLoader.load(this);
+        FlagRegistrationLoader.load(this);
         updateFlags();
 
         getLogger().info("[NBP] HOOKED FUNCTIONS LOADED.");
@@ -177,70 +174,6 @@ public class NoBuildPlus extends JavaPlugin {
 
     void updateVersion() {
         getConfig().set("Version", getDescription().getVersion());
-    }
-
-    void checkHookPlugins() {
-
-        boolean areaProtectionPlugin = false;
-        for (String plugin : getConfig().getConfigurationSection("hook").getKeys(false)) {
-            switch (plugin) {
-                case "Residence": {
-                    if (areaProtectionPlugin) { continue; }
-                    Plugin res = getServer().getPluginManager().getPlugin("Residence");
-                    Plugin cmilib = getServer().getPluginManager().getPlugin("CMILib");
-                    boolean loaded = getConfig().getBoolean("hook." + plugin) && res != null && cmilib != null;
-                    if (loaded) {
-                        if (!cmilib.isEnabled()) {
-                            getServer().getPluginManager().enablePlugin(cmilib);
-                            getServer().getPluginManager().enablePlugin(res);
-                            getLogger().info("Residence is enabled by NoBuildPlus.");
-                        }
-                        getServer().getPluginManager().registerEvents(new ResidenceListener(), this);
-                        HookedPlugins.addHookPlugin(new HRes());
-                        areaProtectionPlugin = true;
-                    }
-                }
-
-                case "Dominion": {
-                    if (areaProtectionPlugin) { continue; }
-                    Plugin dom = getServer().getPluginManager().getPlugin("Dominion");
-                    boolean loaded = getConfig().getBoolean("hook." + plugin) && dom != null;
-                    if (loaded) {
-                        if (!dom.isEnabled()) {
-                            getServer().getPluginManager().enablePlugin(dom);
-                            getLogger().info("Dominion is enabled by NoBuildPlus.");
-                        }
-                        try {
-                            dominionAPI = DominionAPI.getInstance();
-                        } catch (Exception e) {
-                            getLogger().info("Dominion function loading failure.");
-                        }
-                        getServer().getPluginManager().registerEvents(new DominionListener(), this);
-                        HookedPlugins.addHookPlugin(new HDom());
-                        areaProtectionPlugin = true;
-                    }
-                }
-
-                // Register flags 注册规则
-                case "ItemsAdder": {
-                    Plugin itemsAdder = getServer().getPluginManager().getPlugin("ItemsAdder");
-                    boolean loaded = getConfig().getBoolean("hook." + plugin) && itemsAdder != null;
-                    if (loaded) {
-                        // Register listener
-                        getServer().getPluginManager().registerEvents(new ItemsAdderListener(), this);
-                        // Register flags
-                        for (ItemsAdderFlags flag : ItemsAdderFlags.values()) {
-                            FlagRegistry.registerFlag(flag);
-                        }
-                    }
-                }
-            }
-
-        }
-
-        if (!areaProtectionPlugin) {
-            HookedPlugins.addHookPlugin(new HDefault());
-        }
     }
 
     void updateFlags() {
@@ -302,27 +235,29 @@ public class NoBuildPlus extends JavaPlugin {
     void updateConfig() {
         int v = Config.getConfigurationVersion();
 
-        if (v < 6) {
-            getConfig().set("Configuration", 6);
-            getConfig().set("hook.ItemsAdder", true);
-            if (v < 5) {
-                getConfig().set("text-edit-mode.cancel", "cancel");
-                if (v < 4) {
-                    if (v < 3) {
-                        getConfig().set("hook.Dominion", true);
+        if (v < 7) {
+            getConfig().set("Configuration", 7);
+            getConfig().set("hook.BlockRegen", true);
+            if (v < 6) {
+                getConfig().set("hook.ItemsAdder", true);
+                if (v < 5) {
+                    getConfig().set("text-edit-mode.cancel", "cancel");
+                    if (v < 4) {
+                        if (v < 3) {
+                            getConfig().set("hook.Dominion", true);
+                        }
+                        getConfig().set("deny-message-type", "MESSAGE");
+                        getConfig().set("deny-message-sound.name", "ENTITY_VILLAGER_NO");
                     }
-                    getConfig().set("deny-message-type", "MESSAGE");
-                    getConfig().set("deny-message-sound.name", "ENTITY_VILLAGER_NO");
-                }
-                try {
-                    getConfig().save(new File(getDataFolder(), "config.yml"));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
                 }
             }
         }
+        try {
+            getConfig().save(new File(getDataFolder(), "config.yml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 //    public static boolean isResidenceEnabled() {
 //        return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
 //    }

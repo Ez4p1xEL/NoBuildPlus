@@ -350,7 +350,7 @@ public class NoBuildPlusEntityListener implements Listener {
     }
 
     // Flag: tnt
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onTNTExplode(EntityExplodeEvent e) {
 
         Entity entity = e.getEntity();

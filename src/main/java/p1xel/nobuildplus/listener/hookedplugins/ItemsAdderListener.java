@@ -1,6 +1,5 @@
 package p1xel.nobuildplus.listener.hookedplugins;
 
-import dev.lone.itemsadder.api.CustomEntity;
 import dev.lone.itemsadder.api.Events.FurnitureInteractEvent;
 import dev.lone.itemsadder.api.Events.campfire.CampfirePutItemEvent;
 import dev.lone.itemsadder.api.Events.campfire.CampfireRemoveItemEvent;

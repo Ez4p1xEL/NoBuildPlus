@@ -1,5 +1,7 @@
 package p1xel.nobuildplus.hook;
 
+import nl.aurorion.blockregen.BlockRegenPlugin;
+import nl.aurorion.blockregen.region.RegionManager;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -9,7 +11,9 @@ import org.bukkit.event.Listener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HDefault extends Hooks {
+public class HBlockRegen extends Hooks{
+
+    private final RegionManager regionManager = BlockRegenPlugin.getInstance().getRegionManager();
 
     @Override
     public List<Listener> getListeners() {
@@ -23,7 +27,7 @@ public class HDefault extends Hooks {
 
     @Override
     public boolean cancel(Block b) {
-        return false;
+        return regionManager.getArea(b) != null;
     }
 
     @Override

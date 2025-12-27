@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import p1xel.nobuildplus.Flags;
@@ -20,7 +21,7 @@ public class NoBuildPlusBlockListener implements Listener {
     規則事件監聽示例
     */
     // Flag: break
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onBreak(BlockBreakEvent e) {
 
         Block block = e.getBlock();
@@ -109,7 +110,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: leaf-decay
-    @EventHandler(priority = LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onLeafDecay(LeavesDecayEvent e) {
 
         Block block = e.getBlock();
@@ -129,7 +130,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: melt
-    @EventHandler(priority = LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onSnowMelt(BlockFadeEvent e) {
         Block block = e.getBlock();
         Material mat = block.getType();
@@ -152,7 +153,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Coral Decay
-    @EventHandler(priority = LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onCoralDecay(BlockFadeEvent e) {
         Block block = e.getBlock();
 

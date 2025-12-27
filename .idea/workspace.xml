@@ -4,10 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.5.50 update - flag registry">
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="update README.md">
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HBlockRegen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/loader/AreaProtectionLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/loader/FlagRegistrationLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README_zh_CN.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_zh_CN.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HDefault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HDom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HDom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HRes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HRes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HookedPlugins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/HookedPlugins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/Hooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/hook/Hooks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusBlockListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusBlockListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusEntityListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusEntityListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/hookedplugins/ItemsAdderListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/hookedplugins/ItemsAdderListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,14 +133,6 @@
       <option name="presentableId" value="Default" />
       <updated>1723874925242</updated>
       <workItem from="1723874926713" duration="2956000" />
-    </task>
-    <task id="LOCAL-00007" summary="1.4.2 - Add compatibility to Dominion and NBPAPI">
-      <option name="closed" value="true" />
-      <created>1726999952567</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1726999952567</updated>
     </task>
     <task id="LOCAL-00008" summary="1.4.3 - Adjust all the code of flag listeners, flags automatically update function and updated README.md">
       <option name="closed" value="true" />
@@ -513,7 +518,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766761009301</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="update README.md">
+      <option name="closed" value="true" />
+      <created>1766785217755</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1766785217755</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,11 +567,11 @@
     <MESSAGE value="menu update and package rename" />
     <MESSAGE value="pom update" />
     <MESSAGE value="lets make flags.yml clean again" />
-    <MESSAGE value="update README.md" />
     <MESSAGE value="clean maven package" />
     <MESSAGE value="1.5.4 update - world flag menu remake" />
     <MESSAGE value="1.5.41" />
     <MESSAGE value="1.5.50 update - flag registry" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5.50 update - flag registry" />
+    <MESSAGE value="update README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="update README.md" />
   </component>
 </project>

@@ -134,7 +134,10 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
             }
 
             Flag flag = FlagRegistry.matchFlag(f);
-            Material material = Material.valueOf(flag.getShowItem());
+            Material material = Material.matchMaterial(flag.getShowItem());
+            if (material == null) {
+                material = Material.PAPER;
+            }
             String flagName = flag.getName();
             boolean bool = Settings.getDefaultFlag(flagName);
             ItemStack item = new ItemStack(material);

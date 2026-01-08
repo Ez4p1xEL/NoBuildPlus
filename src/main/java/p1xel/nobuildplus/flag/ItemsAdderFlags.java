@@ -5,14 +5,13 @@ import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.storage.Locale;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public enum ItemsAdderFlags implements Flag {
 
     // Reference: WorldGuard Compatibility with ItemsAdder
     // 参考来自WorldGuard对ItemsAdder新增的可开关保护
-    ia_furniture_sit("ia-furniture-sit", "oak_stairs", null, null),
+    ia_furniture_sit("ia-furniture-sit", "OAK_STAIRS", null, null),
     ia_campfire_interact("ia-campfire-interact", "CAMPFIRE", null, null);
 //    ia_vehicle_place("ia-vehicle-place", "minecart", null, null),
 //    ia_vehicle_remove("ia-vehicle-remove", "minecart", null, null),
@@ -21,8 +20,7 @@ public enum ItemsAdderFlags implements Flag {
     private final String flag_name;
     private final String show_item;
     private final String type;
-    private final List<String> list;
-    private final HashMap<ItemsAdderFlags, List<String>> LISTMAP = new HashMap<>();
+    private List<String> list;
 
     ItemsAdderFlags(String flag_name, String show_item, String type, List<String> list) {
         this.flag_name = flag_name;
@@ -43,7 +41,7 @@ public enum ItemsAdderFlags implements Flag {
 
     @Override
     public List<String> getList() {
-        return FlagsManager.getFlagsList(flag_name);
+        return list;
     }
 
     @Override
@@ -68,7 +66,7 @@ public enum ItemsAdderFlags implements Flag {
             if (FlagsManager.yaml.isSet("flags." + flag + ".list")) {
                 list = FlagsManager.getFlagsList(flag.flag_name);
             }
-            LISTMAP.put(flag, list);
+            flag.list = list;
         }
     }
 

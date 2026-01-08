@@ -7,6 +7,7 @@ import p1xel.nobuildplus.Flag;
 import p1xel.nobuildplus.FlagRegistry;
 import p1xel.nobuildplus.flag.ItemsAdderFlags;
 import p1xel.nobuildplus.listener.hookedplugins.ItemsAdderListener;
+import p1xel.nobuildplus.storage.Config;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,14 +26,16 @@ public class FlagRegistrationLoader {
 
     public static void load(JavaPlugin plugin) {
         FLAG_REGISTRATION_HOOKS.forEach((pluginName, flags) -> {
-            if (Bukkit.getPluginManager().getPlugin(pluginName) != null) {
-                for (Flag flag : flags) {
-                    FlagRegistry.registerFlag(flag);
+            if (Config.getBool("hook." + pluginName)) {
+                if (Bukkit.getPluginManager().getPlugin(pluginName) != null) {
+                    for (Flag flag : flags) {
+                        FlagRegistry.registerFlag(flag);
+                    }
+                    for (Listener listener : LISTENER_REGISTRATION.get(pluginName)) {
+                        plugin.getServer().getPluginManager().registerEvents(listener, plugin);
+                    }
+                    plugin.getLogger().info("Registered flags from: " + pluginName);
                 }
-                for (Listener listener : LISTENER_REGISTRATION.get(pluginName)) {
-                    plugin.getServer().getPluginManager().registerEvents(listener, plugin);
-                }
-                plugin.getLogger().info("Registered flags from: " + pluginName);
             }
         });
 

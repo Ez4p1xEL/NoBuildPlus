@@ -22,7 +22,6 @@ import java.util.List;
 public class NoBuildPlusEntityListener implements Listener {
 
     // Flag: Mob Damage
-    // Flag: Pvp
     @EventHandler
     public void onMobDamage(EntityDamageByEntityEvent e) {
 

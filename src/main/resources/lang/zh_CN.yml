@@ -79,7 +79,7 @@ gui:
           - '&7修改默认模板的规则设定'
           - '&7使下次启用的世界可直接套用'
           - ''
-          - '&7Click to edit'
+          - '&7点击编辑'
       next_page:
         display_name: '&a下一页'
         lore:

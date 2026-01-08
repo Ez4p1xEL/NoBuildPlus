@@ -4,7 +4,7 @@ import java.util.*;
 
 public class FlagRegistry {
 
-    private static final HashSet<Flag> externalFlags = new HashSet<>();
+    private static final List<Flag> externalFlags = new ArrayList<>();
     private static final HashMap<String, Flag> NAMEMAP = new HashMap<>();
 
     public static void registerFlag(Flag flag) {
@@ -12,11 +12,11 @@ public class FlagRegistry {
         NAMEMAP.put(flag.getName(), flag);
     }
 
-    public static HashSet<Flag> getAllFlags() {
-        HashSet<Flag> set = new HashSet<>();
-        set.addAll(Arrays.asList(Flags.values()));
-        set.addAll(externalFlags);
-        return set;
+    public static List<Flag> getAllFlags() {
+        List<Flag> list = new ArrayList<>();
+        list.addAll(Arrays.asList(Flags.values()));
+        list.addAll(externalFlags);
+        return list;
     }
 
     public static Flag matchFlag(final String name) {

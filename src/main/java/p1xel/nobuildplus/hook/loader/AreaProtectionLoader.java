@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.hook.*;
+import p1xel.nobuildplus.storage.Config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,13 +22,15 @@ public class AreaProtectionLoader {
 
     public static void load(JavaPlugin plugin) {
         for (Map.Entry<String, Supplier<Hooks>> entry : AREA_PROTECTION_HOOKS.entrySet()) {
-            if (Bukkit.getPluginManager().getPlugin(entry.getKey()) != null) {
-                Hooks hook = entry.getValue().get();
-                HookedPlugins.addHookPlugin(hook);
-                for (Listener listener : hook.getListeners()) {
-                    plugin.getServer().getPluginManager().registerEvents(listener, plugin);
+            if (Config.getBool("hook." + entry.getKey())) {
+                if (Bukkit.getPluginManager().getPlugin(entry.getKey()) != null) {
+                    Hooks hook = entry.getValue().get();
+                    HookedPlugins.addHookPlugin(hook);
+                    for (Listener listener : hook.getListeners()) {
+                        plugin.getServer().getPluginManager().registerEvents(listener, plugin);
+                    }
+                    plugin.getLogger().info("Loaded AreaProtection hook: " + entry.getKey());
                 }
-                plugin.getLogger().info("Loaded AreaProtection hook: " + entry.getKey());
             }
         }
     }

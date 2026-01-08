@@ -1,10 +1,16 @@
 package p1xel.nobuildplus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Maps;
+
 import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.storage.Locale;
-
-import java.util.*;
 
 public enum Flags implements Flag {
     // Default value
@@ -81,7 +87,7 @@ public enum Flags implements Flag {
     private final String type;
     private final List<String> list;
     private final static Map<String, Flags> NAMEMAP = Maps.newHashMap();
-    private final static Map<String, List<String>> LISTMAP = Maps.newHashMap();
+    private List<String> configList;
 
     private Flags(String flag_name, boolean enabled, String show_item, int slot, String type, List<String> list) {
         this.flag_name = flag_name;
@@ -90,6 +96,7 @@ public enum Flags implements Flag {
         this.slot = slot;
         this.type = type;
         this.list = list;
+        this.configList = list;
     }
 
     @Deprecated
@@ -129,46 +136,28 @@ public enum Flags implements Flag {
 
     @Override
     public List<String> getList() {
-        return LISTMAP.get(getName());
+        return configList;
     }
 
     @Deprecated
     public static Flags matchFlag(final String name) {
-        Flags result;
-
-        String filtered = name.toLowerCase();
-
-        //filtered = filtered.replaceAll("-", "_");
-        result = NAMEMAP.get(filtered);
-
-        return result;
-    }
-
-    @Deprecated
-    public static Map<String, Flags> getMaps() {
-        return NAMEMAP;
-    }
-
-    public static Map<String, List<String>> getListMap() {
-        return LISTMAP;
+        return NAMEMAP.get(name.toLowerCase());
     }
 
     @Override
     public void refreshMap() {
-        for (String flag : NAMEMAP.keySet()) {
+        for (Flags flag : values()) {
             List<String> list = new ArrayList<>();
-            if (FlagsManager.yaml.isSet("flags." + flag + ".list")) {
-                list = FlagsManager.getFlagsList(flag);
+            if (FlagsManager.yaml.isSet("flags." + flag.flag_name + ".list")) {
+                list = FlagsManager.getFlagsList(flag.flag_name);
             }
-            LISTMAP.put(flag, list);
+            flag.configList = list;
         }
-
     }
 
     static {
         for (Flags flag : values()) {
-
-            NAMEMAP.put(flag.getName(), flag);
+            NAMEMAP.put(flag.flag_name.toLowerCase(), flag);
         }
     }
 

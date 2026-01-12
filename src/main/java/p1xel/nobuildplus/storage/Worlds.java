@@ -91,8 +91,8 @@ public class Worlds {
             x = yaml.getDouble(w + ".spawn-loc.x");
             y = yaml.getDouble(w + ".spawn-loc.y");
             z = yaml.getDouble(w + ".spawn-loc.z");
-            yaw = (Float) yaml.get(w + ".spawn-loc.yaw");
-            pitch = (Float) yaml.get(w + ".spawn-loc.pitch");
+            yaw = Float.parseFloat(yaml.getString(w + ".spawn-loc.yaw"));
+            pitch = Float.parseFloat(yaml.getString(w + ".spawn-loc.pitch"));
         } catch (NullPointerException e) {
             return null;
         }

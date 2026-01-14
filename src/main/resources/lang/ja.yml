@@ -1,0 +1,297 @@
+Language: ja
+plugin-name: NoBuildPlus
+commands-plugin-name: nbp
+commands:
+  top: '&8&m                                                   '
+  plugin: '                &2&lNoBuildPlus %version%'
+  space-1: '&f'
+  gui: '&7/%prefix% &6GUIを開く。'
+  help: '&7/%prefix% help &6ヘルプを表示。'
+  list: '&7/%prefix% list &6有効なワールドの一覧。'
+  add: '&7/%prefix% add <world> &6ワールド名をリストに追加。'
+  remove: '&7/%prefix% remove <world> &6ワールド名をリストから削除。'
+  clear: '&7/%prefix% clear &6リストからワールドを全て削除。'
+  flag: '&7/%prefix% flag <world> <flag> <true/false> &6ワールドのフラグを設定。'
+  flaglist: '&7/%prefix% flag list &6フラグ一覧を表示。'
+  setspawn: '&7/%prefix% setspawn &6現在のワールドのスポーン地点を設定。'
+  tp: '&7/%prefix% tp &6現在のワールドのスポーン地点へテレポート。'
+  open: '&7/%prefix% open [world] &6ワールドのGUIを開く。'
+  reload: '&7/%prefix% reload &6設定をリロード。'
+  space-8: '&f'
+  bottom: '&8&m                                                   '
+update-check:
+  invalid: 'アップデートを確認できません: '
+  latest: 'アップデートはありません。'
+  outdate: '新しいアップデートがあります。'
+list-1: '&7&l%prefix% &8&l>> &7有効なワールド:'
+list-2: '&9%list%'
+no-perm: '&7&l%prefix% &8&l>> &cその操作を行う権限がありません！'
+not-allow: '&7&l%prefix% &8&l>> &c&l! &7ここではその操作はできません。'
+already-exists: '&7&l%prefix% &8&l>> &cそのワールドはすでに存在します！'
+not-in-list: '&7&l%prefix% &8&l>> &cそのワールドはリストにありません！'
+clear-success: '&7&l%prefix% &8&l>> &a有効なワールドリストをクリアしました！'
+reload-success: '&7&l%prefix% &8&l>> &a設定を正常にリロードしました！'
+add-success: '&7&l%prefix% &8&l>> &aワールド &9%world% &aをリストに追加しました。'
+remove-success: '&7&l%prefix% &8&l>> &aワールド &9%world% &aをリストから削除しました。'
+cant-find-world: '&7&l%prefix% &8&l>> &cワールドが見つかりません。（または無効化されています）'
+flags-list: '&7&l%prefix% &8&l>> &c無効なフラグです。/nbp flag list で確認してください。'
+invalid-boolean: '&7&l%prefix% &8&l>> &c無効です。true または false を入力してください。'
+flag-set-success: '&7&l%prefix% &8&l>> &aワールド &9%world% &a のフラグ &e%flag% &aを &b%boolean%&a に設定しました。'
+loc-not-set: '&7&l%prefix% &8&l>> &cワールドのスポーン地点が設定されていません！'
+loc-set-success: '&7&l%prefix% &8&l>> &aワールド &9%world%&a のスポーン地点を設定しました！'
+not-player: '&cプレイヤーでなければその操作はできません。'
+tp-success: '&7&l%prefix% &8&l>> &aワールド &9%world%&a のスポーン地点へテレポートしました。'
+wrong-arg: '&7&l%prefix% &8&l>> &c引数が間違っています！'
+gui-not-support: '&7&l%prefix% &8&l> &cこのサーバーバージョンはGUI機能をサポートしていません。'
+default-flag-set-success: '&7&l%prefix% &8&l> &aデフォルトテンプレートのフラグ &e%flag% &aを &e%boolean%&a に設定しました。'
+join-mode: '&7&l%prefix% &8&l> &aテキスト編集モードです。内容を入力するか、%cancel% を入力して終了してください。'
+already-in-mode: '&7&l%prefix% &8&l> &c現在モード中です。終了するには %cancel% を入力してください。'
+quit-mode: '&7&l%prefix% &8&l> &cテキスト編集モードを終了しています...'
+edit-default-permission: '&7&l%prefix% &8&l> &aデフォルトテンプレートの権限を &e%permission%&a に編集しました。'
+edit-default-deny-message: '&7&l%prefix% &8&l> &aデフォルトテンプレートの拒否メッセージを &e%message%&a に編集しました。'
+edit-permission: '&7&l%prefix% &8&l> &aワールド &9%world% &a の権限を &e%permission%&a に編集しました。'
+edit-deny-message: '&7&l%prefix% &8&l> &aワールド &9%world% &a の拒否メッセージを &e%message%&a に編集しました。'
+
+gui:
+  main:
+    title: 'NoBuildPlus ワールド管理'
+    items:
+      world:
+        display_name: '&7ワールド &e%world% %type%'
+        lore:
+          - ''
+          - '&7保護対象として有効'
+          - ''
+          - '&7左クリックでフラグを表示'
+          - '&c右クリックで削除'
+      add:
+        display_name: '&aワールドを追加'
+        lore:
+          - ''
+          - '&7ワールドを追加して'
+          - '&7管理に組み込み'
+          - '&7保護対象にします。'
+          - ''
+          - '&7クリックで追加'
+      edit-default:
+        display_name: '&aデフォルトテンプレートを編集'
+        lore:
+          - ''
+          - '&7新しい有効ワールドの'
+          - '&7フラグ設定用デフォルト'
+          - '&7テンプレートを編集'
+          - ''
+          - '&7クリックで編集'
+      next_page:
+        display_name: '&a次のページ'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+      previous_page:
+        display_name: '&a前のページ'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+      close:
+        display_name: '&cメニューを閉じる'
+        lore:
+          - ''
+          - '&7クリックで閉じる'
+          - ''
+  list:
+    title: '保護対象にワールドを追加'
+    items:
+      world:
+        display_name: '&7ワールド &e%world% %type%'
+        lore:
+          - ''
+          - '&7このワールドはまだ'
+          - '&7保護対象として有効ではありません。'
+          - ''
+          - '&7クリックで有効化'
+          - ''
+      next_page:
+        display_name: '&a次のページ'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+      previous_page:
+        display_name: '&a前のページ'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+      back_to_main:
+        display_name: '&cメインメニューに戻る'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+  edit-default:
+    title: 'デフォルトテンプレートのフラグ設定を編集'
+    items:
+      flag:
+        display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aクリックで切り替え'
+      edit-permission:
+        display_name: '&a権限を編集'
+        lore:
+          - ''
+          - '&7現在の権限: &b%permission%'
+          - '&7この権限を持つプレイヤーは'
+          - '&7NoBuildPlus の保護をバイパスできます'
+          - ''
+          - '&7クリックで編集'
+      edit-deny-message:
+        display_name: '&a拒否メッセージを編集'
+        lore:
+          - ''
+          - '&7現在: &7%message%'
+          - ''
+          - '&7クリックで編集'
+      next_page:
+        display_name: '&a次のページ'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+      previous_page:
+        display_name: '&a前のページ'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+      back_to_main:
+        display_name: '&cメインメニューに戻る'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+  world:
+    title: '%world% のフラグ設定を編集'
+    items:
+      flag:
+        display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aクリックで切り替え'
+      edit-permission:
+        display_name: '&a権限を編集'
+        lore:
+          - ''
+          - '&7現在の権限: &b%permission%'
+          - '&7この権限を持つプレイヤーは'
+          - '&7NoBuildPlus の保護をバイパスできます'
+          - ''
+          - '&7クリックで編集'
+      edit-deny-message:
+        display_name: '&a拒否メッセージを編集'
+        lore:
+          - ''
+          - '&7現在: &7%message%'
+          - ''
+          - '&7クリックで編集'
+      next_page:
+        display_name: '&a次のページ'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+      previous_page:
+        display_name: '&a前のページ'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+      back_to_main:
+        display_name: '&cメインメニューに戻る'
+        lore:
+          - ''
+          - '&7クリックで切り替え'
+          - ''
+
+flag:
+  description:
+    break: 'ブロック破壊'
+    build: 'ブロック設置'
+    use: 'ブロック使用'
+    container: 'コンテナの使用'
+    mob-damage: 'モブからのダメージ'
+    mob-explode: 'モブによる爆発'
+    pvp: '他プレイヤーからのダメージ'
+    shoot: 'プレイヤーの矢射撃'
+    tnt: 'TNT爆発'
+    tnt-damage: 'TNT爆発ダメージ'
+    frame: '額縁の操作'
+    bed: 'ベッドの操作'
+    voidtp: '虚無に落下した際にスポーン地点へテレポート'
+    villager: '村人との操作'
+    command: 'コマンド実行'
+    chat: 'チャット'
+    leaf-decay: '葉の腐敗'
+    melt: 'ブロックの溶解'
+    fall-damage: '落下ダメージ'
+    armorstand: '防具立ての設置・操作'
+    farmbreak: '農地を踏む'
+    ride: 'エンティティに乗る'
+    painting: '絵画の破壊'
+    bucket-place: '液体バケツの設置'
+    bucket-fill: 'バケツで液体を汲む'
+    boat: 'ボートの操作'
+    button: 'ボタンの操作'
+    door-interact: 'ドアの操作'
+    lever: 'レバーの操作'
+    trapdoor-interact: 'トラップドアの操作'
+    fencegate-interact: 'フェンスゲートの操作'
+    drop-item: 'プレイヤーによるアイテムドロップ'
+    egg-throw: '卵投げ'
+    snowball-throw: '雪玉投げ'
+    water-spread: '水の拡散'
+    lava-spread: '溶岩の拡散'
+    fly: 'プレイヤーの飛行'
+    teleport: 'プレイヤーのテレポート'
+    mob-spawn: 'モブのスポーン'
+    minecart: 'トロッコの設置'
+    item-pickup: 'プレイヤーによるアイテム取得'
+    potion: 'プレイヤーによるポーション投擲・飲用'
+    bonemeal: '骨粉をブロックに使用'
+    elytra: 'エリトラによる滑空'
+    nether: 'ネザーポータルの生成'
+    coral-decay: 'サンゴの腐敗'
+    fire-spawn: '火の発生'
+    sign-edit: '看板の文字編集'
+    dye: '羊毛の染色'
+    piston: 'ピストンの作動'
+    ice-form: '氷の生成'
+    hook: '釣竿でプレイヤーを引っ掛ける'
+    fish: '釣り'
+    crystal: 'エンダークリスタルの操作'
+    flower-pot: '植木鉢の操作'
+    books-interact: '模様付き本棚の操作'
+    hunger: 'プレイヤーの空腹'
+    berries: 'グロウベリーの収穫'
+    craft: 'プレイヤーのクラフト'
+    heal: 'プレイヤーの回復'
+    turtle-egg: 'ウミガメの卵を踏む'
+    lightning: '落雷'
+    tnt-prime: 'TNTの着火'
+    pressure-plate: '感圧板の操作'
+    fire-spread: '火の拡散'
+    ia-furniture-sit: 'ItemsAdder家具に座る'
+    ia-campfire-interact: 'ItemsAdder焚き火の操作'
+
+true: '&a許可'
+false: '&c禁止'
+
+overworld: '&a[オーバーワールド]'
+nether: '&c[ネザー]'
+the_end: '&6[ジ・エンド]'

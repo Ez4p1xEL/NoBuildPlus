@@ -1,0 +1,297 @@
+Language: ru
+plugin-name: NoBuildPlus
+commands-plugin-name: nbp
+commands:
+  top: '&8&m                                                   '
+  plugin: '                &2&lNoBuildPlus %version%'
+  space-1: '&f'
+  gui: '&7/%prefix% &6Открыть GUI.'
+  help: '&7/%prefix% help &6Просмотреть помощь.'
+  list: '&7/%prefix% list &6Список включённых миров.'
+  add: '&7/%prefix% add <мир> &6Добавить мир в список.'
+  remove: '&7/%prefix% remove <мир> &6Удалить мир из списка.'
+  clear: '&7/%prefix% clear &6Очистить список миров.'
+  flag: '&7/%prefix% flag <мир> <флагов> <true/false> &6Установите флаг для всего мира.'
+  flaglist: '&7/%prefix% flag list &6Просмотреть список флагов.'
+  setspawn: '&7/%prefix% setspawn &6Установить точку спавна текущего мира.'
+  tp: '&7/%prefix% tp &6Телепортироваться к спавну текущего мира.'
+  open: '&7/%prefix% open [мир] &6Открыть GUI мира.'
+  reload: '&7/%prefix% reload &6Перезагрузить конфигурацию.'
+  space-8: '&f'
+  bottom: '&8&m                                                   '
+update-check:
+  invalid: 'Не удалось проверить обновления: '
+  latest: 'Новых обновлений нет.'
+  outdate: 'Доступно новое обновление.'
+list-1: '&7&l%prefix% &8&l>> &7Включённые миры:'
+list-2: '&9%list%'
+no-perm: '&7&l%prefix% &8&l>> &cУ вас нет прав для этого!'
+not-allow: '&7&l%prefix% &8&l>> &c&l! &7Вы не можете делать это здесь.'
+already-exists: '&7&l%prefix% &8&l>> &cМир уже существует!'
+not-in-list: '&7&l%prefix% &8&l>> &cМир отсутствует в списке!'
+clear-success: '&7&l%prefix% &8&l>> &aВы очистили список включённых миров!'
+reload-success: '&7&l%prefix% &8&l>> &aКонфигурация успешно перезагружена!'
+add-success: '&7&l%prefix% &8&l>> &aВы добавили &9%world% &aв список.'
+remove-success: '&7&l%prefix% &8&l>> &aВы удалили &9%world% &aиз списка.'
+cant-find-world: '&7&l%prefix% &8&l>> &cНе удалось найти мир. (Или мир отключён)'
+flags-list: '&7&l%prefix% &8&l>> &cНеверный флаг. Используйте /nbp flag list для просмотра.'
+invalid-boolean: '&7&l%prefix% &8&l>> &cНеверно, введите true или false для флага'
+flag-set-success: '&7&l%prefix% &8&l>> &aВы установили флаг &e%flag% &aдля мира &9%world% &aв &b%boolean%&a.'
+loc-not-set: '&7&l%prefix% &8&l>> &cВы не установили точку спавна для мира!'
+loc-set-success: '&7&l%prefix% &8&l>> &aВы установили точку спавна для &9%world%&a!'
+not-player: '&cВы должны быть игроком, чтобы сделать это.'
+tp-success: '&7&l%prefix% &8&l>> &aВы телепортировались к спавну мира &9%world%&a.'
+wrong-arg: '&7&l%prefix% &8&l>> &cНеверный аргумент!'
+gui-not-support: '&7&l%prefix% &8&l> &cВерсия сервера не поддерживает GUI.'
+default-flag-set-success: '&7&l%prefix% &8&l> &aВы установили флаг &e%flag% &aв шаблоне по умолчанию на &e%boolean%&a.'
+join-mode: '&7&l%prefix% &8&l> &aВы вошли в режим редактирования текста, введите содержимое или %cancel% для выхода.'
+already-in-mode: '&7&l%prefix% &8&l> &cВы уже находитесь в режиме, введите %cancel% для выхода.'
+quit-mode: '&7&l%prefix% &8&l> &cВы выходите из режима редактирования текста...'
+edit-default-permission: '&7&l%prefix% &8&l> &aВы изменили разрешение шаблона по умолчанию на &e%permission%&a.'
+edit-default-deny-message: '&7&l%prefix% &8&l> &aВы изменили сообщение отказа шаблона по умолчанию на &e%message%&a.'
+edit-permission: '&7&l%prefix% &8&l> &aВы изменили разрешение мира &9%world% &aна &e%permission%&a.'
+edit-deny-message: '&7&l%prefix% &8&l> &aВы изменили сообщение отказа мира &9%world% &aна &e%message%&a.'
+
+gui:
+  main:
+    title: 'Управление мирами NoBuildPlus'
+    items:
+      world:
+        display_name: '&7Мир &e%world% %type%'
+        lore:
+          - ''
+          - '&7Включено для защиты'
+          - ''
+          - '&7ЛКМ — просмотреть флаги'
+          - '&cПКМ — удалить'
+      add:
+        display_name: '&aДобавить мир'
+        lore:
+          - ''
+          - '&7Добавить мир'
+          - '&7в управление'
+          - '&7для защиты.'
+          - ''
+          - '&7Нажмите, чтобы добавить'
+      edit-default:
+        display_name: '&aРедактировать шаблон по умолчанию'
+        lore:
+          - ''
+          - '&7Редактировать шаблон по умолчанию'
+          - '&7настроек флагов для новых'
+          - '&7включённых миров'
+          - ''
+          - '&7Нажмите, чтобы редактировать'
+      next_page:
+        display_name: '&aСледующая страница'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+      previous_page:
+        display_name: '&aПредыдущая страница'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+      close:
+        display_name: '&cЗакрыть меню'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы закрыть'
+          - ''
+  list:
+    title: 'Добавить мир для защиты'
+    items:
+      world:
+        display_name: '&7Мир &e%world% %type%'
+        lore:
+          - ''
+          - '&7Этот мир не включён'
+          - '&7для защиты.'
+          - ''
+          - '&7Нажмите, чтобы включить'
+          - ''
+      next_page:
+        display_name: '&aСледующая страница'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+      previous_page:
+        display_name: '&aПредыдущая страница'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+      back_to_main:
+        display_name: '&cНазад в главное меню'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+  edit-default:
+    title: 'Редактировать шаблон настроек флагов'
+    items:
+      flag:
+        display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aНажмите, чтобы переключить'
+      edit-permission:
+        display_name: '&aРедактировать разрешение'
+        lore:
+          - ''
+          - '&7Текущее разрешение: &b%permission%'
+          - '&7Игроки с этим разрешением могут обходить'
+          - '&7защиту NoBuildPlus'
+          - ''
+          - '&7Нажмите, чтобы редактировать'
+      edit-deny-message:
+        display_name: '&aРедактировать сообщение отказа'
+        lore:
+          - ''
+          - '&7Текущее: &7%message%'
+          - ''
+          - '&7Нажмите, чтобы редактировать'
+      next_page:
+        display_name: '&aСледующая страница'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+      previous_page:
+        display_name: '&aПредыдущая страница'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+      back_to_main:
+        display_name: '&cНазад в главное меню'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+  world:
+    title: 'Редактировать настройки флагов мира %world%'
+    items:
+      flag:
+        display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aНажмите, чтобы переключить'
+      edit-permission:
+        display_name: '&aРедактировать разрешение'
+        lore:
+          - ''
+          - '&7Текущее разрешение: &b%permission%'
+          - '&7Игроки с этим разрешением могут обходить'
+          - '&7защиту NoBuildPlus'
+          - ''
+          - '&7Нажмите, чтобы редактировать'
+      edit-deny-message:
+        display_name: '&aРедактировать сообщение отказа'
+        lore:
+          - ''
+          - '&7Текущее: &7%message%'
+          - ''
+          - '&7Нажмите, чтобы редактировать'
+      next_page:
+        display_name: '&aСледующая страница'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+      previous_page:
+        display_name: '&aПредыдущая страница'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+      back_to_main:
+        display_name: '&cНазад в главное меню'
+        lore:
+          - ''
+          - '&7Нажмите, чтобы переключить'
+          - ''
+
+flag:
+  description:
+    break: 'Разрушение блока'
+    build: 'Установка блока'
+    use: 'Использование блока'
+    container: 'Использование контейнеров'
+    mob-damage: 'Получение урона от моба'
+    mob-explode: 'Взрыв, вызванный мобом'
+    pvp: 'Получение урона от других игроков'
+    shoot: 'Игрок стреляет из лука'
+    tnt: 'Взрыв TNT'
+    tnt-damage: 'Урон от взрыва TNT'
+    frame: 'Взаимодействие с рамкой'
+    bed: 'Взаимодействие с кроватью'
+    voidtp: 'Телепортация на спавн при падении в пустоту'
+    villager: 'Взаимодействие с жителем'
+    command: 'Выполнение команды'
+    chat: 'Общение в чате'
+    leaf-decay: 'Опадание листвы'
+    melt: 'Плавление блока'
+    fall-damage: 'Урон от падения'
+    armorstand: 'Взаимодействие и установка стойки для брони'
+    farmbreak: 'Топтание грядок'
+    ride: 'Езда на сущности'
+    painting: 'Разрушение картины'
+    bucket-place: 'Разлив жидкости из ведра'
+    bucket-fill: 'Наполнение ведра жидкостью'
+    boat: 'Взаимодействие с лодкой'
+    button: 'Взаимодействие с кнопкой'
+    door-interact: 'Взаимодействие с дверью'
+    lever: 'Взаимодействие с рычагом'
+    trapdoor-interact: 'Взаимодействие с люком'
+    fencegate-interact: 'Взаимодействие с калиткой'
+    drop-item: 'Выбрасывание предмета игроком'
+    egg-throw: 'Бросок яйца'
+    snowball-throw: 'Бросок снежка'
+    water-spread: 'Распространение воды'
+    lava-spread: 'Распространение лавы'
+    fly: 'Полёт игрока'
+    teleport: 'Телепортация игрока'
+    mob-spawn: 'Появление мобов'
+    minecart: 'Установка вагонетки'
+    item-pickup: 'Поднятие предмета игроком'
+    potion: 'Бросок и употребление зелья'
+    bonemeal: 'Использование костной муки на блоках'
+    elytra: 'Планирование с помощью элитр'
+    nether: 'Создание портала в ад'
+    coral-decay: 'Разрушение кораллов'
+    fire-spawn: 'Появление огня'
+    sign-edit: 'Редактирование текста на табличке'
+    dye: 'Окрашивание шерсти овцы'
+    piston: 'Срабатывание поршня'
+    ice-form: 'Образование льда'
+    hook: 'Подсечка игрока удочкой'
+    fish: 'Рыбалка'
+    crystal: 'Взаимодействие с кристаллом Края'
+    flower-pot: 'Взаимодействие с цветочным горшком'
+    books-interact: 'Взаимодействие с резным книжным шкафом'
+    hunger: 'Игрок испытывает голод'
+    berries: 'Сбор светящихся ягод'
+    craft: 'Крафт предметов игроком'
+    heal: 'Исцеление игрока'
+    turtle-egg: 'Разрушение яиц черепах'
+    lightning: 'Молния'
+    tnt-prime: 'Поджигание TNT'
+    pressure-plate: 'Взаимодействие с нажимной плитой'
+    fire-spread: 'Распространение огня'
+    ia-furniture-sit: 'Сидение на мебели ItemsAdder'
+    ia-campfire-interact: 'Взаимодействие с костром ItemsAdder'
+
+true: '&aРАЗРЕШЕНО'
+false: '&cЗАПРЕЩЕНО'
+
+overworld: '&a[ОБЫЧНЫЙ МИР]'
+nether: '&c[НЕДР]'
+the_end: '&6[КРАЙ]'

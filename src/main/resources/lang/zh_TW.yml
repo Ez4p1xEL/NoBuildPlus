@@ -5,6 +5,7 @@ commands:
   top: '&8&m                                                   '
   plugin: '                &2&lNoBuildPlus %version%'
   space-1: '&f'
+  gui: '&7/%prefix% &6打開GUI選單.'
   help: '&7/%prefix% help &6查看幫助'
   list: '&7/%prefix% list &6查看啟用本插件的世界列表'
   add: '&7/%prefix% add <世界> &6將世界加入至列表中'

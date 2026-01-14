@@ -5,8 +5,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.Flag;
 import p1xel.nobuildplus.FlagRegistry;
-import p1xel.nobuildplus.flag.ItemsAdderFlags;
-import p1xel.nobuildplus.listener.hookedplugins.ItemsAdderListener;
+import p1xel.nobuildplus.flag.*;
+import p1xel.nobuildplus.listener.hookedplugins.*;
 import p1xel.nobuildplus.storage.Config;
 
 import java.util.Collections;

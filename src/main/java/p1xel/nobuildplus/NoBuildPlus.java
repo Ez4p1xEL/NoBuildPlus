@@ -38,27 +38,7 @@ public class NoBuildPlus extends JavaPlugin {
         return api;
     }
     public static FoliaLib getFoliaLib() {return foliaLib;}
-    @Deprecated
-    public static DominionAPI getDominionAPI() { return dominionAPI;}
     public static TextEditMode getTextEditMode() { return textEditMode; }
-
-    // Will be adjusted
-    private void saveOtherConfigs() {
-        File file = new File(this.getDataFolder(), "lang/config_zh_CN.yml");
-        if (!file.exists()) {
-            saveResource("lang/config_zh_CN.yml", false);
-        }
-    }
-
-    @Deprecated
-    public static Residence getRes() {
-        Plugin resPlug = Bukkit.getServer().getPluginManager().getPlugin("Residence");
-        if (resPlug != null) {
-            return Residence.getInstance();
-        } else {
-            return null;
-        }
-    }
 
     @Override
     public void onLoad() {
@@ -66,8 +46,6 @@ public class NoBuildPlus extends JavaPlugin {
         foliaLib = new FoliaLib(this);
         api = new NBPAPI();
         saveDefaultConfig();
-        saveOtherConfigs();
-        Config.update();
         Locale.createLocaleFile();
         FlagsManager.createFlagsManagerFile();
         Settings.createSettingsFile();
@@ -226,9 +204,6 @@ public class NoBuildPlus extends JavaPlugin {
 
         FlagsManager.defaultFlagList();
         Settings.defaultList();
-//        if (getBukkitVersion() >= 15) {
-//            GUIManager.instance.initialization();
-//        }
 
     }
 
@@ -258,58 +233,5 @@ public class NoBuildPlus extends JavaPlugin {
             throw new RuntimeException(e);
         }
     }
-//    public static boolean isResidenceEnabled() {
-//        return Bukkit.getServer().getPluginManager().isPluginEnabled("Residence");
-//    }
-//
-//    public static boolean isDominionEnabled() {
-//        return Bukkit.getServer().getPluginManager().isPluginEnabled("Dominion");
-//    }
-
-
-//    public static boolean isOraxenEnabled() {
-//        return Bukkit.getServer().getPluginManager().isPluginEnabled("Oraxen");
-//    }
-//
-//    public static boolean isBlockRegenEnabled() {
-//        return Bukkit.getServer().getPluginManager().isPluginEnabled("BlockRegen");
-//    }
-
-    // bruh
-
-    /* void updateConfig() {
-        updateDefaultConfig(getResource("config.yml"), new File(getDataFolder(), "config.yml"), "config.yml");
-        updateDefaultConfig(getResource("flags.yml"), new File(getDataFolder(), "flags.yml"), "flags.yml");
-        updateDefaultConfig(getResource("settings.yml"), new File(getDataFolder(), "settings.yml"), "settings.yml");
-        String langFile = Config.getLanguage() + ".yml";
-        updateDefaultConfig(getResource("lang/" + langFile), new File(getDataFolder() + "/lang", langFile), langFile);
-        int oldVersion = 1;
-        new ConfigUpdater(this).checkUpdate(oldVersion);
-    }
-
-    void updateDefaultConfig(InputStream input, File actual, String name) {
-        try (FileOutputStream output = new FileOutputStream(actual)) {
-            byte[] buf = new byte[8192];
-            int length;
-            while ((length = input.read(buf)) > 0) {
-                output.write(buf, 0, length);
-            }
-            getLogger().info("Updated to the latest: " + name);
-        } catch (IOException e) {
-            getLogger().log(Level.WARNING, "Failed to update the latest configuration!", e);
-        }
-    }
-    */
-
-//    // API? (unfinished)
-//    private NBPAPI nbp;
-//    public NBPAPI getNBPAPI() {
-//        return nbp;
-//    }
-//
-//    // The code you need to write into your onEnable()
-//    if (getServer().getPluginManager().getPlugin("NoBuildPlus") != null) {
-//        nbp = new NBPAPI();
-//    }
 
 }

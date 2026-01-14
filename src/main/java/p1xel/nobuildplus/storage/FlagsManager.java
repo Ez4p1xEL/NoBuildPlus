@@ -9,7 +9,6 @@ import p1xel.nobuildplus.NoBuildPlus;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FlagsManager {
@@ -47,10 +46,7 @@ public class FlagsManager {
 
     @Deprecated
     public static boolean getFlagsIsEnabled(String flag) {
-        if (!yaml.isSet("flags." + flag + ".enable")) {
-            return false;
-        }
-        return yaml.getBoolean("flags." + flag + ".enable");
+        return yaml.getBoolean("flags." + flag + ".enable", false);
     }
 
     public static String getFlagsType(String flag) {

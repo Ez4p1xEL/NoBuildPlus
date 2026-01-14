@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.5.53</version>
+    <version>1.5.54</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -77,6 +77,11 @@
             <url>https://maven.devs.beer/</url>
         </repository>
 
+        <repository>
+            <id>craftengine</id>
+            <url>https://repo.momirealms.net/releases/</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -128,5 +133,6 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/BlockRegen-3.31.0.jar</systemPath>
         </dependency>
+
     </dependencies>
 </project>

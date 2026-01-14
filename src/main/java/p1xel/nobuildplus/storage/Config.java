@@ -49,11 +49,4 @@ public class Config {
 
     public static boolean isOraxenEnabled() { return getBool("hook.Oraxen"); }
 
-    public static void update() {
-        // Update the config according to the configuration file version.
-        if (config.getInt("Configuration") < 2) {
-            config.set("hook.Oraxen", true);
-        }
-    }
-
 }

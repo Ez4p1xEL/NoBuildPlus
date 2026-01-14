@@ -12,19 +12,9 @@
       <option name="url" value="https://jitpack.io" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="spigot-repo" />
-      <option name="name" value="spigot-repo" />
-      <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="oraxen-releases" />
       <option name="name" value="Oraxen Repository" />
       <option name="url" value="https://repo.oraxen.com/releases" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="tcoded-releases" />
-      <option name="name" value="tcoded-releases" />
-      <option name="url" value="https://repo.tcoded.com/releases" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="lunadeer" />
@@ -32,14 +22,29 @@
       <option name="url" value="https://ssl.lunadeer.cn:14454/repository/maven-snapshots/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="oraxen" />
-      <option name="name" value="Oraxen Repository" />
-      <option name="url" value="https://repo.oraxen.com/releases/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="oraxen" />
+      <option name="name" value="Oraxen Repository" />
+      <option name="url" value="https://repo.oraxen.com/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="spigot-repo" />
+      <option name="name" value="spigot-repo" />
+      <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="tcoded-releases" />
+      <option name="name" value="tcoded-releases" />
+      <option name="url" value="https://repo.tcoded.com/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="oraxen" />
+      <option name="name" value="Oraxen Repository" />
+      <option name="url" value="https://repo.oraxen.com/releases/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="jboss.community" />
@@ -52,14 +57,14 @@
       <option name="url" value="https://maven.devs.beer/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="oraxen" />
-      <option name="name" value="Oraxen Repository" />
-      <option name="url" value="https://repo.oraxen.com/#/releases/" />
+      <option name="id" value="craftengine" />
+      <option name="name" value="craftengine" />
+      <option name="url" value="https://repo.momirealms.net/releases/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="oraxen" />
       <option name="name" value="Oraxen Repository" />
-      <option name="url" value="https://repo.oraxen.com/releases" />
+      <option name="url" value="https://repo.oraxen.com/#/releases/" />
     </remote-repository>
   </component>
 </project>

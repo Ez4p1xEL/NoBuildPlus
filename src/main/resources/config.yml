@@ -21,6 +21,9 @@
 ## Thanks for using my plugin
 ## My name on SpigotMC is p1xEL_mc
 
+## See wiki at PixelCraft Documentation https://docs.p1mc.top
+## 中文版使用指南到 https://docs.p1mc.top/zh 查看
+
 # The version of the plugin.
 Version: Check plugin.yml
 type: Release
@@ -30,21 +33,21 @@ type: Release
 Configuration: 7
 
 # Language of the file.
-# Languages list: en(English) zh_CN(Simplified Chinese) zh_TW(Traditional Chinese).
-# It only changes the texts from language file if you change this.
+# Languages list: en(English) zh_CN(Simplified Chinese) zh_TW(Traditional Chinese), ru(Russian), ja(Japanese), de(German)
+# Some languages are translated by translator tool from the English version
 Language: en
 
 # Check update when the plugin loaded.
 check-update: true
 
-# The plugin will only choose the first one that is enabled in your server!
+# Compatibilities with these plugins
 hook:
   Residence: true
   Dominion: true
   ItemsAdder: true
   BlockRegen: true
 
-# Set to true if you want to enable deny-message
+# Set to false if you want to disable all the deny messages
 deny-message-enable: true
 
 # Two types of message sending to the player
@@ -53,8 +56,10 @@ deny-message-enable: true
 deny-message-type: ACTIONBAR
 deny-message-sound:
   enable: true
+  # Spigot Sound List https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
   name: ENTITY_VILLAGER_NO
 
 text-edit-mode:
+  # the keyword to leave text editing mode
   cancel: 'cancel'
 

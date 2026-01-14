@@ -86,7 +86,7 @@ public enum Flags implements Flag {
     private final static Map<String, Flags> NAMEMAP = Maps.newHashMap();
     private List<String> configList;
 
-    private Flags(String flag_name, String show_item, String type, List<String> list) {
+    Flags(String flag_name, String show_item, String type, List<String> list) {
         this.flag_name = flag_name;
         this.show_item = show_item;
         this.type = type;

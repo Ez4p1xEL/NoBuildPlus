@@ -1,0 +1,297 @@
+Language: de
+plugin-name: NoBuildPlus
+commands-plugin-name: nbp
+commands:
+  top: '&8&m                                                   '
+  plugin: '                &2&lNoBuildPlus %version%'
+  space-1: '&f'
+  gui: '&7/%prefix% &6GUI öffnen.'
+  help: '&7/%prefix% help &6Hilfe anzeigen.'
+  list: '&7/%prefix% list &6Liste der aktivierten Welten.'
+  add: '&7/%prefix% add <world> &6Weltname zur Liste hinzufügen.'
+  remove: '&7/%prefix% remove <world> &6Weltname aus der Liste entfernen.'
+  clear: '&7/%prefix% clear &6Welten aus der Liste löschen.'
+  flag: '&7/%prefix% flag <world> <flag> <true/false> &6Welt-Flag setzen.'
+  flaglist: '&7/%prefix% flag list &6Flags-Liste anzeigen.'
+  setspawn: '&7/%prefix% setspawn &6Spawnpunkt der aktuellen Welt setzen.'
+  tp: '&7/%prefix% tp &6Zum Spawn der aktuellen Welt teleportieren.'
+  open: '&7/%prefix% open [world] &6GUI der Welt öffnen.'
+  reload: '&7/%prefix% reload &6Konfiguration neu laden.'
+  space-8: '&f'
+  bottom: '&8&m                                                   '
+update-check:
+  invalid: 'Updateprüfung fehlgeschlagen: '
+  latest: 'Kein Update verfügbar.'
+  outdate: 'Ein neues Update ist verfügbar.'
+list-1: '&7&l%prefix% &8&l>> &7Aktivierte Welten:'
+list-2: '&9%list%'
+no-perm: '&7&l%prefix% &8&l>> &cDu hast keine Berechtigung dafür!'
+not-allow: '&7&l%prefix% &8&l>> &c&l! &7Das kannst du hier nicht tun.'
+already-exists: '&7&l%prefix% &8&l>> &cDie Welt existiert bereits!'
+not-in-list: '&7&l%prefix% &8&l>> &cDie Welt ist nicht in der Liste!'
+clear-success: '&7&l%prefix% &8&l>> &aDu hast die Liste der aktivierten Welten geleert!'
+reload-success: '&7&l%prefix% &8&l>> &aKonfiguration erfolgreich neu geladen!'
+add-success: '&7&l%prefix% &8&l>> &aDu hast &9%world% &a zur Liste hinzugefügt.'
+remove-success: '&7&l%prefix% &8&l>> &aDu hast &9%world% &a aus der Liste entfernt.'
+cant-find-world: '&7&l%prefix% &8&l>> &cWelt nicht gefunden. (Oder die Welt ist deaktiviert)'
+flags-list: '&7&l%prefix% &8&l>> &cUngültiges Flag. Nutze /nbp flag list um die Flags anzuzeigen.'
+invalid-boolean: '&7&l%prefix% &8&l>> &cUngültig, bitte true oder false für das Flag eingeben.'
+flag-set-success: '&7&l%prefix% &8&l>> &aDu hast das Flag &e%flag% &a der Welt &9%world% &a auf &b%boolean%&a gesetzt.'
+loc-not-set: '&7&l%prefix% &8&l>> &cDu hast den Spawnpunkt deiner Welt nicht gesetzt!'
+loc-set-success: '&7&l%prefix% &8&l>> &aDu hast den Spawnpunkt für &9%world%&a gesetzt!'
+not-player: '&cDu musst ein Spieler sein, um das zu tun.'
+tp-success: '&7&l%prefix% &8&l>> &aDu wurdest zum Spawn von &9%world%&a teleportiert.'
+wrong-arg: '&7&l%prefix% &8&l>> &cFalsches Argument!'
+gui-not-support: '&7&l%prefix% &8&l> &cDeine Serverversion unterstützt die GUI-Funktion nicht.'
+default-flag-set-success: '&7&l%prefix% &8&l> &aDu hast das Flag &e%flag% &a der Standardvorlage auf &e%boolean%&a gesetzt.'
+join-mode: '&7&l%prefix% &8&l> &aDu befindest dich im Texteingabemodus, bitte gib den Inhalt ein oder %cancel% zum Beenden.'
+already-in-mode: '&7&l%prefix% &8&l> &cDu befindest dich bereits in einem Modus, bitte gib %cancel% zum Beenden ein.'
+quit-mode: '&7&l%prefix% &8&l> &cDu verlässt den Texteingabemodus...'
+edit-default-permission: '&7&l%prefix% &8&l> &aDu hast die Berechtigung der Standardvorlage auf &e%permission%&a geändert.'
+edit-default-deny-message: '&7&l%prefix% &8&l> &aDu hast die Ablehnungsnachricht der Standardvorlage auf &e%message%&a geändert.'
+edit-permission: '&7&l%prefix% &8&l> &aDu hast die Berechtigung der Welt &9%world% &a auf &e%permission%&a geändert.'
+edit-deny-message: '&7&l%prefix% &8&l> &aDu hast die Ablehnungsnachricht der Welt &9%world% &a auf &e%message%&a geändert.'
+
+gui:
+  main:
+    title: 'NoBuildPlus Weltverwaltung'
+    items:
+      world:
+        display_name: '&7Welt &e%world% %type%'
+        lore:
+          - ''
+          - '&7Für Schutz aktiviert'
+          - ''
+          - '&7Linksklick zum Anzeigen der Flags'
+          - '&cRechtsklick zum Löschen'
+      add:
+        display_name: '&aWelt hinzufügen'
+        lore:
+          - ''
+          - '&7Füge die Welt'
+          - '&7zur Verwaltung hinzu'
+          - '&7für den Schutz.'
+          - ''
+          - '&7Klicken zum Hinzufügen'
+      edit-default:
+        display_name: '&aStandardvorlage bearbeiten'
+        lore:
+          - ''
+          - '&7Bearbeite die Standardvorlage der'
+          - '&7Flag-Einstellungen für neue'
+          - '&7aktivierte Welt(en)'
+          - ''
+          - '&7Klicken zum Bearbeiten'
+      next_page:
+        display_name: '&aNächste Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      previous_page:
+        display_name: '&aVorherige Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      close:
+        display_name: '&cMenü schließen'
+        lore:
+          - ''
+          - '&7Klicken zum Schließen'
+          - ''
+  list:
+    title: 'Welt zum Schutz hinzufügen'
+    items:
+      world:
+        display_name: '&7Welt &e%world% %type%'
+        lore:
+          - ''
+          - '&7Diese Welt ist nicht aktiviert'
+          - '&7für den Schutz.'
+          - ''
+          - '&7Klicken zum Aktivieren'
+          - ''
+      next_page:
+        display_name: '&aNächste Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      previous_page:
+        display_name: '&aVorherige Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      back_to_main:
+        display_name: '&cZurück zum Hauptmenü'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+  edit-default:
+    title: 'Standardvorlage der Flag-Einstellungen bearbeiten'
+    items:
+      flag:
+        display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aKlicken zum Wechseln'
+      edit-permission:
+        display_name: '&aBerechtigung bearbeiten'
+        lore:
+          - ''
+          - '&7Aktuelle Berechtigung: &b%permission%'
+          - '&7Spieler mit dieser Berechtigung können'
+          - '&7den Schutz von NoBuildPlus umgehen'
+          - ''
+          - '&7Klicken zum Bearbeiten'
+      edit-deny-message:
+        display_name: '&aAblehnungsnachricht bearbeiten'
+        lore:
+          - ''
+          - '&7Aktuell: &7%message%'
+          - ''
+          - '&7Klicken zum Bearbeiten'
+      next_page:
+        display_name: '&aNächste Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      previous_page:
+        display_name: '&aVorherige Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      back_to_main:
+        display_name: '&cZurück zum Hauptmenü'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+  world:
+    title: 'Flag-Einstellungen von %world% bearbeiten'
+    items:
+      flag:
+        display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aKlicken zum Wechseln'
+      edit-permission:
+        display_name: '&aBerechtigung bearbeiten'
+        lore:
+          - ''
+          - '&7Aktuelle Berechtigung: &b%permission%'
+          - '&7Spieler mit dieser Berechtigung können'
+          - '&7den Schutz von NoBuildPlus umgehen'
+          - ''
+          - '&7Klicken zum Bearbeiten'
+      edit-deny-message:
+        display_name: '&aAblehnungsnachricht bearbeiten'
+        lore:
+          - ''
+          - '&7Aktuell: &7%message%'
+          - ''
+          - '&7Klicken zum Bearbeiten'
+      next_page:
+        display_name: '&aNächste Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      previous_page:
+        display_name: '&aVorherige Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      back_to_main:
+        display_name: '&cZurück zum Hauptmenü'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+
+flag:
+  description:
+    break: 'Block zerstören'
+    build: 'Block platzieren'
+    use: 'Block benutzen'
+    container: 'Container benutzen'
+    mob-damage: 'Schaden durch Mobs'
+    mob-explode: 'Explosion durch Mobs'
+    pvp: 'Schaden durch andere Spieler'
+    shoot: 'Spieler schießt Pfeil'
+    tnt: 'TNT-Explosion'
+    tnt-damage: 'TNT-Explosionsschaden'
+    frame: 'Interaktion mit Rahmen'
+    bed: 'Interaktion mit Bett'
+    voidtp: 'Teleport zum Spawn beim Fallen ins Leere'
+    villager: 'Interaktion mit Dorfbewohner'
+    command: 'Befehl ausführen'
+    chat: 'Chatten'
+    leaf-decay: 'Blattverfall'
+    melt: 'Block schmilzt'
+    fall-damage: 'Fallschaden'
+    armorstand: 'Interaktion und Platzierung von Rüstungsständern'
+    farmbreak: 'Felder zertreten'
+    ride: 'Auf Entität reiten'
+    painting: 'Gemälde zerstören'
+    bucket-place: 'Flüssigkeit mit Eimer platzieren'
+    bucket-fill: 'Flüssigkeit mit Eimer füllen'
+    boat: 'Interaktion mit Boot'
+    button: 'Interaktion mit Knopf'
+    door-interact: 'Interaktion mit Tür'
+    lever: 'Interaktion mit Hebel'
+    trapdoor-interact: 'Interaktion mit Falltür'
+    fencegate-interact: 'Interaktion mit Zauntor'
+    drop-item: 'Spieler wirft Item'
+    egg-throw: 'Ei werfen'
+    snowball-throw: 'Schneeball werfen'
+    water-spread: 'Wasser breitet sich aus'
+    lava-spread: 'Lava breitet sich aus'
+    fly: 'Spieler fliegt'
+    teleport: 'Spieler teleportiert'
+    mob-spawn: 'Mob-Spawn'
+    minecart: 'Minecart platzieren'
+    item-pickup: 'Spieler hebt Item auf'
+    potion: 'Spieler wirft oder trinkt Trank'
+    bonemeal: 'Knochenmehl auf Blöcke verwenden'
+    elytra: 'Mit Elytra gleiten'
+    nether: 'Netherportal erstellen'
+    coral-decay: 'Korallenverfall'
+    fire-spawn: 'Feuer entsteht'
+    sign-edit: 'Schildtext bearbeiten'
+    dye: 'Schafwolle färben'
+    piston: 'Kolben auslösen'
+    ice-form: 'Eisbildung'
+    hook: 'Spieler mit Angel einhaken'
+    fish: 'Angeln'
+    crystal: 'Interaktion mit Enderkristall'
+    flower-pot: 'Interaktion mit Blumentopf'
+    books-interact: 'Interaktion mit gemeißeltem Bücherregal'
+    hunger: 'Spieler wird hungrig'
+    berries: 'Leuchtbeeren ernten'
+    craft: 'Spieler craftet'
+    heal: 'Spieler heilt'
+    turtle-egg: 'Schildkrötenei zertreten'
+    lightning: 'Blitz'
+    tnt-prime: 'TNT zünden'
+    pressure-plate: 'Interaktion mit Druckplatte'
+    fire-spread: 'Feuer breitet sich aus'
+    ia-furniture-sit: 'Auf ItemsAdder-Möbel sitzen'
+    ia-campfire-interact: 'Interaktion mit ItemsAdder-Lagerfeuer'
+
+true: '&aERLAUBEN'
+false: '&cVERHINDERN'
+
+overworld: '&a[OVERWORLD]'
+nether: '&c[NETHER]'
+the_end: '&6[THE END]'

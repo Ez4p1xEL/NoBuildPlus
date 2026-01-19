@@ -4,21 +4,20 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import p1xel.nobuildplus.FlagRegistry;
-import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.listener.gui.GUIMain;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.listener.gui.GUIType;
 import p1xel.nobuildplus.listener.gui.GUIWorld;
 import p1xel.nobuildplus.storage.*;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 
 public class Cmd implements CommandExecutor {
 
     @Override
-    @ParametersAreNonnullByDefault
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
 
         if (!sender.hasPermission("nobuildplus.use")) {
             sender.sendMessage(Locale.getMessage("no-perm"));
@@ -74,7 +73,7 @@ public class Cmd implements CommandExecutor {
 //
 //                    }
 
-                    p.openInventory(new GUIWorld(name, 1).getInventory());
+                    p.openInventory(new GUIWorld(name, 1, GUIType.FLAG).getInventory());
                     return true;
 
                 }

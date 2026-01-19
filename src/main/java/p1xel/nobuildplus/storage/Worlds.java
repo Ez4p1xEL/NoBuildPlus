@@ -6,9 +6,10 @@ import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.gamerule.GameRuleRegistry;
 
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 
@@ -112,11 +113,20 @@ public class Worlds {
     public static void createWorld(String world) {
 
         for (String flagname : FlagsManager.getFlags()) {
-            set(world + ".flags." + flagname, Settings.getDefaultFlag(flagname));
+            yaml.set(world + ".flags." + flagname, Settings.getDefaultFlag(flagname));
         }
 
-        set(world + ".permission", Settings.getPermission());
-        set(world + ".deny-message", Settings.getDenyMessageString());
+        for (String gameruleName : GameRuleRegistry.getRegisteredGameRules()) {
+            yaml.set(world+ ".gamerules." + gameruleName, Settings.getDefaultGameRule(gameruleName));
+        }
+
+        yaml.set(world + ".permission", Settings.getPermission());
+        yaml.set(world + ".deny-message", Settings.getDenyMessageString());
+        try {
+            yaml.save(file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Settings.addWorld(world);
 
     }
@@ -137,6 +147,15 @@ public class Worlds {
 
     public static boolean getFlag(String world, String flag) {
         return yaml.getBoolean(world + ".flags." + flag);
+    }
+
+    public static void setGameRule(String world, String rule, Object value) {
+        set(world + ".gamerules." + rule, value);
+        GameRuleRegistry.setWorldGameRule(world, rule, value);
+    }
+
+    public static Object getGameRule(String world, String rule) {
+        return yaml.get(world+".gamerules." + rule);
     }
 
     @Deprecated

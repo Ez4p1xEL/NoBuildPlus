@@ -52,6 +52,10 @@ edit-default-permission: '&7&l%prefix% &8&l> &a你更改了默认模板的权限
 edit-default-deny-message: '&7&l%prefix% &8&l> &a你更改了默认模板的拒绝消息为 &e%message%'
 edit-permission: '&7&l%prefix% &8&l> &a你修改了 &9%world% &a的权限为 &e%permission%'
 edit-deny-message: '&7&l%prefix% &8&l> &a你修改了 &9%world% &a的拒绝消息为 &e%message%'
+default-gamerule-set-success: '&7&l%prefix% &8&l> &a你设置了默认模板的游戏规则 &e%gamerule% &a为 &e%value%'
+gamerule-set-success: '&7&l%prefix% &8&l> &a你设置了世界 &9%world% &a的游戏规则 &e%gamerule% &a为 &e%value%'
+invalid-amount: '&7&l%prefix% &8&l> &c未知数值'
+invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &c并不存在于该Minecraft版本的服务器!'
 
 gui:
   main:
@@ -132,8 +136,23 @@ gui:
   edit-default:
     title: '更改默认模板的规则'
     items:
+      type:
+        display_name: '&a当前类型: &6%type%'
+        lore:
+          - ''
+          - '&7你目前正处于'
+          - '&7%type% 的操作界面'
+          - ''
+          - '&a点击切换'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&a点击切换'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
         lore:
           - ''
           - '&7%description%'
@@ -176,8 +195,23 @@ gui:
   world:
     title: '更改 %world% 规则'
     items:
+      type:
+        display_name: '&a当前类型: &6%type%'
+        lore:
+          - ''
+          - '&7你目前正处于'
+          - '&7%type% 的操作界面'
+          - ''
+          - '&a点击切换'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&a点击切换'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
         lore:
           - ''
           - '&7%description%'
@@ -219,6 +253,7 @@ gui:
           - ''
 
 flag:
+  name: 'NBP规则'
   description:
     break: '玩家破坏方块'
     build: '玩家放置方块'
@@ -288,8 +323,131 @@ flag:
     ia-furniture-sit: '坐在ItemsAdder家具'
     ia-campfire-interact: '与ItemsAdder营火互动'
 
+gamerule:
+  name: 游戏规则
+  description:
+    advance_time: 控制时间是否推进（昼夜循环）。
+    doDaylightCycle: 控制时间是否推进（昼夜循环）。
+    advance_weather: 控制天气是否自然变化。
+    doWeatherCycle: 控制天气是否自然变化。
+    block_drops: 决定方块被破坏时是否掉落物品。
+    doTileDrops: 决定方块被破坏时是否掉落物品。
+    entity_drops: 决定实体被击杀时是否掉落物品。
+    doEntityDrops: 决定实体被击杀时是否掉落物品。
+    mob_drops: 决定生物被击杀时是否掉落战利品。
+    doMobLoot: 决定生物被击杀时是否掉落战利品。
+    block_explosion_drop_decay: 控制方块爆炸掉落物品的衰减。
+    blockExplosionDropDecay: 控制方块爆炸掉落物品的衰减。
+    mob_explosion_drop_decay: 控制生物爆炸掉落物品的衰减。
+    mobExplosionDropDecay: 控制生物爆炸掉落物品的衰减。
+    tnt_explosion_drop_decay: 控制 TNT 爆炸掉落物品的衰减。
+    tntExplosionDropDecay: 控制 TNT 爆炸掉落物品的衰减。
+    pvp: 启用或禁用玩家对战。
+    keep_inventory: 玩家死亡后保留物品栏。
+    keepInventory: 玩家死亡后保留物品栏。
+    immediate_respawn: 玩家立即重生，无死亡界面。
+    doImmediateRespawn: 玩家立即重生，无死亡界面。
+    natural_health_regeneration: 启用自然生命恢复。
+    naturalRegeneration: 启用自然生命恢复。
+    show_death_messages: 在聊天中显示死亡信息。
+    showDeathMessages: 在聊天中显示死亡信息。
+    universal_anger: 中立生物被激怒后攻击所有玩家。
+    universalAnger: 中立生物被激怒后攻击所有玩家。
+    command_block_output: 在聊天中显示命令方块输出。
+    commandBlockOutput: 在聊天中显示命令方块输出。
+    command_blocks_work: 启用命令方块。
+    commandBlocksEnabled: 启用命令方块。
+    log_admin_commands: 将管理员命令记录到服务器控制台。
+    logAdminCommands: 将管理员命令记录到服务器控制台。
+    send_command_feedback: 在聊天中显示命令反馈。
+    sendCommandFeedback: 在聊天中显示命令反馈。
+    show_advancement_messages: 在聊天中宣布进度。
+    announceAdvancements: 在聊天中宣布进度。
+    reduced_debug_info: 减少调试界面信息。
+    reducedDebugInfo: 减少调试界面信息。
+    max_command_sequence_length: 命令序列的最大长度。
+    maxCommandChainLength: 命令序列的最大长度。
+    max_command_forks: 命令执行允许的最大分支数。
+    maxCommandForkCount: 命令执行允许的最大分支数。
+    max_block_modifications: 命令允许的最大方块修改数。
+    commandModificationBlockLimit: 命令允许的最大方块修改数。
+    spawn_mobs: 控制生物生成。
+    doMobSpawning: 控制生物生成。
+    spawn_monsters: 控制怪物生成。
+    spawn_patrols: 控制巡逻队生成。
+    doPatrolSpawning: 控制巡逻队生成。
+    spawn_phantoms: 控制幻翼生成。
+    doInsomnia: 控制幻翼生成。
+    spawn_wandering_traders: 控制流浪商人生成。
+    doTraderSpawning: 控制流浪商人生成。
+    spawn_wardens: 控制监守者生成。
+    doWardenSpawning: 控制监守者生成。
+    raids: 启用或禁用袭击。
+    disableRaids: 启用或禁用袭击。
+    random_tick_speed: 设置随机刻速度（方块更新）。
+    randomTickSpeed: 设置随机刻速度（方块更新）。
+    respawn_radius: 设置玩家重生半径。
+    spawnRadius: 设置玩家重生半径。
+    max_entity_cramming: 单个空间允许的最大实体数，超过则窒息。
+    maxEntityCramming: 单个空间允许的最大实体数，超过则窒息。
+    max_snow_accumulation_height: 最大积雪层高度。
+    snowAccumulationHeight: 最大积雪层高度。
+    max_minecart_speed: 最大矿车速度。
+    fire_spread_radius_around_player: 火焰在玩家周围的蔓延半径。
+    doFireTick: 启用火焰蔓延和衰减。
+    allowFireTicksAwayFromPlayer: 启用火焰在玩家远处蔓延。
+    water_source_conversion: 允许水源方块再生。
+    waterSourceConversion: 允许水源方块再生。
+    lava_source_conversion: 允许岩浆源方块再生。
+    lavaSourceConversion: 允许岩浆源方块再生。
+    spread_vines: 允许藤蔓自然蔓延。
+    doVinesSpread: 允许藤蔓自然蔓延。
+    spectators_generate_chunks: 旁观者移动时生成区块。
+    spectatorsGenerateChunks: 旁观者移动时生成区块。
+    locator_bar: 显示指南针定位栏。
+    global_sound_events: 启用全局声音事件。
+    globalSoundEvents: 启用全局声音事件。
+    allow_entering_nether_using_portals: 允许通过传送门进入下界。
+    players_nether_portal_default_delay: 默认下界传送门延迟。
+    playersNetherPortalDefaultDelay: 默认下界传送门延迟。
+    players_nether_portal_creative_delay: 创造模式玩家下界传送门延迟。
+    playersNetherPortalCreativeDelay: 创造模式玩家下界传送门延迟。
+    limited_crafting: 限制合成仅限已解锁配方。
+    doLimitedCrafting: 限制合成仅限已解锁配方。
+    spawner_blocks_work: 启用刷怪笼。
+    spawnerBlocksEnabled: 启用刷怪笼。
+    elytra_movement_check: 检查鞘翅移动有效性。
+    disableElytraMovementCheck: 检查鞘翅移动有效性。
+    player_movement_check: 检查玩家移动有效性。
+    disablePlayerMovementCheck: 检查玩家移动有效性。
+    ender_pearls_vanish_on_death: 玩家死亡时末影珍珠消失。
+    enderPearlsVanishOnDeath: 玩家死亡时末影珍珠消失。
+    forgive_dead_players: 生物在玩家死亡后原谅玩家。
+    forgiveDeadPlayers: 生物在玩家死亡后原谅玩家。
+    freeze_damage: 启用粉雪冻结伤害。
+    freezeDamage: 启用粉雪冻结伤害。
+    drowning_damage: 启用溺水伤害。
+    drowningDamage: 启用溺水伤害。
+    fall_damage: 启用摔落伤害。
+    fallDamage: 启用摔落伤害。
+    fire_damage: 启用火焰伤害。
+    fireDamage: 启用火焰伤害。
+    tnt_explodes: 启用 TNT 爆炸。
+    players_sleeping_percentage: 设置需要睡觉的玩家百分比。
+    playersSleepingPercentage: 设置需要睡觉的玩家百分比。
+    projectiles_can_break_blocks: 决定投射物是否能破坏方块。
+    projectilesCanBreakBlocks: 决定投射物是否能破坏方块。
+    spawnChunkRadius: 设置出生点周围加载的区块数。
+    mob_griefing: 决定生物是否能拾取物品或改变方块。
+    mobGriefing: 决定生物是否能拾取物品或改变方块。
+
+
 true: '&a允许'
 false: '&c禁止'
+
+gamerule_true: '&a启用'
+gamerule_false: '&c关闭'
+value: '&b%value%'
 
 overworld: '&a[主世界]'
 nether: '&c[地狱]'

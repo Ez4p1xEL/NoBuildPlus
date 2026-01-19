@@ -43,7 +43,7 @@ not-player: '&cYou must be a player to do that.'
 tp-success: '&7&l%prefix% &8&l>> &aYou teleport to spawn of &9%world%&a.'
 wrong-arg: '&7&l%prefix% &8&l>> &cWrong argument!'
 gui-not-support: '&7&l%prefix% &8&l> &cYour server version does not support GUI feature.'
-default-flag-set-success: '&7&l%prefix% &8&l> &aYou set &e%flag% &aof default template to &e%boolean%&a.'
+default-flag-set-success: '&7&l%prefix% &8&l> &aYou set flag &e%flag% &aof default template to &e%boolean%&a.'
 join-mode: '&7&l%prefix% &8&l> &aYou are in text editing mode, please enter the content or enter %cancel% to quit. '
 already-in-mode: '&7&l%prefix% &8&l> &cYou are currently in a mode, please enter %cancel% to quit.'
 quit-mode: '&7&l%prefix% &8&l> &cYou are quitting text editing mode...'
@@ -51,6 +51,10 @@ edit-default-permission: '&7&l%prefix% &8&l> &aYou edited the permission of defa
 edit-default-deny-message: '&7&l%prefix% &8&l> &aYou edited the deny message of default template to &e%message%&a.'
 edit-permission: '&7&l%prefix% &8&l> &aYou edited the permission of &9%world% &ato &e%permission%&a.'
 edit-deny-message: '&7&l%prefix% &8&l> &aYou edited the deny message of &9%world% &ato &e%message%&a.'
+default-gamerule-set-success: '&7&l%prefix% &8&l> &aYou set gamerule &e%gamerule% &aof default template to &e%value%&a.'
+gamerule-set-success: '&7&l%prefix% &8&l> &aYou set &9%world%&a''s gamerule &e%gamerule% &ato &e%value%&a.'
+invalid-amount: '&7&l%prefix% &8&l> &cInvalid amount.'
+invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cdoes not exist in this minecraft version!'
 
 gui:
   main:
@@ -62,7 +66,7 @@ gui:
           - ''
           - '&7Enabled for Protection'
           - ''
-          - '&7Left click to view flags'
+          - '&7Left click to view'
           - '&cRight click to delete'
       add:
         display_name: '&aAdd world'
@@ -78,7 +82,7 @@ gui:
         lore:
           - ''
           - '&7Edit the default template of'
-          - '&7flags settings for new'
+          - '&7settings for new'
           - '&7enabled world(s)'
           - ''
           - '&7Click to edit'
@@ -133,8 +137,23 @@ gui:
   edit-default:
     title: 'Edit default template of flag settings'
     items:
+      type:
+        display_name: '&aCurrent Type: &6%type%'
+        lore:
+          - ''
+          - '&7You are currently operating in'
+          - '&7%type% setting mode.'
+          - ''
+          - '&aClick to change'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aClick to switch'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
         lore:
           - ''
           - '&7%description%'
@@ -175,8 +194,23 @@ gui:
           - '&7Click to switch'
           - ''
   world:
-    title: 'Edit flag settings of %world%'
+    title: 'Edit settings of %world%'
     items:
+      type:
+        display_name: '&aCurrent Type: &6%type%'
+        lore:
+          - ''
+          - '&7You are currently operating in'
+          - '&7%type% setting mode.'
+          - ''
+          - '&aClick to change'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aClick to switch'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
         lore:
@@ -220,6 +254,7 @@ gui:
           - ''
 
 flag:
+  name: 'Flag'
   description:
     break: 'Block destroying'
     build: 'Block place'
@@ -289,8 +324,130 @@ flag:
     ia-furniture-sit: 'Sit on ItemsAdder furniture'
     ia-campfire-interact: 'Interact with ItemsAdder campfire'
 
+gamerule:
+  name: GameRule
+  description:
+    advance_time: Controls whether time progresses (day/night cycle).
+    doDaylightCycle: Controls whether time progresses (day/night cycle).
+    advance_weather: Controls whether weather changes naturally.
+    doWeatherCycle: Controls whether weather changes naturally.
+    block_drops: Determines if blocks drop items when broken.
+    doTileDrops: Determines if blocks drop items when broken.
+    entity_drops: Determines if entities drop items when killed.
+    doEntityDrops: Determines if entities drop items when killed.
+    mob_drops: Determines if mobs drop loot when killed.
+    doMobLoot: Determines if mobs drop loot when killed.
+    block_explosion_drop_decay: Controls item decay from block explosions.
+    blockExplosionDropDecay: Controls item decay from block explosions.
+    mob_explosion_drop_decay: Controls item decay from mob explosions.
+    mobExplosionDropDecay: Controls item decay from mob explosions.
+    tnt_explosion_drop_decay: Controls item decay from TNT explosions.
+    tntExplosionDropDecay: Controls item decay from TNT explosions.
+    pvp: Enables or disables player versus player combat.
+    keep_inventory: Keeps player inventory after death.
+    keepInventory: Keeps player inventory after death.
+    immediate_respawn: Players respawn instantly without death screen.
+    doImmediateRespawn: Players respawn instantly without death screen.
+    natural_health_regeneration: Enables natural health regeneration.
+    naturalRegeneration: Enables natural health regeneration.
+    show_death_messages: Shows death messages in chat.
+    showDeathMessages: Shows death messages in chat.
+    universal_anger: Makes neutral mobs angry at all players when provoked.
+    universalAnger: Makes neutral mobs angry at all players when provoked.
+    command_block_output: Shows command block output in chat.
+    commandBlockOutput: Shows command block output in chat.
+    command_blocks_work: Enables command blocks.
+    commandBlocksEnabled: Enables command blocks.
+    log_admin_commands: Logs admin commands to server console.
+    logAdminCommands: Logs admin commands to server console.
+    send_command_feedback: Shows feedback from commands in chat.
+    sendCommandFeedback: Shows feedback from commands in chat.
+    show_advancement_messages: Announces advancements in chat.
+    announceAdvancements: Announces advancements in chat.
+    reduced_debug_info: Reduces debug screen information.
+    reducedDebugInfo: Reduces debug screen information.
+    max_command_sequence_length: Maximum length of command sequences.
+    maxCommandChainLength: Maximum length of command sequences.
+    max_command_forks: Maximum forks allowed in command execution.
+    maxCommandForkCount: Maximum forks allowed in command execution.
+    max_block_modifications: Maximum block modifications allowed by commands.
+    commandModificationBlockLimit: Maximum block modifications allowed by commands.
+    spawn_mobs: Controls mob spawning.
+    doMobSpawning: Controls mob spawning.
+    spawn_monsters: Controls monster spawning.
+    spawn_patrols: Controls patrol spawning.
+    doPatrolSpawning: Controls patrol spawning.
+    spawn_phantoms: Controls phantom spawning.
+    doInsomnia: Controls phantom spawning.
+    spawn_wandering_traders: Controls wandering trader spawning.
+    doTraderSpawning: Controls wandering trader spawning.
+    spawn_wardens: Controls warden spawning.
+    doWardenSpawning: Controls warden spawning.
+    raids: Enables or disables raids.
+    disableRaids: Enables or disables raids.
+    random_tick_speed: Sets random tick speed (block updates).
+    randomTickSpeed: Sets random tick speed (block updates).
+    respawn_radius: Sets player respawn radius.
+    spawnRadius: Sets player respawn radius.
+    max_entity_cramming: Maximum entities allowed in one space before suffocation.
+    maxEntityCramming: Maximum entities allowed in one space before suffocation.
+    max_snow_accumulation_height: Maximum snow layer height.
+    snowAccumulationHeight: Maximum snow layer height.
+    max_minecart_speed: Maximum minecart speed.
+    fire_spread_radius_around_player: Fire spread radius around players.
+    doFireTick: Enables fire spread and decay.
+    allowFireTicksAwayFromPlayer: Enables fire spread away from players.
+    water_source_conversion: Allows water source blocks to regenerate.
+    waterSourceConversion: Allows water source blocks to regenerate.
+    lava_source_conversion: Allows lava source blocks to regenerate.
+    lavaSourceConversion: Allows lava source blocks to regenerate.
+    spread_vines: Allows vines to spread naturally.
+    doVinesSpread: Allows vines to spread naturally.
+    spectators_generate_chunks: Spectators generate chunks when moving.
+    spectatorsGenerateChunks: Spectators generate chunks when moving.
+    locator_bar: Shows locator bar for compass tracking.
+    global_sound_events: Enables global sound events.
+    globalSoundEvents: Enables global sound events.
+    allow_entering_nether_using_portals: Allows entering Nether via portals.
+    players_nether_portal_default_delay: Default Nether portal delay.
+    playersNetherPortalDefaultDelay: Default Nether portal delay.
+    players_nether_portal_creative_delay: Nether portal delay for creative players.
+    playersNetherPortalCreativeDelay: Nether portal delay for creative players.
+    limited_crafting: Restricts crafting to unlocked recipes.
+    doLimitedCrafting: Restricts crafting to unlocked recipes.
+    spawner_blocks_work: Enables spawner blocks.
+    spawnerBlocksEnabled: Enables spawner blocks.
+    elytra_movement_check: Checks Elytra movement validity.
+    disableElytraMovementCheck: Checks Elytra movement validity.
+    player_movement_check: Checks player movement validity.
+    disablePlayerMovementCheck: Checks player movement validity.
+    ender_pearls_vanish_on_death: Ender pearls vanish when player dies.
+    enderPearlsVanishOnDeath: Ender pearls vanish when player dies.
+    forgive_dead_players: Mobs forgive players after death.
+    forgiveDeadPlayers: Mobs forgive players after death.
+    freeze_damage: Enables freeze damage from powder snow.
+    freezeDamage: Enables freeze damage from powder snow.
+    drowning_damage: Enables drowning damage.
+    drowningDamage: Enables drowning damage.
+    fall_damage: Enables fall damage.
+    fallDamage: Enables fall damage.
+    fire_damage: Enables fire damage.
+    fireDamage: Enables fire damage.
+    tnt_explodes: Enables TNT explosions.
+    players_sleeping_percentage: Sets the players percentage to sleep
+    playersSleepingPercentage: Sets the players percentage to sleep
+    projectiles_can_break_blocks: Determines if projectiles can break blocks.
+    projectilesCanBreakBlocks: Determines if projectiles can break blocks.
+    spawnChunkRadius: Sets the number of loaded chunks around spawn.
+    mob_griefing: Determines if mobs can pick up items or change blocks.
+    mobGriefing: Determines if mobs can pick up items or change blocks.
+
 true: '&aALLOW'
 false: '&cPREVENT'
+
+gamerule_true: '&aENABLED'
+gamerule_false: '&cDISABLED'
+value: '&b%value%'
 
 overworld: '&a[OVERWORLD]'
 nether: '&c[NETHER]'

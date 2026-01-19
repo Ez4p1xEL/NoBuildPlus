@@ -51,6 +51,10 @@ edit-default-permission: '&7&l%prefix% &8&l> &aDu hast die Berechtigung der Stan
 edit-default-deny-message: '&7&l%prefix% &8&l> &aDu hast die Ablehnungsnachricht der Standardvorlage auf &e%message%&a geändert.'
 edit-permission: '&7&l%prefix% &8&l> &aDu hast die Berechtigung der Welt &9%world% &a auf &e%permission%&a geändert.'
 edit-deny-message: '&7&l%prefix% &8&l> &aDu hast die Ablehnungsnachricht der Welt &9%world% &a auf &e%message%&a geändert.'
+default-gamerule-set-success: '&7&l%prefix% &8&l> &aDu hast die Standardvorlage der Spielregel &e%gamerule% &aauf &e%value% gesetzt'
+gamerule-set-success: '&7&l%prefix% &8&l> &aDu hast die Spielregel &e%gamerule% &a der Welt &9%world% &aauf &e%value% gesetzt'
+invalid-amount: '&7&l%prefix% &8&l> &cUnbekannter Wert'
+invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cexistiert nicht auf diesem Minecraft-Server in dieser Version!'
 
 gui:
   main:
@@ -133,13 +137,28 @@ gui:
   edit-default:
     title: 'Standardvorlage der Flag-Einstellungen bearbeiten'
     items:
+      type:
+        display_name: '&aAktueller Typ: &6%type%'
+        lore:
+          - ''
+          - '&7Du befindest dich derzeit'
+          - '&7im Bedienfeld von %type%'
+          - ''
+          - '&aKlicken zum Umschalten'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
         lore:
           - ''
           - '&7%description%'
           - ''
-          - '&aKlicken zum Wechseln'
+          - '&aKlicken zum Umschalten'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aKlicken zum Umschalten'
       edit-permission:
         display_name: '&aBerechtigung bearbeiten'
         lore:
@@ -177,13 +196,28 @@ gui:
   world:
     title: 'Flag-Einstellungen von %world% bearbeiten'
     items:
+      type:
+        display_name: '&aAktueller Typ: &6%type%'
+        lore:
+          - ''
+          - '&7Du befindest dich derzeit'
+          - '&7im Bedienfeld von %type%'
+          - ''
+          - '&aKlicken zum Umschalten'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
         lore:
           - ''
           - '&7%description%'
           - ''
-          - '&aKlicken zum Wechseln'
+          - '&aKlicken zum Umschalten'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aKlicken zum Umschalten'
       edit-permission:
         display_name: '&aBerechtigung bearbeiten'
         lore:
@@ -289,8 +323,130 @@ flag:
     ia-furniture-sit: 'Auf ItemsAdder-Möbel sitzen'
     ia-campfire-interact: 'Interaktion mit ItemsAdder-Lagerfeuer'
 
+gamerule:
+  name: Spielregel
+  description:
+    advance_time: Steuert, ob die Zeit fortschreitet (Tag/Nacht-Zyklus).
+    doDaylightCycle: Steuert, ob die Zeit fortschreitet (Tag/Nacht-Zyklus).
+    advance_weather: Steuert, ob sich das Wetter natürlich verändert.
+    doWeatherCycle: Steuert, ob sich das Wetter natürlich verändert.
+    block_drops: Bestimmt, ob Blöcke beim Zerstören Gegenstände fallen lassen.
+    doTileDrops: Bestimmt, ob Blöcke beim Zerstören Gegenstände fallen lassen.
+    entity_drops: Bestimmt, ob Entitäten beim Töten Gegenstände fallen lassen.
+    doEntityDrops: Bestimmt, ob Entitäten beim Töten Gegenstände fallen lassen.
+    mob_drops: Bestimmt, ob Mobs beim Töten Beute fallen lassen.
+    doMobLoot: Bestimmt, ob Mobs beim Töten Beute fallen lassen.
+    block_explosion_drop_decay: Steuert den Verfall von Gegenständen durch Blockexplosionen.
+    blockExplosionDropDecay: Steuert den Verfall von Gegenständen durch Blockexplosionen.
+    mob_explosion_drop_decay: Steuert den Verfall von Gegenständen durch Mobexplosionen.
+    mobExplosionDropDecay: Steuert den Verfall von Gegenständen durch Mobexplosionen.
+    tnt_explosion_drop_decay: Steuert den Verfall von Gegenständen durch TNT-Explosionen.
+    tntExplosionDropDecay: Steuert den Verfall von Gegenständen durch TNT-Explosionen.
+    pvp: Aktiviert oder deaktiviert Spieler-gegen-Spieler-Kampf.
+    keep_inventory: Behält das Inventar des Spielers nach dem Tod.
+    keepInventory: Behält das Inventar des Spielers nach dem Tod.
+    immediate_respawn: Spieler respawnen sofort ohne Todesbildschirm.
+    doImmediateRespawn: Spieler respawnen sofort ohne Todesbildschirm.
+    natural_health_regeneration: Aktiviert die natürliche Lebensregeneration.
+    naturalRegeneration: Aktiviert die natürliche Lebensregeneration.
+    show_death_messages: Zeigt Todesmeldungen im Chat an.
+    showDeathMessages: Zeigt Todesmeldungen im Chat an.
+    universal_anger: Neutrale Mobs werden bei Provokation auf alle Spieler wütend.
+    universalAnger: Neutrale Mobs werden bei Provokation auf alle Spieler wütend.
+    command_block_output: Zeigt die Ausgabe von Befehlsblöcken im Chat an.
+    commandBlockOutput: Zeigt die Ausgabe von Befehlsblöcken im Chat an.
+    command_blocks_work: Aktiviert Befehlsblöcke.
+    commandBlocksEnabled: Aktiviert Befehlsblöcke.
+    log_admin_commands: Protokolliert Admin-Befehle in der Serverkonsole.
+    logAdminCommands: Protokolliert Admin-Befehle in der Serverkonsole.
+    send_command_feedback: Zeigt Rückmeldungen von Befehlen im Chat an.
+    sendCommandFeedback: Zeigt Rückmeldungen von Befehlen im Chat an.
+    show_advancement_messages: Kündigt Fortschritte im Chat an.
+    announceAdvancements: Kündigt Fortschritte im Chat an.
+    reduced_debug_info: Reduziert die Informationen im Debug-Bildschirm.
+    reducedDebugInfo: Reduziert die Informationen im Debug-Bildschirm.
+    max_command_sequence_length: Maximale Länge von Befehlssequenzen.
+    maxCommandChainLength: Maximale Länge von Befehlssequenzen.
+    max_command_forks: Maximale Anzahl von Verzweigungen bei der Befehlsausführung.
+    maxCommandForkCount: Maximale Anzahl von Verzweigungen bei der Befehlsausführung.
+    max_block_modifications: Maximale Blockänderungen, die durch Befehle erlaubt sind.
+    commandModificationBlockLimit: Maximale Blockänderungen, die durch Befehle erlaubt sind.
+    spawn_mobs: Steuert das Spawnen von Mobs.
+    doMobSpawning: Steuert das Spawnen von Mobs.
+    spawn_monsters: Steuert das Spawnen von Monstern.
+    spawn_patrols: Steuert das Spawnen von Patrouillen.
+    doPatrolSpawning: Steuert das Spawnen von Patrouillen.
+    spawn_phantoms: Steuert das Spawnen von Phantomen.
+    doInsomnia: Steuert das Spawnen von Phantomen.
+    spawn_wandering_traders: Steuert das Spawnen von fahrenden Händlern.
+    doTraderSpawning: Steuert das Spawnen von fahrenden Händlern.
+    spawn_wardens: Steuert das Spawnen von Wardens.
+    doWardenSpawning: Steuert das Spawnen von Wardens.
+    raids: Aktiviert oder deaktiviert Überfälle.
+    disableRaids: Aktiviert oder deaktiviert Überfälle.
+    random_tick_speed: Legt die zufällige Tick-Geschwindigkeit fest (Blockaktualisierungen).
+    randomTickSpeed: Legt die zufällige Tick-Geschwindigkeit fest (Blockaktualisierungen).
+    respawn_radius: Legt den Respawn-Radius der Spieler fest.
+    spawnRadius: Legt den Respawn-Radius der Spieler fest.
+    max_entity_cramming: Maximale Anzahl von Entitäten in einem Raum vor dem Ersticken.
+    maxEntityCramming: Maximale Anzahl von Entitäten in einem Raum vor dem Ersticken.
+    max_snow_accumulation_height: Maximale Höhe der Schneeschichten.
+    snowAccumulationHeight: Maximale Höhe der Schneeschichten.
+    max_minecart_speed: Maximale Geschwindigkeit von Loren.
+    fire_spread_radius_around_player: Radius der Feuerverbreitung um Spieler.
+    doFireTick: Aktiviert Feuerverbreitung und -verfall.
+    allowFireTicksAwayFromPlayer: Aktiviert Feuerverbreitung fern vom Spieler.
+    water_source_conversion: Erlaubt die Regeneration von Wasserquellenblöcken.
+    waterSourceConversion: Erlaubt die Regeneration von Wasserquellenblöcken.
+    lava_source_conversion: Erlaubt die Regeneration von Lavaquellenblöcken.
+    lavaSourceConversion: Erlaubt die Regeneration von Lavaquellenblöcken.
+    spread_vines: Erlaubt das natürliche Ausbreiten von Ranken.
+    doVinesSpread: Erlaubt das natürliche Ausbreiten von Ranken.
+    spectators_generate_chunks: Zuschauer erzeugen Chunks beim Bewegen.
+    spectatorsGenerateChunks: Zuschauer erzeugen Chunks beim Bewegen.
+    locator_bar: Zeigt die Locator-Leiste für Kompassverfolgung an.
+    global_sound_events: Aktiviert globale Soundereignisse.
+    globalSoundEvents: Aktiviert globale Soundereignisse.
+    allow_entering_nether_using_portals: Erlaubt den Eintritt ins Nether über Portale.
+    players_nether_portal_default_delay: Standardverzögerung für Nether-Portale.
+    playersNetherPortalDefaultDelay: Standardverzögerung für Nether-Portale.
+    players_nether_portal_creative_delay: Nether-Portale-Verzögerung für Kreativspieler.
+    playersNetherPortalCreativeDelay: Nether-Portale-Verzögerung für Kreativspieler.
+    limited_crafting: Beschränkt das Crafting auf freigeschaltete Rezepte.
+    doLimitedCrafting: Beschränkt das Crafting auf freigeschaltete Rezepte.
+    spawner_blocks_work: Aktiviert Spawnerblöcke.
+    spawnerBlocksEnabled: Aktiviert Spawnerblöcke.
+    elytra_movement_check: Überprüft die Gültigkeit der Elytra-Bewegung.
+    disableElytraMovementCheck: Überprüft die Gültigkeit der Elytra-Bewegung.
+    player_movement_check: Überprüft die Gültigkeit der Spielerbewegung.
+    disablePlayerMovementCheck: Überprüft die Gültigkeit der Spielerbewegung.
+    ender_pearls_vanish_on_death: Enderperlen verschwinden, wenn der Spieler stirbt.
+    enderPearlsVanishOnDeath: Enderperlen verschwinden, wenn der Spieler stirbt.
+    forgive_dead_players: Mobs vergeben Spielern nach deren Tod.
+    forgiveDeadPlayers: Mobs vergeben Spielern nach deren Tod.
+    freeze_damage: Aktiviert Frostschaden durch Pulverschnee.
+    freezeDamage: Aktiviert Frostschaden durch Pulverschnee.
+    drowning_damage: Aktiviert Ertrinkungsschaden.
+    drowningDamage: Aktiviert Ertrinkungsschaden.
+    fall_damage: Aktiviert Fallschaden.
+    fallDamage: Aktiviert Fallschaden.
+    fire_damage: Aktiviert Feuerschaden.
+    fireDamage: Aktiviert Feuerschaden.
+    tnt_explodes: Aktiviert TNT-Explosionen.
+    players_sleeping_percentage: Legt den Prozentsatz der schlafenden Spieler fest.
+    playersSleepingPercentage: Legt den Prozentsatz der schlafenden Spieler fest.
+    projectiles_can_break_blocks: Bestimmt, ob Projektile Blöcke zerstören können.
+    projectilesCanBreakBlocks: Bestimmt, ob Projektile Blöcke zerstören können.
+    spawnChunkRadius: Legt die Anzahl der geladenen Chunks um den Spawn fest.
+    mob_griefing: Bestimmt, ob Mobs Gegenstände aufnehmen oder Blöcke verändern können.
+    mobGriefing: Bestimmt, ob Mobs Gegenstände aufnehmen oder Blöcke verändern können.
+
 true: '&aERLAUBEN'
 false: '&cVERHINDERN'
+
+gamerule_true: '&aAktiviert'
+gamerule_false: '&cDeaktiviert'
+value: '&b%value%'
 
 overworld: '&a[OVERWORLD]'
 nether: '&c[NETHER]'

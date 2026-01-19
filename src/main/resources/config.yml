@@ -30,7 +30,9 @@ type: Release
 
 # The version of configuration.
 # DO NOT CHANGE THIS!!
-Configuration: 7
+Configuration: 8
+
+debug: false
 
 # Language of the file.
 # Languages list: en(English) zh_CN(Simplified Chinese) zh_TW(Traditional Chinese), ru(Russian), ja(Japanese), de(German)

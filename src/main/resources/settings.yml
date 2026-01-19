@@ -1,4 +1,5 @@
 global-settings:
+  # For flag:
   # true = not prevent
   # false = prevent
   flags:
@@ -67,5 +68,118 @@ global-settings:
     tnt-prime: true
     pressure-plate: true
     fire-spread: true
+  # the usage of boolean (true/false) here does not equal to the usage of flag
+  gamerules:
+    advance_time: true
+    doDaylightCycle: true
+    advance_weather: true
+    doWeatherCycle: true
+    allow_entering_nether_using_portals: true
+    announce_advancements: true
+    announceAdvancements: true
+    block_drops: true
+    doTileDrops: true
+    block_explosion_drop_decay: true
+    blockExplosionDropDecay: true
+    command_block_output: true
+    commandBlockOutput: true
+    command_blocks_work: true
+    commandModificationBlockLimit: 32768
+    disableElytraMovementCheck: false
+    elytra_movement_check: true
+    disableRaids: false
+    raids: true
+    doEntityDrops: true
+    entity_drops: true
+    doFireTick: true
+    fire_spread_radius_around_player: -1
+    doImmediateRespawn: false
+    immediate_respawn: false
+    doInsomnia: true
+    spawn_phantoms: true
+    doLimitedCrafting: false
+    limited_crafting: false
+    doMobLoot: true
+    mob_drops: true
+    doMobSpawning: true
+    spawn_mobs: true
+    doPatrolSpawning: true
+    spawn_patrols: true
+    doTraderSpawning: true
+    spawn_wandering_traders: true
+    doVinesSpread: true
+    spread_vines: true
+    doWardenSpawning: true
+    spawn_wardens: true
+    drowning_damage: true
+    drowningDamage: true
+    ender_pearls_vanish_on_death: true
+    enderPearlsVanishOnDeath: true
+    fall_damage: true
+    fallDamage: true
+    fire_damage: true
+    fireDamage: true
+    forgive_dead_players: true
+    forgiveDeadPlayers: true
+    freeze_damage: true
+    freezeDamage: true
+    global_sound_events: true
+    globalSoundEvents: true
+    keep_inventory: false
+    keepInventory: false
+    lava_source_conversion: true
+    lavaSourceConversion: true
+    locator_bar: false
+    log_admin_commands: true
+    logAdminCommands: true
+    max_block_modifications: 32768
+    maxCommandChainLength: 65536
+    max_command_forks: 65536
+    maxCommandForkCount: 65536
+    max_command_sequence_length: 65536
+    max_entity_cramming: 24
+    maxEntityCramming: 24
+    max_minecart_speed: 8
+    max_snow_accumulation_height: 3
+    snowAccumulationHeight: 3
+    mob_explosion_drop_decay: true
+    mobExplosionDropDecay: true
+    mob_griefing: true
+    mobGriefing: true
+    natural_health_regeneration: true
+    naturalRegeneration: true
+    player_movement_check: true
+    players_nether_portal_creative_delay: 0
+    playersNetherPortalCreativeDelay: 0
+    players_nether_portal_default_delay: 80
+    playersNetherPortalDefaultDelay: 80
+    players_sleeping_percentage: 100
+    playersSleepingPercentage: 100
+    projectiles_can_break_blocks: false
+    projectilesCanBreakBlocks: false
+    pvp: true
+    random_tick_speed: 3
+    randomTickSpeed: 3
+    reduced_debug_info: false
+    reducedDebugInfo: false
+    respawn_radius: 10
+    spawnRadius: 10
+    spawnChunkRadius: 10
+    send_command_feedback: true
+    sendCommandFeedback: true
+    show_advancement_messages: true
+    show_death_messages: true
+    showDeathMessages: true
+    spawn_monsters: true
+    spawner_blocks_work: true
+    spectators_generate_chunks: true
+    spectatorsGenerateChunks: true
+    tnt_explodes: true
+    tnt_explosion_drop_decay: true
+    tntExplosionDropDecay: true
+    universal_anger: false
+    universalAnger: false
+    water_source_conversion: true
+    waterSourceConversion: true
   permission: nobuildplus.bypass
   deny-message: '&c&l! &7You cannot do that here.'

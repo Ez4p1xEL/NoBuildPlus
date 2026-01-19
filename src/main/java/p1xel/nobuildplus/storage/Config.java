@@ -23,7 +23,9 @@ public class Config {
 
         NoBuildPlus.getInstance().reloadConfig();
         config = NoBuildPlus.getInstance().getConfig();
-       NoBuildPlus.getTextEditMode().cancelWord = Config.getString("text-edit-mode.cancel");
+        NoBuildPlus.getTextEditMode().cancelWord = Config.getString("text-edit-mode.cancel");
+        RuleSetting.createFile();
+        Logger.setEnabled(Config.getBool("debug"));
 
     }
 

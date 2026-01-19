@@ -13,10 +13,8 @@ import p1xel.nobuildplus.Flag;
 import p1xel.nobuildplus.FlagRegistry;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.NoBuildPlus;
-import p1xel.nobuildplus.storage.Config;
-import p1xel.nobuildplus.storage.FlagsManager;
-import p1xel.nobuildplus.storage.Locale;
-import p1xel.nobuildplus.storage.Settings;
+import p1xel.nobuildplus.gamerule.GameRuleRegistry;
+import p1xel.nobuildplus.storage.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +24,11 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
 
     private Inventory inventory;
     private int page;
-    private final NamespacedKey menu_id_key = new NamespacedKey("nobuildplus", "menu_id");
+    private GUIType type;
 
-    public GUIDefaultTemplate(int page) {
+    public GUIDefaultTemplate(int page, GUIType type) {
         this.page = page;
+        this.type = type;
         init();
     }
 
@@ -39,47 +38,39 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
         boolean hasPreviousPage = page > 1;
         boolean hasNextPage;
 
-        List<String> flags = FlagsManager.getFlags();
-        hasNextPage = flags.size() > page * 28;
-        flags = flags.subList(28 * (page-1), Math.min((page) * 28, flags.size()));
+        List<String> list;
+
+        if (type == GUIType.GAMERULE) {
+            list = GameRuleRegistry.getRegisteredGameRules();
+            hasNextPage = list.size() > page * 28;
+
+        } else {
+            list = FlagsManager.getFlags();
+            hasNextPage = list.size() > page * 28;
+        }
+
+        // 获取符合当前页面的数量
+        list = list.subList(28 * (page - 1), Math.min((page) * 28, list.size()));
 
         Inventory inventory = Bukkit.createInventory(this, 54, Locale.getMessage("gui.edit-default.title"));
 
         if (hasNextPage) {
-
-            ItemStack item = new ItemStack(Material.PAPER);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(Locale.getMessage("gui.edit-default.items.next_page.display_name"));
-            List<String> lore = Locale.yaml.getStringList("gui.edit-default.items.next_page.lore").stream()
-                    .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-            meta.setLore(lore);
-            PersistentDataContainer container = meta.getPersistentDataContainer();
-            container.set(menu_id_key, PersistentDataType.STRING, "next_page");
-            item.setItemMeta(meta);
-            inventory.setItem(53, item);
+            inventory = setNextPage(inventory, "edit-default", 4);
         }
 
         if (hasPreviousPage) {
-
-            ItemStack item = new ItemStack(Material.PAPER);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(Locale.getMessage("gui.edit-default.items.previous_page.display_name"));
-            List<String> lore = Locale.yaml.getStringList("gui.edit-default.items.previous_page.lore").stream()
-                    .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-            meta.setLore(lore);
-            PersistentDataContainer container = meta.getPersistentDataContainer();
-            container.set(menu_id_key, PersistentDataType.STRING, "previous_page");
-            item.setItemMeta(meta);
-            inventory.setItem(45, item);
+            inventory = setPreviousPage(inventory, "edit-default", 4);
         }
+
+        inventory = setBackTo(inventory, "edit-default", 4);
+        inventory = setTypeButton(inventory, "edit-default", type);
 
         this.inventory = inventory;
 
-        setItem(Material.ARROW, "back_to_main", 49);
         setItem(Material.IRON_CHESTPLATE, "edit-permission", 48);
         setItem(Material.FEATHER, "edit-deny-message", 50);
 
-        update(flags);
+        update(list);
 
     }
 
@@ -125,42 +116,82 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
         inventory.setItem(slot, item);
     }
 
-    public void update(List<String> flags) {
+    public void update(List<String> list) {
         int slot = 10; // starting slot
         int base = 17;
-        for (String f : flags) {
-            if ((slot-base)%9 == 0) {
-                slot+=2;
-            }
 
-            Flag flag = FlagRegistry.matchFlag(f);
-            Material material = Material.matchMaterial(flag.getShowItem());
-            if (material == null) {
-                material = Material.PAPER;
-            }
-            String flagName = flag.getName();
-            boolean bool = Settings.getDefaultFlag(flagName);
-            ItemStack item = new ItemStack(material);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(Locale.getMessage("gui.edit-default.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
-            List<String> lore_list = Locale.yaml.getStringList("gui.edit-default.items.flag.lore").stream()
-                    .map(line -> ChatColor.translateAlternateColorCodes('&', line))
-                    .map(line -> line.replaceAll("%flag%",flagName)
-                            .replaceAll("%bool%", Locale.getMessage(String.valueOf(bool)))
-                            .replaceAll("%description%", flag.getDescription(Config.getLanguage())))
-                    .collect(Collectors.toList());
-            meta.setLore(lore_list);
-            PersistentDataContainer container = meta.getPersistentDataContainer();
-            container.set(menu_id_key, PersistentDataType.STRING, "flag:" + flagName);
-            item.setItemMeta(meta);
-            inventory.setItem(slot, item);
-            slot++;
-            // closing slot
-            if (slot >= 44) {
-                break;
-            }
+        if (type == GUIType.FLAG) {
 
+            for (String element : list) {
+                if ((slot - base) % 9 == 0) {
+                    slot += 2;
+                }
+
+                Flag flag = FlagRegistry.matchFlag(element);
+                Material material = Material.matchMaterial(flag.getShowItem());
+                if (material == null) {
+                    material = Material.PAPER;
+                }
+                String flagName = flag.getName();
+                boolean bool = Settings.getDefaultFlag(flagName);
+                ItemStack item = new ItemStack(material);
+                ItemMeta meta = item.getItemMeta();
+                meta.setDisplayName(Locale.getMessage("gui.edit-default.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
+                List<String> lore_list = Locale.yaml.getStringList("gui.edit-default.items.flag.lore").stream()
+                        .map(line -> ChatColor.translateAlternateColorCodes('&', line))
+                        .map(line -> line.replaceAll("%flag%", flagName)
+                                .replaceAll("%bool%", Locale.getMessage(String.valueOf(bool)))
+                                .replaceAll("%description%", flag.getDescription(Config.getLanguage())))
+                        .collect(Collectors.toList());
+                meta.setLore(lore_list);
+                PersistentDataContainer container = meta.getPersistentDataContainer();
+                container.set(menu_id_key, PersistentDataType.STRING, "flag:" + flagName);
+                item.setItemMeta(meta);
+                inventory.setItem(slot, item);
+                slot++;
+                // closing slot
+                if (slot >= 44) {
+                    break;
+                }
+            }
         }
+
+        if (type == GUIType.GAMERULE) {
+            for (String element : list) {
+                if ((slot - base) % 9 == 0) {
+                    slot += 2;
+                }
+
+                Material material = Material.matchMaterial(RuleSetting.getMaterialString(element));
+                if (material == null) {
+                    material = Material.PAPER;
+                }
+                Object value = Settings.getDefaultGameRule(element);
+                ItemStack item = new ItemStack(material);
+                ItemMeta meta = item.getItemMeta();
+                String gameruleBoolean = value instanceof Boolean ? Locale.getMessage("gamerule_"+(boolean) value) : "";
+                String gameruleInteger = value instanceof Integer ? Locale.getMessage("value").replace("%value%", String.valueOf((int) value)) : "";
+                meta.setDisplayName(Locale.getMessage("gui.edit-default.items.gamerule.display_name").replaceAll("%gamerule%", element).replace("%bool%", gameruleBoolean).replace("%int%", gameruleInteger));
+                List<String> lore_list = Locale.yaml.getStringList("gui.edit-default.items.gamerule.lore").stream()
+                        .map(line -> ChatColor.translateAlternateColorCodes('&', line))
+                        .map(line -> line.replace("%gamerule%", element)
+                                .replace("%bool%", gameruleBoolean)
+                                .replace("%int%", gameruleInteger)
+                                .replace("%description%", Locale.getMessage("gamerule.description." + element)))
+                        .collect(Collectors.toList());
+                meta.setLore(lore_list);
+                PersistentDataContainer container = meta.getPersistentDataContainer();
+                container.set(menu_id_key, PersistentDataType.STRING, "gamerule:" + element);
+                item.setItemMeta(meta);
+                inventory.setItem(slot, item);
+                slot++;
+                // closing slot
+                if (slot >= 44) {
+                    break;
+                }
+            }
+        }
+
 
         for (int i = 0; i < 54; i++) {
             if (inventory.getItem(i) == null) {
@@ -174,22 +205,45 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
     }
 
     public void updateSlot(int slot) {
+        if (type == GUIType.FLAG) {
+            ItemStack item = inventory.getItem(slot);
+            ItemMeta meta = item.getItemMeta();
+            PersistentDataContainer container = meta.getPersistentDataContainer();
+            String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+            Flag flag = FlagRegistry.matchFlag(flagName);
+            boolean bool = Settings.getDefaultFlag(flagName);
+            meta.setDisplayName(Locale.getMessage("gui.edit-default.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
+            List<String> lore_list = Locale.yaml.getStringList("gui.edit-default.items.flag.lore").stream()
+                    .map(line -> ChatColor.translateAlternateColorCodes('&', line))
+                    .map(line -> line.replaceAll("%flag%", flagName)
+                            .replaceAll("%bool%", Locale.getMessage(String.valueOf(bool)))
+                            .replaceAll("%description%", flag.getDescription(Config.getLanguage())))
+                    .collect(Collectors.toList());
+            meta.setLore(lore_list);
+            item.setItemMeta(meta);
+            inventory.setItem(slot, item);
+            return;
+        }
+
         ItemStack item = inventory.getItem(slot);
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
-        String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
-        Flag flag = FlagRegistry.matchFlag(flagName);
-        boolean bool = Settings.getDefaultFlag(flagName);
-        meta.setDisplayName(Locale.getMessage("gui.edit-default.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
-        List<String> lore_list = Locale.yaml.getStringList("gui.edit-default.items.flag.lore").stream()
+        String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+        Object value = Settings.getDefaultGameRule(gameruleName);
+        String gameruleBoolean = value instanceof Boolean ? Locale.getMessage("gamerule_"+(boolean) value) : "";
+        String gameruleInteger = value instanceof Integer ? Locale.getMessage("value").replace("%value%", String.valueOf((int) value)) : "";
+        meta.setDisplayName(Locale.getMessage("gui.edit-default.items.gamerule.display_name").replaceAll("%gamerule%", gameruleName).replace("%bool%", gameruleBoolean).replace("%int%", gameruleInteger));
+        List<String> lore_list = Locale.yaml.getStringList("gui.edit-default.items.gamerule.lore").stream()
                 .map(line -> ChatColor.translateAlternateColorCodes('&', line))
-                .map(line -> line.replaceAll("%flag%",flagName)
-                        .replaceAll("%bool%", Locale.getMessage(String.valueOf(bool)))
-                        .replaceAll("%description%", flag.getDescription(Config.getLanguage())))
+                .map(line -> line.replace("%gamerule%", gameruleName)
+                        .replace("%bool%", gameruleBoolean)
+                        .replace("%int%", gameruleInteger)
+                        .replace("%description%", Locale.getMessage("gamerule.description." + gameruleName)))
                 .collect(Collectors.toList());
         meta.setLore(lore_list);
         item.setItemMeta(meta);
         inventory.setItem(slot, item);
+
     }
 
     @Override
@@ -201,28 +255,40 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
         switch (name) {
             case "back_to_main": {
                 player.openInventory(new GUIMain(1).getInventory());
+                player.playSound(player, Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
                 return true;
             }
             case "previous_page": {
-                player.openInventory(new GUIDefaultTemplate(Math.max(1, page-1)).getInventory());
+                player.openInventory(new GUIDefaultTemplate(Math.max(1, page-1), type).getInventory());
+                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
             case "next_page": {
-                player.openInventory(new GUIDefaultTemplate(page+1).getInventory());
+                player.openInventory(new GUIDefaultTemplate(page+1, type).getInventory());
+                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
 
             case "edit-permission": {
-                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-permission");
+                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-permission", inventory);
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
+                player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
                 return true;
             }
 
             case "edit-deny-message": {
-                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-deny-message");
+                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-deny-message", inventory);
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
+                player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
+                return true;
+            }
+
+            case "type": {
+                GUIType new_type = type == GUIType.FLAG ? GUIType.GAMERULE : GUIType.FLAG;
+                player.openInventory(new GUIDefaultTemplate(page, new_type).getInventory());
+                player.playSound(player, Sound.UI_BUTTON_CLICK, 0.5f, 0.5f);
                 return true;
             }
         }
@@ -234,6 +300,29 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
             Settings.setDefaultFlag(flag, !bool);
             updateSlot(slot);
             player.sendMessage(Locale.getMessage("default-flag-set-success").replaceAll("%flag%", flag).replaceAll("%boolean%", String.valueOf(!bool)));
+            player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
+            return true;
+
+        }
+
+        if (name.startsWith("gamerule:")) {
+            String gameruleName = name.split(":")[1];
+            Object value = Settings.getDefaultGameRule(gameruleName);
+            if (value instanceof Boolean) {
+                boolean bool = (boolean) value;
+                Settings.setDefaultGameRule(gameruleName, !bool);
+                updateSlot(slot);
+                player.sendMessage(Locale.getMessage("default-gamerule-set-success").replaceAll("%gamerule%", gameruleName).replaceAll("%value%", String.valueOf(!bool)));
+                player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
+                Logger.debug("Setting default template gamerule: " + gameruleName);
+                //GameRuleRegistry.setWorldGameRule("world", gameruleName, !bool); // for test
+                return true;
+            }
+
+            NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-gamerule:" + gameruleName, inventory);
+            player.closeInventory();
+            player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
+            player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
             return true;
 
         }

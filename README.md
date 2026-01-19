@@ -19,6 +19,7 @@ With simple and customizable settings, you can easily manage each world accordin
 - Ability to toggle flag booleans in the global settings file
 - World-specific permissions and deny messages can be customized or removed
 - Menu support for a more convenient and user-friendly experience
+- convenient operating Minecraft GameRule management system in GUI
 
 ## Version Support
 - 1.8+ (Spigot, Paper, Purpur, Folia)

@@ -21,7 +21,6 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
 
     private Inventory inventory;
     private int page;
-    private final NamespacedKey menu_id_key = new NamespacedKey("nobuildplus", "menu_id");
     private int size;
 
     public GUIMain(int page) {
@@ -49,69 +48,34 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
         Inventory inventory = Bukkit.createInventory(this, (size+2)*9, Locale.getMessage("gui.main.title"));
 
         if (hasNextPage) {
-
-            ItemStack item = new ItemStack(Material.PAPER);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(Locale.getMessage("gui.main.items.next_page.display_name"));
-            List<String> lore = Locale.yaml.getStringList("gui.main.items.next_page.lore").stream()
-                    .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-            meta.setLore(lore);
-            PersistentDataContainer container = meta.getPersistentDataContainer();
-            container.set(menu_id_key, PersistentDataType.STRING, "next_page");
-            item.setItemMeta(meta);
-            inventory.setItem(9 * (size+2) - 1, item);
+            inventory = setNextPage(inventory, "main", size);
         }
 
         if (hasPreviousPage) {
-
-            ItemStack item = new ItemStack(Material.PAPER);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(Locale.getMessage("gui.main.items.previous_page.display_name"));
-            List<String> lore = Locale.yaml.getStringList("gui.main.items.previous_page.lore").stream()
-                    .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-            meta.setLore(lore);
-            PersistentDataContainer container = meta.getPersistentDataContainer();
-            container.set(menu_id_key, PersistentDataType.STRING, "previous_page");
-            item.setItemMeta(meta);
-            inventory.setItem(9 * (size+2) - 9, item);
+            inventory = setPreviousPage(inventory, "main", size);
         }
 
-        ItemStack item = new ItemStack(Material.BARRIER);
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(Locale.getMessage("gui.main.items.close.display_name"));
-        List<String> lore = Locale.yaml.getStringList("gui.main.items.close.lore").stream()
-                .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-        meta.setLore(lore);
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        container.set(menu_id_key, PersistentDataType.STRING, "close");
-        item.setItemMeta(meta);
-        inventory.setItem(9 * (size+2) - 5, item);
-
-        ItemStack add_item = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-        ItemMeta add_meta = add_item.getItemMeta();
-        add_meta.setDisplayName(Locale.getMessage("gui.main.items.add.display_name"));
-        List<String> add_lore = Locale.yaml.getStringList("gui.main.items.add.lore").stream()
-                .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-        add_meta.setLore(add_lore);
-        PersistentDataContainer add_container = add_meta.getPersistentDataContainer();
-        add_container.set(menu_id_key, PersistentDataType.STRING, "add");
-        add_item.setItemMeta(add_meta);
-        inventory.setItem(4, add_item);
-
-        ItemStack edit_default_item = new ItemStack(Material.BOOK);
-        ItemMeta edit_default_meta = edit_default_item.getItemMeta();
-        edit_default_meta.setDisplayName(Locale.getMessage("gui.main.items.edit-default.display_name"));
-        List<String> edit_default_lore = Locale.yaml.getStringList("gui.main.items.edit-default.lore").stream()
-                .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-        edit_default_meta.setLore(edit_default_lore);
-        PersistentDataContainer edit_default_container = edit_default_meta.getPersistentDataContainer();
-        edit_default_container.set(menu_id_key, PersistentDataType.STRING, "edit-default");
-        edit_default_item.setItemMeta(edit_default_meta);
-        inventory.setItem(3, edit_default_item);
+        inventory = setItem(inventory, "close", Material.BARRIER, 9*(size+2)-5);
+        inventory = setItem(inventory, "add", Material.LIME_STAINED_GLASS_PANE, 4);
+        inventory = setItem(inventory, "edit-default", Material.BOOK, 3);
 
         this.inventory = inventory;
         update(worlds);
 
+    }
+
+    Inventory setItem(Inventory inventory, String item_name, Material material, int slot) {
+        ItemStack item = new ItemStack(material);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(Locale.getMessage("gui.main.items."+ item_name+".display_name"));
+        List<String> lore = Locale.yaml.getStringList("gui.main.items."+ item_name+".lore").stream()
+                .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
+        itemMeta.setLore(lore);
+        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
+        container.set(menu_id_key, PersistentDataType.STRING, item_name);
+        item.setItemMeta(itemMeta);
+        inventory.setItem(slot, item);
+        return inventory;
     }
 
     public void update(List<String> worlds) {
@@ -184,22 +148,27 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
         switch (name) {
             case "close": {
                 player.closeInventory();
+                player.playSound(player, Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
                 return true;
             }
             case "previous_page": {
                 player.openInventory(new GUIMain(Math.min(1, page-1)).getInventory());
+                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
             case "next_page": {
                 player.openInventory(new GUIMain(page+1).getInventory());
+                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
             case "add": {
                 player.openInventory(new GUIWorldList(1).getInventory());
+                player.playSound(player, Sound.BLOCK_SLIME_BLOCK_PLACE, 0.5f, 0.5f);
                 return true;
             }
             case "edit-default": {
-                player.openInventory(new GUIDefaultTemplate(1).getInventory());
+                player.openInventory(new GUIDefaultTemplate(1, GUIType.FLAG).getInventory());
+                player.playSound(player, Sound.ENTITY_ARMOR_STAND_BREAK, 0.45f, 0.45f);
                 return true;
             }
         }
@@ -210,18 +179,22 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
                 if (!Settings.getEnableWorldList().contains(world)) {
                     player.sendMessage(Locale.getMessage("cant-find-world"));
                     player.openInventory(new GUIMain(1).getInventory());
+                    player.playSound(player, Sound.ENTITY_VILLAGER_NO, 0.5f, 0.5f);
                     return true;
                 }
-                player.openInventory(new GUIWorld(world, 1).getInventory());
+                player.openInventory(new GUIWorld(world, 1, GUIType.FLAG).getInventory());
+                player.playSound(player, Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
             } else if (clickType == ClickType.RIGHT) {
                 if (!Settings.getEnableWorldList().contains(world)) {
                     player.sendMessage(Locale.getMessage("cant-find-world"));
                     player.openInventory(new GUIMain(1).getInventory());
+                    player.playSound(player, Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
                     return true;
                 }
                 Worlds.removeWorld(world);
                 //GUIManager.instance.removeWorld(world);
                 player.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%",world));
+                player.playSound(player, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 0.5f);
                 player.openInventory(new GUIMain(1).getInventory());
             }
             return true;

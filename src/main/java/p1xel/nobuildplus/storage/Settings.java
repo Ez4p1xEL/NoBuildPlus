@@ -99,4 +99,10 @@ public class Settings {
 
     }
 
+    public static void setDefaultGameRule(String gamerule, Object value) { set("global-settings.gamerules." + gamerule, value);}
+
+    public static Object getDefaultGameRule(String gamerule) {
+        return yaml.get("global-settings.gamerules." + gamerule);
+    }
+
 }

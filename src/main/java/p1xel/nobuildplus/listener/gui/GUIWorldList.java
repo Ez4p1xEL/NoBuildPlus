@@ -22,7 +22,6 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
     private Inventory inventory;
     private int page;
     private int size;
-    private final NamespacedKey menu_id_key = new NamespacedKey("nobuildplus", "menu_id");
 
     public GUIWorldList(int page) {
         this.page = page;
@@ -54,43 +53,14 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
         Inventory inventory = Bukkit.createInventory(this, (size+2)*9, Locale.getMessage("gui.list.title"));
 
         if (hasNextPage) {
-
-            ItemStack item = new ItemStack(Material.PAPER);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(Locale.getMessage("gui.list.items.next_page.display_name"));
-            List<String> lore = Locale.yaml.getStringList("gui.list.items.next_page.lore").stream()
-                    .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-            meta.setLore(lore);
-            PersistentDataContainer container = meta.getPersistentDataContainer();
-            container.set(menu_id_key, PersistentDataType.STRING, "next_page");
-            item.setItemMeta(meta);
-            inventory.setItem(9 * (size+2) - 1, item);
+            inventory = setNextPage(inventory, "list", size);
         }
 
         if (hasPreviousPage) {
-
-            ItemStack item = new ItemStack(Material.PAPER);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(Locale.getMessage("gui.list.items.previous_page.display_name"));
-            List<String> lore = Locale.yaml.getStringList("gui.list.items.previous_page.lore").stream()
-                    .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-            meta.setLore(lore);
-            PersistentDataContainer container = meta.getPersistentDataContainer();
-            container.set(menu_id_key, PersistentDataType.STRING, "previous_page");
-            item.setItemMeta(meta);
-            inventory.setItem(9 * (size+2) - 9, item);
+            inventory = setPreviousPage(inventory, "list", size);
         }
 
-        ItemStack item = new ItemStack(Material.ARROW);
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(Locale.getMessage("gui.list.items.back_to_main.display_name"));
-        List<String> lore = Locale.yaml.getStringList("gui.list.items.back_to_main.lore").stream()
-                .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-        meta.setLore(lore);
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        container.set(menu_id_key, PersistentDataType.STRING, "back_to_main");
-        item.setItemMeta(meta);
-        inventory.setItem(9 * (size+2) - 5, item);
+        inventory = setBackTo(inventory, "list", size);
 
         this.inventory = inventory;
         update(worlds);
@@ -167,14 +137,17 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
         switch (name) {
             case "back_to_main": {
                 player.openInventory(new GUIMain(1).getInventory());
+                player.playSound(player, Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
                 return true;
             }
             case "previous_page": {
                 player.openInventory(new GUIWorldList(Math.max(1, page-1)).getInventory());
+                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
             case "next_page": {
                 player.openInventory(new GUIWorldList(page+1).getInventory());
+                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
         }
@@ -190,6 +163,7 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
 
                 Worlds.createWorld(world);
                 player.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", world));
+                player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
                 player.openInventory(new GUIWorldList(1).getInventory());
 
             } else {

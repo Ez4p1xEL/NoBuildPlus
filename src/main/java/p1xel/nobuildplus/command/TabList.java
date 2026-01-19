@@ -3,10 +3,10 @@ package p1xel.nobuildplus.command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.jetbrains.annotations.NotNull;
 import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.storage.Settings;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,8 +17,7 @@ public class TabList implements TabCompleter {
     List<String> flags = new ArrayList<>();
     List<String> bool = new ArrayList<>(Arrays.asList("true", "false"));
     @Override
-    @ParametersAreNonnullByDefault
-    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
 
         if (args0.isEmpty()) {
             args0.add("help"); args0.add("list"); args0.add("add"); args0.add("remove"); args0.add("clear"); args0.add("flag");

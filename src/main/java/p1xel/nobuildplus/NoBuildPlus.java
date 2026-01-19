@@ -1,14 +1,13 @@
 package p1xel.nobuildplus;
 
 import cn.lunadeer.dominion.api.DominionAPI;
-import com.bekvon.bukkit.residence.Residence;
 import com.tcoded.folialib.FoliaLib;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.api.NBPAPI;
 import p1xel.nobuildplus.command.Cmd;
 import p1xel.nobuildplus.command.TabList;
+import p1xel.nobuildplus.gamerule.GameRuleRegistry;
 import p1xel.nobuildplus.hook.loader.AreaProtectionLoader;
 import p1xel.nobuildplus.hook.loader.FlagRegistrationLoader;
 import p1xel.nobuildplus.listener.*;
@@ -20,6 +19,7 @@ import p1xel.nobuildplus.tool.spigotmc.UpdateChecker;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class NoBuildPlus extends JavaPlugin {
@@ -52,6 +52,7 @@ public class NoBuildPlus extends JavaPlugin {
         Worlds.createWorldsFile();
         Settings.defaultList();
         FlagRegistry.refreshMap();
+        RuleSetting.createFile();
 
     }
 
@@ -59,6 +60,7 @@ public class NoBuildPlus extends JavaPlugin {
     public void onEnable() {
 
         updateConfig();
+        Logger.setEnabled(Config.getBool("debug"));
         textEditMode = new TextEditMode();
 
         getLogger().info("[NBP] START LOADING ...");
@@ -73,12 +75,16 @@ public class NoBuildPlus extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoBuildPlusVehicleListener(), this);
         getServer().getPluginManager().registerEvents(textEditMode, this);
 
-        if (getBukkitVersion() >= 9) {
+        String[] v = Bukkit.getServer().getBukkitVersion().split("-")[0].split("\\.");
+        int parent_version = Integer.parseInt(v[1]);
+        int child_version = Integer.parseInt(v[2]);
+
+        if (parent_version >= 9) {
             getServer().getPluginManager().registerEvents(new NBPEntityListener_1_9(), this);
             getLogger().info("NBP Player Listener for 1.9+ is registered!");
         }
 
-        if (getBukkitVersion() < 13) {
+        if (parent_version < 13) {
             getServer().getPluginManager().registerEvents(new NBPPlayerListener_1_8(), this);
             getLogger().info("NBP Player Listener for 1.8-1.12 is registered!");
         } else {
@@ -86,13 +92,13 @@ public class NoBuildPlus extends JavaPlugin {
             getLogger().info("NBP Entity Listener for 1.13+ is registered!");
         }
 
-        if (getBukkitVersion() > 15) {
+        if (parent_version > 15) {
             getLogger().info("In-game menu is enabled at 1.16+.");
         } else {
             getLogger().info("The version of your server does not support in-game menu.");
         }
 
-        if (getBukkitVersion() >= 17) {
+        if (parent_version >= 17) {
             getServer().getPluginManager().registerEvents(new NBPBlockListener_1_17(), this);
             getLogger().info("NBP Block Listener for 1.17+ is registered!");
         } else {
@@ -100,12 +106,20 @@ public class NoBuildPlus extends JavaPlugin {
             getLogger().info("NBP Block Listener for 1.8-1.16 is registered!");
         }
 
-        if (getBukkitVersion() >= 20) {
+        if (parent_version >= 20) {
             getServer().getPluginManager().registerEvents(new NBPPlayerListener_1_20(), this);
             getLogger().info("NBP Player Listener for 1.20+ is registered!");
         }
 
-        if (getBukkitVersion() >= 15) {
+//        if (parent_version < 21 || (parent_version == 21 && child_version <= 10)) {
+//            getServer().getPluginManager().registerEvents(new NBPEntityListener_Legacy_1_21_10(), this);
+//            getLogger().info("NBP Entity Listener for 1.8-1.20.10 is registered!");
+//        } else {
+//            getServer().getPluginManager().registerEvents(new NBPEntityListener_1_21_11(), this);
+//            getLogger().info("NBP Entity Listener for 1.21.11+ is registered!");
+//        }
+
+        if (parent_version > 15 || (parent_version == 15 && child_version >= 2)) {
             getServer().getPluginManager().registerEvents(new GUIListener(), this);
         }
         getLogger().info("[NBP] LISTENERS LOADED.");
@@ -116,12 +130,17 @@ public class NoBuildPlus extends JavaPlugin {
 
         getLogger().info("[NBP] HOOKED FUNCTIONS LOADED.");
 
+        GameRuleRegistry.init(getServer().getBukkitVersion());
+        getLogger().info("[NBP] GAMERULES MANAGEMENT LOADED");
+
         updateVersion();
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());
 
         NBPAPI api = new NBPAPI();
         String message = "NoBuildPlusAPI is running at " + api.getVersion();
         getLogger().info("NBP API is loaded! " + message);
+
+        updateGameRules();
 
         // Text from https://tools.miku.ac/taag/ (Font: Slant)
         getLogger().info("    _   __      ____        _ __    ______  __          ");
@@ -145,6 +164,7 @@ public class NoBuildPlus extends JavaPlugin {
 
     }
 
+    // Only for old version, below 1.21.11;
     public int getBukkitVersion() {
         String v = Bukkit.getServer().getBukkitVersion().split("-")[0].split("\\.")[1];
         return Integer.parseInt(v);
@@ -207,22 +227,40 @@ public class NoBuildPlus extends JavaPlugin {
 
     }
 
+    void updateGameRules() {
+        List<String> gamerules = GameRuleRegistry.getRegisteredGameRules();
+        for (String world : Settings.getEnableWorldList()) {
+
+            for (String gameruleName : gamerules) {
+
+                if (!Worlds.yaml.isSet(gameruleName)) {
+                    Worlds.set(world + ".gamerule." + gameruleName, Settings.getDefaultGameRule(gameruleName));
+                }
+
+            }
+
+        }
+    }
+
     void updateConfig() {
         int v = Config.getConfigurationVersion();
 
-        if (v < 7) {
-            getConfig().set("Configuration", 7);
-            getConfig().set("hook.BlockRegen", true);
-            if (v < 6) {
-                getConfig().set("hook.ItemsAdder", true);
-                if (v < 5) {
-                    getConfig().set("text-edit-mode.cancel", "cancel");
-                    if (v < 4) {
-                        if (v < 3) {
-                            getConfig().set("hook.Dominion", true);
+        if (v < 8) {
+            getConfig().set("Configuration", 8);
+            getConfig().set("debug", false);
+            if (v < 7) {
+                getConfig().set("hook.BlockRegen", true);
+                if (v < 6) {
+                    getConfig().set("hook.ItemsAdder", true);
+                    if (v < 5) {
+                        getConfig().set("text-edit-mode.cancel", "cancel");
+                        if (v < 4) {
+                            if (v < 3) {
+                                getConfig().set("hook.Dominion", true);
+                            }
+                            getConfig().set("deny-message-type", "MESSAGE");
+                            getConfig().set("deny-message-sound.name", "ENTITY_VILLAGER_NO");
                         }
-                        getConfig().set("deny-message-type", "MESSAGE");
-                        getConfig().set("deny-message-sound.name", "ENTITY_VILLAGER_NO");
                     }
                 }
             }

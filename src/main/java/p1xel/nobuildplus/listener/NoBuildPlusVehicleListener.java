@@ -27,7 +27,7 @@ public class NoBuildPlusVehicleListener implements Listener {
             return;
         }
 
-        if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
+        if (vehicle instanceof Boat) {
 
             Entity p = e.getAttacker();
 
@@ -100,7 +100,7 @@ public class NoBuildPlusVehicleListener implements Listener {
             return;
         }
 
-        if (vehicle.getType() == EntityType.BOAT || vehicle.getType() == EntityType.CHEST_BOAT) {
+        if (vehicle instanceof Boat) {
 
             Entity p = e.getAttacker();
 

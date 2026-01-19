@@ -51,6 +51,10 @@ edit-default-permission: '&7&l%prefix% &8&l> &aデフォルトテンプレート
 edit-default-deny-message: '&7&l%prefix% &8&l> &aデフォルトテンプレートの拒否メッセージを &e%message%&a に編集しました。'
 edit-permission: '&7&l%prefix% &8&l> &aワールド &9%world% &a の権限を &e%permission%&a に編集しました。'
 edit-deny-message: '&7&l%prefix% &8&l> &aワールド &9%world% &a の拒否メッセージを &e%message%&a に編集しました。'
+default-gamerule-set-success: '&7&l%prefix% &8&l> &aデフォルトテンプレートのゲームルール &e%gamerule% &aを &e%value% に設定しました'
+gamerule-set-success: '&7&l%prefix% &8&l> &aワールド &9%world% &aのゲームルール &e%gamerule% &aを &e%value% に設定しました'
+invalid-amount: '&7&l%prefix% &8&l> &c不明な数値'
+invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cはこのMinecraftバージョンのサーバーには存在しません!'
 
 gui:
   main:
@@ -133,8 +137,23 @@ gui:
   edit-default:
     title: 'デフォルトテンプレートのフラグ設定を編集'
     items:
+      type:
+        display_name: '&a現在のタイプ: &6%type%'
+        lore:
+          - ''
+          - '&7あなたは現在'
+          - '&7%type% の操作画面にいます'
+          - ''
+          - '&aクリックで切り替え'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aクリックで切り替え'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
         lore:
           - ''
           - '&7%description%'
@@ -177,8 +196,23 @@ gui:
   world:
     title: '%world% のフラグ設定を編集'
     items:
+      type:
+        display_name: '&a現在のタイプ: &6%type%'
+        lore:
+          - ''
+          - '&7あなたは現在'
+          - '&7%type% の操作画面にいます'
+          - ''
+          - '&aクリックで切り替え'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aクリックで切り替え'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
         lore:
           - ''
           - '&7%description%'
@@ -289,8 +323,130 @@ flag:
     ia-furniture-sit: 'ItemsAdder家具に座る'
     ia-campfire-interact: 'ItemsAdder焚き火の操作'
 
+gamerule:
+  name: ゲームルール
+  description:
+    advance_time: 時間が進行するかどうかを制御します（昼夜サイクル）。
+    doDaylightCycle: 時間が進行するかどうかを制御します（昼夜サイクル）。
+    advance_weather: 天候が自然に変化するかどうかを制御します。
+    doWeatherCycle: 天候が自然に変化するかどうかを制御します。
+    block_drops: ブロックが破壊されたときにアイテムをドロップするかどうかを決定します。
+    doTileDrops: ブロックが破壊されたときにアイテムをドロップするかどうかを決定します。
+    entity_drops: エンティティが倒されたときにアイテムをドロップするかどうかを決定します。
+    doEntityDrops: エンティティが倒されたときにアイテムをドロップするかどうかを決定します。
+    mob_drops: モブが倒されたときに戦利品をドロップするかどうかを決定します。
+    doMobLoot: モブが倒されたときに戦利品をドロップするかどうかを決定します。
+    block_explosion_drop_decay: ブロック爆発によるアイテムの減衰を制御します。
+    blockExplosionDropDecay: ブロック爆発によるアイテムの減衰を制御します。
+    mob_explosion_drop_decay: モブ爆発によるアイテムの減衰を制御します。
+    mobExplosionDropDecay: モブ爆発によるアイテムの減衰を制御します。
+    tnt_explosion_drop_decay: TNT爆発によるアイテムの減衰を制御します。
+    tntExplosionDropDecay: TNT爆発によるアイテムの減衰を制御します。
+    pvp: プレイヤー同士の戦闘を有効または無効にします。
+    keep_inventory: プレイヤーが死亡した後にインベントリを保持します。
+    keepInventory: プレイヤーが死亡した後にインベントリを保持します。
+    immediate_respawn: プレイヤーは死亡画面なしで即座にリスポーンします。
+    doImmediateRespawn: プレイヤーは死亡画面なしで即座にリスポーンします。
+    natural_health_regeneration: 自然な体力回復を有効にします。
+    naturalRegeneration: 自然な体力回復を有効にします。
+    show_death_messages: チャットに死亡メッセージを表示します。
+    showDeathMessages: チャットに死亡メッセージを表示します。
+    universal_anger: 中立モブが挑発されると全プレイヤーに怒ります。
+    universalAnger: 中立モブが挑発されると全プレイヤーに怒ります。
+    command_block_output: チャットにコマンドブロックの出力を表示します。
+    commandBlockOutput: チャットにコマンドブロックの出力を表示します。
+    command_blocks_work: コマンドブロックを有効にします。
+    commandBlocksEnabled: コマンドブロックを有効にします。
+    log_admin_commands: 管理者コマンドをサーバーコンソールに記録します。
+    logAdminCommands: 管理者コマンドをサーバーコンソールに記録します。
+    send_command_feedback: チャットにコマンドのフィードバックを表示します。
+    sendCommandFeedback: チャットにコマンドのフィードバックを表示します。
+    show_advancement_messages: チャットに進捗を通知します。
+    announceAdvancements: チャットに進捗を通知します。
+    reduced_debug_info: デバッグ画面の情報を減らします。
+    reducedDebugInfo: デバッグ画面の情報を減らします。
+    max_command_sequence_length: コマンドシーケンスの最大長。
+    maxCommandChainLength: コマンドシーケンスの最大長。
+    max_command_forks: コマンド実行で許可される最大分岐数。
+    maxCommandForkCount: コマンド実行で許可される最大分岐数。
+    max_block_modifications: コマンドで許可される最大ブロック変更数。
+    commandModificationBlockLimit: コマンドで許可される最大ブロック変更数。
+    spawn_mobs: モブのスポーンを制御します。
+    doMobSpawning: モブのスポーンを制御します。
+    spawn_monsters: モンスターのスポーンを制御します。
+    spawn_patrols: パトロールのスポーンを制御します。
+    doPatrolSpawning: パトロールのスポーンを制御します。
+    spawn_phantoms: ファントムのスポーンを制御します。
+    doInsomnia: ファントムのスポーンを制御します。
+    spawn_wandering_traders: 行商人のスポーンを制御します。
+    doTraderSpawning: 行商人のスポーンを制御します。
+    spawn_wardens: ウォーデンのスポーンを制御します。
+    doWardenSpawning: ウォーデンのスポーンを制御します。
+    raids: 襲撃を有効または無効にします。
+    disableRaids: 襲撃を有効または無効にします。
+    random_tick_speed: ランダムティック速度を設定します（ブロック更新）。
+    randomTickSpeed: ランダムティック速度を設定します（ブロック更新）。
+    respawn_radius: プレイヤーのリスポーン半径を設定します。
+    spawnRadius: プレイヤーのリスポーン半径を設定します。
+    max_entity_cramming: 窒息前に一つの空間に許可される最大エンティティ数。
+    maxEntityCramming: 窒息前に一つの空間に許可される最大エンティティ数。
+    max_snow_accumulation_height: 最大積雪層の高さ。
+    snowAccumulationHeight: 最大積雪層の高さ。
+    max_minecart_speed: 最大トロッコ速度。
+    fire_spread_radius_around_player: プレイヤー周囲の火の広がり半径。
+    doFireTick: 火の広がりと減衰を有効にします。
+    allowFireTicksAwayFromPlayer: プレイヤーから離れた場所で火の広がりを有効にします。
+    water_source_conversion: 水源ブロックが再生することを許可します。
+    waterSourceConversion: 水源ブロックが再生することを許可します。
+    lava_source_conversion: 溶岩源ブロックが再生することを許可します。
+    lavaSourceConversion: 溶岩源ブロックが再生することを許可します。
+    spread_vines: ツタが自然に広がることを許可します。
+    doVinesSpread: ツタが自然に広がることを許可します。
+    spectators_generate_chunks: 観戦者が移動するとチャンクを生成します。
+    spectatorsGenerateChunks: 観戦者が移動するとチャンクを生成します。
+    locator_bar: コンパス追跡用のロケータバーを表示します。
+    global_sound_events: グローバルサウンドイベントを有効にします。
+    globalSoundEvents: グローバルサウンドイベントを有効にします。
+    allow_entering_nether_using_portals: ポータルを使用してネザーに入ることを許可します。
+    players_nether_portal_default_delay: デフォルトのネザーポータル遅延。
+    playersNetherPortalDefaultDelay: デフォルトのネザーポータル遅延。
+    players_nether_portal_creative_delay: クリエイティブプレイヤーのネザーポータル遅延。
+    playersNetherPortalCreativeDelay: クリエイティブプレイヤーのネザーポータル遅延。
+    limited_crafting: 解放されたレシピのみでクラフトを制限します。
+    doLimitedCrafting: 解放されたレシピのみでクラフトを制限します。
+    spawner_blocks_work: スポナーを有効にします。
+    spawnerBlocksEnabled: スポナーを有効にします。
+    elytra_movement_check: エリトラの移動有効性をチェックします。
+    disableElytraMovementCheck: エリトラの移動有効性をチェックします。
+    player_movement_check: プレイヤーの移動有効性をチェックします。
+    disablePlayerMovementCheck: プレイヤーの移動有効性をチェックします。
+    ender_pearls_vanish_on_death: プレイヤーが死亡するとエンダーパールが消えます。
+    enderPearlsVanishOnDeath: プレイヤーが死亡するとエンダーパールが消えます。
+    forgive_dead_players: プレイヤーが死亡するとモブは許します。
+    forgiveDeadPlayers: プレイヤーが死亡するとモブは許します。
+    freeze_damage: パウダースノーによる凍結ダメージを有効にします。
+    freezeDamage: パウダースノーによる凍結ダメージを有効にします。
+    drowning_damage: 溺死ダメージを有効にします。
+    drowningDamage: 溺死ダメージを有効にします。
+    fall_damage: 落下ダメージを有効にします。
+    fallDamage: 落下ダメージを有効にします。
+    fire_damage: 火炎ダメージを有効にします。
+    fireDamage: 火炎ダメージを有効にします。
+    tnt_explodes: TNT爆発を有効にします。
+    players_sleeping_percentage: 睡眠に必要なプレイヤーの割合を設定します。
+    playersSleepingPercentage: 睡眠に必要なプレイヤーの割合を設定します。
+    projectiles_can_break_blocks: 投射物がブロックを破壊できるかどうかを決定します。
+    projectilesCanBreakBlocks: 投射物がブロックを破壊できるかどうかを決定します。
+    spawnChunkRadius: スポーン周囲に読み込まれるチャンク数を設定します。
+    mob_griefing: モブがアイテムを拾ったりブロックを変更できるかどうかを決定します。
+    mobGriefing: モブがアイテムを拾ったりブロックを変更できるかどうかを決定します。
+
 true: '&a許可'
 false: '&c禁止'
+
+gamerule_true: '&a有効'
+gamerule_false: '&c無効'
+value: '&b%value%'
 
 overworld: '&a[オーバーワールド]'
 nether: '&c[ネザー]'

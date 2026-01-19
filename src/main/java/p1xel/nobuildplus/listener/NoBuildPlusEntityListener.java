@@ -5,8 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.*;
+import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -68,7 +68,6 @@ public class NoBuildPlusEntityListener implements Listener {
 
                     Worlds.sendMessage((Player) p, world);
                     e.setCancelled(true);
-                    return;
 
                 }
 
@@ -76,42 +75,6 @@ public class NoBuildPlusEntityListener implements Listener {
 
 
         }
-
-//        // Flag: boat
-//        if (Settings.canExecute(world, "boat")) {
-//            if (!Worlds.getFlag(world, "boat")) {
-//                if (p instanceof Player) {
-//                    if (target.getType() == ) {
-//                        if (!p.hasPermission(Worlds.getPermission(world))) {
-//                            if (Worlds.isDenyMessageExist(world)) {
-//                                p.sendMessage(Worlds.getDenyMessage(world));
-//                            }
-//                            e.setCancelled(true);
-//                        }
-//                    }
-//                }
-//
-//            }
-//            return;
-//        }
-//
-//        // Flag: minecart
-//        if (Settings.canExecute(world, "minecart")) {
-//            if (!Worlds.getFlag(world, "minecart")) {
-//                if (p instanceof Player) {
-//                    if (target instanceof Minecart) {
-//                        if (!p.hasPermission(Worlds.getPermission(world))) {
-//                            if (Worlds.isDenyMessageExist(world)) {
-//                                p.sendMessage(Worlds.getDenyMessage(world));
-//                            }
-//                            e.setCancelled(true);
-//                        }
-//                    }
-//                }
-//
-//            }
-//            return;
-//        }
 
     }
 
@@ -192,7 +155,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        if (p.getType() == EntityType.PRIMED_TNT || p.getType() == EntityType.MINECART_TNT) {
+        if (p instanceof TNTPrimed || p instanceof ExplosiveMinecart) {
 
             e.setCancelled(true);
 
@@ -266,7 +229,7 @@ public class NoBuildPlusEntityListener implements Listener {
         }
 
         if (p instanceof Player) {
-            if (target.getType() == EntityType.ENDER_CRYSTAL || target instanceof EnderCrystal) {
+            if (target instanceof EnderCrystal) {
                 Worlds.sendMessage((Player) p, world);
                 e.setCancelled(true);
             }
@@ -318,8 +281,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        EntityType type = e.getEntityType();
-        if (type == EntityType.PRIMED_TNT || type == EntityType.MINECART_TNT) {
+        if (entity instanceof TNTPrimed || entity instanceof ExplosiveMinecart) {
             return;
         }
 
@@ -338,6 +300,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         if (Flags.mob_explode.getType().equalsIgnoreCase("list")) {
 
+            EntityType type = e.getEntityType();
             if (Flags.mob_explode.getList().contains(type.toString().toUpperCase())) {
 
                 e.setCancelled(true);
@@ -349,7 +312,7 @@ public class NoBuildPlusEntityListener implements Listener {
     }
 
     // Flag: tnt
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler
     public void onTNTExplode(EntityExplodeEvent e) {
 
         Entity entity = e.getEntity();
@@ -358,8 +321,7 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        EntityType type = e.getEntityType();
-        if (type != EntityType.PRIMED_TNT && type != EntityType.MINECART_TNT) {
+        if (!(entity instanceof TNTPrimed || entity instanceof ExplosiveMinecart)) {
             return;
         }
 

@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import p1xel.nobuildplus.flag.ItemsAdderFlags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 public class ItemsAdderListener implements Listener {
 
@@ -21,17 +23,18 @@ public class ItemsAdderListener implements Listener {
             return;
         }
 
-        String world = entity.getWorld().getName();
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!ItemsAdderFlags.ia_furniture_sit.isEnabled(world)) {
             return;
         }
 
         Player player = event.getPlayer();
-        if (player.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(player, world);
+        WorldManager.sendMessage(player, world);
         event.setCancelled(true);
 
     }
@@ -43,17 +46,18 @@ public class ItemsAdderListener implements Listener {
             return;
         }
 
-        String world = location.getWorld().getName();
+        String worldName = location.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!ItemsAdderFlags.ia_campfire_interact.isEnabled(world)) {
             return;
         }
 
         Player player = event.getPlayer();
-        if (player.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(player, world);
+        WorldManager.sendMessage(player, world);
         event.setCancelled(true);
 
     }
@@ -65,17 +69,18 @@ public class ItemsAdderListener implements Listener {
             return;
         }
 
-        String world = location.getWorld().getName();
+        String worldName = location.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!ItemsAdderFlags.ia_campfire_interact.isEnabled(world)) {
             return;
         }
 
         Player player = event.getPlayer();
-        if (player.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(player, world);
+        WorldManager.sendMessage(player, world);
         event.setCancelled(true);
 
     }

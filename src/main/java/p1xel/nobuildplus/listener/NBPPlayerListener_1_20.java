@@ -10,17 +10,18 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSignOpenEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
-import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 public class NBPPlayerListener_1_20 implements Listener {
 
     // Flag: sign-edit
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onSignOpen(PlayerSignOpenEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
@@ -28,22 +29,23 @@ public class NBPPlayerListener_1_20 implements Listener {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.sign_edit.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: books(helf) interact
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBookShelfInteract(PlayerInteractEvent e) {
         Action action = e.getAction();
         Block block = e.getClickedBlock();
@@ -56,17 +58,18 @@ public class NBPPlayerListener_1_20 implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.books_interact.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
 
         e.setCancelled(true);
     }

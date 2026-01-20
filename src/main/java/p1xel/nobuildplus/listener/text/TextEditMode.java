@@ -13,6 +13,7 @@ import p1xel.nobuildplus.listener.gui.GUIDefaultTemplate;
 import p1xel.nobuildplus.listener.gui.GUIType;
 import p1xel.nobuildplus.listener.gui.GUIWorld;
 import p1xel.nobuildplus.storage.*;
+import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.HashMap;
 
@@ -112,16 +113,16 @@ public class TextEditMode implements Listener {
 
         if (action.startsWith("edit-permission:")) {
 
-            String world = action.split(":")[1];
-            Worlds.setPermission(world, text);
-            player.sendMessage(Locale.getMessage("edit-permission").replaceAll("%world%", world).replaceAll("%permission%", text));
+            String worldName = action.split(":")[1];
+            WorldManager.setPermission(worldName, text);
+            player.sendMessage(Locale.getMessage("edit-permission").replaceAll("%world%", worldName).replaceAll("%permission%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             removePlayer(player);
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.openInventory(new GUIWorld(world, 1, GUIType.FLAG).getInventory());
+                    player.openInventory(new GUIWorld(worldName, 1, GUIType.FLAG).getInventory());
                 }
             }.runTaskLater(NoBuildPlus.getInstance(), 5L);
             return;
@@ -130,16 +131,16 @@ public class TextEditMode implements Listener {
 
         if (action.startsWith("edit-deny-message:")) {
 
-            String world = action.split(":")[1];
-            Worlds.setDenyMessage(world, text);
-            player.sendMessage(Locale.getMessage("edit-deny-message").replaceAll("%world%", world).replaceAll("%message%", text));
+            String worldName = action.split(":")[1];
+            WorldManager.setDenyMessage(worldName, text);
+            player.sendMessage(Locale.getMessage("edit-deny-message").replaceAll("%world%", worldName).replaceAll("%message%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             removePlayer(player);
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.openInventory(new GUIWorld(world, 1, GUIType.FLAG).getInventory());
+                    player.openInventory(new GUIWorld(worldName, 1, GUIType.FLAG).getInventory());
                 }
             }.runTaskLater(NoBuildPlus.getInstance(), 5L);
             return;
@@ -184,7 +185,7 @@ public class TextEditMode implements Listener {
                 return;
             }
             try {
-                Worlds.setGameRule(worldName, gameruleName, number);
+                WorldManager.setGameRule(worldName, gameruleName, number);
             } catch (IllegalArgumentException exception) {
                 player.sendMessage(Locale.getMessage("invalid-gamerule").replace("%gamerule%", gameruleName));
                 return;

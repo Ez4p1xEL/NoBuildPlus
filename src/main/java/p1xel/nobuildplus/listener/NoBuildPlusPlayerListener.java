@@ -1,5 +1,6 @@
 package p1xel.nobuildplus.listener;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
@@ -14,13 +15,17 @@ import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.storage.FlagsManager;
-import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
+
+import java.util.HashMap;
 
 public class NoBuildPlusPlayerListener implements Listener {
 
+    private static HashMap<Player, Location> PRESSURE_PLATE_RECORD = new HashMap<>();
+
     // Flag: Use
-    // Flag: Container
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onUse(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -34,13 +39,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.use.isEnabled(world)) {
             return;
         }
 
         Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (p.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -51,7 +57,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (material != null) {
                     Material mat = block.getType();
                     if (mat == material) {
-                        Worlds.sendMessage(p, world);
+                        WorldManager.sendMessage(p, world);
                         e.setCancelled(true);
                         return;
                     }
@@ -65,7 +71,7 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: button
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onButtonUse(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -79,13 +85,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.button.isEnabled(world)) {
             return;
         }
 
         Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (p.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -96,7 +103,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (material != null) {
                     Material mat = block.getType();
                     if (mat == material) {
-                        Worlds.sendMessage(p, world);
+                        WorldManager.sendMessage(p, world);
                         e.setCancelled(true);
                         return;
                     }
@@ -108,7 +115,7 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: door interact
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onDoorInteract(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -122,13 +129,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.door_interact.isEnabled(world)) {
             return;
         }
 
         Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (p.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -139,7 +147,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (material != null) {
                     Material mat = block.getType();
                     if (mat == material) {
-                        Worlds.sendMessage(p, world);
+                        WorldManager.sendMessage(p, world);
                         e.setCancelled(true);
                         return;
                     }
@@ -153,7 +161,7 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: lever
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onLeverInteract(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -167,24 +175,25 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.lever.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
 
         e.setCancelled(true);
 
     }
 
     // Flag: trapdoor interact
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onTrapDoorInteract(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -198,13 +207,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.trapdoor_interact.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -216,7 +226,7 @@ public class NoBuildPlusPlayerListener implements Listener {
                 if (material != null) {
                     Material mat = block.getType();
                     if (mat == material) {
-                        Worlds.sendMessage(p, world);
+                        WorldManager.sendMessage(player, world);
                         e.setCancelled(true);
                         return;
                     }
@@ -228,7 +238,7 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: fence gate interact
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFenceGateInteract(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -242,13 +252,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.fencegate_interact.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -256,7 +267,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = block.getType();
             if (Flags.fencegate_interact.getList().contains(mat.toString().toUpperCase())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
 
@@ -265,7 +276,7 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: bone meal
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBoneMealUse(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -280,23 +291,24 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.bonemeal.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
 
         e.setCancelled(true);
     }
 
     // Flag: boat
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBoatInteract(PlayerInteractEvent e) {
         Action action = e.getAction();
         Block block = e.getClickedBlock();
@@ -310,13 +322,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.boat.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -324,7 +337,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = item.getType();
             if (Flags.boat.getList().contains(mat.toString().toUpperCase())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
 
@@ -333,7 +346,7 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: flower pot
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFlowerPotUse(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -347,13 +360,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.flower_pot.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -361,14 +375,14 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         if (mat == Material.FLOWER_POT || mat.name().startsWith("POTTED_")) {
 
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
 
         }
     }
 
     // Flag: minecart
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onMinecartInteract(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -383,13 +397,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.minecart.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -397,7 +412,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = item.getType();
             if (Flags.minecart.getList().contains(mat.toString().toUpperCase())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
 
@@ -406,7 +421,7 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: egg throw
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onEggThrow(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -416,29 +431,29 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.egg_throw.isEnabled(world)) {
             return;
         }
 
-
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: snowball throw
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onSnowBallThrow(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -448,29 +463,29 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.snowball_throw.isEnabled(world)) {
             return;
         }
 
-
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: potion
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPotionUse(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -482,28 +497,29 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.potion.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: farmbreak
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFarmInteract(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -518,24 +534,25 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.farmbreak.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
 
         e.setCancelled(true);
 
     }
 
     // Flag: container
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onContainerInteract(PlayerInteractEvent e) {
 
         Action action = e.getAction();
@@ -549,13 +566,14 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.container.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -563,7 +581,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = block.getType();
             if (Flags.container.getList().contains(mat.toString().toUpperCase())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
 
@@ -573,34 +591,35 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: boat
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onInteractEntity(PlayerInteractEntityEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.boat.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
         if (e.getRightClicked() instanceof Boat) {
 
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
             return;
         }
 
         if (FlagsManager.BoatIsIncludingChestBoat()) {
             if (e.getRightClicked() instanceof ChestBoat) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
         }
@@ -608,180 +627,187 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: Bed
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBed(PlayerBedEnterEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.bed.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: Chat
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onChat(AsyncPlayerChatEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.chat.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: Command
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onCommandExecute(PlayerCommandPreprocessEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.command.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
         if (Flags.command.getType().equalsIgnoreCase("all")) {
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
             return;
         }
 
         if (Flags.command.getType().equalsIgnoreCase("list")) {
             if (Flags.command.getList().contains("/" + e.getMessage())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
         }
     }
 
     // Flag: armor stand
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void ArmorStand(PlayerArmorStandManipulateEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.armorstand.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: bucket place
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBucketUse(PlayerBucketEmptyEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.bucket_place.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBucketFill(PlayerBucketFillEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.bucket_fill.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: drop-item
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onDropItem(PlayerDropItemEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.drop_item.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
         Item droppedItem = e.getItemDrop();
 
         if (Flags.drop_item.getType().equalsIgnoreCase("all")) {
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
             return;
         }
@@ -790,35 +816,36 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = droppedItem.getItemStack().getType();
             if (Flags.drop_item.getList().contains(mat.toString().toUpperCase())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
         }
     }
 
     // Flag: item-pickup
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onItemPickUp(PlayerPickupItemEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.item_pickup.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
         Item item = e.getItem();
 
         if (Flags.item_pickup.getType().equalsIgnoreCase("all")) {
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
             return;
         }
@@ -827,83 +854,86 @@ public class NoBuildPlusPlayerListener implements Listener {
 
             Material mat = item.getItemStack().getType();
             if (Flags.item_pickup.getList().contains(mat.toString().toUpperCase())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
         }
     }
 
     // Flag: fly
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFlightToggle(PlayerToggleFlightEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        if (!p.getAllowFlight()) {
+        if (!player.getAllowFlight()) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.fly.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: teleport (For Player)
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerTeleport(PlayerTeleportEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.teleport.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        if (e.getFrom().getWorld().getName().equalsIgnoreCase(world) || e.getTo().getWorld().getName().equalsIgnoreCase(world)) {
+        if (e.getFrom().getWorld().getName().equalsIgnoreCase(worldName) || e.getTo().getWorld().getName().equalsIgnoreCase(worldName)) {
 
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
 
         }
     }
 
     // Flag: potion
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPotionEffect(PlayerItemConsumeEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.potion.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -912,7 +942,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         if (mat == Material.POTION || mat == Material.SPLASH_POTION || mat == Material.LINGERING_POTION) {
 
             e.setCancelled(true);
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
 
         }
 
@@ -920,7 +950,7 @@ public class NoBuildPlusPlayerListener implements Listener {
 
 
     // Flag: dye
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onSheepDye(SheepDyeWoolEvent e) {
 
         Entity entity = e.getEntity();
@@ -929,28 +959,30 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = entity.getWorld().getName();
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.dye.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = e.getPlayer();
+
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: hook (To Players, NOT Fish)
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onHook(PlayerFishEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
@@ -958,27 +990,28 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.hook.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: fish (To fish, NOT players)
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFish(PlayerFishEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
@@ -986,36 +1019,38 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.fish.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: hunger
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onHungerLost(FoodLevelChangeEvent e) {
 
-        Player p = (Player) e.getEntity();
+        Player player = (Player) e.getEntity();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.hunger.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -1024,44 +1059,46 @@ public class NoBuildPlusPlayerListener implements Listener {
     }
 
     // Flag: craft
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onCraft(CraftItemEvent e) {
 
-        Player p = (Player) e.getWhoClicked();
+        Player player = (Player) e.getWhoClicked();
 
-        if (HookedPlugins.cancel(p)) {
+        if (HookedPlugins.cancel(player)) {
             return;
         }
 
-        String world = p.getWorld().getName();
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.craft.isEnabled(world)) {
             return;
         }
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
         if (Flags.craft.getType().equalsIgnoreCase("list")) {
             if (Flags.craft.getList().contains(e.getRecipe().getResult().getType().toString().toUpperCase())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
             return;
         }
 
-        Worlds.sendMessage(p,world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }
 
     // Flag: pressure-plate
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onInteractPressurePlate(PlayerInteractEvent e) {
         Block block = e.getClickedBlock();
         if (block == null) {
             return;
         }
+
         if (!Flags.pressure_plate.getList().contains(block.getType().toString())) {
             return;
         }
@@ -1074,14 +1111,28 @@ public class NoBuildPlusPlayerListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        Player player = e.getPlayer();
+        boolean sendMessage = true;
+        if (PRESSURE_PLATE_RECORD.containsKey(player)) {
+            if (PRESSURE_PLATE_RECORD.get(player).distance(player.getLocation()) <= 0.5) {
+                sendMessage = false;
+            }
+        }
 
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.pressure_plate.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
-        Worlds.sendMessage(p, world);
+        if (player.hasPermission(world.getPermission())) {
+            return;
+        }
+
+        if (sendMessage) {
+            WorldManager.sendMessage(player, world);
+            PRESSURE_PLATE_RECORD.put(player, player.getLocation());
+        }
         e.setCancelled(true);
 
     }

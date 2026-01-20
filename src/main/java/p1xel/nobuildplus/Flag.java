@@ -2,6 +2,8 @@ package p1xel.nobuildplus;
 
 import p1xel.nobuildplus.storage.Settings;
 import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.List;
 
@@ -39,15 +41,23 @@ public interface Flag {
     /**
      * True means the plugin is protecting
      * True代表插件允许进行保护
-     * @param world name of the world
+     * @param worldName name of the world
      * @return boolean
      */
-    default boolean isEnabled(String world) {
-        if (!Settings.canExecute(world, getName())) {
-            return false;
-        }
+    default boolean isEnabled(String worldName) {
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
-        return !Worlds.getFlag(world, getName());
+        return isEnabled(world);
+    }
+
+    /**
+     * True means the plugin is protecting
+     * True代表插件允许进行保护
+     * @param world instance of ProtectedWorld
+     * @return boolean
+     */
+    default boolean isEnabled(ProtectedWorld world) {
+        return world != null && !world.getFlag(this);
     }
 
     /**

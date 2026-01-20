@@ -4,14 +4,12 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
-import p1xel.nobuildplus.storage.Worlds;
-
-import static org.bukkit.event.EventPriority.LOWEST;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 public class NoBuildPlusBlockListener implements Listener {
 
@@ -21,7 +19,7 @@ public class NoBuildPlusBlockListener implements Listener {
     規則事件監聽示例
     */
     // Flag: break
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true)
     public void onBreak(BlockBreakEvent e) {
 
         Block block = e.getBlock();
@@ -32,8 +30,8 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
-
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         // Check if the flag listener should continue its work
         // If the flag is not enabled, then it is FALSE
         // If the flag in designated world is TRUE(ALLOW), then it is FALSE here.
@@ -41,16 +39,16 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
         // Check if the player has permission to bypass that.
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
         // If the flag type is ALL, then the listener will prevent all blocks breaking.
         if (Flags.destroy.getType().equalsIgnoreCase("all")) {
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
         }
 
@@ -59,7 +57,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
             Material mat = block.getType();
             if (Flags.destroy.getList().contains(mat.toString().toUpperCase())) {
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
         }
@@ -68,7 +66,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
 
     // Flag: Build
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBuild(BlockPlaceEvent e) {
 
         Block block = e.getBlock();
@@ -78,20 +76,20 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
-
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.build.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
         if (Flags.build.getType().equalsIgnoreCase("all")) {
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
         }
 
@@ -101,7 +99,7 @@ public class NoBuildPlusBlockListener implements Listener {
 
             if (Flags.build.getList().contains(mat.toString().toUpperCase())) {
 
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
             }
 
@@ -110,7 +108,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: leaf-decay
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(ignoreCancelled = true)
     public void onLeafDecay(LeavesDecayEvent e) {
 
         Block block = e.getBlock();
@@ -119,8 +117,8 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
-
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.leaf_decay.isEnabled(world)) {
             return;
         }
@@ -130,7 +128,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: melt
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(ignoreCancelled = true)
     public void onSnowMelt(BlockFadeEvent e) {
         Block block = e.getBlock();
         Material mat = block.getType();
@@ -139,7 +137,8 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.melt.isEnabled(world)) {
             return;
@@ -153,12 +152,14 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Coral Decay
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(ignoreCancelled = true)
     public void onCoralDecay(BlockFadeEvent e) {
         Block block = e.getBlock();
 
         // Flag: coral-decay
-        if (!Flags.coral_decay.isEnabled(block.getWorld().getName())) {
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.coral_decay.isEnabled(world)) {
             return;
         }
 
@@ -175,7 +176,7 @@ public class NoBuildPlusBlockListener implements Listener {
         e.setCancelled(true);
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onWaterSpread(BlockFromToEvent e) {
 
         Block block = e.getBlock();
@@ -189,7 +190,8 @@ public class NoBuildPlusBlockListener implements Listener {
         // Flag: water-spread
         if (mat == Material.WATER) {
 
-            String world = block.getWorld().getName();
+            String worldName = block.getWorld().getName();
+            ProtectedWorld world = WorldManager.getWorld(worldName);
             if (!Flags.water_spread.isEnabled(world)) {
                 return;
             }
@@ -202,7 +204,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: lava-spread
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onLavaSpread(BlockFromToEvent e) {
 
         Block block = e.getBlock();
@@ -216,7 +218,8 @@ public class NoBuildPlusBlockListener implements Listener {
         // Flag: lava-spread
         if (mat == Material.LAVA) {
 
-            String world = block.getWorld().getName();
+            String worldName = block.getWorld().getName();
+            ProtectedWorld world = WorldManager.getWorld(worldName);
             if (!Flags.lava_spread.isEnabled(world)) {
                 return;
             }
@@ -227,7 +230,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: ice-form
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onIceFormation(BlockFromToEvent e) {
 
         Block block = e.getBlock();
@@ -240,8 +243,8 @@ public class NoBuildPlusBlockListener implements Listener {
 
         if (newMat == Material.ICE) {
 
-            String world = block.getWorld().getName();
-
+            String worldName = block.getWorld().getName();
+            ProtectedWorld world = WorldManager.getWorld(worldName);
             if (!Flags.ice_form.isEnabled(world)) {
                 return;
             }
@@ -252,7 +255,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: piston
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPistonTrigger(BlockPistonRetractEvent e) {
         Block block = e.getBlock();
 
@@ -260,8 +263,8 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
-
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.piston.isEnabled(world)) {
             return;
         }
@@ -271,7 +274,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: fire spawn (block igniting)
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onIgnite(BlockIgniteEvent e) {
 
         Block block = e.getBlock();
@@ -280,7 +283,8 @@ public class NoBuildPlusBlockListener implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.fire_spawn.isEnabled(world)) {
             return;
@@ -291,7 +295,7 @@ public class NoBuildPlusBlockListener implements Listener {
     }
 
     // Flag: fire spread
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onSpread(BlockIgniteEvent e) {
 
         if (e.getCause() != BlockIgniteEvent.IgniteCause.SPREAD) {
@@ -299,7 +303,8 @@ public class NoBuildPlusBlockListener implements Listener {
         }
 
         Block block = e.getBlock();
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.fire_spread.isEnabled(world)) {
             return;
@@ -313,37 +318,11 @@ public class NoBuildPlusBlockListener implements Listener {
 
     }
 
-//    @EventHandler
-//    public void onFireSpread(BlockSpreadEvent e) {
-//        Block block = e.getSource();
-//        System.out.println("Event called");
-//        System.out.println(e.getBlock().getType());
-//        System.out.println(e.getSource().getType());
-//        System.out.println(e.getNewState().getBlock().getType());
-//
-//        if (block.getType() != Material.FIRE) {
-//            return;
-//        }
-//
-//        System.out.println("PASS");
-//
-//        if (HookedPlugins.cancel(block)) {
-//            return;
-//        }
-//
-//        String world = block.getWorld().getName();
-//
-//        if (!Flags.fire_spread.isEnabled(world)) {
-//            return;
-//        }
-//
-//        e.setCancelled(true);
-//    }
-//
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBlockBurn(BlockBurnEvent e) {
         Block block = e.getIgnitingBlock();
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.fire_spread.isEnabled(world)) {
             return;

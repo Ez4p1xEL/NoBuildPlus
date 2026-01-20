@@ -8,12 +8,13 @@ import org.bukkit.event.hanging.HangingPlaceEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.NoBuildPlus;
-import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 public class NoBuildPlusHangingListener implements Listener {
 
     // Flag: frame (Break)
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFrameBroke(HangingBreakByEntityEvent e) {
 
         Entity entity = e.getRemover();
@@ -22,14 +23,15 @@ public class NoBuildPlusHangingListener implements Listener {
             return;
         }
 
-        String world = entity.getWorld().getName();
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.frame.isEnabled(world)) {
             return;
         }
 
-        Player p = (Player) entity;
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        Player player = (Player) entity;
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -38,7 +40,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
             if (e.getEntity() instanceof GlowItemFrame) {
 
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
                 return;
 
@@ -48,14 +50,14 @@ public class NoBuildPlusHangingListener implements Listener {
 
         if (e.getEntity() instanceof ItemFrame) {
 
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
 
         }
     }
 
     // Flag: painting
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPaintingBroke(HangingBreakByEntityEvent e) {
 
         Entity entity = e.getRemover();
@@ -68,19 +70,20 @@ public class NoBuildPlusHangingListener implements Listener {
             return;
         }
 
-        String world = entity.getWorld().getName();
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.painting.isEnabled(world)) {
             return;
         }
 
         if (entity instanceof Player) {
-            Player p = (Player) entity;
-            if (p.hasPermission(Worlds.getPermission(world))) {
+            Player player = (Player) entity;
+            if (player.hasPermission(world.getPermission())) {
                 return;
             }
 
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
         }
         e.setCancelled(true);
     }
@@ -88,7 +91,7 @@ public class NoBuildPlusHangingListener implements Listener {
     int v = NoBuildPlus.getInstance().getBukkitVersion();
 
     // Flag: frame (being placed)
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFramePlaced(HangingPlaceEvent e) {
 
         Entity entity = e.getEntity();
@@ -97,15 +100,16 @@ public class NoBuildPlusHangingListener implements Listener {
             return;
         }
 
-        String world = entity.getWorld().getName();
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.frame.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
@@ -115,7 +119,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
             if (type == EntityType.GLOW_ITEM_FRAME) {
 
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
                 return;
 
@@ -125,7 +129,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         if (type == EntityType.ITEM_FRAME) {
 
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
 
         }
@@ -133,7 +137,7 @@ public class NoBuildPlusHangingListener implements Listener {
     }
 
     // Flag: painting
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPaintingPlaced(HangingPlaceEvent e) {
 
         Entity entity = e.getEntity();
@@ -146,19 +150,20 @@ public class NoBuildPlusHangingListener implements Listener {
             return;
         }
 
-        String world = entity.getWorld().getName();
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.painting.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
-        Worlds.sendMessage(p, world);
+        WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
     }

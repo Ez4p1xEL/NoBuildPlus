@@ -7,12 +7,13 @@ import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
-import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 public class NoBuildPlusVehicleListener implements Listener {
 
     // Flag: Boat
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBoatDamaged(VehicleDamageEvent e) {
 
         Vehicle vehicle = e.getVehicle();
@@ -21,7 +22,8 @@ public class NoBuildPlusVehicleListener implements Listener {
             return;
         }
 
-        String world = vehicle.getWorld().getName();
+        String worldName = vehicle.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.boat.isEnabled(world)) {
             return;
@@ -29,15 +31,15 @@ public class NoBuildPlusVehicleListener implements Listener {
 
         if (vehicle instanceof Boat) {
 
-            Entity p = e.getAttacker();
+            Entity player = e.getAttacker();
 
-            if (p instanceof Player) {
+            if (player instanceof Player) {
 
-                if (p.hasPermission(Worlds.getPermission(world))) {
+                if (player.hasPermission(world.getPermission())) {
                     return;
                 }
 
-                Worlds.sendMessage((Player)p, world);
+                WorldManager.sendMessage((Player)player, world);
 
             }
 
@@ -48,7 +50,7 @@ public class NoBuildPlusVehicleListener implements Listener {
     }
 
     // Flag: minecart
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onMinecartDamaged(VehicleDamageEvent e) {
 
         Vehicle vehicle = e.getVehicle();
@@ -57,7 +59,8 @@ public class NoBuildPlusVehicleListener implements Listener {
             return;
         }
 
-        String world = vehicle.getWorld().getName();
+        String worldName = vehicle.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.minecart.isEnabled(world)) {
             return;
@@ -66,13 +69,13 @@ public class NoBuildPlusVehicleListener implements Listener {
         for (String stype : Flags.minecart.getList()) {
             if (vehicle.getType() == EntityType.valueOf(stype)) {
 
-                Entity p = e.getAttacker();
+                Entity player = e.getAttacker();
 
-                if (p instanceof Player) {
-                    if (p.hasPermission(Worlds.getPermission(world))) {
+                if (player instanceof Player) {
+                    if (player.hasPermission(world.getPermission())) {
                         return;
                     }
-                    Worlds.sendMessage((Player)p, world);
+                    WorldManager.sendMessage((Player)player, world);
                 }
 
                 e.setCancelled(true);
@@ -85,7 +88,7 @@ public class NoBuildPlusVehicleListener implements Listener {
     }
 
     // Flag: boat
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBoatDestroyed(VehicleDestroyEvent e) {
 
         Vehicle vehicle = e.getVehicle();
@@ -94,7 +97,8 @@ public class NoBuildPlusVehicleListener implements Listener {
             return;
         }
 
-        String world = vehicle.getWorld().getName();
+        String worldName = vehicle.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.boat.isEnabled(world)) {
             return;
@@ -102,14 +106,14 @@ public class NoBuildPlusVehicleListener implements Listener {
 
         if (vehicle instanceof Boat) {
 
-            Entity p = e.getAttacker();
+            Entity player = e.getAttacker();
 
-            if (p instanceof Player) {
+            if (player instanceof Player) {
 
-                if (p.hasPermission(Worlds.getPermission(world))) {
+                if (player.hasPermission(world.getPermission())) {
                     return;
                 }
-                Worlds.sendMessage((Player)p, world);
+                WorldManager.sendMessage((Player)player, world);
 
             }
 
@@ -119,7 +123,7 @@ public class NoBuildPlusVehicleListener implements Listener {
     }
 
     // Flag: minecart
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onMinecartDestroyed(VehicleDestroyEvent e) {
 
         Vehicle vehicle = e.getVehicle();
@@ -128,33 +132,31 @@ public class NoBuildPlusVehicleListener implements Listener {
             return;
         }
 
-        String world = vehicle.getWorld().getName();
+        String worldName = vehicle.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.minecart.isEnabled(world)) {
             return;
         }
 
-        for (String stype : Flags.minecart.getList()) {
 
-            if (vehicle.getType() == EntityType.valueOf(stype)) {
+        if (Flags.minecart.getList().contains(vehicle.getType().getName())) {
 
-                Entity p = e.getAttacker();
+            Entity player = e.getAttacker();
 
-                if (p instanceof Player) {
+            if (player instanceof Player) {
 
-                    if (p.hasPermission(Worlds.getPermission(world))) {
-                        return;
-                    }
-
-                    Worlds.sendMessage((Player)p, world);
-
+                if (player.hasPermission(world.getPermission())) {
+                    return;
                 }
 
-                e.setCancelled(true);
-                break;
+                WorldManager.sendMessage((Player)player, world);
+
             }
 
+            e.setCancelled(true);
         }
+
 
 
     }

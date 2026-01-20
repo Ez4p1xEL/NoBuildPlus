@@ -1,3 +1,5 @@
+# enable: is no longer used since 1.6.10
+# which means you can't disable the flag, and you don't need to disable it.
 flags:
   break:
     enable: true

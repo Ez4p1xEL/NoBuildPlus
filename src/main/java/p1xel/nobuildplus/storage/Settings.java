@@ -3,6 +3,7 @@ package p1xel.nobuildplus.storage;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.world.WorldManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,11 +47,13 @@ public class Settings {
     static List<String> list = new java.util.ArrayList<>(Collections.emptyList());
 
     // 初始化
+    @Deprecated
     public static void defaultList() {
         list.clear();
         list.addAll(Worlds.yaml.getKeys(false));
     }
 
+    @Deprecated
     public static List<String> getEnableWorldList() {
         return list;
     }
@@ -82,7 +85,7 @@ public class Settings {
     // 是否可以执行flag监测
     // 这个方法包含了 FlagsManager.getFlagsIeEnabled() 和 Settings.getEnableWorldList().contains() 的功能
     public static boolean canExecute(String world, String flag) {
-        return FlagsManager.yaml.getBoolean(flag + ".enable", true) && Settings.getEnableWorldList().contains(world);
+        return FlagsManager.yaml.getBoolean(flag + ".enable", true) && WorldManager.getWorld(world) != null;
     }
 
     // Update from SETTINGS

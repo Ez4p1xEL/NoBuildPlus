@@ -11,8 +11,11 @@ import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.listener.gui.GUIType;
 import p1xel.nobuildplus.listener.gui.GUIWorld;
 import p1xel.nobuildplus.storage.*;
+import p1xel.nobuildplus.world.NBPWorld;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Cmd implements CommandExecutor {
 
@@ -60,9 +63,9 @@ public class Cmd implements CommandExecutor {
 
                 if (args.length == 2) {
 
-                    String name = args[1];
+                    String worldName = args[1];
 
-                    if (!Worlds.yaml.getKeys(false).contains(name)) {
+                    if (WorldManager.getWorld(worldName) == null) {
                         sender.sendMessage(Locale.getMessage("not-in-list"));
                         return true;
                     }
@@ -73,7 +76,7 @@ public class Cmd implements CommandExecutor {
 //
 //                    }
 
-                    p.openInventory(new GUIWorld(name, 1, GUIType.FLAG).getInventory());
+                    p.openInventory(new GUIWorld(worldName, 1, GUIType.FLAG).getInventory());
                     return true;
 
                 }
@@ -97,7 +100,7 @@ public class Cmd implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("list")) {
 
-                ArrayList<String> list = (ArrayList<String>) Settings.getEnableWorldList();
+                List<String> list = WorldManager.getWorldsInName();
 
                 sender.sendMessage(Locale.getMessage("list-1"));
                 sender.sendMessage(Locale.getMessage("list-2").replaceAll("%list%", list.toString()));
@@ -123,9 +126,7 @@ public class Cmd implements CommandExecutor {
                 Settings.createSettingsFile();
                 Worlds.createWorldsFile();
                 FlagRegistry.refreshMap();
-//                if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-//                    GUIManager.instance.reloadGUIs();
-//                }
+                WorldManager.init();
                 sender.sendMessage(Locale.getMessage("reload-success"));
                 return true;
 
@@ -141,12 +142,12 @@ public class Cmd implements CommandExecutor {
                 Player p = (Player) sender;
                 String world = p.getWorld().getName();
 
-                if (!Settings.getEnableWorldList().contains(world)) {
+                if (WorldManager.getWorld(world) == null) {
                     sender.sendMessage(Locale.getMessage("not-in-list"));
                     return true;
                 }
 
-                Worlds.setSpawnLocation(world, p.getLocation());
+                WorldManager.setLocation(world, p.getLocation());
                 sender.sendMessage(Locale.getMessage("loc-set-success").replaceAll("%world%", world));
                 return true;
 
@@ -160,20 +161,21 @@ public class Cmd implements CommandExecutor {
                 }
 
                 Player p = (Player) sender;
-                String world = p.getWorld().getName();
+                String worldName = p.getWorld().getName();
+                ProtectedWorld world = WorldManager.getWorld(worldName);
 
-                if (!Settings.getEnableWorldList().contains(world)) {
+                if (WorldManager.getWorld(worldName) == null) {
                     sender.sendMessage(Locale.getMessage("not-in-list"));
                     return true;
                 }
 
-                if (!Worlds.isSpawnLocationSet(world)) {
+                if (world.getLocation() == null) {
                     sender.sendMessage(Locale.getMessage("loc-not-set"));
                     return true;
                 }
 
-                sender.sendMessage(Locale.getMessage("tp-success").replaceAll("%world%",world));
-                p.teleport(Worlds.getSpawnLocation(world));
+                sender.sendMessage(Locale.getMessage("tp-success").replaceAll("%world%", worldName));
+                p.teleport(world.getLocation());
                 return true;
             }
 
@@ -186,37 +188,31 @@ public class Cmd implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("add")) {
 
-                if (!Settings.getEnableWorldList().contains(args[1])) {
+                if (WorldManager.getWorld(args[1]) == null) {
 
-                    Worlds.createWorld(args[1]);
-//                    if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-//                        GUIManager.instance.createInv(args[1]);
-//                    }
+                    //Worlds.createWorld(args[1]);
+                    WorldManager.enableWorld(args[1]);
                     sender.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", args[1]));
-                    return true;
 
                 } else {
                     sender.sendMessage(Locale.getMessage("already-exists"));
-                    return true;
                 }
+                return true;
 
             }
 
             if (args[0].equalsIgnoreCase("remove")) {
 
-                if (Settings.getEnableWorldList().contains(args[1])) {
+                if (WorldManager.getWorld(args[1]) != null) {
 
-                    Worlds.removeWorld(args[1]);
-//                    if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-//                        GUIManager.instance.removeWorld(args[1]);
-//                    }
+                    //Worlds.removeWorld(args[1]);
+                    WorldManager.removeWorld(args[1]);
                     sender.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%", args[1]));
-                    return true;
 
                 } else {
                     sender.sendMessage(Locale.getMessage("not-in-list"));
-                    return true;
                 }
+                return true;
 
             }
 
@@ -240,19 +236,20 @@ public class Cmd implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("flag")) {
 
-                if (!Settings.getEnableWorldList().contains(args[1])) {
+                if (WorldManager.getWorld(args[1]) == null) {
                     sender.sendMessage(Locale.getMessage("cant-find-world"));
                     return true;
                 }
 
-                if (!FlagsManager.isInTheFlagsList(args[2])) {
+                if (FlagRegistry.matchFlag(args[2]) == null) {
                     sender.sendMessage(Locale.getMessage("flags-list"));
                     return true;
                 }
 
                 if (args[3].equalsIgnoreCase("true") || args[3].equalsIgnoreCase("t")) {
 
-                    Worlds.setFlag(args[1], args[2], true);
+                    //Worlds.setFlag(args[1], args[2], true);
+                    WorldManager.setFlag(args[1], FlagRegistry.matchFlag(args[2]), true);
                     sender.sendMessage(Locale.getMessage("flag-set-success").replaceAll("%world%",args[1]).replaceAll("%flag%",args[2]).replaceAll("%boolean%", args[3]));
                     return true;
 
@@ -260,7 +257,7 @@ public class Cmd implements CommandExecutor {
 
                 if (args[3].equalsIgnoreCase("false") || args[3].equalsIgnoreCase("f")) {
 
-                    Worlds.setFlag(args[1], args[2], false);
+                    WorldManager.setFlag(args[1], FlagRegistry.matchFlag(args[2]), false);
                     sender.sendMessage(Locale.getMessage("flag-set-success").replaceAll("%world%",args[1]).replaceAll("%flag%",args[2]).replaceAll("%boolean%", args[3]));
                     return true;
 

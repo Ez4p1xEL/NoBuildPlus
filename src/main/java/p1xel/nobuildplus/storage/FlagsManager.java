@@ -60,9 +60,7 @@ public class FlagsManager {
     static List<String> flagList = new ArrayList<>();
 
     public static void defaultFlagList() {
-        for (Flag flag : FlagRegistry.getAllFlags()) {
-            flagList.add(flag.getName());
-        }
+        flagList = FlagRegistry.getFlagsInName();
     }
 
     public static List<String> getFlags() {

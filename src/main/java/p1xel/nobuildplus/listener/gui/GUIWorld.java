@@ -11,10 +11,11 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import p1xel.nobuildplus.Flag;
 import p1xel.nobuildplus.FlagRegistry;
-import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.gamerule.GameRuleRegistry;
 import p1xel.nobuildplus.storage.*;
+import p1xel.nobuildplus.world.NBPWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,13 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
     private String worldName;
     private int page;
     private final GUIType type;
+    private final NBPWorld world;
 
     public GUIWorld(String worldName, int page, GUIType type) {
         this.worldName = worldName;
         this.page = page;
         this.type = type;
+        this.world = (NBPWorld) WorldManager.getWorld(worldName);
         init();
     }
 
@@ -95,12 +98,12 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 display_name = Locale.getMessage("gui.world.items." + menu_id + ".display_name");
                 lore = Locale.yaml.getStringList("gui.world.items." + menu_id + ".lore").stream()
                         .map(line -> ChatColor.translateAlternateColorCodes('&', line))
-                        .map(line -> line.replaceAll("%permission%", Worlds.getPermission(worldName))).collect(Collectors.toList());
+                        .map(line -> line.replaceAll("%permission%", world.getPermission())).collect(Collectors.toList());
                 break;
             }
 
             case "edit-deny-message": {
-                String message = Worlds.isDenyMessageExist(worldName) ? Worlds.getDenyMessage(worldName) : "";
+                String message = world.getDenyMessage() != null ? world.getDenyMessage() : "";
                 display_name = Locale.getMessage("gui.world.items." + menu_id + ".display_name");
                 lore = Locale.yaml.getStringList("gui.world.items." + menu_id + ".lore").stream()
                         .map(line -> ChatColor.translateAlternateColorCodes('&', line))
@@ -133,7 +136,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                     material = Material.PAPER;
                 }
                 String flagName = flag.getName();
-                boolean bool = Worlds.getFlag(worldName, flagName);
+                boolean bool = world.getFlag(flag);
                 ItemStack item = new ItemStack(material);
                 ItemMeta meta = item.getItemMeta();
                 meta.setDisplayName(Locale.getMessage("gui.world.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
@@ -167,7 +170,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 if (material == null) {
                     material = Material.PAPER;
                 }
-                Object value = Worlds.getGameRule(worldName, element);
+                Object value = world.getGameRule(element);
                 ItemStack item = new ItemStack(material);
                 ItemMeta meta = item.getItemMeta();
                 String gameruleBoolean = value instanceof Boolean ? Locale.getMessage("gamerule_"+(boolean) value) : "";
@@ -211,7 +214,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
             PersistentDataContainer container = meta.getPersistentDataContainer();
             String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
             Flag flag = FlagRegistry.matchFlag(flagName);
-            boolean bool = Worlds.getFlag(worldName, flagName);
+            boolean bool = world.getFlag(flag);
             meta.setDisplayName(Locale.getMessage("gui.world.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
             List<String> lore_list = Locale.yaml.getStringList("gui.world.items.flag.lore").stream()
                     .map(line -> ChatColor.translateAlternateColorCodes('&', line))
@@ -229,7 +232,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
         String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
-        Object value = Worlds.getGameRule(worldName, gameruleName);
+        Object value = world.getGameRule(gameruleName);
         String gameruleBoolean = value instanceof Boolean ? Locale.getMessage("gamerule_"+(boolean) value) : "";
         String gameruleInteger = value instanceof Integer ? Locale.getMessage("value").replace("%value%", String.valueOf((int) value)) : "";
         meta.setDisplayName(Locale.getMessage("gui.world.items.gamerule.display_name").replaceAll("%gamerule%", gameruleName).replace("%bool%", gameruleBoolean).replace("%int%", gameruleInteger));
@@ -293,12 +296,13 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("flag:")) {
-            String flag = name.split(":")[1];
-            boolean bool = Worlds.getFlag(worldName, flag);
+            String flagName = name.split(":")[1];
+            Flag flag = FlagRegistry.matchFlag(flagName);
+            boolean bool = world.getFlag(flag);
 
-            Worlds.setFlag(worldName, flag, !bool);
+            WorldManager.setFlag(world, flag, !bool);
             updateSlot(slot);
-            player.sendMessage(Locale.getMessage("flag-set-success").replace("%world%", worldName).replace("%flag%", flag).replace("%boolean%", String.valueOf(!bool)));
+            player.sendMessage(Locale.getMessage("flag-set-success").replace("%world%", worldName).replace("%flag%", flagName).replace("%boolean%", String.valueOf(!bool)));
             player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
             return true;
 
@@ -306,10 +310,10 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
 
         if (name.startsWith("gamerule:")) {
             String gameruleName = name.split(":")[1];
-            Object value = Worlds.getGameRule(worldName, gameruleName);
+            Object value = world.getGameRule(gameruleName);
             if (value instanceof Boolean) {
                 boolean bool = (boolean) value;
-                Worlds.setGameRule(worldName, gameruleName, !bool);
+                WorldManager.setGameRule(world, gameruleName, !bool);
                 updateSlot(slot);
                 player.sendMessage(Locale.getMessage("gamerule-set-success").replace("%world%", worldName).replace("%gamerule%", gameruleName).replace("%value%", String.valueOf(!bool)));
                 player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);

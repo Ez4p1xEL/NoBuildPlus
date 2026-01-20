@@ -2,6 +2,7 @@ package p1xel.nobuildplus.storage;
 
 import org.bukkit.configuration.Configuration;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.world.WorldManager;
 
 public class Config {
 

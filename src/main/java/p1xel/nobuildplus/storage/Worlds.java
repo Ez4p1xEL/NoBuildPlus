@@ -56,7 +56,7 @@ public class Worlds {
     }
 
     public static String getDenyMessage(String world) {
-        String m = yaml.getString(world + ".deny-message");
+        String m = yaml.getString(world + ".deny-message", null);
         if (m==null) {return null;}
         return ChatColor.translateAlternateColorCodes('&', m);
     }
@@ -94,7 +94,7 @@ public class Worlds {
             z = yaml.getDouble(w + ".spawn-loc.z");
             yaw = Float.parseFloat(yaml.getString(w + ".spawn-loc.yaw"));
             pitch = Float.parseFloat(yaml.getString(w + ".spawn-loc.pitch"));
-        } catch (NullPointerException e) {
+        } catch (IllegalArgumentException | NullPointerException exception) {
             return null;
         }
 
@@ -146,7 +146,7 @@ public class Worlds {
     }
 
     public static boolean getFlag(String world, String flag) {
-        return yaml.getBoolean(world + ".flags." + flag);
+        return yaml.getBoolean(world + ".flags." + flag, true);
     }
 
     public static void setGameRule(String world, String rule, Object value) {
@@ -175,11 +175,8 @@ public class Worlds {
 
     }
 
+    @Deprecated
     public static void sendMessage(Player player, String world) {
-
-        if (!Worlds.isDenyMessageExist(world)) {
-            return;
-        }
 
         String sound = Config.getString("deny-message-sound.name");
         boolean enableSound = Config.getBool("deny-message-sound.enable");

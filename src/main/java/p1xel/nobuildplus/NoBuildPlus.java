@@ -1,6 +1,5 @@
 package p1xel.nobuildplus;
 
-import cn.lunadeer.dominion.api.DominionAPI;
 import com.tcoded.folialib.FoliaLib;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +15,7 @@ import p1xel.nobuildplus.listener.text.TextEditMode;
 import p1xel.nobuildplus.storage.*;
 import p1xel.nobuildplus.tool.bstats.Metrics;
 import p1xel.nobuildplus.tool.spigotmc.UpdateChecker;
+import p1xel.nobuildplus.world.WorldManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,6 @@ public class NoBuildPlus extends JavaPlugin {
 
     private static NoBuildPlus instance;
     private static FoliaLib foliaLib;
-    private static DominionAPI dominionAPI;
     private static TextEditMode textEditMode;
 
     public static NoBuildPlus getInstance() {
@@ -50,6 +49,8 @@ public class NoBuildPlus extends JavaPlugin {
         FlagsManager.createFlagsManagerFile();
         Settings.createSettingsFile();
         Worlds.createWorldsFile();
+        GameRuleRegistry.init(getServer().getBukkitVersion());
+        WorldManager.init();
         Settings.defaultList();
         FlagRegistry.refreshMap();
         RuleSetting.createFile();
@@ -111,14 +112,6 @@ public class NoBuildPlus extends JavaPlugin {
             getLogger().info("NBP Player Listener for 1.20+ is registered!");
         }
 
-//        if (parent_version < 21 || (parent_version == 21 && child_version <= 10)) {
-//            getServer().getPluginManager().registerEvents(new NBPEntityListener_Legacy_1_21_10(), this);
-//            getLogger().info("NBP Entity Listener for 1.8-1.20.10 is registered!");
-//        } else {
-//            getServer().getPluginManager().registerEvents(new NBPEntityListener_1_21_11(), this);
-//            getLogger().info("NBP Entity Listener for 1.21.11+ is registered!");
-//        }
-
         if (parent_version > 15 || (parent_version == 15 && child_version >= 2)) {
             getServer().getPluginManager().registerEvents(new GUIListener(), this);
         }
@@ -129,9 +122,6 @@ public class NoBuildPlus extends JavaPlugin {
         updateFlags();
 
         getLogger().info("[NBP] HOOKED FUNCTIONS LOADED.");
-
-        GameRuleRegistry.init(getServer().getBukkitVersion());
-        getLogger().info("[NBP] GAMERULES MANAGEMENT LOADED");
 
         updateVersion();
         getLogger().info("Plugin loaded! Version: " + Config.getVersion());
@@ -157,7 +147,7 @@ public class NoBuildPlus extends JavaPlugin {
                 if (this.getDescription().getVersion().equals(version)) {
                     getLogger().info(Locale.getMessage("update-check.latest"));
                 } else {
-                    getLogger().info(Locale.getMessage("update-check.outdate"));
+                    getLogger().info(Locale.getMessage("update-check.outdate").replace("%version%", version));
                 }
             });
         }
@@ -195,7 +185,7 @@ public class NoBuildPlus extends JavaPlugin {
                 Settings.yaml.set("global-settings.flags."+key, true);
                 getLogger().info("Flag " + key.toUpperCase() + " is updated to settings.yml!");
 
-                for (String world : Settings.getEnableWorldList()) {
+                for (String world : WorldManager.getWorldsInName()) {
 
                     Worlds.yaml.set(world + ".flags." + key, true);
                     getLogger().info("Flag " + key.toUpperCase() + " is updated to " + world + " in worlds.yml!");
@@ -229,7 +219,7 @@ public class NoBuildPlus extends JavaPlugin {
 
     void updateGameRules() {
         List<String> gamerules = GameRuleRegistry.getRegisteredGameRules();
-        for (String world : Settings.getEnableWorldList()) {
+        for (String world : WorldManager.getWorldsInName()) {
 
             for (String gameruleName : gamerules) {
 

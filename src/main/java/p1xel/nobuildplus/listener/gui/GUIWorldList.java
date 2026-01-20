@@ -13,6 +13,7 @@ import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.storage.Locale;
 import p1xel.nobuildplus.storage.Settings;
 import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +38,7 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
             hasPreviousPage = true;
         }
 
-        List<String> enabledWorlds = Settings.getEnableWorldList();
+        List<String> enabledWorlds = WorldManager.getWorldsInName();
         List<String> worlds = Bukkit.getWorlds().stream()
                 .map(World::getName) // Convert to String
                 .filter(worldName -> !enabledWorlds.contains(worldName)) // Check if existed
@@ -159,9 +160,10 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
                 player.openInventory(new GUIWorldList(1).getInventory());
                 return true;
             }
-            if (!Settings.getEnableWorldList().contains(world)) {
+            if (WorldManager.getWorld(world) == null) {
 
-                Worlds.createWorld(world);
+                //Worlds.createWorld(world);
+                WorldManager.enableWorld(world);
                 player.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", world));
                 player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
                 player.openInventory(new GUIWorldList(1).getInventory());

@@ -6,6 +6,7 @@ import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
 import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.storage.Settings;
+import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +43,7 @@ public class TabList implements TabCompleter {
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("flag") || args[0].equalsIgnoreCase("open")) {
                 List<String> result = new ArrayList<>();
-                for (String a : Settings.getEnableWorldList()) {
+                for (String a : WorldManager.getWorldsInName()) {
                     if (a.toLowerCase().startsWith(args[1].toLowerCase())) {
                         result.add(a);
                     }

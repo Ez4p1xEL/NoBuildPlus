@@ -11,11 +11,13 @@ import org.bukkit.event.player.PlayerHarvestBlockEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 public class NBPBlockListener_1_17 implements Listener {
 
     // Flag: berries
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onHarvest(PlayerHarvestBlockEvent e) {
 
         Block block = e.getHarvestedBlock();
@@ -24,36 +26,38 @@ public class NBPBlockListener_1_17 implements Listener {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.berries.isEnabled(world)) {
             return;
         }
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
         Material harvested = block.getType();
 
         if (harvested.equals(Material.matchMaterial("CAVE_VINES")) || harvested.equals(Material.matchMaterial("CAVE_VINES_PLANT"))) {
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
             e.setCancelled(true);
         }
 
     }
 
     // Flag: tnt-prime
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPrimeTNT(TNTPrimeEvent e) {
         Block block = e.getBlock();
         if (HookedPlugins.cancel(block)) {
             return;
         }
 
-        String world = block.getWorld().getName();
+        String worldName = block.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.tnt_prime.isEnabled(world)) {
             return;
@@ -62,12 +66,12 @@ public class NBPBlockListener_1_17 implements Listener {
         Entity entity = e.getPrimingEntity();
 
         if (entity instanceof Player) {
-            Player p = (Player) entity;
-            if (p.hasPermission(Worlds.getPermission(world))) {
+            Player player = (Player) entity;
+            if (player.hasPermission(world.getPermission())) {
                 return;
             }
 
-            Worlds.sendMessage(p, world);
+            WorldManager.sendMessage(player, world);
         }
 
         e.setCancelled(true);

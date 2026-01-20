@@ -22,7 +22,7 @@ commands:
 update-check:
   invalid: '無法檢查更新: '
   latest: '暫時沒有任何更新，你的版本為最新版!'
-  outdate: '有版本更新，請前往MineBBS或SpigotMC下載!'
+  outdate: '發現新版本 %version%，請前往MineBBS或SpigotMC下載!'
 list-1: '&7&l%prefix% &8&l>> &7啟用本插件的世界:'
 list-2: '&9%list%'
 no-perm: '&7&l%prefix% &8&l>> &c你沒有權限這麼做!'

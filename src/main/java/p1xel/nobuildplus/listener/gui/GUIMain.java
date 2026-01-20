@@ -12,6 +12,7 @@ import org.bukkit.persistence.PersistentDataType;
 import p1xel.nobuildplus.storage.Locale;
 import p1xel.nobuildplus.storage.Settings;
 import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
             hasPreviousPage = true;
         }
 
-        List<String> worlds = new ArrayList<>(Settings.getEnableWorldList());
+        List<String> worlds = new ArrayList<>(WorldManager.getWorldsInName());
 
         if (worlds.size() >= page*28) {
             hasNextPage = true;
@@ -176,7 +177,7 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
         if (name.startsWith("world:")) {
             String world = name.split(":")[1];
             if (clickType == ClickType.LEFT) {
-                if (!Settings.getEnableWorldList().contains(world)) {
+                if (WorldManager.getWorld(world) == null) {
                     player.sendMessage(Locale.getMessage("cant-find-world"));
                     player.openInventory(new GUIMain(1).getInventory());
                     player.playSound(player, Sound.ENTITY_VILLAGER_NO, 0.5f, 0.5f);
@@ -185,14 +186,14 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
                 player.openInventory(new GUIWorld(world, 1, GUIType.FLAG).getInventory());
                 player.playSound(player, Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
             } else if (clickType == ClickType.RIGHT) {
-                if (!Settings.getEnableWorldList().contains(world)) {
+                if (WorldManager.getWorld(world) == null) {
                     player.sendMessage(Locale.getMessage("cant-find-world"));
                     player.openInventory(new GUIMain(1).getInventory());
                     player.playSound(player, Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
                     return true;
                 }
-                Worlds.removeWorld(world);
-                //GUIManager.instance.removeWorld(world);
+                //Worlds.removeWorld(world);
+                WorldManager.removeWorld(world);
                 player.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%",world));
                 player.playSound(player, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 0.5f);
                 player.openInventory(new GUIMain(1).getInventory());

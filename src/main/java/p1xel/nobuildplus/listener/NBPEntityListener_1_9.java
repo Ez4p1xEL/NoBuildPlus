@@ -8,12 +8,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
-import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.world.ProtectedWorld;
+import p1xel.nobuildplus.world.WorldManager;
 
 public class NBPEntityListener_1_9 implements Listener {
 
     // Flag: elytra
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onGlide(EntityToggleGlideEvent e) {
 
         Entity entity = e.getEntity();
@@ -26,23 +27,24 @@ public class NBPEntityListener_1_9 implements Listener {
             return;
         }
 
-        String world = entity.getWorld().getName();
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.elytra.isEnabled(world)) {
             return;
         }
 
-        Player p = (Player) entity;
+        Player player = (Player) entity;
 
-        if (p.hasPermission(Worlds.getPermission(world))) {
+        if (player.hasPermission(world.getPermission())) {
             return;
         }
 
 
         if (e.isGliding()) {
-            if (p.getInventory().getChestplate().getType() == Material.ELYTRA) {
+            if (player.getInventory().getChestplate().getType() == Material.ELYTRA) {
 
-                Worlds.sendMessage(p, world);
+                WorldManager.sendMessage(player, world);
                 e.setCancelled(true);
 
             }

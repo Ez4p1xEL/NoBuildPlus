@@ -22,7 +22,7 @@ commands:
 update-check:
   invalid: 'Unable to check for updates: '
   latest: 'No update available.'
-  outdate: 'A new update is available.'
+  outdate: 'A new version %version% is available, please download at Modrinth or SpigotMC'
 list-1: '&7&l%prefix% &8&l>> &7Enable worlds:'
 list-2: '&9%list%'
 no-perm: '&7&l%prefix% &8&l>> &cYou do not have permission to do that!'

@@ -4,27 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.6.20 update - menu update">
-      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/MenuConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/menus.yml" afterDir="false" />
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.6.21 update - fix bugs from v1.6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIAbstract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIAbstract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIDefaultTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIDefaultTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/text/TextEditMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/text/TextEditMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/de.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/de.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/en.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/ja.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/ja.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/ru.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/ru.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/gamerule/LegacyGameRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/gamerule/LegacyGameRule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,15 +154,8 @@
       <workItem from="1768998675675" duration="5837000" />
       <workItem from="1769008947943" duration="87000" />
       <workItem from="1769066239221" duration="5635000" />
-      <workItem from="1769087888688" duration="4693000" />
-    </task>
-    <task id="LOCAL-00016" summary="1.4.9 Update - new flag &quot;craft&quot; and actionbar message supported">
-      <option name="closed" value="true" />
-      <created>1729152673881</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1729152673881</updated>
+      <workItem from="1769087888688" duration="4941000" />
+      <workItem from="1769095524281" duration="34000" />
     </task>
     <task id="LOCAL-00017" summary="1.4.9 Update - new flag &quot;craft&quot; and actionbar message supported">
       <option name="closed" value="true" />
@@ -566,7 +541,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769067564501</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="1.6.21 update - fix bugs from v1.6">
+      <option name="closed" value="true" />
+      <created>1769094537001</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1769094537001</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +570,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.5.15" />
     <MESSAGE value="1.5.16" />
     <MESSAGE value="1.5.17 - fixed flag &quot;chat&quot; error in dominion area" />
     <MESSAGE value="1.5.18 - new flags &quot;pressure-plate&quot; and &quot;fire-spread&quot;" />
@@ -612,7 +594,8 @@
     <MESSAGE value="1.6.0 update - GameRule management system in GUI" />
     <MESSAGE value="1.6.10 update - caches update" />
     <MESSAGE value="1.6.20 update - menu update" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.6.20 update - menu update" />
+    <MESSAGE value="1.6.21 update - fix bugs from v1.6" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.6.21 update - fix bugs from v1.6" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

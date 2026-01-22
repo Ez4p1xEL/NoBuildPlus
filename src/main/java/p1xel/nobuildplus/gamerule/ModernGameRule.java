@@ -15,7 +15,7 @@ public class ModernGameRule implements InterfaceGameRuleRegistry {
     public List<String> getGameRules() {
         List<String> list = new ArrayList<>();
 
-        World world = Bukkit.getWorlds().getFirst();
+        World world = Bukkit.getWorlds().get(0);
 
         for (GameRule<?> rule : Registry.GAME_RULE) {
             try {

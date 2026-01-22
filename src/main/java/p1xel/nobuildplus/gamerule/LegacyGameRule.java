@@ -29,7 +29,7 @@ public class LegacyGameRule implements InterfaceGameRuleRegistry {
         try {
             // find the method directly
             Object values = gameRuleClass.getMethod("values").invoke(null);
-            World world = Bukkit.getWorlds().getFirst();
+            World world = Bukkit.getWorlds().get(0);
 
             for (Object gamerule : (Object[]) values) {
                 String key = (String) gamerule.getClass().getMethod("getName").invoke(gamerule);

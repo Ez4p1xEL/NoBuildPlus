@@ -59,10 +59,21 @@ invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &c並不存在於你所在的
 gamerule-notice: '&c&l&n溫馨提示&a 你因為輸入了 /gamerule 指令而開啟了這個由 NoBuildPlus 提供的原版遊戲規則管理選單, 
 如果你不想透過該指令來開啟管理選單, 你完全、自由地或不受限制地可以在 NoBuildPlus 的 config 檔案中關閉, 
 &6&o這條提示訊息也同樣可在 config 中關閉'
+documentation: '&e&l&n&o點擊這裏前往 PixelCraft 使用文檔'
 
 gui:
   messages:
     not-enabled: '&c&o該世界不被保護, 你無法更改模式!'
+  buttons:
+    wiki:
+      display_name: '&6&oNoBuildPlus 使用文档'
+      lore:
+        - ''
+        - '&7&o在PixelCraft使用文檔'
+        - '&7&o瀏覽更多插件使用幫助'
+        - '&7&ohttps://docs.p1mc.top'
+        - ''
+        - '&7點擊打開'
   main:
     title: 'NoBuildPlus 世界管理'
     items:

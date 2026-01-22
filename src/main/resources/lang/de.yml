@@ -58,10 +58,22 @@ invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cexistiert nicht auf diesem 
 gamerule-notice: '&c&l&nHINWEIS&a Du öffnest das Gamerule-Verwaltungsmenü von NoBuildPlus, weil du den Befehl /gamerule ausgeführt hast. 
 Wenn du das Verwaltungsmenü nicht über diesen Befehl öffnen möchtest, kannst du dies in der Konfiguration von NoBuildPlus deaktivieren.
 &6&oDiese Benachrichtigung kann ebenfalls in der config.yml von NoBuildPlus deaktiviert werden!'
+documentation: '&e&l&n&oHier klicken, um die PixelCraft-Dokumentation zu öffnen'
 
 gui:
   messages:
     not-enabled: '&c&oDiese Welt steht nicht unter Schutz, du kannst den Modus nicht ändern.'
+  buttons:
+    wiki:
+      display_name: '&6&oNoBuildPlus Dokumentation'
+      lore:
+        - ''
+        - '&7&oIn der PixelCraft-Dokumentation'
+        - '&7&oWeitere Plugin-Anleitungen ansehen'
+        - '&7&ohttps://docs.p1mc.top'
+        - ''
+        - '&7Klicken zum Öffnen'
+
   main:
     title: 'NoBuildPlus Weltverwaltung'
     items:

@@ -1,0 +1,21 @@
+# This is not language setting, please refer to lang/your_language.yml
+global:
+  back-to-main: NETHER_STAR
+  next-page: ENDER_EYE
+  previous-page: ENDER_PEARL
+  empty-slot: BLACK_STAINED_GLASS_PANE
+
+world-setting:
+  type-button:
+    flag: RED_STAINED_GLASS_PANE
+    gamerule: YELLOW_STAINED_GLASS_PANE
+  edit-permission: COMMAND_BLOCK
+  edit-deny-message: FEATHER
+
+main:
+  default-template-entry: BOOK
+  add-world: LIME_STAINED_GLASS_PANE
+  close: BARRIER
+
+button:
+  wiki: BOOK

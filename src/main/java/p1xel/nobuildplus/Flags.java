@@ -77,7 +77,7 @@ public enum Flags implements Flag {
     lightning("lightning", "LIGHTNING_ROD", null, null),
     tnt_prime("tnt-prime", "TNT", null, null),
     pressure_plate("pressure-plate", "OAK_PRESSURE_PLATE", "list", Arrays.asList("OAK_PRESSURE_PLATE", "SPRUCE_PRESSURE_PLATE", "BIRCH_PRESSURE_PLATE", "JUNGLE_PRESSURE_PLATE", "ACACIA_PRESSURE_PLATE", "DARK_OAK_PRESSURE_PLATE", "MANGROVE_PRESSURE_PLATE", "CHERRY_PRESSURE_PLATE", "PALE_OAK_PRESSURE_PLATE", "BAMBOO_PRESSURE_PLATE", "CRIMSON_PRESSURE_PLATE", "WARPED_PRESSURE_PLATE", "STONE_PRESSURE_PLATE", "POLISHED_BLACKSTONE_PRESSURE_PLATE", "LIGHT_WEIGHTED_PRESSURE_PLATE", "HEAVY_WEIGHTED_PRESSURE_PLATE", "PRESSURE_PLATE")),
-    fire_spread("fire-spread", "FLINT_AND_STEEL", null, null);
+    fire_spread("fire-spread", "CRIMSON_STEM", null, null);
 
     private final String flag_name;
     private final String show_item;

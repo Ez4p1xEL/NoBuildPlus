@@ -40,6 +40,7 @@ public class NBPListener implements Listener {
             if (Config.getBool("open-menu-if-gamerule.notification")) {
                 player.sendMessage(Locale.getMessage("gamerule-notice"));
             }
+
             player.openInventory(new GUIWorld(worldName, 1, GUIType.GAMERULE).getInventory());
             event.setCancelled(true);
         }

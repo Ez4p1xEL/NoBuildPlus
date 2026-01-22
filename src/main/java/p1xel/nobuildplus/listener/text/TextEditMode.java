@@ -58,11 +58,9 @@ public class TextEditMode implements Listener {
             Logger.debug("Last_viewed_inventory: " + last_viewed_gui.getInventory());
             if (last_viewed_gui.getInventory() != null) {
                 player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
-                removePlayer(player);
-
                 openInventory(player);
             }
-            removePlayer(player);
+            //removePlayer(player);
             event.setCancelled(true);
             return;
         }
@@ -76,8 +74,6 @@ public class TextEditMode implements Listener {
                 player.sendMessage(Locale.getMessage("edit-default-permission").replaceAll("%permission%", text));
                 player.sendMessage(Locale.getMessage("quit-mode"));
                 player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
-                removePlayer(player);
-
                 openInventory(player);
 
                 break;
@@ -90,8 +86,6 @@ public class TextEditMode implements Listener {
                 player.sendMessage(Locale.getMessage("edit-default-deny-message").replaceAll("%message%", text));
                 player.sendMessage(Locale.getMessage("quit-mode"));
                 player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
-                removePlayer(player);
-
                 openInventory(player);
                 break;
 
@@ -108,8 +102,6 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("edit-permission").replaceAll("%world%", worldName).replaceAll("%permission%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
-            removePlayer(player);
-
             openInventory(player);
             return;
 
@@ -122,7 +114,6 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("edit-deny-message").replaceAll("%world%", worldName).replaceAll("%message%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
-            removePlayer(player);
             openInventory(player);
             return;
 
@@ -142,7 +133,6 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("default-gamerule-set-success").replace("%gamerule%", gameruleName).replace("%value%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
-            removePlayer(player);
             openInventory(player);
             return;
 
@@ -174,7 +164,6 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("gamerule-set-success").replace("%world%", worldName).replace("%gamerule%", gameruleName).replace("%value%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
-            removePlayer(player);
 
             openInventory(player);
 
@@ -184,14 +173,23 @@ public class TextEditMode implements Listener {
 
     public void openInventory(Player player) {
 
-        GUIAbstract gui = last_viewed_inventories.get(player);
-        gui.init();
+        //Inventory inventory = gui.getInventory();
         if (NoBuildPlus.getFoliaLib().isFolia()) {
-            NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> player.openInventory(gui.getInventory()));
+            NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> {
+                GUIAbstract gui = last_viewed_inventories.get(player);
+                gui.init();
+                player.openInventory(gui.getInventory());
+                removePlayer(player);
+            });
             return;
         }
 
-        Bukkit.getScheduler().runTask(NoBuildPlus.getInstance(), () -> player.openInventory(gui.getInventory()));
+        Bukkit.getScheduler().runTask(NoBuildPlus.getInstance(), () -> {
+            GUIAbstract gui = last_viewed_inventories.get(player);
+            gui.init();
+            player.openInventory(gui.getInventory());
+            removePlayer(player);
+        });
     }
 
 

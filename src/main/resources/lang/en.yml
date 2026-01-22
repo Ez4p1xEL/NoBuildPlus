@@ -58,10 +58,21 @@ invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cdoes not exist in this mine
 gamerule-notice: '&c&l&nJUST TO NOTICE THAT&a you are opening the gamerule management provided by NoBuildPlus because you executed the command /gamerule. 
 If you don''t want to open the management menu through this command, you are feeling free to disable this in config of NoBuildPlus.
 &6&oThis notification can also be disabled in config.yml of NoBuildPlus!'
+documentation: '&e&l&n&oClick here to open PixelCraft Documentation'
 
 gui:
   messages:
     not-enabled: '&c&oThis world is not under protection, you can''t change the mode.'
+  buttons:
+    wiki:
+      display_name: '&6&oNoBuildPlus Documentation'
+      lore:
+        - ''
+        - '&7&oView more information on'
+        - '&7&oPixelCraft Documentation'
+        - '&7&ohttps://docs.p1mc.top'
+        - ''
+        - '&7Click to open'
   main:
     title: 'NoBuildPlus World Management'
     items:

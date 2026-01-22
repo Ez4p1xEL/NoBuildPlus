@@ -27,6 +27,7 @@ public class Config {
         NoBuildPlus.getTextEditMode().cancelWord = Config.getString("text-edit-mode.cancel");
         RuleSetting.createFile();
         Logger.setEnabled(Config.getBool("debug"));
+        MenuConfig.initialization();
 
     }
 

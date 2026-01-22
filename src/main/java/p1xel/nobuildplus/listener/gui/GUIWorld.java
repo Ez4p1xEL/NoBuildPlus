@@ -1,5 +1,7 @@
 package p1xel.nobuildplus.listener.gui;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -44,6 +46,11 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
             VIEW_FOR_GAMERULE_ONLY = true;
         }
 
+        if (this.inventory == null) {
+            this.inventory = Bukkit.createInventory(this, 54, Locale.getMessage("gui.world.title").replaceAll("%world%", worldName));
+        }
+        this.inventory.clear();
+
         boolean hasPreviousPage = page > 1;
         boolean hasNextPage;
 
@@ -58,8 +65,6 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         }
 
         list = list.subList(28 * (page - 1), Math.min((page) * 28, list.size()));
-
-        Inventory inventory = Bukkit.createInventory(this, 54, Locale.getMessage("gui.world.title").replaceAll("%world%", worldName));
 
         if (hasNextPage) {
             inventory = setNextPage(inventory, "world", 4);
@@ -80,12 +85,16 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
             type.setItemMeta(typeMeta);
         }
 
+        inventory.setItem(0, getWikiButton());
+
         this.inventory = inventory;
 
         if (!VIEW_FOR_GAMERULE_ONLY) {
 
-            setItem(Material.COMMAND_BLOCK, "edit-permission", 2);
-            setItem(Material.FEATHER, "edit-deny-message", 6);
+            Material edit_permission = Material.matchMaterial(MenuConfig.WORLD_SETTING_EDIT_PERMISSION);
+            Material edit_deny_message = Material.matchMaterial(MenuConfig.WORLD_SETTING_EDIT_DENY_MESSAGE);
+            setItem(edit_permission != null ? edit_permission : Material.PAPER, "edit-permission", 2);
+            setItem(edit_deny_message != null ? edit_deny_message : Material.PAPER, "edit-deny-message", 6);
         }
 
         update(list);
@@ -227,7 +236,8 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
 
         for (int i = 0; i < 54; i++) {
             if (inventory.getItem(i) == null) {
-                ItemStack item = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+                Material empty_slot = Material.matchMaterial(MenuConfig.GLOBAL_EMPTY_SLOT);
+                ItemStack item = new ItemStack(empty_slot != null ? empty_slot : Material.GRAY_STAINED_GLASS_PANE);
                 ItemMeta meta = item.getItemMeta();
                 meta.setDisplayName(" ");
                 item.setItemMeta(meta);
@@ -341,6 +351,15 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 player.playSound(player, Sound.UI_BUTTON_CLICK, 0.5f, 0.5f);
                 return true;
             }
+
+            case "wiki": {
+                TextComponent text = new TextComponent(Locale.getMessage("documentation"));
+                        text.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://docs.p1mc.top/"));
+                player.spigot().sendMessage(text);
+                player.playSound(player, Sound.BLOCK_PISTON_EXTEND, 0.5f, 0.5f);
+                player.closeInventory();
+                return true;
+            }
         }
 
         if (name.startsWith("flag:")) {
@@ -395,4 +414,11 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
     public Inventory getInventory() {
         return inventory;
     }
+
+    @Override
+    public int getPage() {
+        return page;
+    }
+
+    public GUIType guiType() { return type; }
 }

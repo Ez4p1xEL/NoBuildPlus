@@ -192,4 +192,9 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
         return inventory;
     }
 
+    @Override
+    public int getPage() {
+        return page;
+    }
+
 }

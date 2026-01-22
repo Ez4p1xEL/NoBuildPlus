@@ -63,6 +63,7 @@ public class NoBuildPlus extends JavaPlugin {
         Logger.setEnabled(Config.getBool("debug"));
         GameRuleRegistry.init(getServer().getBukkitVersion());
         textEditMode = new TextEditMode();
+        MenuConfig.initialization();
 
         getLogger().info("[NBP] START LOADING ...");
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());

@@ -58,10 +58,22 @@ invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cはこのMinecraftバージ
 gamerule-notice: '&c&l&n注意事項&a あなたは /gamerule コマンドを実行したため、NoBuildPlus が提供する gamerule 管理メニューを開いています。 
 このコマンドで管理メニューを開きたくない場合は、NoBuildPlus の config で無効にすることができます。
 &6&oこの通知も NoBuildPlus の config.yml で無効にできます！'
+documentation: '&e&l&n&oここをクリックして PixelCraft 使用ドキュメントへ'
 
 gui:
   messages:
     not-enabled: '&c&oこのワールドは保護されていないため、モードを変更することはできません。'
+  buttons:
+    wiki:
+      display_name: '&6&oNoBuildPlus 使用ドキュメント'
+      lore:
+        - ''
+        - '&7&oPixelCraft 使用ドキュメントで'
+        - '&7&oさらに多くのプラグインガイドを閲覧'
+        - '&7&ohttps://docs.p1mc.top'
+        - ''
+        - '&7クリックして開く'
+
   main:
     title: 'NoBuildPlus ワールド管理'
     items:

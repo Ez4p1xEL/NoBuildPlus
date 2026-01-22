@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import p1xel.nobuildplus.storage.Locale;
+import p1xel.nobuildplus.storage.MenuConfig;
 import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.ArrayList;
@@ -54,9 +55,12 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
             inventory = setPreviousPage(inventory, "main", size);
         }
 
-        inventory = setItem(inventory, "close", Material.BARRIER, 9*(size+2)-5);
-        inventory = setItem(inventory, "add", Material.LIME_STAINED_GLASS_PANE, 4);
-        inventory = setItem(inventory, "edit-default", Material.BOOK, 3);
+        Material closeButton = Material.matchMaterial(MenuConfig.MAIN_CLOSE);
+        Material addButton = Material.matchMaterial(MenuConfig.MAIN_ADD_WORLD);
+        Material templateButton = Material.matchMaterial(MenuConfig.MAIN_DEFAULT_TEMPLATE_ENTRY);
+        inventory = setItem(inventory, "close", closeButton != null ? closeButton : Material.BARRIER, 9*(size+2)-5);
+        inventory = setItem(inventory, "add", addButton != null ? addButton : Material.LIME_STAINED_GLASS_PANE, 4);
+        inventory = setItem(inventory, "edit-default", templateButton != null ? templateButton : Material.BOOK, 3);
 
         this.inventory = inventory;
         update(worlds);
@@ -129,7 +133,8 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
 
         for (int i = 0; i < 9*(size+2); i++) {
             if (inventory.getItem(i) == null) {
-                ItemStack item = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+                Material empty_slot = Material.matchMaterial(MenuConfig.GLOBAL_EMPTY_SLOT);
+                ItemStack item = new ItemStack(empty_slot != null ? empty_slot : Material.BLACK_STAINED_GLASS_PANE);
                 ItemMeta meta = item.getItemMeta();
                 meta.setDisplayName(" ");
                 item.setItemMeta(meta);
@@ -206,5 +211,10 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
     @Override
     public Inventory getInventory() {
         return inventory;
+    }
+
+    @Override
+    public int getPage() {
+        return page;
     }
 }

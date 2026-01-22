@@ -24,7 +24,7 @@ public abstract class GUIAbstract {
 
     protected final NamespacedKey menu_id_key = new NamespacedKey("nobuildplus", "menu_id");
     protected Inventory setNextPage(Inventory inventory, String name, int rows) {
-        ItemStack item = new ItemStack(Material.PAPER);
+        ItemStack item = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(Locale.getMessage("gui." + name + ".items.next_page.display_name"));
         List<String> lore = Locale.yaml.getStringList("gui." + name + ".items.next_page.lore").stream()
@@ -33,12 +33,12 @@ public abstract class GUIAbstract {
         PersistentDataContainer container = meta.getPersistentDataContainer();
         container.set(menu_id_key, PersistentDataType.STRING, "next_page");
         item.setItemMeta(meta);
-        inventory.setItem(9 * (rows+2) - 1, item);
+        inventory.setItem(9 * (rows+2) - 4, item);
         return inventory;
     }
 
     protected Inventory setPreviousPage(Inventory inventory, String name, int rows) {
-        ItemStack item = new ItemStack(Material.PAPER);
+        ItemStack item = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(Locale.getMessage("gui."+ name +".items.previous_page.display_name"));
         List<String> lore = Locale.yaml.getStringList("gui."+ name +".items.previous_page.lore").stream()
@@ -47,7 +47,7 @@ public abstract class GUIAbstract {
         PersistentDataContainer container = meta.getPersistentDataContainer();
         container.set(menu_id_key, PersistentDataType.STRING, "previous_page");
         item.setItemMeta(meta);
-        inventory.setItem(9 * (rows+2) - 9, item);
+        inventory.setItem(9 * (rows+2) - 6, item);
         return inventory;
     }
 
@@ -61,7 +61,7 @@ public abstract class GUIAbstract {
         PersistentDataContainer container = meta.getPersistentDataContainer();
         container.set(menu_id_key, PersistentDataType.STRING, "back_to_main");
         item.setItemMeta(meta);
-        inventory.setItem(9 * (rows+2) - 5, item);
+        inventory.setItem(9 * (rows+2) - 9, item);
         return inventory;
     }
 

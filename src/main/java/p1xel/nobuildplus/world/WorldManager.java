@@ -7,8 +7,10 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 import p1xel.nobuildplus.Flag;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.gamerule.GameRuleRegistry;
 import p1xel.nobuildplus.storage.Config;
 import p1xel.nobuildplus.storage.Logger;
+import p1xel.nobuildplus.storage.Settings;
 import p1xel.nobuildplus.storage.Worlds;
 
 import java.util.ArrayList;
@@ -54,6 +56,11 @@ public class WorldManager {
         Worlds.createWorld(worldName);
         NBPWorld world = new NBPWorld(worldName);
         enabled_worlds.put(worldName, world);
+
+        for (String gameruleName : GameRuleRegistry.getRegisteredGameRules()) {
+            GameRuleRegistry.setWorldGameRule(worldName, gameruleName, Settings.getDefaultGameRule(gameruleName));
+        }
+
         Logger.debug("A new enabled world " + worldName + " has been uploaded to caches!");
     }
 
@@ -74,13 +81,12 @@ public class WorldManager {
     }
 
     public static void setGameRule(NBPWorld world, String ruleName, Object value) {
-        world.updateGameRule(ruleName, value);
-        Worlds.setGameRule(world.getWorldName(), ruleName, value);
+        String worldName = world.getWorldName();
+        setGameRule(worldName, ruleName, value);
     }
 
     public static void setGameRule(String worldName, String ruleName, Object value) {
-        NBPWorld world = (NBPWorld) enabled_worlds.get(worldName);
-        setGameRule(world, ruleName, value);
+        GameRuleRegistry.setWorldGameRule(worldName, ruleName, value);
     }
 
     public static void setPermission(NBPWorld world, String permission) {

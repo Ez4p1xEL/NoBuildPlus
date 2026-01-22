@@ -37,6 +37,7 @@ fallDamage: FEATHER
 fire_damage: FLINT_AND_STEEL
 fireDamage: FLINT_AND_STEEL
 fire_spread_radius_around_player: FIRE_CHARGE
+allowFireTicksAwayFromPlayer: FIRE_CHARGE
 forgive_dead_players: TOTEM_OF_UNDYING
 forgiveDeadPlayers: TOTEM_OF_UNDYING
 freeze_damage: POWDER_SNOW_BUCKET
@@ -50,6 +51,7 @@ lava_source_conversion: LAVA_BUCKET
 lavaSourceConversion: LAVA_BUCKET
 limited_crafting: CRAFTING_TABLE
 locator_bar: COMPASS
+locatorBar: COMPASS
 log_admin_commands: BOOK_AND_QUILL
 logAdminCommands: BOOK_AND_QUILL
 max_block_modifications: OBSIDIAN
@@ -69,6 +71,7 @@ mobGriefing: ENDERMAN_SPAWN_EGG
 natural_health_regeneration: GOLDEN_APPLE
 naturalRegeneration: GOLDEN_APPLE
 player_movement_check: LEATHER_BOOTS
+disablePlayerMovementCheck: LEATHER_BOOTS
 players_nether_portal_creative_delay: OBSIDIAN
 playersNetherPortalCreativeDelay: OBSIDIAN
 players_nether_portal_default_delay: OBSIDIAN
@@ -102,6 +105,7 @@ spectators_generate_chunks: GLASS
 spectatorsGenerateChunks: GLASS
 spread_vines: VINE
 tnt_explodes: TNT
+tntExplodes: TNT
 tnt_explosion_drop_decay: TNT_MINECART
 tntExplosionDropDecay: TNT_MINECART
 universal_anger: ZOMBIE_HEAD

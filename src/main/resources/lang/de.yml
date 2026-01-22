@@ -55,8 +55,13 @@ default-gamerule-set-success: '&7&l%prefix% &8&l> &aDu hast die Standardvorlage 
 gamerule-set-success: '&7&l%prefix% &8&l> &aDu hast die Spielregel &e%gamerule% &a der Welt &9%world% &aauf &e%value% gesetzt'
 invalid-amount: '&7&l%prefix% &8&l> &cUnbekannter Wert'
 invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cexistiert nicht auf diesem Minecraft-Server in dieser Version!'
+gamerule-notice: '&c&l&nHINWEIS&a Du öffnest das Gamerule-Verwaltungsmenü von NoBuildPlus, weil du den Befehl /gamerule ausgeführt hast. 
+Wenn du das Verwaltungsmenü nicht über diesen Befehl öffnen möchtest, kannst du dies in der Konfiguration von NoBuildPlus deaktivieren.
+&6&oDiese Benachrichtigung kann ebenfalls in der config.yml von NoBuildPlus deaktiviert werden!'
 
 gui:
+  messages:
+    not-enabled: '&c&oDiese Welt steht nicht unter Schutz, du kannst den Modus nicht ändern.'
   main:
     title: 'NoBuildPlus Weltverwaltung'
     items:
@@ -114,8 +119,8 @@ gui:
           - '&7Diese Welt ist nicht aktiviert'
           - '&7für den Schutz.'
           - ''
-          - '&7Klicken zum Aktivieren'
-          - ''
+          - '&7Linksklick zum Aktivieren'
+          - '&7Rechtsklick zum Verwalten der Gamerules'
       next_page:
         display_name: '&aNächste Seite'
         lore:

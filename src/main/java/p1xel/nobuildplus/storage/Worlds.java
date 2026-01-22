@@ -116,10 +116,6 @@ public class Worlds {
             yaml.set(world + ".flags." + flagname, Settings.getDefaultFlag(flagname));
         }
 
-        for (String gameruleName : GameRuleRegistry.getRegisteredGameRules()) {
-            yaml.set(world+ ".gamerules." + gameruleName, Settings.getDefaultGameRule(gameruleName));
-        }
-
         yaml.set(world + ".permission", Settings.getPermission());
         yaml.set(world + ".deny-message", Settings.getDenyMessageString());
         try {
@@ -140,22 +136,10 @@ public class Worlds {
 
     public static void setFlag(String world, String flag, boolean bool) {
         set(world + ".flags." + flag, bool);
-//        if (NoBuildPlus.getInstance().getBukkitVersion() >= 15) {
-//            GUIManager.instance.updateFlag(world, flag, bool);
-//        }
     }
 
     public static boolean getFlag(String world, String flag) {
         return yaml.getBoolean(world + ".flags." + flag, true);
-    }
-
-    public static void setGameRule(String world, String rule, Object value) {
-        set(world + ".gamerules." + rule, value);
-        GameRuleRegistry.setWorldGameRule(world, rule, value);
-    }
-
-    public static Object getGameRule(String world, String rule) {
-        return yaml.get(world+".gamerules." + rule);
     }
 
     @Deprecated

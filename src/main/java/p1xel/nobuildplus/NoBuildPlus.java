@@ -12,6 +12,7 @@ import p1xel.nobuildplus.hook.loader.FlagRegistrationLoader;
 import p1xel.nobuildplus.listener.*;
 import p1xel.nobuildplus.listener.gui.GUIListener;
 import p1xel.nobuildplus.listener.text.TextEditMode;
+import p1xel.nobuildplus.listener.version.*;
 import p1xel.nobuildplus.storage.*;
 import p1xel.nobuildplus.tool.bstats.Metrics;
 import p1xel.nobuildplus.tool.spigotmc.UpdateChecker;
@@ -19,7 +20,6 @@ import p1xel.nobuildplus.world.WorldManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 public class NoBuildPlus extends JavaPlugin {
@@ -49,7 +49,6 @@ public class NoBuildPlus extends JavaPlugin {
         FlagsManager.createFlagsManagerFile();
         Settings.createSettingsFile();
         Worlds.createWorldsFile();
-        GameRuleRegistry.init(getServer().getBukkitVersion());
         WorldManager.init();
         Settings.defaultList();
         FlagRegistry.refreshMap();
@@ -62,6 +61,7 @@ public class NoBuildPlus extends JavaPlugin {
 
         updateConfig();
         Logger.setEnabled(Config.getBool("debug"));
+        GameRuleRegistry.init(getServer().getBukkitVersion());
         textEditMode = new TextEditMode();
 
         getLogger().info("[NBP] START LOADING ...");
@@ -74,6 +74,7 @@ public class NoBuildPlus extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoBuildPlusPlayerListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusServerListener(), this);
         getServer().getPluginManager().registerEvents(new NoBuildPlusVehicleListener(), this);
+        getServer().getPluginManager().registerEvents(new NBPListener(), this);
         getServer().getPluginManager().registerEvents(textEditMode, this);
 
         String[] v = Bukkit.getServer().getBukkitVersion().split("-")[0].split("\\.");
@@ -112,9 +113,15 @@ public class NoBuildPlus extends JavaPlugin {
             getLogger().info("NBP Player Listener for 1.20+ is registered!");
         }
 
+        if (parent_version > 12 || (parent_version == 12 && child_version >= 2)) {
+            getServer().getPluginManager().registerEvents(new NBPPortalListener_1_12(), this);
+            getLogger().info("NBP Portal Listener for 1.12+ is registered!");
+        }
+
         if (parent_version > 15 || (parent_version == 15 && child_version >= 2)) {
             getServer().getPluginManager().registerEvents(new GUIListener(), this);
         }
+
         getLogger().info("[NBP] LISTENERS LOADED.");
 
         AreaProtectionLoader.load(this);
@@ -129,8 +136,6 @@ public class NoBuildPlus extends JavaPlugin {
         NBPAPI api = new NBPAPI();
         String message = "NoBuildPlusAPI is running at " + api.getVersion();
         getLogger().info("NBP API is loaded! " + message);
-
-        updateGameRules();
 
         // Text from https://tools.miku.ac/taag/ (Font: Slant)
         getLogger().info("    _   __      ____        _ __    ______  __          ");
@@ -147,7 +152,7 @@ public class NoBuildPlus extends JavaPlugin {
                 if (this.getDescription().getVersion().equals(version)) {
                     getLogger().info(Locale.getMessage("update-check.latest"));
                 } else {
-                    getLogger().info(Locale.getMessage("update-check.outdate").replace("%version%", version));
+                    getLogger().info(Locale.getMessage("update-check.outdate").replace("%new_version%", version));
                 }
             });
         }
@@ -217,49 +222,48 @@ public class NoBuildPlus extends JavaPlugin {
 
     }
 
-    void updateGameRules() {
-        List<String> gamerules = GameRuleRegistry.getRegisteredGameRules();
-        for (String world : WorldManager.getWorldsInName()) {
-
-            for (String gameruleName : gamerules) {
-
-                if (!Worlds.yaml.isSet(gameruleName)) {
-                    Worlds.set(world + ".gamerule." + gameruleName, Settings.getDefaultGameRule(gameruleName));
-                }
-
-            }
-
-        }
-    }
-
     void updateConfig() {
         int v = Config.getConfigurationVersion();
 
-        if (v < 8) {
-            getConfig().set("Configuration", 8);
-            getConfig().set("debug", false);
-            if (v < 7) {
+        switch (v) {
+            case 0: // v < 3 的情况
+            case 1:
+            case 2:
+                getConfig().set("hook.Dominion", true);
+                // fall through
+            case 3:
+                getConfig().set("deny-message-type", "MESSAGE");
+                getConfig().set("deny-message-sound.name", "ENTITY_VILLAGER_NO");
+                // fall through
+            case 4:
+                getConfig().set("text-edit-mode.cancel", "cancel");
+                // fall through
+            case 5:
+                getConfig().set("hook.ItemsAdder", true);
+                // fall through
+            case 6:
                 getConfig().set("hook.BlockRegen", true);
-                if (v < 6) {
-                    getConfig().set("hook.ItemsAdder", true);
-                    if (v < 5) {
-                        getConfig().set("text-edit-mode.cancel", "cancel");
-                        if (v < 4) {
-                            if (v < 3) {
-                                getConfig().set("hook.Dominion", true);
-                            }
-                            getConfig().set("deny-message-type", "MESSAGE");
-                            getConfig().set("deny-message-sound.name", "ENTITY_VILLAGER_NO");
-                        }
-                    }
-                }
-            }
+                // fall through
+            case 7:
+                getConfig().set("debug", false);
+                // fall through
+            case 8:
+                getConfig().set("open-menu-if-gamerule.enable", true);
+                getConfig().set("open-menu-if-gamerule.notification", true);
+                getConfig().set("open-menu-if-gamerule.disable-in-non-protected-world", false);
+                getConfig().set("Configuration", 9);
+                break;
+            default:
+                // latest version
+                break;
         }
+
         try {
             getConfig().save(new File(getDataFolder(), "config.yml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
 }

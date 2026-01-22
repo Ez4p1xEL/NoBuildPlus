@@ -1,5 +1,6 @@
 package p1xel.nobuildplus;
 
+import p1xel.nobuildplus.storage.Logger;
 import p1xel.nobuildplus.storage.Settings;
 import p1xel.nobuildplus.storage.Worlds;
 import p1xel.nobuildplus.world.ProtectedWorld;
@@ -46,6 +47,7 @@ public interface Flag {
      */
     default boolean isEnabled(String worldName) {
         ProtectedWorld world = WorldManager.getWorld(worldName);
+        Logger.debug("A flag " + getName() + " in world " + worldName + " has been detected!");
 
         return isEnabled(world);
     }

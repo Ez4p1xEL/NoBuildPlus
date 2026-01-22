@@ -55,8 +55,13 @@ default-gamerule-set-success: '&7&l%prefix% &8&l> &aデフォルトテンプレ�
 gamerule-set-success: '&7&l%prefix% &8&l> &aワールド &9%world% &aのゲームルール &e%gamerule% &aを &e%value% に設定しました'
 invalid-amount: '&7&l%prefix% &8&l> &c不明な数値'
 invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cはこのMinecraftバージョンのサーバーには存在しません!'
+gamerule-notice: '&c&l&n注意事項&a あなたは /gamerule コマンドを実行したため、NoBuildPlus が提供する gamerule 管理メニューを開いています。 
+このコマンドで管理メニューを開きたくない場合は、NoBuildPlus の config で無効にすることができます。
+&6&oこの通知も NoBuildPlus の config.yml で無効にできます！'
 
 gui:
+  messages:
+    not-enabled: '&c&oこのワールドは保護されていないため、モードを変更することはできません。'
   main:
     title: 'NoBuildPlus ワールド管理'
     items:
@@ -114,8 +119,8 @@ gui:
           - '&7このワールドはまだ'
           - '&7保護対象として有効ではありません。'
           - ''
-          - '&7クリックで有効化'
-          - ''
+          - '&7左クリックで有効化'
+          - '&7右クリックでゲームルールを管理'
       next_page:
         display_name: '&a次のページ'
         lore:

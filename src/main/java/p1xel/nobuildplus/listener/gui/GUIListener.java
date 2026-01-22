@@ -63,7 +63,7 @@ public class GUIListener implements Listener {
             PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
             if (container.has(menu_id_key, PersistentDataType.STRING)) {
                 GUIWorldList gui = (GUIWorldList) holder;
-                gui.check(p, container.get(menu_id_key, PersistentDataType.STRING));
+                gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getClick());
             }
             e.setCancelled(true);
             return;

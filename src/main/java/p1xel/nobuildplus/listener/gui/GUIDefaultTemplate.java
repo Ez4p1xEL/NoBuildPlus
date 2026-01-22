@@ -67,8 +67,8 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
 
         this.inventory = inventory;
 
-        setItem(Material.IRON_CHESTPLATE, "edit-permission", 48);
-        setItem(Material.FEATHER, "edit-deny-message", 50);
+        setItem(Material.COMMAND_BLOCK, "edit-permission", 2);
+        setItem(Material.FEATHER, "edit-deny-message", 6);
 
         update(list);
 
@@ -270,7 +270,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
             }
 
             case "edit-permission": {
-                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-permission", inventory);
+                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-permission", this);
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
                 player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
@@ -278,7 +278,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
             }
 
             case "edit-deny-message": {
-                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-deny-message", inventory);
+                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-deny-message", this);
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
                 player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
@@ -287,7 +287,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
 
             case "type": {
                 GUIType new_type = type == GUIType.FLAG ? GUIType.GAMERULE : GUIType.FLAG;
-                player.openInventory(new GUIDefaultTemplate(page, new_type).getInventory());
+                player.openInventory(new GUIDefaultTemplate(1, new_type).getInventory());
                 player.playSound(player, Sound.UI_BUTTON_CLICK, 0.5f, 0.5f);
                 return true;
             }
@@ -319,7 +319,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
                 return true;
             }
 
-            NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-gamerule:" + gameruleName, inventory);
+            NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-gamerule:" + gameruleName, this);
             player.closeInventory();
             player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
             player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);

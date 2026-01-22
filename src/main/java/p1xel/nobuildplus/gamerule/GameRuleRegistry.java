@@ -1,5 +1,7 @@
 package p1xel.nobuildplus.gamerule;
 
+import p1xel.nobuildplus.NoBuildPlus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,15 @@ public class GameRuleRegistry {
 //    }
 
     public static void setWorldGameRule(String worldName, String rule, Object value) {
+        if (NoBuildPlus.getFoliaLib().isFolia()) {
+            NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> registry.setWorldGameRule(worldName, rule, value));
+            return;
+        }
         registry.setWorldGameRule(worldName, rule, value);
+    }
+
+    public static String getWorldGameRule(String worldName, String rule) {
+        return registry.getWorldGameRule(worldName, rule);
     }
 
 

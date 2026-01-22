@@ -1,14 +1,16 @@
 package p1xel.nobuildplus.listener.text;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Nullable;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.gamerule.GameRuleRegistry;
+import p1xel.nobuildplus.listener.gui.GUIAbstract;
 import p1xel.nobuildplus.listener.gui.GUIDefaultTemplate;
 import p1xel.nobuildplus.listener.gui.GUIType;
 import p1xel.nobuildplus.listener.gui.GUIWorld;
@@ -20,7 +22,7 @@ import java.util.HashMap;
 public class TextEditMode implements Listener {
 
     private final HashMap<Player, String> status = new HashMap<>();
-    private final HashMap<Player, Inventory> last_viewed_inventories = new HashMap<>();
+    private final HashMap<Player, GUIAbstract> last_viewed_inventories = new HashMap<>();
     public String cancelWord = Config.getString("text-edit-mode.cancel");
 
     @Nullable
@@ -28,9 +30,9 @@ public class TextEditMode implements Listener {
         return status.get(player);
     }
 
-    public void setPlayerAction(Player player, String action, Inventory last_viewed_inventory) {
+    public void setPlayerAction(Player player, String action, GUIAbstract gui) {
         status.put(player, action);
-        last_viewed_inventories.put(player, last_viewed_inventory);
+        last_viewed_inventories.put(player, gui);
     }
 
     public void removePlayer(Player player) {
@@ -52,17 +54,13 @@ public class TextEditMode implements Listener {
         String text = event.getMessage();
         if (text.equalsIgnoreCase(mode.cancelWord)) {
             player.sendMessage(Locale.getMessage("quit-mode"));
-            Inventory last_viewed_inventory = last_viewed_inventories.get(player);
-            Logger.debug("Last_viewed_inventory: " + last_viewed_inventory);
-            if (last_viewed_inventory != null) {
+            GUIAbstract last_viewed_gui = last_viewed_inventories.get(player);
+            Logger.debug("Last_viewed_inventory: " + last_viewed_gui.getInventory());
+            if (last_viewed_gui.getInventory() != null) {
                 player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
                 removePlayer(player);
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        player.openInventory(last_viewed_inventory);
-                    }
-                }.runTaskLater(NoBuildPlus.getInstance(), 5L);
+
+                openInventory(player);
             }
             removePlayer(player);
             event.setCancelled(true);
@@ -79,12 +77,8 @@ public class TextEditMode implements Listener {
                 player.sendMessage(Locale.getMessage("quit-mode"));
                 player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
                 removePlayer(player);
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        player.openInventory(new GUIDefaultTemplate(1, GUIType.FLAG).getInventory());
-                    }
-                }.runTaskLater(NoBuildPlus.getInstance(), 5L);
+
+                openInventory(player);
 
                 break;
 
@@ -97,12 +91,8 @@ public class TextEditMode implements Listener {
                 player.sendMessage(Locale.getMessage("quit-mode"));
                 player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
                 removePlayer(player);
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        player.openInventory(new GUIDefaultTemplate(1, GUIType.FLAG).getInventory());
-                    }
-                }.runTaskLater(NoBuildPlus.getInstance(), 5L);
+
+                openInventory(player);
                 break;
 
             }
@@ -119,12 +109,8 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             removePlayer(player);
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    player.openInventory(new GUIWorld(worldName, 1, GUIType.FLAG).getInventory());
-                }
-            }.runTaskLater(NoBuildPlus.getInstance(), 5L);
+
+            openInventory(player);
             return;
 
         }
@@ -137,12 +123,7 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             removePlayer(player);
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    player.openInventory(new GUIWorld(worldName, 1, GUIType.FLAG).getInventory());
-                }
-            }.runTaskLater(NoBuildPlus.getInstance(), 5L);
+            openInventory(player);
             return;
 
         }
@@ -162,12 +143,7 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             removePlayer(player);
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    player.openInventory(new GUIDefaultTemplate(1, GUIType.GAMERULE).getInventory());
-                }
-            }.runTaskLater(NoBuildPlus.getInstance(), 5L);
+            openInventory(player);
             return;
 
         }
@@ -185,7 +161,12 @@ public class TextEditMode implements Listener {
                 return;
             }
             try {
-                WorldManager.setGameRule(worldName, gameruleName, number);
+
+                if (NoBuildPlus.getFoliaLib().isFolia()) {
+                    NoBuildPlus.getFoliaLib().getScheduler().runNextTick(wrappedTask -> GameRuleRegistry.setWorldGameRule(worldName, gameruleName, number));
+                } else {
+                    Bukkit.getScheduler().runTask(NoBuildPlus.getInstance(), task -> GameRuleRegistry.setWorldGameRule(worldName, gameruleName, number));
+                }
             } catch (IllegalArgumentException exception) {
                 player.sendMessage(Locale.getMessage("invalid-gamerule").replace("%gamerule%", gameruleName));
                 return;
@@ -194,16 +175,23 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             removePlayer(player);
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    player.openInventory(new GUIWorld(worldName, 1, GUIType.GAMERULE).getInventory());
-                }
-            }.runTaskLater(NoBuildPlus.getInstance(), 5L);
-            //return;
+
+            openInventory(player);
 
         }
 
+    }
+
+    public void openInventory(Player player) {
+
+        GUIAbstract gui = last_viewed_inventories.get(player);
+        gui.init();
+        if (NoBuildPlus.getFoliaLib().isFolia()) {
+            NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> player.openInventory(gui.getInventory()));
+            return;
+        }
+
+        Bukkit.getScheduler().runTask(NoBuildPlus.getInstance(), () -> player.openInventory(gui.getInventory()));
     }
 
 

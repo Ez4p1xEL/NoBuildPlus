@@ -27,18 +27,22 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
     private String worldName;
     private int page;
     private final GUIType type;
-    private final NBPWorld world;
+    private NBPWorld world;
+    private boolean VIEW_FOR_GAMERULE_ONLY = false;
 
     public GUIWorld(String worldName, int page, GUIType type) {
         this.worldName = worldName;
         this.page = page;
         this.type = type;
-        this.world = (NBPWorld) WorldManager.getWorld(worldName);
         init();
     }
 
     @Override
     public void init() {
+        this.world = (NBPWorld) WorldManager.getWorld(worldName);
+        if (world == null && type == GUIType.GAMERULE) {
+            VIEW_FOR_GAMERULE_ONLY = true;
+        }
 
         boolean hasPreviousPage = page > 1;
         boolean hasNextPage;
@@ -67,11 +71,22 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
 
         inventory = setBackTo(inventory, "world", 4);
         inventory = setTypeButton(inventory, "world", type);
+        if (VIEW_FOR_GAMERULE_ONLY) {
+            ItemStack type = inventory.getItem(4);
+            ItemMeta typeMeta = type.getItemMeta();
+            List<String> lore = typeMeta.getLore();
+            lore.add(Locale.getMessage("gui.messages.not-enabled"));
+            typeMeta.setLore(lore);
+            type.setItemMeta(typeMeta);
+        }
 
         this.inventory = inventory;
 
-        setItem(Material.IRON_CHESTPLATE, "edit-permission", 48);
-        setItem(Material.FEATHER, "edit-deny-message", 50);
+        if (!VIEW_FOR_GAMERULE_ONLY) {
+
+            setItem(Material.COMMAND_BLOCK, "edit-permission", 2);
+            setItem(Material.FEATHER, "edit-deny-message", 6);
+        }
 
         update(list);
 
@@ -170,17 +185,31 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 if (material == null) {
                     material = Material.PAPER;
                 }
-                Object value = world.getGameRule(element);
+                String value = GameRuleRegistry.getWorldGameRule(worldName, element);
+                Logger.debug("GameRule " + element + " value: " + value);
+                Logger.debug("GameRule " + element + " class type: " + value.getClass().getName());
                 ItemStack item = new ItemStack(material);
                 ItemMeta meta = item.getItemMeta();
-                String gameruleBoolean = value instanceof Boolean ? Locale.getMessage("gamerule_"+(boolean) value) : "";
-                String gameruleInteger = value instanceof Integer ? Locale.getMessage("value").replace("%value%", String.valueOf((int) value)) : "";
+                String gameruleBoolean;
+                String gameruleInteger = "";
+                if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
+                    gameruleBoolean = Locale.getMessage("gamerule_" + value.toLowerCase());
+                } else {
+                    gameruleBoolean = "";
+                    try {
+                        int number = Integer.parseInt(value);
+                        gameruleInteger = Locale.getMessage("value").replace("%value%", String.valueOf(number));
+                    } catch (NumberFormatException exception) {
+                        gameruleInteger = value;
+                    }
+                }
                 meta.setDisplayName(Locale.getMessage("gui.world.items.gamerule.display_name").replaceAll("%gamerule%", element).replace("%bool%", gameruleBoolean).replace("%int%", gameruleInteger));
+                String finalGameruleInteger = gameruleInteger;
                 List<String> lore_list = Locale.yaml.getStringList("gui.world.items.gamerule.lore").stream()
                         .map(line -> ChatColor.translateAlternateColorCodes('&', line))
                         .map(line -> line.replace("%gamerule%", element)
                                 .replace("%bool%", gameruleBoolean)
-                                .replace("%int%", gameruleInteger)
+                                .replace("%int%", finalGameruleInteger)
                                 .replace("%description%", Locale.getMessage("gamerule.description." + element)))
                         .collect(Collectors.toList());
                 meta.setLore(lore_list);
@@ -232,15 +261,27 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
         String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
-        Object value = world.getGameRule(gameruleName);
-        String gameruleBoolean = value instanceof Boolean ? Locale.getMessage("gamerule_"+(boolean) value) : "";
-        String gameruleInteger = value instanceof Integer ? Locale.getMessage("value").replace("%value%", String.valueOf((int) value)) : "";
+        String value = GameRuleRegistry.getWorldGameRule(worldName, gameruleName);
+        String gameruleBoolean;
+        String gameruleInteger = "";
+        if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
+            gameruleBoolean = Locale.getMessage("gamerule_" + value.toLowerCase());
+        } else {
+            gameruleBoolean = "";
+            try {
+                int number = Integer.parseInt(value);
+                gameruleInteger = Locale.getMessage("value").replace("%value%", String.valueOf(number));
+            } catch (NumberFormatException exception) {
+                gameruleInteger = value;
+            }
+        }
         meta.setDisplayName(Locale.getMessage("gui.world.items.gamerule.display_name").replaceAll("%gamerule%", gameruleName).replace("%bool%", gameruleBoolean).replace("%int%", gameruleInteger));
+        String finalGameruleInteger = gameruleInteger;
         List<String> lore_list = Locale.yaml.getStringList("gui.world.items.gamerule.lore").stream()
                 .map(line -> ChatColor.translateAlternateColorCodes('&', line))
                 .map(line -> line.replace("%gamerule%", gameruleName)
                         .replace("%bool%", gameruleBoolean)
-                        .replace("%int%", gameruleInteger)
+                        .replace("%int%", finalGameruleInteger)
                         .replace("%description%", Locale.getMessage("gamerule.description." + gameruleName)))
                 .collect(Collectors.toList());
         meta.setLore(lore_list);
@@ -256,7 +297,11 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
     public boolean check(Player player, String name, int slot) {
         switch (name) {
             case "back_to_main": {
-                player.openInventory(new GUIMain(1).getInventory());
+                if (VIEW_FOR_GAMERULE_ONLY) {
+                    player.openInventory(new GUIWorldList(1).getInventory());
+                } else {
+                    player.openInventory(new GUIMain(1).getInventory());
+                }
                 player.playSound(player, Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
                 return true;
             }
@@ -272,7 +317,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
             }
 
             case "edit-permission": {
-                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-permission:" + worldName, inventory);
+                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-permission:" + worldName, this);
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
                 player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
@@ -280,7 +325,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
             }
 
             case "edit-deny-message": {
-                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-deny-message:" + worldName, inventory);
+                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-deny-message:" + worldName, this);
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
                 player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
@@ -288,8 +333,11 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
             }
 
             case "type": {
+                if (VIEW_FOR_GAMERULE_ONLY) {
+                    return true;
+                }
                 GUIType new_type = type == GUIType.FLAG ? GUIType.GAMERULE : GUIType.FLAG;
-                player.openInventory(new GUIWorld(worldName, page, new_type).getInventory());
+                player.openInventory(new GUIWorld(worldName, 1, new_type).getInventory());
                 player.playSound(player, Sound.UI_BUTTON_CLICK, 0.5f, 0.5f);
                 return true;
             }
@@ -310,21 +358,27 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
 
         if (name.startsWith("gamerule:")) {
             String gameruleName = name.split(":")[1];
-            Object value = world.getGameRule(gameruleName);
-            if (value instanceof Boolean) {
-                boolean bool = (boolean) value;
-                WorldManager.setGameRule(world, gameruleName, !bool);
-                updateSlot(slot);
-                player.sendMessage(Locale.getMessage("gamerule-set-success").replace("%world%", worldName).replace("%gamerule%", gameruleName).replace("%value%", String.valueOf(!bool)));
-                player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
-                Logger.debug("Setting world "+worldName+" gamerule: " + gameruleName);
-                return true;
-            }
+            String value = GameRuleRegistry.getWorldGameRule(worldName, gameruleName);
 
-            NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-gamerule:" + gameruleName + ":" + worldName, inventory);
-            player.closeInventory();
-            player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
-            player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
+            try {
+                int number = Integer.parseInt(value);
+                NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-gamerule:" + gameruleName + ":" + worldName, this);
+                player.closeInventory();
+                player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
+                player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
+                return true;
+            } catch (NumberFormatException ignored) {}
+
+            boolean bool = Boolean.parseBoolean(value);
+            GameRuleRegistry.setWorldGameRule(worldName, gameruleName, !bool);
+            if (NoBuildPlus.getFoliaLib().isFolia()) {
+                NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> updateSlot(slot));
+            } else {
+                updateSlot(slot);
+            }
+            player.sendMessage(Locale.getMessage("gamerule-set-success").replace("%world%", worldName).replace("%gamerule%", gameruleName).replace("%value%", String.valueOf(!bool)));
+            player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
+            Logger.debug("Setting world "+worldName+" gamerule: " + gameruleName);
             return true;
 
         }

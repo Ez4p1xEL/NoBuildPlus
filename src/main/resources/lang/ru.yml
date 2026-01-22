@@ -55,8 +55,13 @@ default-gamerule-set-success: '&7&l%prefix% &8&l> &aВы установили и
 gamerule-set-success: '&7&l%prefix% &8&l> &aВы установили игровое правило &e%gamerule% &aдля мира &9%world% &aна &e%value%'
 invalid-amount: '&7&l%prefix% &8&l> &cНеизвестное значение'
 invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cне существует на сервере этой версии Minecraft!'
+gamerule-notice: '&c&l&nВАЖНОЕ УВЕДОМЛЕНИЕ&a Вы открываете меню управления gamerule, предоставленное NoBuildPlus, потому что выполнили команду /gamerule. 
+Если вы не хотите открывать меню управления через эту команду, вы можете отключить это в конфигурации NoBuildPlus.
+&6&oЭто уведомление также можно отключить в config.yml NoBuildPlus!'
 
 gui:
+  messages:
+    not-enabled: '&c&oЭтот мир не находится под защитой, вы не можете изменить режим.'
   main:
     title: 'Управление мирами NoBuildPlus'
     items:
@@ -114,8 +119,8 @@ gui:
           - '&7Этот мир не включён'
           - '&7для защиты.'
           - ''
-          - '&7Нажмите, чтобы включить'
-          - ''
+          - '&7Левый клик — включить'
+          - '&7Правый клик — управлять правилами игры'
       next_page:
         display_name: '&aСледующая страница'
         lore:

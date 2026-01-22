@@ -130,11 +130,7 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
     }
 
     @Override
-    public boolean check(Player player, String name, ClickType type) { return false; }
-
-    @Override
-    public boolean check(Player player, String name) {
-
+    public boolean check(Player player, String name, ClickType type) {
         switch (name) {
             case "back_to_main": {
                 player.openInventory(new GUIMain(1).getInventory());
@@ -155,9 +151,16 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
 
         if (name.startsWith("world:")) {
             String world = name.split(":")[1];
+
             if (Bukkit.getWorld(world) == null) {
                 player.sendMessage(Locale.getMessage("cant-find-world"));
                 player.openInventory(new GUIWorldList(1).getInventory());
+                return true;
+            }
+
+            if (type == ClickType.RIGHT) {
+                player.openInventory(new GUIWorld(world, 1, GUIType.GAMERULE).getInventory());
+                player.playSound(player, Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
                 return true;
             }
             if (WorldManager.getWorld(world) == null) {
@@ -174,8 +177,14 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
             }
 
         }
-
         return true;
+
+    }
+
+    @Override
+    public boolean check(Player player, String name) {
+
+        return false;
     }
 
     @Override

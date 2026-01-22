@@ -30,7 +30,7 @@ type: Release
 
 # The version of configuration.
 # DO NOT CHANGE THIS!!
-Configuration: 8
+Configuration: 9
 
 debug: false
 
@@ -64,4 +64,16 @@ deny-message-sound:
 text-edit-mode:
   # the keyword to leave text editing mode
   cancel: 'cancel'
+
+# If you execute /gamerule command without arguments, NoBuildPlus will directly open the menu of world for you.
+# This function is added because I hope you to use the gamerule management provided by the plugin instead of the vanilla commands.
+# This behavior is kinda bad, so I apologize for that.
+# That's why I made this notification to tell you this function can be TOTALLY DISABLED.
+open-menu-if-gamerule:
+  # You can disable it by setting to false
+  enable: true
+  # This is a notice message displayed to tell you this function can be disabled!
+  notification: true
+  # If you don't want to open the menu in non plugin protecting worlds, set this to true to disable it.
+  disable-in-non-protected-world: false
 

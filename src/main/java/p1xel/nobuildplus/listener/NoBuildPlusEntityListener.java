@@ -683,14 +683,6 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity entity = e.getEntity();
 
-        if (!(entity instanceof Player)) {
-            return;
-        }
-
-        if (HookedPlugins.cancel(entity)) {
-            return;
-        }
-
         String worldName = entity.getWorld().getName();
         ProtectedWorld world = WorldManager.getWorld(worldName);
 
@@ -704,18 +696,20 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
+        if (e.getReason() != PortalCreateEvent.CreateReason.FIRE || e.getReason() != PortalCreateEvent.CreateReason.NETHER_PAIR) {
+            return;
+        }
+
         List<BlockState> blocks = e.getBlocks();
 
         for (BlockState block : blocks) {
-
-            if (block.getType() == Material.OBSIDIAN) {
-
-                WorldManager.sendMessage(p, world);
-                e.setCancelled(true);
+            if (HookedPlugins.cancel(block.getBlock())) {
                 return;
             }
-            return;
         }
+
+        WorldManager.sendMessage(p, world);
+        e.setCancelled(true);
 
     }
 

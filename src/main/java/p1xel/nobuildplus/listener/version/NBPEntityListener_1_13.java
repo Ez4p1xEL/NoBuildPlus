@@ -1,4 +1,4 @@
-package p1xel.nobuildplus.listener;
+package p1xel.nobuildplus.listener.version;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -13,7 +13,6 @@ import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.storage.FlagsManager;
-import p1xel.nobuildplus.storage.Worlds;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
 

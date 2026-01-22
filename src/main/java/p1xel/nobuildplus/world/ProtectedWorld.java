@@ -18,6 +18,6 @@ public interface ProtectedWorld {
     boolean getFlag(Flag flag);
 
     // gamerule
-    Object getGameRule(String ruleName);
+    //Object getGameRule(String ruleName);
 
 }

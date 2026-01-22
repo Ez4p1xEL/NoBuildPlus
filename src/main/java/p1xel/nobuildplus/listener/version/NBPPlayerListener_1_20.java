@@ -1,4 +1,4 @@
-package p1xel.nobuildplus.listener;
+package p1xel.nobuildplus.listener.version;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;

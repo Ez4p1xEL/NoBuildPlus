@@ -22,7 +22,7 @@ commands:
 update-check:
   invalid: '無法檢查更新: '
   latest: '暫時沒有任何更新，你的版本為最新版!'
-  outdate: '發現新版本 %version%，請前往MineBBS或SpigotMC下載!'
+  outdate: '發現新版本 %new_version%，請前往MineBBS或SpigotMC下載!'
 list-1: '&7&l%prefix% &8&l>> &7啟用本插件的世界:'
 list-2: '&9%list%'
 no-perm: '&7&l%prefix% &8&l>> &c你沒有權限這麼做!'
@@ -56,8 +56,13 @@ default-gamerule-set-success: '&7&l%prefix% &8&l> &a你更改了預設模板的�
 gamerule-set-success: '&7&l%prefix% &8&l> &a你更改了世界 &9%world% &a的游戲槼則 &e%gamerule% &a為 &e%value%'
 invalid-amount: '&7&l%prefix% &8&l> &c未知數值'
 invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &c並不存在於你所在的服務器對應的Minecraft版本!'
+gamerule-notice: '&c&l&n溫馨提示&a 你因為輸入了 /gamerule 指令而開啟了這個由 NoBuildPlus 提供的原版遊戲規則管理選單, 
+如果你不想透過該指令來開啟管理選單, 你完全、自由地或不受限制地可以在 NoBuildPlus 的 config 檔案中關閉, 
+&6&o這條提示訊息也同樣可在 config 中關閉'
 
 gui:
+  messages:
+    not-enabled: '&c&o該世界不被保護, 你無法更改模式!'
   main:
     title: 'NoBuildPlus 世界管理'
     items:
@@ -113,8 +118,8 @@ gui:
           - '&7該世界尚未啟用'
           - '&7世界保護'
           - ''
-          - '&7點擊啟用'
-          - ''
+          - '&7左鍵點擊啟用'
+          - '&7右鍵點擊管理游戲規則'
       next_page:
         display_name: '&a下一頁'
         lore:

@@ -22,7 +22,7 @@ commands:
 update-check:
   invalid: 'Unable to check for updates: '
   latest: 'No update available.'
-  outdate: 'A new version %version% is available, please download at Modrinth or SpigotMC'
+  outdate: 'A new version %new_version% is available, please download at Modrinth or SpigotMC'
 list-1: '&7&l%prefix% &8&l>> &7Enable worlds:'
 list-2: '&9%list%'
 no-perm: '&7&l%prefix% &8&l>> &cYou do not have permission to do that!'
@@ -55,8 +55,13 @@ default-gamerule-set-success: '&7&l%prefix% &8&l> &aYou set gamerule &e%gamerule
 gamerule-set-success: '&7&l%prefix% &8&l> &aYou set &9%world%&a''s gamerule &e%gamerule% &ato &e%value%&a.'
 invalid-amount: '&7&l%prefix% &8&l> &cInvalid amount.'
 invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cdoes not exist in this minecraft version!'
+gamerule-notice: '&c&l&nJUST TO NOTICE THAT&a you are opening the gamerule management provided by NoBuildPlus because you executed the command /gamerule. 
+If you don''t want to open the management menu through this command, you are feeling free to disable this in config of NoBuildPlus.
+&6&oThis notification can also be disabled in config.yml of NoBuildPlus!'
 
 gui:
+  messages:
+    not-enabled: '&c&oThis world is not under protection, you can''t change the mode.'
   main:
     title: 'NoBuildPlus World Management'
     items:
@@ -114,8 +119,8 @@ gui:
           - '&7This world is not enabled'
           - '&7for the protection.'
           - ''
-          - '&7Click to enable'
-          - ''
+          - '&7Left click to enable'
+          - '&7Right click to manage gamerules'
       next_page:
         display_name: '&aNext page'
         lore:
@@ -406,6 +411,7 @@ gamerule:
     spectators_generate_chunks: Spectators generate chunks when moving.
     spectatorsGenerateChunks: Spectators generate chunks when moving.
     locator_bar: Shows locator bar for compass tracking.
+    locatorBar: Shows locator bar for compass tracking.
     global_sound_events: Enables global sound events.
     globalSoundEvents: Enables global sound events.
     allow_entering_nether_using_portals: Allows entering Nether via portals.
@@ -434,6 +440,7 @@ gamerule:
     fire_damage: Enables fire damage.
     fireDamage: Enables fire damage.
     tnt_explodes: Enables TNT explosions.
+    tntExplodes: Enables TNT explosions.
     players_sleeping_percentage: Sets the players percentage to sleep
     playersSleepingPercentage: Sets the players percentage to sleep
     projectiles_can_break_blocks: Determines if projectiles can break blocks.

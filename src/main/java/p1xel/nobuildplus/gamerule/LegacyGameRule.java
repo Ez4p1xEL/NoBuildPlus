@@ -2,11 +2,12 @@ package p1xel.nobuildplus.gamerule;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.jetbrains.annotations.Nullable;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.storage.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.logging.Level;
 
 public class LegacyGameRule implements InterfaceGameRuleRegistry {
 
@@ -28,9 +29,16 @@ public class LegacyGameRule implements InterfaceGameRuleRegistry {
         try {
             // find the method directly
             Object values = gameRuleClass.getMethod("values").invoke(null);
+            World world = Bukkit.getWorlds().getFirst();
+
             for (Object gamerule : (Object[]) values) {
                 String key = (String) gamerule.getClass().getMethod("getName").invoke(gamerule);
-                list.add(key.replace("minecraft:", ""));
+                key = key.replace("minecraft:", "");
+                if (world.isGameRule(key)) {
+                    list.add(key);
+                } else {
+                    Logger.log(Level.INFO, "A gamerule that might be experimental '" + key + "' has been ignored!");
+                }
             }
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -48,8 +56,22 @@ public class LegacyGameRule implements InterfaceGameRuleRegistry {
             world.getClass().getMethod("setGameRuleValue", String.class, String.class).invoke(world, rule, String.valueOf(value));
         } catch (Exception exception) {
             exception.printStackTrace();
-            NoBuildPlus.getInstance().getLogger().warning("Error of LegacyGameRule when getGameRules");
+            NoBuildPlus.getInstance().getLogger().warning("Error of LegacyGameRule when setGameRuleValue");
         }
 
+    }
+
+    @Override
+    @Nullable
+    public String getWorldGameRule(String worldName, String rule) {
+        World world = Bukkit.getWorld(worldName);
+        String value = null;
+        try {
+            value = (String) world.getClass().getMethod("getGameRuleValue", String.class).invoke(world, rule);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            NoBuildPlus.getInstance().getLogger().warning("Error of LegacyGameRule when getGameRuleValue");
+        }
+        return value;
     }
 }

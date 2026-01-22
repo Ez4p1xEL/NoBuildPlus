@@ -1,10 +1,12 @@
 package p1xel.nobuildplus.gamerule;
 
 import org.bukkit.*;
+import org.jetbrains.annotations.Nullable;
 import p1xel.nobuildplus.storage.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class ModernGameRule implements InterfaceGameRuleRegistry {
 
@@ -13,8 +15,15 @@ public class ModernGameRule implements InterfaceGameRuleRegistry {
     public List<String> getGameRules() {
         List<String> list = new ArrayList<>();
 
+        World world = Bukkit.getWorlds().getFirst();
+
         for (GameRule<?> rule : Registry.GAME_RULE) {
-            list.add(rule.getKeyOrNull().getKey());
+            try {
+                Object value = world.getGameRuleValue(rule);
+                list.add(rule.getKeyOrNull().getKey());
+            } catch (Exception exception) {
+                Logger.log(Level.INFO, "A gamerule that might be experimental '" + rule.getKeyOrNull().getKey() + "' has been ignored!");
+            }
         }
 
         Logger.debug("GameRule list: " + list);
@@ -34,5 +43,13 @@ public class ModernGameRule implements InterfaceGameRuleRegistry {
         if (gamerule.getType() == Integer.class && value instanceof Integer) {
             world.setGameRule((GameRule<Integer>) gamerule, (int) value);
         }
+    }
+
+    @Override
+    @Nullable
+    public String getWorldGameRule(String worldName, String rule) {
+        World world = Bukkit.getWorld(worldName);
+        GameRule<?> gamerule = Registry.GAME_RULE.get(NamespacedKey.fromString(rule));
+        return String.valueOf(world.getGameRuleValue(gamerule));
     }
 }

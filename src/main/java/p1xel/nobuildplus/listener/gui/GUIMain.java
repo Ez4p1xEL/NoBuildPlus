@@ -10,8 +10,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import p1xel.nobuildplus.storage.Locale;
-import p1xel.nobuildplus.storage.Settings;
-import p1xel.nobuildplus.storage.Worlds;
 import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.ArrayList;

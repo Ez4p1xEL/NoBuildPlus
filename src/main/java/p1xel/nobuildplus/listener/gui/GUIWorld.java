@@ -87,8 +87,6 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
 
         inventory.setItem(0, getWikiButton());
 
-        this.inventory = inventory;
-
         if (!VIEW_FOR_GAMERULE_ONLY) {
 
             Material edit_permission = Material.matchMaterial(MenuConfig.WORLD_SETTING_EDIT_PERMISSION);
@@ -190,10 +188,10 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                     slot += 2;
                 }
 
-                Material material = Material.matchMaterial(RuleSetting.getMaterialString(element));
-                if (material == null) {
-                    material = Material.PAPER;
-                }
+                String materialString = RuleSetting.getMaterialString(element);
+                if (materialString == null) { materialString = "PAPER"; }
+                Material material = Material.matchMaterial(materialString);
+
                 String value = GameRuleRegistry.getWorldGameRule(worldName, element);
                 Logger.debug("GameRule " + element + " value: " + value);
                 Logger.debug("GameRule " + element + " class type: " + value.getClass().getName());
@@ -212,6 +210,8 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                         gameruleInteger = value;
                     }
                 }
+
+                String description = Locale.yaml.isSet("gamerule.description." + element) ? Locale.getMessage("gamerule.description." + element) : "";
                 meta.setDisplayName(Locale.getMessage("gui.world.items.gamerule.display_name").replaceAll("%gamerule%", element).replace("%bool%", gameruleBoolean).replace("%int%", gameruleInteger));
                 String finalGameruleInteger = gameruleInteger;
                 List<String> lore_list = Locale.yaml.getStringList("gui.world.items.gamerule.lore").stream()
@@ -219,7 +219,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                         .map(line -> line.replace("%gamerule%", element)
                                 .replace("%bool%", gameruleBoolean)
                                 .replace("%int%", finalGameruleInteger)
-                                .replace("%description%", Locale.getMessage("gamerule.description." + element)))
+                                .replace("%description%", description))
                         .collect(Collectors.toList());
                 meta.setLore(lore_list);
                 PersistentDataContainer container = meta.getPersistentDataContainer();
@@ -285,6 +285,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 gameruleInteger = value;
             }
         }
+        String description = Locale.yaml.isSet("gamerule.description." + gameruleName) ? Locale.getMessage("gamerule.description." + gameruleName) : "";
         meta.setDisplayName(Locale.getMessage("gui.world.items.gamerule.display_name").replaceAll("%gamerule%", gameruleName).replace("%bool%", gameruleBoolean).replace("%int%", gameruleInteger));
         String finalGameruleInteger = gameruleInteger;
         List<String> lore_list = Locale.yaml.getStringList("gui.world.items.gamerule.lore").stream()
@@ -292,7 +293,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 .map(line -> line.replace("%gamerule%", gameruleName)
                         .replace("%bool%", gameruleBoolean)
                         .replace("%int%", finalGameruleInteger)
-                        .replace("%description%", Locale.getMessage("gamerule.description." + gameruleName)))
+                        .replace("%description%", description))
                 .collect(Collectors.toList());
         meta.setLore(lore_list);
         item.setItemMeta(meta);

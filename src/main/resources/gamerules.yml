@@ -113,3 +113,6 @@ universalAnger: ZOMBIE_HEAD
 water_source_conversion: WATER_BUCKET
 waterSourceConversion: WATER_BUCKET
 spawnChunkRadius: COMPASS
+
+# For other server cores:
+keepAccessoryInventory: CHEST_MINECART

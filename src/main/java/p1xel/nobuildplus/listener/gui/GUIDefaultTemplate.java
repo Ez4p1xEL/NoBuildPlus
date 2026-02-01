@@ -262,17 +262,17 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
         switch (name) {
             case "back_to_main": {
                 player.openInventory(new GUIMain(1).getInventory());
-                player.playSound(player, Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
                 return true;
             }
             case "previous_page": {
                 player.openInventory(new GUIDefaultTemplate(Math.max(1, page-1), type).getInventory());
-                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
             case "next_page": {
                 player.openInventory(new GUIDefaultTemplate(page+1, type).getInventory());
-                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
 
@@ -280,7 +280,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
                 NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-permission", this);
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
-                player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
                 return true;
             }
 
@@ -288,14 +288,14 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
                 NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-deny-message", this);
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
-                player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
                 return true;
             }
 
             case "type": {
                 GUIType new_type = type == GUIType.FLAG ? GUIType.GAMERULE : GUIType.FLAG;
                 player.openInventory(new GUIDefaultTemplate(1, new_type).getInventory());
-                player.playSound(player, Sound.UI_BUTTON_CLICK, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 0.5f, 0.5f);
                 return true;
             }
 
@@ -303,7 +303,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
                 TextComponent text = new TextComponent(Locale.getMessage("documentation"));
                 text.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://docs.p1mc.top/"));
                 player.spigot().sendMessage(text);
-                player.playSound(player, Sound.BLOCK_PISTON_EXTEND, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, 0.5f, 0.5f);
                 player.closeInventory();
                 return true;
             }
@@ -316,7 +316,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
             Settings.setDefaultFlag(flag, !bool);
             updateSlot(slot);
             player.sendMessage(Locale.getMessage("default-flag-set-success").replaceAll("%flag%", flag).replaceAll("%boolean%", String.valueOf(!bool)));
-            player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
+            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
             return true;
 
         }
@@ -329,7 +329,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
                 Settings.setDefaultGameRule(gameruleName, !bool);
                 updateSlot(slot);
                 player.sendMessage(Locale.getMessage("default-gamerule-set-success").replaceAll("%gamerule%", gameruleName).replaceAll("%value%", String.valueOf(!bool)));
-                player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
                 Logger.debug("Setting default template gamerule: " + gameruleName);
                 //GameRuleRegistry.setWorldGameRule("world", gameruleName, !bool); // for test
                 return true;
@@ -338,7 +338,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
             NoBuildPlus.getTextEditMode().setPlayerAction(player, "edit-default-gamerule:" + gameruleName, this);
             player.closeInventory();
             player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
-            player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.5f, 0.5f);
             return true;
 
         }

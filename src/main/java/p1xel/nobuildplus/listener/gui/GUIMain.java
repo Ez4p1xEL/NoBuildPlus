@@ -152,27 +152,27 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
         switch (name) {
             case "close": {
                 player.closeInventory();
-                player.playSound(player, Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
                 return true;
             }
             case "previous_page": {
                 player.openInventory(new GUIMain(Math.min(1, page-1)).getInventory());
-                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
             case "next_page": {
                 player.openInventory(new GUIMain(page+1).getInventory());
-                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
             case "add": {
                 player.openInventory(new GUIWorldList(1).getInventory());
-                player.playSound(player, Sound.BLOCK_SLIME_BLOCK_PLACE, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_SLIME_BLOCK_PLACE, 0.5f, 0.5f);
                 return true;
             }
             case "edit-default": {
                 player.openInventory(new GUIDefaultTemplate(1, GUIType.FLAG).getInventory());
-                player.playSound(player, Sound.ENTITY_ARMOR_STAND_BREAK, 0.45f, 0.45f);
+                player.playSound(player.getLocation(), Sound.ENTITY_ARMOR_STAND_BREAK, 0.45f, 0.45f);
                 return true;
             }
         }
@@ -183,7 +183,7 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
                 if (WorldManager.getWorld(world) == null) {
                     player.sendMessage(Locale.getMessage("cant-find-world"));
                     player.openInventory(new GUIMain(1).getInventory());
-                    player.playSound(player, Sound.ENTITY_VILLAGER_NO, 0.5f, 0.5f);
+                    player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 0.5f, 0.5f);
                     return true;
                 }
                 player.openInventory(new GUIWorld(world, 1, GUIType.FLAG).getInventory());
@@ -192,13 +192,13 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
                 if (WorldManager.getWorld(world) == null) {
                     player.sendMessage(Locale.getMessage("cant-find-world"));
                     player.openInventory(new GUIMain(1).getInventory());
-                    player.playSound(player, Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
                     return true;
                 }
                 //Worlds.removeWorld(world);
                 WorldManager.removeWorld(world);
                 player.sendMessage(Locale.getMessage("remove-success").replaceAll("%world%",world));
-                player.playSound(player, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 0.5f);
                 player.openInventory(new GUIMain(1).getInventory());
             }
             return true;

@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.6.22</version>
+    <version>1.6.24</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

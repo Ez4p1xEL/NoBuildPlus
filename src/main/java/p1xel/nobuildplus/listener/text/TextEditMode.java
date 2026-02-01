@@ -57,7 +57,7 @@ public class TextEditMode implements Listener {
             GUIAbstract last_viewed_gui = last_viewed_inventories.get(player);
             Logger.debug("Last_viewed_inventory: " + last_viewed_gui.getInventory());
             if (last_viewed_gui.getInventory() != null) {
-                player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
+                player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
                 openInventory(player);
             }
             //removePlayer(player);
@@ -73,7 +73,7 @@ public class TextEditMode implements Listener {
                 Settings.setPermission(text);
                 player.sendMessage(Locale.getMessage("edit-default-permission").replaceAll("%permission%", text));
                 player.sendMessage(Locale.getMessage("quit-mode"));
-                player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
+                player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
                 openInventory(player);
 
                 break;
@@ -85,7 +85,7 @@ public class TextEditMode implements Listener {
                 Settings.setDenyMessageString(text);
                 player.sendMessage(Locale.getMessage("edit-default-deny-message").replaceAll("%message%", text));
                 player.sendMessage(Locale.getMessage("quit-mode"));
-                player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
+                player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
                 openInventory(player);
                 break;
 
@@ -101,7 +101,7 @@ public class TextEditMode implements Listener {
             WorldManager.setPermission(worldName, text);
             player.sendMessage(Locale.getMessage("edit-permission").replaceAll("%world%", worldName).replaceAll("%permission%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
-            player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
+            player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             openInventory(player);
             return;
 
@@ -113,7 +113,7 @@ public class TextEditMode implements Listener {
             WorldManager.setDenyMessage(worldName, text);
             player.sendMessage(Locale.getMessage("edit-deny-message").replaceAll("%world%", worldName).replaceAll("%message%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
-            player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
+            player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             openInventory(player);
             return;
 
@@ -132,7 +132,7 @@ public class TextEditMode implements Listener {
             Settings.setDefaultGameRule(gameruleName, number);
             player.sendMessage(Locale.getMessage("default-gamerule-set-success").replace("%gamerule%", gameruleName).replace("%value%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
-            player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
+            player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             openInventory(player);
             return;
 
@@ -163,7 +163,7 @@ public class TextEditMode implements Listener {
             }
             player.sendMessage(Locale.getMessage("gamerule-set-success").replace("%world%", worldName).replace("%gamerule%", gameruleName).replace("%value%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
-            player.playSound(player, Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
+            player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
 
             openInventory(player);
 

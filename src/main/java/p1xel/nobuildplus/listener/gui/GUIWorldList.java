@@ -9,12 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.storage.Locale;
-import p1xel.nobuildplus.storage.Settings;
-import p1xel.nobuildplus.storage.Worlds;
 import p1xel.nobuildplus.world.WorldManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,10 +37,32 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
         }
 
         List<String> enabledWorlds = WorldManager.getWorldsInName();
-        List<String> worlds = Bukkit.getWorlds().stream()
+
+        List<String> worlds = new ArrayList<>();
+        try {
+            // 1.17+
+            Class<?> bukkit = Class.forName("org.bukkit.generator.WorldInfo");
+            List<World> bukkitWorlds = Bukkit.getWorlds();
+            worlds = bukkitWorlds.stream()
                 .map(World::getName) // Convert to String
                 .filter(worldName -> !enabledWorlds.contains(worldName)) // Check if existed
                 .collect(Collectors.toList());
+        } catch (Exception e) {
+            // 1.16-
+            try {
+                Class<?> bukkit = Class.forName("org.bukkit.Bukkit");
+                List<Object> worldsList = (List<Object>) bukkit.getMethod("getWorlds").invoke(null);
+                for (Object world : worldsList) {
+                    Class<?> worldClass = Class.forName("org.bukkit.World");
+                    String worldName = (String) worldClass.getMethod("getName").invoke(world);
+                    if (enabledWorlds.contains(worldName)) {
+                        continue;
+                    }
+                    worlds.add(worldName);
+                }
+            } catch (Exception ignored) {
+            }
+        }
 
         if (worlds.size() >= page*28) {
             hasNextPage = true;
@@ -134,17 +154,17 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
         switch (name) {
             case "back_to_main": {
                 player.openInventory(new GUIMain(1).getInventory());
-                player.playSound(player, Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
                 return true;
             }
             case "previous_page": {
                 player.openInventory(new GUIWorldList(Math.max(1, page-1)).getInventory());
-                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
             case "next_page": {
                 player.openInventory(new GUIWorldList(page+1).getInventory());
-                player.playSound(player, Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
                 return true;
             }
         }
@@ -160,7 +180,7 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
 
             if (type == ClickType.RIGHT) {
                 player.openInventory(new GUIWorld(world, 1, GUIType.GAMERULE).getInventory());
-                player.playSound(player, Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
                 return true;
             }
             if (WorldManager.getWorld(world) == null) {
@@ -168,7 +188,7 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
                 //Worlds.createWorld(world);
                 WorldManager.enableWorld(world);
                 player.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", world));
-                player.playSound(player, Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
                 player.openInventory(new GUIWorldList(1).getInventory());
 
             } else {

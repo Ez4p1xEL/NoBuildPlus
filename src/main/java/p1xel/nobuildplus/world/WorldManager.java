@@ -127,14 +127,14 @@ public class WorldManager {
         if (IS_ACTIONBAR) {
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(world.getDenyMessage()));
             if (SOUND_ENABLED && SOUND_NAME != null) {
-                player.playSound(player, SOUND_NAME, 1f, 1f);
+                player.playSound(player.getLocation(), SOUND_NAME, 1f, 1f);
             }
             return;
         }
 
         player.sendMessage(world.getDenyMessage());
         if (SOUND_ENABLED && SOUND_NAME != null) {
-            player.playSound(player, SOUND_NAME, 1f, 1f);
+            player.playSound(player.getLocation(), SOUND_NAME, 1f, 1f);
         }
     }
 

@@ -4,16 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="bruh getFirst() is since java21">
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.6.22 - fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIDefaultTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIDefaultTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/gamerules.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gamerules.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/text/TextEditMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/text/TextEditMode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/world/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/world/WorldManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_D:/Space/Projects/NoBuildPlus" value="2km3Sbb8rzBThIIS1oN5O0fORxW" />
+    </persistenceIdMap>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -101,6 +110,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Space/Projects/NoBuildPlus_legacy_package&quot;,
@@ -112,7 +122,7 @@
     &quot;project.structure.last.edited&quot;: &quot;库&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -161,14 +171,17 @@
       <workItem from="1769109316728" duration="1862000" />
       <workItem from="1769331363127" duration="2194000" />
       <workItem from="1769493441867" duration="27000" />
-    </task>
-    <task id="LOCAL-00018" summary="1.4.9 Update - new flag &quot;craft&quot; and actionbar message supported">
-      <option name="closed" value="true" />
-      <created>1729329626913</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1729329626913</updated>
+      <workItem from="1769496088959" duration="20000" />
+      <workItem from="1769515882496" duration="293000" />
+      <workItem from="1769596141826" duration="6000" />
+      <workItem from="1769601837253" duration="7000" />
+      <workItem from="1769676302519" duration="621000" />
+      <workItem from="1769700544730" duration="631000" />
+      <workItem from="1769708607841" duration="609000" />
+      <workItem from="1769874037743" duration="1619000" />
+      <workItem from="1769881744455" duration="3002000" />
+      <workItem from="1769933351468" duration="665000" />
+      <workItem from="1769953744246" duration="2735000" />
     </task>
     <task id="LOCAL-00019" summary="1.5.0 update - Add flag &quot;heal&quot; and fix play sound function in legacy version">
       <option name="closed" value="true" />
@@ -554,7 +567,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769095580746</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="1.6.22 - fix">
+      <option name="closed" value="true" />
+      <created>1769496101426</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1769496101427</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,7 +596,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.5.17 - fixed flag &quot;chat&quot; error in dominion area" />
     <MESSAGE value="1.5.18 - new flags &quot;pressure-plate&quot; and &quot;fire-spread&quot;" />
     <MESSAGE value="1.5.19 - optimization of some codes" />
     <MESSAGE value="1.5.21 - optimization of some codes" />
@@ -600,10 +620,19 @@
     <MESSAGE value="1.6.20 update - menu update" />
     <MESSAGE value="1.6.21 update - fix bugs from v1.6" />
     <MESSAGE value="bruh getFirst() is since java21" />
-    <option name="LAST_COMMIT_MESSAGE" value="bruh getFirst() is since java21" />
+    <MESSAGE value="1.6.22 - fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.6.22 - fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>

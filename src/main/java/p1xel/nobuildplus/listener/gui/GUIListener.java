@@ -9,10 +9,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import p1xel.nobuildplus.listener.version.FeatureListener;
 
-public class GUIListener implements Listener {
+public class GUIListener implements FeatureListener {
 
     private final NamespacedKey menu_id_key = new NamespacedKey("nobuildplus", "menu_id");
 
@@ -36,10 +38,13 @@ public class GUIListener implements Listener {
         if (holder instanceof GUIMain) {
 
             ItemStack item = inventory.getItem(e.getSlot());
-            PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
-            if (container.has(menu_id_key, PersistentDataType.STRING)) {
-                GUIMain gui = (GUIMain) holder;
-                gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getClick());
+            ItemMeta meta = item.getItemMeta();
+            if (meta != null) {
+                PersistentDataContainer container = meta.getPersistentDataContainer();
+                if (container.has(menu_id_key, PersistentDataType.STRING)) {
+                    GUIMain gui = (GUIMain) holder;
+                    gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getClick());
+                }
             }
             e.setCancelled(true);
             return;
@@ -48,10 +53,13 @@ public class GUIListener implements Listener {
         if (holder instanceof GUIWorld) {
 
             ItemStack item = inventory.getItem(e.getSlot());
-            PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
-            if (container.has(menu_id_key, PersistentDataType.STRING)) {
-                GUIWorld gui = (GUIWorld) holder;
-                gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getSlot());
+            ItemMeta meta = item.getItemMeta();
+            if (meta != null) {
+                PersistentDataContainer container = meta.getPersistentDataContainer();
+                if (container.has(menu_id_key, PersistentDataType.STRING)) {
+                    GUIWorld gui = (GUIWorld) holder;
+                    gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getSlot());
+                }
             }
             e.setCancelled(true);
             return;
@@ -72,101 +80,29 @@ public class GUIListener implements Listener {
         if (holder instanceof GUIDefaultTemplate) {
 
             ItemStack item = inventory.getItem(e.getSlot());
-            PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
-            if (container.has(menu_id_key, PersistentDataType.STRING)) {
-                GUIDefaultTemplate gui = (GUIDefaultTemplate) holder;
-                gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getSlot());
+            ItemMeta meta = item.getItemMeta();
+            if (meta != null) {
+                PersistentDataContainer container = meta.getPersistentDataContainer();
+                if (container.has(menu_id_key, PersistentDataType.STRING)) {
+                    GUIDefaultTemplate gui = (GUIDefaultTemplate) holder;
+                    gui.check(p, container.get(menu_id_key, PersistentDataType.STRING), e.getSlot());
+                }
             }
             e.setCancelled(true);
             return;
 
         }
 
-//        if (p.getOpenInventory().getTitle().contains(Locale.getMessage("gui.world.title"))) {
-//
-//            ItemStack id = inventory.getItem(0);
-//            NamespacedKey keyId = new NamespacedKey(NoBuildPlus.getInstance(), "inventory");
-//            String world = id.getItemMeta().getPersistentDataContainer().get(keyId, PersistentDataType.STRING);
-//
-//            int slot = e.getSlot();
-//            ItemStack item = e.getCurrentItem();
-//
-//            // If it's the first slot
-//            if (slot == 0 || slot == 8) {
-//                e.setCancelled(true);
-//                return;
-//
-//            }
-//
-//            if (slot == 49) {
-//                p.openInventory(new GUIMain(1).getInventory());
-//                e.setCancelled(true);
-//                return;
-//            }
-//
-//            if (slot == 45) {
-//
-//                if (item == null) {
-//                    e.setCancelled(true);
-//                    return;
-//                }
-//
-//                NamespacedKey page_id = new NamespacedKey(NoBuildPlus.getInstance(), "page");
-//                int page = Integer.parseInt(inventory.getItem(8).getItemMeta().getPersistentDataContainer().get(page_id, PersistentDataType.STRING));
-//
-//                if (page-1 == 0) {
-//                    e.setCancelled(true);
-//                    return;
-//                }
-//
-//                p.openInventory(GUIManager.instance.getGUI(world + "_page" + (page-1)));
-//                e.setCancelled(true);
-//                return;
-//
-//            }
-//
-//            if (slot == 53) {
-//
-//                if (item == null) {
-//                    e.setCancelled(true);
-//                    return;
-//                }
-//
-//                NamespacedKey page_id = new NamespacedKey(NoBuildPlus.getInstance(), "page");
-//                int page = Integer.parseInt(inventory.getItem(8).getItemMeta().getPersistentDataContainer().get(page_id, PersistentDataType.STRING));
-//                int max_page = FlagsManager.getMaxPage(FlagsManager.getFlags());
-//
-//                if (page+1 > max_page) {
-//                    e.setCancelled(true);
-//                    return;
-//                }
-//
-//                p.openInventory(GUIManager.instance.getGUI(world + "_page" + (page+1)));
-//                e.setCancelled(true);
-//                return;
-//
-//            }
-//
-//            if (item != null) {
-//
-//                ItemMeta meta = item.getItemMeta();
-//                NamespacedKey key = new NamespacedKey(NoBuildPlus.getInstance(), "flag");
-//                String flag = meta.getPersistentDataContainer().get(key, PersistentDataType.STRING);
-//                boolean bool = Worlds.getFlag(world, flag);
-//                bool = !bool;
-//                Worlds.setFlag(world, flag, bool);
-//
-//                // Update GUI item
-//                meta.setDisplayName(Locale.getMessage("gui.world.display_name").replaceAll("%flag%", flag).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
-//                item.setItemMeta(meta);
-//                inventory.setItem(slot, item);
-//
-//
-//                e.setCancelled(true);
-//                return;
-//
-//            }
 
+    }
 
+    @Override
+    public String getName() {
+        return "GUIListener 1.15.2+";
+    }
+
+    @Override
+    public boolean matchRequirement(int[] version) {
+        return version[0] > 1 || (version[0] == 1 && version[1] >= 15 && version[2] >= 2);
     }
 }

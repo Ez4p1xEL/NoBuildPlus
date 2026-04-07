@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSignOpenEvent;
@@ -13,7 +12,7 @@ import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
 
-public class NBPPlayerListener_1_20 implements Listener {
+public class NBPPlayerListener_1_20 implements FeatureListener {
 
     // Flag: sign-edit
     @EventHandler(ignoreCancelled = true)
@@ -74,4 +73,13 @@ public class NBPPlayerListener_1_20 implements Listener {
         e.setCancelled(true);
     }
 
+    @Override
+    public String getName() {
+        return "PlayerListener 1.20+";
+    }
+
+    @Override
+    public boolean matchRequirement(int[] version) {
+        return (version[0] == 1 && version[1] >= 20) || version[0] > 1;
+    }
 }

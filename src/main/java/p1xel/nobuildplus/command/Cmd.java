@@ -19,6 +19,7 @@ import java.util.List;
 
 public class Cmd implements CommandExecutor {
 
+
     @Override
     public boolean onCommand(CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
 
@@ -29,7 +30,7 @@ public class Cmd implements CommandExecutor {
 
         if (args.length == 0) {
 
-            if (sender instanceof Player && NoBuildPlus.getInstance().getBukkitVersion() >= 15 && sender.hasPermission("nobuildplus.gui")) {
+            if (sender instanceof Player && NoBuildPlus.getInstance().isMenuFunctionEnabled() && sender.hasPermission("nobuildplus.gui")) {
                 Player p = (Player) sender;
                 p.openInventory(new GUIMain(1).getInventory());
                 return true;
@@ -49,7 +50,7 @@ public class Cmd implements CommandExecutor {
                     return true;
                 }
 
-                if (NoBuildPlus.getInstance().getBukkitVersion() < 15) {
+                if (NoBuildPlus.getInstance().isMenuFunctionEnabled()) {
                     sender.sendMessage(Locale.getMessage("gui-not-support"));
                     return true;
                 }

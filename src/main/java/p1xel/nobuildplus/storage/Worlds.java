@@ -92,11 +92,13 @@ public class Worlds {
             x = yaml.getDouble(w + ".spawn-loc.x");
             y = yaml.getDouble(w + ".spawn-loc.y");
             z = yaml.getDouble(w + ".spawn-loc.z");
-            yaw = Float.parseFloat(yaml.getString(w + ".spawn-loc.yaw"));
-            pitch = Float.parseFloat(yaml.getString(w + ".spawn-loc.pitch"));
-        } catch (IllegalArgumentException | NullPointerException exception) {
+            yaw = Float.parseFloat(yaml.getString(w + ".spawn-loc.yaw", ""));
+            pitch = Float.parseFloat(yaml.getString(w + ".spawn-loc.pitch", ""));
+        } catch (Exception exception) {
             return null;
         }
+
+        if (world == null) { return null; }
 
         return new Location(world,x,y,z,yaw,pitch);
     }
@@ -159,29 +161,29 @@ public class Worlds {
 
     }
 
-    @Deprecated
-    public static void sendMessage(Player player, String world) {
-
-        String sound = Config.getString("deny-message-sound.name");
-        boolean enableSound = Config.getBool("deny-message-sound.enable");
-
-        if (Config.getString("deny-message-type").equalsIgnoreCase("ACTIONBAR")) {
-            if (NoBuildPlus.getInstance().getBukkitVersion() < 12) {
-                return;
-            }
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Worlds.getDenyMessage(world)));
-            if (enableSound && sound != null) {
-                player.playSound(player.getLocation(), Sound.valueOf(sound), 1f, 1f);
-            }
-            return;
-        }
-
-        player.sendMessage(Worlds.getDenyMessage(world));
-        if (enableSound && sound != null) {
-            player.playSound(player.getLocation(), Sound.valueOf(sound), 1f, 1f);
-        }
-
-    }
+//    @Deprecated
+//    public static void sendMessage(Player player, String world) {
+//
+//        String sound = Config.getString("deny-message-sound.name");
+//        boolean enableSound = Config.getBool("deny-message-sound.enable");
+//
+//        if (Config.getString("deny-message-type").equalsIgnoreCase("ACTIONBAR")) {
+//            if (NoBuildPlus.getInstance().getBukkitVersion() < 12) {
+//                return;
+//            }
+//            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Worlds.getDenyMessage(world)));
+//            if (enableSound && sound != null) {
+//                player.playSound(player.getLocation(), Sound.valueOf(sound), 1f, 1f);
+//            }
+//            return;
+//        }
+//
+//        player.sendMessage(Worlds.getDenyMessage(world));
+//        if (enableSound && sound != null) {
+//            player.playSound(player.getLocation(), Sound.valueOf(sound), 1f, 1f);
+//        }
+//
+//    }
 
 
 

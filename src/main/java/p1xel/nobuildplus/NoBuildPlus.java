@@ -1,7 +1,6 @@
 package p1xel.nobuildplus;
 
 import com.tcoded.folialib.FoliaLib;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.api.NBPAPI;
 import p1xel.nobuildplus.command.Cmd;
@@ -24,6 +23,7 @@ import java.util.Map;
 
 public class NoBuildPlus extends JavaPlugin {
 
+    private int[] version;
     private static NoBuildPlus instance;
     private static FoliaLib foliaLib;
     private static TextEditMode textEditMode;
@@ -45,6 +45,15 @@ public class NoBuildPlus extends JavaPlugin {
         foliaLib = new FoliaLib(this);
         api = new NBPAPI();
         saveDefaultConfig();
+
+    }
+
+    @Override
+    public void onEnable() {
+
+        String[] stringVersion = getServer().getBukkitVersion().split("-")[0].split("\\.");
+        version = new int[]{Integer.parseInt(stringVersion[0]), Integer.parseInt(stringVersion[1]), Integer.parseInt(stringVersion[2])};
+
         Locale.createLocaleFile();
         FlagsManager.createFlagsManagerFile();
         Settings.createSettingsFile();
@@ -54,14 +63,9 @@ public class NoBuildPlus extends JavaPlugin {
         FlagRegistry.refreshMap();
         RuleSetting.createFile();
 
-    }
-
-    @Override
-    public void onEnable() {
-
         updateConfig();
         Logger.setEnabled(Config.getBool("debug"));
-        GameRuleRegistry.init(getServer().getBukkitVersion());
+        GameRuleRegistry.init();
         textEditMode = new TextEditMode();
         MenuConfig.initialization();
 
@@ -78,50 +82,7 @@ public class NoBuildPlus extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NBPListener(), this);
         getServer().getPluginManager().registerEvents(textEditMode, this);
 
-        String[] v = Bukkit.getServer().getBukkitVersion().split("-")[0].split("\\.");
-        int parent_version = Integer.parseInt(v[1]);
-        int child_version = Integer.parseInt(v[2]);
-
-        if (parent_version >= 9) {
-            getServer().getPluginManager().registerEvents(new NBPEntityListener_1_9(), this);
-            getLogger().info("NBP Player Listener for 1.9+ is registered!");
-        }
-
-        if (parent_version < 13) {
-            getServer().getPluginManager().registerEvents(new NBPPlayerListener_1_8(), this);
-            getLogger().info("NBP Player Listener for 1.8-1.12 is registered!");
-        } else {
-            getServer().getPluginManager().registerEvents(new NBPEntityListener_1_13(), this);
-            getLogger().info("NBP Entity Listener for 1.13+ is registered!");
-        }
-
-        if (parent_version > 15) {
-            getLogger().info("In-game menu is enabled at 1.16+.");
-        } else {
-            getLogger().info("The version of your server does not support in-game menu.");
-        }
-
-        if (parent_version >= 17) {
-            getServer().getPluginManager().registerEvents(new NBPBlockListener_1_17(), this);
-            getLogger().info("NBP Block Listener for 1.17+ is registered!");
-        } else {
-            getServer().getPluginManager().registerEvents(new NBPBlockListener_1_8(), this);
-            getLogger().info("NBP Block Listener for 1.8-1.16 is registered!");
-        }
-
-        if (parent_version >= 20) {
-            getServer().getPluginManager().registerEvents(new NBPPlayerListener_1_20(), this);
-            getLogger().info("NBP Player Listener for 1.20+ is registered!");
-        }
-
-        if (parent_version > 12 || (parent_version == 12 && child_version >= 2)) {
-            getServer().getPluginManager().registerEvents(new NBPPortalListener_1_12(), this);
-            getLogger().info("NBP Portal Listener for 1.12+ is registered!");
-        }
-
-        if (parent_version > 15 || (parent_version == 15 && child_version >= 2)) {
-            getServer().getPluginManager().registerEvents(new GUIListener(), this);
-        }
+        FeatureListenerLoader.loadListeners(this);
 
         getLogger().info("[NBP] LISTENERS LOADED.");
 
@@ -161,9 +122,19 @@ public class NoBuildPlus extends JavaPlugin {
     }
 
     // Only for old version, below 1.21.11;
-    public int getBukkitVersion() {
-        String v = Bukkit.getServer().getBukkitVersion().split("-")[0].split("\\.")[1];
-        return Integer.parseInt(v);
+    public int[] getBukkitVersion() {
+        return version;
+    }
+
+    public boolean isLegacyVersion() {
+        return version[0] <= 1;
+    }
+
+    public boolean isMenuFunctionEnabled() {
+        if (!isLegacyVersion()) {
+            return true;
+        }
+        return version[0] != 1 || version[1] >= 15;
     }
 
     void updateVersion() {

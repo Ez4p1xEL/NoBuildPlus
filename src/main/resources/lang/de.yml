@@ -284,7 +284,7 @@ flag:
     tnt-damage: 'TNT-Explosionsschaden'
     frame: 'Interaktion mit Rahmen'
     bed: 'Interaktion mit Bett'
-    voidtp: 'Teleport zum Spawn beim Fallen ins Leere'
+    voidtp: 'Void-Schaden, dieser verhindert die Teleportation des Spielers zum Spawn beim Fallen ins Leere'
     villager: 'Interaktion mit Dorfbewohner'
     command: 'Befehl ausführen'
     chat: 'Chatten'
@@ -337,6 +337,7 @@ flag:
     tnt-prime: 'TNT zünden'
     pressure-plate: 'Interaktion mit Druckplatte'
     fire-spread: 'Feuer breitet sich aus'
+    wind-charge: 'Verwendung und Explosion von Windladung'
     ia-furniture-sit: 'Auf ItemsAdder-Möbel sitzen'
     ia-campfire-interact: 'Interaktion mit ItemsAdder-Lagerfeuer'
 

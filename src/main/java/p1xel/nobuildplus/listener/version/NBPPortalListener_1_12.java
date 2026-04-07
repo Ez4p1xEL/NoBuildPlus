@@ -4,7 +4,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import p1xel.nobuildplus.Flags;
@@ -12,7 +11,7 @@ import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
 
-public class NBPPortalListener_1_12 implements Listener {
+public class NBPPortalListener_1_12 implements FeatureListener {
 
     @EventHandler
     public void onTeleportNether(EntityPortalEvent event) {
@@ -74,4 +73,13 @@ public class NBPPortalListener_1_12 implements Listener {
 
     }
 
+    @Override
+    public String getName() {
+        return "PortalListener 1.12+";
+    }
+
+    @Override
+    public boolean matchRequirement(int[] version) {
+        return (version[0] == 1 && version[1] == 12) || version[0] > 1;
+    }
 }

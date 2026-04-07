@@ -24,7 +24,7 @@ public class NBPListener implements Listener {
             return;
         }
 
-        if (NoBuildPlus.getInstance().getBukkitVersion() < 15) {
+        if (!NoBuildPlus.getInstance().isMenuFunctionEnabled()) {
             return;
         }
 

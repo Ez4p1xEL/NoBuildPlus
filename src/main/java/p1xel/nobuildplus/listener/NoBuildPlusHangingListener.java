@@ -36,7 +36,7 @@ public class NoBuildPlusHangingListener implements Listener {
         }
 
 
-        if (v >= 17) {
+        if ((v[0] == 1 && v[1]>=17) || v[0] > 1) {
 
             if (e.getEntity() instanceof GlowItemFrame) {
 
@@ -88,7 +88,7 @@ public class NoBuildPlusHangingListener implements Listener {
         e.setCancelled(true);
     }
 
-    int v = NoBuildPlus.getInstance().getBukkitVersion();
+    int[] v = NoBuildPlus.getInstance().getBukkitVersion();
 
     // Flag: frame (being placed)
     @EventHandler(ignoreCancelled = true)
@@ -115,7 +115,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         EntityType type = entity.getType();
 
-        if (v >= 17) {
+        if ((v[0] == 1 &&v[1] >= 17) || v[0] > 1) {
 
             if (type == EntityType.GLOW_ITEM_FRAME) {
 

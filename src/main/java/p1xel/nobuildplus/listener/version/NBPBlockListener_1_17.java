@@ -5,7 +5,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.TNTPrimeEvent;
 import org.bukkit.event.player.PlayerHarvestBlockEvent;
 import p1xel.nobuildplus.Flags;
@@ -13,7 +12,7 @@ import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
 
-public class NBPBlockListener_1_17 implements Listener {
+public class NBPBlockListener_1_17 implements FeatureListener {
 
     // Flag: berries
     @EventHandler(ignoreCancelled = true)
@@ -77,4 +76,13 @@ public class NBPBlockListener_1_17 implements Listener {
 
     }
 
+    @Override
+    public String getName() {
+        return "BlockListener 1.17+";
+    }
+
+    @Override
+    public boolean matchRequirement(int[] version) {
+        return (version[0] == 1 && version[1] >= 17) || version[0] > 1;
+    }
 }

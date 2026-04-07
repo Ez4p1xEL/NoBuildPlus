@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +14,7 @@ import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
 
-public class NBPPlayerListener_1_8 implements Listener {
+public class NBPPlayerListener_1_8 implements FeatureListener {
 
     // Flag: armorstand
     @EventHandler(ignoreCancelled = true)
@@ -103,11 +102,12 @@ public class NBPPlayerListener_1_8 implements Listener {
 
     }
 
+    int[] v = NoBuildPlus.getInstance().getBukkitVersion();
     // Flag: crystal
     @EventHandler(ignoreCancelled = true)
     public void onCrystalPlaced(PlayerInteractEvent e) {
 
-        if (NoBuildPlus.getInstance().getBukkitVersion() <= 8) {
+        if (v[0] == 1 && v[1] < 9) {
             return;
         }
         Block block = e.getClickedBlock();
@@ -189,4 +189,13 @@ public class NBPPlayerListener_1_8 implements Listener {
         e.setCancelled(true);
     }
 
+    @Override
+    public String getName() {
+        return "PlayerListener 1.8-1.12";
+    }
+
+    @Override
+    public boolean matchRequirement(int[] version) {
+        return version[0] == 1 && version[1] >= 8 && version[1] <= 12;
+    }
 }

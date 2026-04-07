@@ -4,14 +4,13 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
 
-public class NBPEntityListener_1_9 implements Listener {
+public class NBPEntityListener_1_9 implements FeatureListener {
 
     // Flag: elytra
     @EventHandler(ignoreCancelled = true)
@@ -52,5 +51,15 @@ public class NBPEntityListener_1_9 implements Listener {
         }
 
 
+    }
+
+    @Override
+    public String getName() {
+        return "EntityListener 1.9+";
+    }
+
+    @Override
+    public boolean matchRequirement(int[] version) {
+        return (version[0] == 1 && version[1] >= 9) || version[0] > 1;
     }
 }

@@ -283,7 +283,7 @@ flag:
     tnt-damage: 'TNT爆炸傷害'
     frame: '與展示框互動'
     bed: '與床互動'
-    voidtp: '墜入虛空時傳送'
+    voidtp: '虛空傷害, 禁止這個可以讓玩家在掉入虛空時傳送至設置的出生點'
     villager: '與村民互動'
     command: '輸入指令'
     chat: '玩家聊天'
@@ -336,6 +336,7 @@ flag:
     tnt-prime: 'TNT點燃'
     pressure-plate: '壓力板被觸發'
     fire-spread: '火焰蔓延'
+    wind-charge: '玩家使用風彈及風彈爆炸'
     ia-furniture-sit: '坐在ItemsAdder家具'
     ia-campfire-interact: '與ItemsAdder營火互動'
 

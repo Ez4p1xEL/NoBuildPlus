@@ -154,17 +154,17 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
         switch (name) {
             case "back_to_main": {
                 player.openInventory(new GUIMain(1).getInventory());
-                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_CLOSE, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1.0f, 1.0f);
                 return true;
             }
             case "previous_page": {
                 player.openInventory(new GUIWorldList(Math.max(1, page-1)).getInventory());
-                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0f, 1.0f);
                 return true;
             }
             case "next_page": {
                 player.openInventory(new GUIWorldList(page+1).getInventory());
-                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0f, 1.0f);
                 return true;
             }
         }
@@ -180,7 +180,7 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
 
             if (type == ClickType.RIGHT) {
                 player.openInventory(new GUIWorld(world, 1, GUIType.GAMERULE).getInventory());
-                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1.0f, 1.0f);
                 return true;
             }
             if (WorldManager.getWorld(world) == null) {
@@ -188,7 +188,7 @@ public class GUIWorldList extends GUIAbstract implements InventoryHolder {
                 //Worlds.createWorld(world);
                 WorldManager.enableWorld(world);
                 player.sendMessage(Locale.getMessage("add-success").replaceAll("%world%", world));
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 0.5f, 0.5f);
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1.0f, 1.0f);
                 player.openInventory(new GUIWorldList(1).getInventory());
 
             } else {

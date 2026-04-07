@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPlaceEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
@@ -16,9 +15,9 @@ import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
 
-public class NBPEntityListener_1_13 implements Listener {
+public class NBPEntityListener_1_13 implements FeatureListener {
 
-    int v = NoBuildPlus.getInstance().getBukkitVersion();
+    int[] v = NoBuildPlus.getInstance().getBukkitVersion();
 
     // Flag: armor stand (being created)
     @EventHandler(ignoreCancelled = true)
@@ -139,7 +138,7 @@ public class NBPEntityListener_1_13 implements Listener {
             return;
         }
 
-        if (v >= 19) {
+        if ((v[0] == 1 && v[1] >= 19) || v[0] > 1) {
             if (entity instanceof ChestBoat) {
 
                 Player player = e.getPlayer();
@@ -233,4 +232,13 @@ public class NBPEntityListener_1_13 implements Listener {
 
     }
 
+    @Override
+    public String getName() {
+        return "EntityListener 1.13+";
+    }
+
+    @Override
+    public boolean matchRequirement(int[] version) {
+        return (version[0] == 1 && version[1] >= 13) || version[0] > 1;
+    }
 }

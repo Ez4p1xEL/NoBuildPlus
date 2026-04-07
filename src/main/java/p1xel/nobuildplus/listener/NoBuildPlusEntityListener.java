@@ -515,10 +515,11 @@ public class NoBuildPlusEntityListener implements Listener {
             return;
         }
 
-        if (world.getLocation() != null) {
+        Location loc = world.getLocation();
+        if (loc != null) {
             if (entity instanceof Player) {
                 Player player = (Player) entity;
-                player.teleport(world.getLocation());
+                player.teleport(loc);
                 player.setFallDistance(0);
                 e.setCancelled(true);
             }
@@ -807,6 +808,54 @@ public class NoBuildPlusEntityListener implements Listener {
         }
 
         e.setCancelled(true);
+
+    }
+
+    // Flag: egg-throw
+    @EventHandler(ignoreCancelled = true)
+    public void onEggLaunch(ProjectileLaunchEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        if (!(entity instanceof Egg)) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.wind_charge.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+    }
+
+    // Flag: egg-throw
+    @EventHandler(ignoreCancelled = true)
+    public void onSnowballThrow(ProjectileLaunchEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        if (!(entity instanceof Snowball)) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.wind_charge.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
 
     }
 }

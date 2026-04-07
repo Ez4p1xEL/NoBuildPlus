@@ -2,14 +2,13 @@ package p1xel.nobuildplus.listener.version;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
 
-public class NBPBlockListener_1_8 implements Listener {
+public class NBPBlockListener_1_8 implements FeatureListener {
 
     // flag: tnt-prime
     // This event cannot get the player instance
@@ -30,6 +29,16 @@ public class NBPBlockListener_1_8 implements Listener {
 
         e.setCancelled(true);
 
+    }
+
+    @Override
+    public String getName() {
+        return "BlockListener 1.8-1.12";
+    }
+
+    @Override
+    public boolean matchRequirement(int[] version) {
+        return (version[0] == 1 && version[1] <= 12 && version[1] >= 8);
     }
 
 }

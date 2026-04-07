@@ -68,6 +68,7 @@ global-settings:
     tnt-prime: true
     pressure-plate: true
     fire-spread: true
+    wind-charge: true
   # the usage of boolean (true/false) here does not equal to the usage of flag
   gamerules:
     advance_time: true

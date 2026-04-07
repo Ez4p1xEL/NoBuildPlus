@@ -35,7 +35,8 @@ public class WorldManager {
         }
         SOUND_NAME = Config.getString("deny-message-sound.name").replace("_", ".").toLowerCase();
         SOUND_ENABLED = Config.getBool("deny-message-sound.enable");
-        IS_ACTIONBAR = Config.getString("deny-message-type").equalsIgnoreCase("actionbar") && NoBuildPlus.getInstance().getBukkitVersion() >= 12;
+        int[] version = NoBuildPlus.getInstance().getBukkitVersion();
+        IS_ACTIONBAR = Config.getString("deny-message-type").equalsIgnoreCase("actionbar") && ((version[0] == 1 && version[1] >= 12) || version[0] > 1);
     }
 
     @Nullable

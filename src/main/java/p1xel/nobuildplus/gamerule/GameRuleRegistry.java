@@ -12,11 +12,12 @@ public class GameRuleRegistry {
     private static List<String> gamerules = new ArrayList<>();
     private static InterfaceGameRuleRegistry registry;
 
-    public static void init(String minecraft_version) {
-        String[] version = minecraft_version.split("-")[0].split("\\.");
-        int parent = Integer.parseInt(version[1]);
-        int child = Integer.parseInt(version[2]);
-        if (parent >= 21 && child >= 11) {
+    public static void init() {
+        int[] version = NoBuildPlus.getInstance().getBukkitVersion();
+        int main = version[0];
+        int parent = version[1];
+        int child = version[2];
+        if ((main == 1 && parent >= 21 && child >= 11) || main > 1) {
             registry = new ModernGameRule();
         } else {
             legacy = true;

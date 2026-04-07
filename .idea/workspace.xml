@@ -4,15 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.6.22 - fix">
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.6.30 - add support for 26.1">
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/FeatureListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/FeatureListenerLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/feature/WindChargeListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/NoBuildPlus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/api/NoBuildPlusAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/api/NoBuildPlusAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/command/Cmd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/command/Cmd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/gamerule/GameRuleRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/gamerule/GameRuleRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusEntityListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusEntityListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusHangingListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusHangingListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusPlayerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusPlayerListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIDefaultTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIDefaultTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUIWorldList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/text/TextEditMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/text/TextEditMode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPBlockListener_1_17.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPBlockListener_1_17.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPBlockListener_1_8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPBlockListener_1_8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPEntityListener_1_13.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPEntityListener_1_13.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPEntityListener_1_9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPEntityListener_1_9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPPlayerListener_1_20.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPPlayerListener_1_20.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPPlayerListener_1_8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPPlayerListener_1_8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPPortalListener_1_12.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/NBPPortalListener_1_12.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Worlds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/Worlds.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/world/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/world/WorldManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/flags.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/flags.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/de.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/de.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/ja.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/ja.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/ru.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/ru.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/settings.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/settings.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,14 +210,22 @@
       <workItem from="1769881744455" duration="3002000" />
       <workItem from="1769933351468" duration="665000" />
       <workItem from="1769953744246" duration="2735000" />
-    </task>
-    <task id="LOCAL-00019" summary="1.5.0 update - Add flag &quot;heal&quot; and fix play sound function in legacy version">
-      <option name="closed" value="true" />
-      <created>1737379072846</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1737379072847</updated>
+      <workItem from="1769979901315" duration="268000" />
+      <workItem from="1770028802114" duration="196000" />
+      <workItem from="1770031707207" duration="27000" />
+      <workItem from="1770175258508" duration="4000" />
+      <workItem from="1770537397927" duration="800000" />
+      <workItem from="1770540061320" duration="2706000" />
+      <workItem from="1770555303387" duration="712000" />
+      <workItem from="1771748202878" duration="79000" />
+      <workItem from="1773761688944" duration="1024000" />
+      <workItem from="1774798833553" duration="619000" />
+      <workItem from="1775149079199" duration="37000" />
+      <workItem from="1775551634699" duration="1167000" />
+      <workItem from="1775560007167" duration="4978000" />
+      <workItem from="1775567208429" duration="2643000" />
+      <workItem from="1775575648870" duration="2102000" />
+      <workItem from="1775582703827" duration="5203000" />
     </task>
     <task id="LOCAL-00020" summary="1.5.1 update - new flag &quot;turtle-egg&quot; and &quot;shoot&quot; adjustment">
       <option name="closed" value="true" />
@@ -575,7 +611,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769496101427</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="1.6.24 - fix playing sound in lower minecraft version">
+      <option name="closed" value="true" />
+      <created>1769979935578</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1769979935579</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -596,8 +640,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.5.18 - new flags &quot;pressure-plate&quot; and &quot;fire-spread&quot;" />
-    <MESSAGE value="1.5.19 - optimization of some codes" />
     <MESSAGE value="1.5.21 - optimization of some codes" />
     <MESSAGE value="1.5.22 - an option to disable the sound of deny message" />
     <MESSAGE value="1.5.23 - fix an error" />
@@ -621,7 +663,9 @@
     <MESSAGE value="1.6.21 update - fix bugs from v1.6" />
     <MESSAGE value="bruh getFirst() is since java21" />
     <MESSAGE value="1.6.22 - fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.6.22 - fix" />
+    <MESSAGE value="1.6.24 - fix playing sound in lower minecraft version" />
+    <MESSAGE value="1.6.30 - add support for 26.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.6.30 - add support for 26.1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

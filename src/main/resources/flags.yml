@@ -335,3 +335,5 @@ flags:
       - PRESSURE_PLATE
   fire-spread:
     enable: true
+  wind-charge:
+    enable: true

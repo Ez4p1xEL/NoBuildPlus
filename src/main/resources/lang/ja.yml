@@ -284,7 +284,7 @@ flag:
     tnt-damage: 'TNT爆発ダメージ'
     frame: '額縁の操作'
     bed: 'ベッドの操作'
-    voidtp: '虚無に落下した際にスポーン地点へテレポート'
+    voidtp: '虚無ダメージ、これを防ぐとプレイヤーをスポーン地点にテレポートできます'
     villager: '村人との操作'
     command: 'コマンド実行'
     chat: 'チャット'
@@ -337,6 +337,7 @@ flag:
     tnt-prime: 'TNTの着火'
     pressure-plate: '感圧板の操作'
     fire-spread: '火の拡散'
+    wind-charge: '風の弾の使用と爆発'
     ia-furniture-sit: 'ItemsAdder家具に座る'
     ia-campfire-interact: 'ItemsAdder焚き火の操作'
 

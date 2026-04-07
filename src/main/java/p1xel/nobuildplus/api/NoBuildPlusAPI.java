@@ -44,7 +44,7 @@ public interface NoBuildPlusAPI {
     /**
      * Return the bool whether the plugin does protection with flag.
      * This method is including the area protection plugins checking.
-     * If the player is in the area they create, the protection would be cancelled.
+     * If the player is in the area they create, the protection would be canceled.
      * @param world name of the world
      * @param flag enum value of implementing FlagInterface
      * @param player the player
@@ -55,7 +55,7 @@ public interface NoBuildPlusAPI {
     /**
      * Return the bool whether the plugin does protection with flag.
      * This method is including the area protection plugins checking.
-     * If the location is in the area they create, the protection would be cancelled.
+     * If the location is in the area they create, the protection would be canceled.
      * @param world name of the world
      * @param flag enum value of implementing FlagInterface
      * @param location the location

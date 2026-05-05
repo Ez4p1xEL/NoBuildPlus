@@ -21,7 +21,6 @@ public class WindChargeListener implements FeatureListener {
     // flag: wind-charge
     @EventHandler(ignoreCancelled = true)
     public void onInteractWindCharge(PlayerInteractEvent event) {
-        System.out.println("wind-charge");
 
         Player player = event.getPlayer();
 

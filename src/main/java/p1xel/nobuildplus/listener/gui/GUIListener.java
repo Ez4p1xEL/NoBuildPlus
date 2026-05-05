@@ -103,6 +103,6 @@ public class GUIListener implements FeatureListener {
 
     @Override
     public boolean matchRequirement(int[] version) {
-        return version[0] > 1 || (version[0] == 1 && version[1] >= 15 && version[2] >= 2);
+        return version[0] > 1 || (version[0] == 1 && (version[1] > 15 || (version[1] == 15 && version[2] >= 2)));
     }
 }

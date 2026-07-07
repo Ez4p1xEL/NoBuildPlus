@@ -5,6 +5,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityPlaceEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -87,38 +88,6 @@ public class NBPEntityListener_1_13 implements FeatureListener {
 
         e.setCancelled(true);
 
-    }
-
-    // Flag: crystal
-    @EventHandler(ignoreCancelled = true)
-    public void onCrystalPlaced(EntityPlaceEvent e) {
-
-        Entity entity = e.getEntity();
-
-        if (HookedPlugins.cancel(entity)) {
-            return;
-        }
-
-        if (!(entity instanceof EnderCrystal)) {
-            return;
-        }
-
-        String worldName = entity.getWorld().getName();
-        ProtectedWorld world = WorldManager.getWorld(worldName);
-
-        if (!Flags.crystal.isEnabled(world)) {
-            return;
-        }
-
-        Player player = e.getPlayer();
-        if (player != null) {
-            if (player.hasPermission(world.getPermission())) {
-                return;
-            }
-            WorldManager.sendMessage(player, world);
-        }
-
-        e.setCancelled(true);
     }
 
     // Flag: boat (being placed)

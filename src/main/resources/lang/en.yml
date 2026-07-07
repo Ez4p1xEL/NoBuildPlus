@@ -59,6 +59,7 @@ gamerule-notice: '&c&l&nJUST TO NOTICE THAT&a you are opening the gamerule manag
 If you don''t want to open the management menu through this command, you are feeling free to disable this in config of NoBuildPlus.
 &6&oThis notification can also be disabled in config.yml of NoBuildPlus!'
 documentation: '&e&l&n&oClick here to open PixelCraft Documentation'
+world-flag: '&e%flag% &aof &9%world% &ais currently set to &e%boolean%&a.'
 
 gui:
   messages:
@@ -278,6 +279,7 @@ flag:
     container: 'Using the containers'
     mob-damage: 'Damage taking to the bob'
     mob-explode: 'Explosion caused by the mob'
+    mob-explode-damage: 'Damage taking from the mob explosion'
     pvp: 'Taking damage with other players'
     shoot: 'Player shooting arrow'
     tnt: 'Block destroying by TNT explosion'
@@ -338,6 +340,8 @@ flag:
     pressure-plate: 'Pressure plate interacting'
     fire-spread: 'Fire spreading'
     wind-charge: 'The use and explosion of wind charge'
+    wither-destroy: 'Explosion caused by the wither skull'
+    wither-damage: 'Wither damage'
     ia-furniture-sit: 'Sit on ItemsAdder furniture'
     ia-campfire-interact: 'Interact with ItemsAdder campfire'
 

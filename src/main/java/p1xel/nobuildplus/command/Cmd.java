@@ -233,6 +233,28 @@ public class Cmd implements CommandExecutor {
 
         }
 
+        if (args.length == 3) {
+
+            if (args[0].equalsIgnoreCase("flag")) {
+
+                if (WorldManager.getWorld(args[1]) == null) {
+                    sender.sendMessage(Locale.getMessage("cant-find-world"));
+                    return true;
+                }
+
+                if (FlagRegistry.matchFlag(args[2]) == null) {
+                    sender.sendMessage(Locale.getMessage("flags-list"));
+                    return true;
+                }
+
+                boolean value = !FlagRegistry.matchFlag(args[2]).isEnabled(args[1]);
+                sender.sendMessage(Locale.getMessage("world-flag").replace("%flag%", args[2]).replace("%world%", args[1]).replace("%boolean%", String.valueOf(value)));
+                return true;
+
+            }
+
+        }
+
         if (args.length == 4) {
 
             if (args[0].equalsIgnoreCase("flag")) {

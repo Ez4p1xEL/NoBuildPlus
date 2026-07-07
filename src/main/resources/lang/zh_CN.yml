@@ -60,6 +60,7 @@ gamerule-notice: '&c&l&n温馨提示&a 你因为输入了 /gamerule 指令而开
 如果你不想通过该指令来打开管理菜单, 你完全、绝对自由地、不受限制地、畅通无阻地、随心所欲地或无条件地可以在NoBuildPlus的config文件中关闭, 
 &6&o这条提示消息也同样可在config中关闭'
 documentation: '&e&l&n&o点击这里前往 PixelCraft 使用文档'
+world-flag: '&e%flag% &a在 &9%world% &a中当前设置为 &e%boolean%&a。'
 
 gui:
   messages:
@@ -277,6 +278,7 @@ flag:
     container: '玩家开启容器'
     mob-damage: '对生物造成伤害'
     mob-explode: '生物爆炸'
+    mob-explode-damage: '生物爆炸伤害'
     pvp: '玩家PVP'
     shoot: '玩家射箭'
     tnt: 'TNT爆炸摧毁方块'
@@ -337,6 +339,8 @@ flag:
     pressure-plate: '压力板被触发'
     fire-spread: '火焰蔓延'
     wind-charge: '玩家使用风弹及风弹爆炸'
+    wither-destroy: '凋灵头颅引发的爆炸'
+    wither-damage: '凋灵伤害'
     ia-furniture-sit: '坐在ItemsAdder家具'
     ia-campfire-interact: '与ItemsAdder营火互动'
 

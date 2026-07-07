@@ -60,6 +60,10 @@ flags:
     type: all
     list:
       - CREEPER
+      - WITHER
+      - GHAST
+  mob-explode-damage:
+    enable: true
   pvp:
     enable: true
   shoot:
@@ -336,4 +340,8 @@ flags:
   fire-spread:
     enable: true
   wind-charge:
+    enable: true
+  wither-damage:
+    enable: true
+  wither-destroy:
     enable: true

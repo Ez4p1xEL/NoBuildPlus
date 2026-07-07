@@ -19,6 +19,7 @@ public enum Flags implements Flag {
     container("container", "CHEST", "list", Arrays.asList("CHEST", "ENDER_CHEST", "TRAPPED_CHEST", "FURNACE")),
     mob_damage("mob-damage", "ZOMBIE_SPAWN_EGG", "all", Collections.singletonList("ZOMBIE")),
     mob_explode("mob-explode", "CREEPER_SPAWN_EGG", "all", Collections.singletonList("CREEPER")),
+    mob_explode_damage("mob-explode-damage", "CREEPER_SPAWN_EGG", null, null),
     pvp("pvp", "DIAMOND_SWORD", null, null),
     shoot("shoot", "BOW", null, null),
     tnt("tnt", "TNT", null, null),
@@ -78,7 +79,9 @@ public enum Flags implements Flag {
     tnt_prime("tnt-prime", "TNT", null, null),
     pressure_plate("pressure-plate", "OAK_PRESSURE_PLATE", "list", Arrays.asList("OAK_PRESSURE_PLATE", "SPRUCE_PRESSURE_PLATE", "BIRCH_PRESSURE_PLATE", "JUNGLE_PRESSURE_PLATE", "ACACIA_PRESSURE_PLATE", "DARK_OAK_PRESSURE_PLATE", "MANGROVE_PRESSURE_PLATE", "CHERRY_PRESSURE_PLATE", "PALE_OAK_PRESSURE_PLATE", "BAMBOO_PRESSURE_PLATE", "CRIMSON_PRESSURE_PLATE", "WARPED_PRESSURE_PLATE", "STONE_PRESSURE_PLATE", "POLISHED_BLACKSTONE_PRESSURE_PLATE", "LIGHT_WEIGHTED_PRESSURE_PLATE", "HEAVY_WEIGHTED_PRESSURE_PLATE", "PRESSURE_PLATE")),
     fire_spread("fire-spread", "CRIMSON_STEM", null, null),
-    wind_charge("wind-charge", "WIND_CHARGE", null, null);
+    wind_charge("wind-charge", "WIND_CHARGE", null, null),
+    wither_destroy("wither-destroy", "WITHER_SPAWN_EGG", null, null),
+    wither_damage("wither-damage", "WITHER_SPAWN_EGG",null, null);
 
     private final String flag_name;
     private final String show_item;

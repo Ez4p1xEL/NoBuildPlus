@@ -59,6 +59,7 @@ gamerule-notice: '&c&l&nHINWEIS&a Du öffnest das Gamerule-Verwaltungsmenü von 
 Wenn du das Verwaltungsmenü nicht über diesen Befehl öffnen möchtest, kannst du dies in der Konfiguration von NoBuildPlus deaktivieren.
 &6&oDiese Benachrichtigung kann ebenfalls in der config.yml von NoBuildPlus deaktiviert werden!'
 documentation: '&e&l&n&oHier klicken, um die PixelCraft-Dokumentation zu öffnen'
+world-flag: '&e%flag% &avon &9%world% &aist derzeit auf &e%boolean%&a gesetzt.'
 
 gui:
   messages:
@@ -278,6 +279,7 @@ flag:
     container: 'Container benutzen'
     mob-damage: 'Schaden durch Mobs'
     mob-explode: 'Explosion durch Mobs'
+    mob-explode-damage: 'Schaden durch Mob-Explosion'
     pvp: 'Schaden durch andere Spieler'
     shoot: 'Spieler schießt Pfeil'
     tnt: 'TNT-Explosion'
@@ -338,6 +340,8 @@ flag:
     pressure-plate: 'Interaktion mit Druckplatte'
     fire-spread: 'Feuer breitet sich aus'
     wind-charge: 'Verwendung und Explosion von Windladung'
+    wither-destroy: 'Explosion durch den Wither-Schädel'
+    wither-damage: 'Wither-Schaden'
     ia-furniture-sit: 'Auf ItemsAdder-Möbel sitzen'
     ia-campfire-interact: 'Interaktion mit ItemsAdder-Lagerfeuer'
 

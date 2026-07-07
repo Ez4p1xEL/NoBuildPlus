@@ -1,9 +1,12 @@
 package p1xel.nobuildplus.listener;
 
+import org.bukkit.ExplosionResult;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.*;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.event.EventHandler;
@@ -158,7 +161,7 @@ public class NoBuildPlusEntityListener implements Listener {
         }
     }
 
-    // Flag: armorstand (Damage)
+    // Flag: `armorstand` (Damage)
     @EventHandler(ignoreCancelled = true)
     public void onArmorStandDamage(EntityDamageByEntityEvent e) {
 
@@ -852,6 +855,108 @@ public class NoBuildPlusEntityListener implements Listener {
         String worldName = entity.getWorld().getName();
         ProtectedWorld world = WorldManager.getWorld(worldName);
         if (!Flags.wind_charge.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+    }
+
+    // Flag: wither-damage
+    @EventHandler(ignoreCancelled = true)
+    public void onWitherDamage(EntityDamageByEntityEvent event) {
+
+        Entity damager = event.getDamager();
+
+        if (HookedPlugins.cancel(event.getEntity())) {
+            return;
+        }
+
+        String worldName = damager.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.wither_damage.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+    }
+
+    // Flag: wither-destroy
+    @EventHandler(ignoreCancelled = true)
+    public void onWitherDestroy(EntityExplodeEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (entity.getType() != EntityType.WITHER_SKULL) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.wither_destroy.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+    }
+
+    // Flag: tnt
+    @EventHandler
+    public void onTNTDestroyEntity(EntityDamageByEntityEvent event) {
+
+        Entity entity = event.getEntity();
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        Entity damager = event.getDamager();
+        EntityType type = damager.getType();
+        if (type != EntityType.TNT && type != EntityType.TNT_MINECART && !(damager instanceof Player) && !(damager instanceof EnderCrystal)) {
+            return;
+        }
+
+        if (event.getCause() != EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.tnt.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+    }
+
+    @Flag("mob-explode-damage")
+    @EventHandler
+    public void onMobExplosionDamagingEntity(EntityDamageByEntityEvent event) {
+
+        Entity entity = event.getEntity();
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        Entity damager = event.getDamager();
+
+        if (damager instanceof Player || damager instanceof TNTPrimed || damager instanceof ExplosiveMinecart || damager instanceof EnderCrystal) {
+            return;
+        }
+
+        if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.mob_explode_damage.isEnabled(world)) {
             return;
         }
 

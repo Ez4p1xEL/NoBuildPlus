@@ -24,6 +24,15 @@ public interface NoBuildPlusAPI {
     void registerFlag(Flag flag);
 
     /**
+     * Return the bool whether the player can do the action with flag.
+     * This method includes isWorldEnabled()
+     * @param world name of the world
+     * @param flag object Flags
+     * @return true if the player can do the action.
+     **/
+    boolean canDo(String world, Flag flag);
+
+    /**
      * Return the bool whether the plugin does protection with flag.
      * This method includes isWorldEnabled()
      * @param world name of the world

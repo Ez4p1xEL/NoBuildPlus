@@ -9,6 +9,7 @@ global-settings:
     container: false
     mob-damage: true
     mob-explode: false
+    mob-explode-damage: false
     pvp: false
     shoot: false
     tnt: false
@@ -69,6 +70,8 @@ global-settings:
     pressure-plate: true
     fire-spread: true
     wind-charge: true
+    wither-damage: true
+    wither-destroy: false
   # the usage of boolean (true/false) here does not equal to the usage of flag
   gamerules:
     advance_time: true

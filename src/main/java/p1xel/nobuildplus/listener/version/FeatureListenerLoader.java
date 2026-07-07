@@ -3,6 +3,7 @@ package p1xel.nobuildplus.listener.version;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.listener.gui.GUIListener;
+import p1xel.nobuildplus.listener.version.feature.CrystalListener;
 import p1xel.nobuildplus.listener.version.feature.WindChargeListener;
 
 import java.util.Arrays;
@@ -19,7 +20,8 @@ public class FeatureListenerLoader {
             new NBPEntityListener_1_13(),
             new NBPBlockListener_1_17(),
             new NBPPlayerListener_1_20(),
-            new WindChargeListener()
+            new WindChargeListener(),
+            new CrystalListener()
             );
 
 

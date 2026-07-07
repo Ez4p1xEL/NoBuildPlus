@@ -13,12 +13,14 @@ import p1xel.nobuildplus.listener.gui.GUIListener;
 import p1xel.nobuildplus.listener.text.TextEditMode;
 import p1xel.nobuildplus.listener.version.*;
 import p1xel.nobuildplus.storage.*;
+import p1xel.nobuildplus.tool.ColorUtil;
 import p1xel.nobuildplus.tool.bstats.Metrics;
 import p1xel.nobuildplus.tool.spigotmc.UpdateChecker;
 import p1xel.nobuildplus.world.WorldManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class NoBuildPlus extends JavaPlugin {
@@ -39,8 +41,18 @@ public class NoBuildPlus extends JavaPlugin {
     public static FoliaLib getFoliaLib() {return foliaLib;}
     public static TextEditMode getTextEditMode() { return textEditMode; }
 
+    private boolean firstLoad = false;
+
     @Override
     public void onLoad() {
+
+        // Check if the plugin is loaded for the first time
+        // 检查插件是否第一次被服务器加载
+        File dataFolder = getDataFolder();
+        if (!dataFolder.exists()) {
+            firstLoad = true;
+        }
+
         instance = this;
         foliaLib = new FoliaLib(this);
         api = new NBPAPI();
@@ -53,6 +65,16 @@ public class NoBuildPlus extends JavaPlugin {
 
         String[] stringVersion = getServer().getBukkitVersion().split("-")[0].split("\\.");
         version = new int[]{Integer.parseInt(stringVersion[0]), Integer.parseInt(stringVersion[1]), Integer.parseInt(stringVersion[2])};
+
+        // 加载 ColorUtil (Hex color support for 1.16.1+)
+        if (((version[0] == 1 && version[1] > 16) || (version[0] == 1 && version[1] == 16 && version[2] >= 1)) || version[0] >= 26) {
+            ColorUtil.hexColorEnabled = true;
+        }
+
+        // 更改语言
+        if (firstLoad) {
+            checkSystemLanguage();
+        }
 
         Locale.createLocaleFile();
         FlagsManager.createFlagsManagerFile();
@@ -235,6 +257,33 @@ public class NoBuildPlus extends JavaPlugin {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void checkSystemLanguage() {
+
+        java.util.Locale currentLocale = java.util.Locale.getDefault();
+        String language = currentLocale.getLanguage();
+        String country = currentLocale.getCountry();
+        String lang = language + "_" + country;
+
+        List<String> languages = Locale.getLanguages();
+
+        if (lang.equals("zh_HK")) {
+            lang = "zh_TW";
+        }
+
+        if (!languages.contains(language)) {
+            // 如果插件没有这个语言, 则默认配置文件的语言(英文)
+            if (!languages.contains(lang)) {
+                return;
+            }
+        } else {
+            lang = language;
+        }
+
+        getConfig().set("Language", lang);
+        saveConfig();
+
     }
 
 

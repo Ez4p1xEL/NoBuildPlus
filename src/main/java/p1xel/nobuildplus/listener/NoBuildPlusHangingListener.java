@@ -1,9 +1,11 @@
 package p1xel.nobuildplus.listener;
 
+import org.bukkit.block.data.type.TNT;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.hook.HookedPlugins;
@@ -19,7 +21,7 @@ public class NoBuildPlusHangingListener implements Listener {
 
         Entity entity = e.getRemover();
 
-        if (HookedPlugins.cancel(entity)) {
+        if (HookedPlugins.cancel(e.getEntity())) {
             return;
         }
 
@@ -30,9 +32,14 @@ public class NoBuildPlusHangingListener implements Listener {
             return;
         }
 
-        Player player = (Player) entity;
-        if (player.hasPermission(world.getPermission())) {
-            return;
+        Player player = null;
+        boolean isPlayer = entity instanceof Player;
+
+        if (isPlayer) {
+            player = (Player) entity;
+            if (player.hasPermission(world.getPermission())) {
+                return;
+            }
         }
 
 
@@ -40,7 +47,9 @@ public class NoBuildPlusHangingListener implements Listener {
 
             if (e.getEntity() instanceof GlowItemFrame) {
 
+                if (isPlayer) {
                 WorldManager.sendMessage(player, world);
+                }
                 e.setCancelled(true);
                 return;
 
@@ -50,7 +59,9 @@ public class NoBuildPlusHangingListener implements Listener {
 
         if (e.getEntity() instanceof ItemFrame) {
 
-            WorldManager.sendMessage(player, world);
+            if (isPlayer) {
+                WorldManager.sendMessage(player, world);
+            }
             e.setCancelled(true);
 
         }
@@ -167,5 +178,154 @@ public class NoBuildPlusHangingListener implements Listener {
         e.setCancelled(true);
 
     }
+
+    // Flag: frame
+    @EventHandler(ignoreCancelled = true)
+    public void onHangingBreak(HangingBreakEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (event.getCause() != HangingBreakEvent.RemoveCause.EXPLOSION) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+
+        if (!Flags.frame.isEnabled(world)) {
+            return;
+        }
+
+        if ((v[0] == 1 && v[1]>=17) || v[0] > 1) {
+
+            if (entity instanceof GlowItemFrame) {
+                event.setCancelled(true);
+                return;
+
+            }
+
+        }
+
+        if (entity instanceof ItemFrame) {
+
+            event.setCancelled(true);
+
+        }
+    }
+
+    // Flag: painting
+    @EventHandler(ignoreCancelled = true)
+    public void onPaintingBreak(HangingBreakEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (event.getCause() != HangingBreakEvent.RemoveCause.EXPLOSION) {
+            return;
+        }
+
+        if (entity.getType() != EntityType.PAINTING) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+
+        if (!Flags.painting.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+    }
+
+    @Flag("armorstand")
+    @EventHandler(ignoreCancelled = true)
+    public void onBreakArmorstand(HangingBreakEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (event.getCause() != HangingBreakEvent.RemoveCause.EXPLOSION) {
+            return;
+        }
+
+        if (entity.getType() != EntityType.ARMOR_STAND) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+
+        if (!Flags.armorstand.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+    }
+
+    @Flag("minecart")
+    @EventHandler(ignoreCancelled = true)
+    public void onBreakMinecart(HangingBreakEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (event.getCause() != HangingBreakEvent.RemoveCause.EXPLOSION) {
+            return;
+        }
+
+        if (!(entity instanceof Minecart)) {
+            return;
+        }
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+
+        if (!Flags.minecart.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+    }
+
+
+    @Flag("mob-explode-damage")
+    @EventHandler(ignoreCancelled = true)
+    public void onMobExplode(HangingBreakByEntityEvent event) {
+
+        Entity remover = event.getRemover();
+        Entity entity = event.getEntity();
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        if (event.getCause() != HangingBreakEvent.RemoveCause.EXPLOSION && (remover instanceof Player || remover instanceof TNTPrimed)) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+
+        if (!Flags.mob_explode_damage.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+    }
+
 
 }

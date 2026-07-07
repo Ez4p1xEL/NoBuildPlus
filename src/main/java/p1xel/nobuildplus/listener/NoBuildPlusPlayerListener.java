@@ -1,5 +1,6 @@
 package p1xel.nobuildplus.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -13,7 +14,9 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import p1xel.nobuildplus.Flags;
+import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.hook.HookedPlugins;
+import p1xel.nobuildplus.listener.gui.GUIAbstract;
 import p1xel.nobuildplus.storage.FlagsManager;
 import p1xel.nobuildplus.world.ProtectedWorld;
 import p1xel.nobuildplus.world.WorldManager;
@@ -886,6 +889,17 @@ public class NoBuildPlusPlayerListener implements Listener {
 
         WorldManager.sendMessage(player, world);
         e.setCancelled(true);
+
+        if (NoBuildPlus.getFoliaLib().isFolia()) {
+            NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> {
+                player.setFlying(false);
+            });
+            return;
+        } else {
+            Bukkit.getScheduler().runTaskLater(NoBuildPlus.getInstance(), () -> {
+                player.setFlying(false);
+            }, 1L);
+        }
 
     }
 

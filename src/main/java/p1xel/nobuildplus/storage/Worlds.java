@@ -1,14 +1,11 @@
 package p1xel.nobuildplus.storage;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 import p1xel.nobuildplus.NoBuildPlus;
-import p1xel.nobuildplus.gamerule.GameRuleRegistry;
+import p1xel.nobuildplus.tool.ColorUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,7 +55,7 @@ public class Worlds {
     public static String getDenyMessage(String world) {
         String m = yaml.getString(world + ".deny-message", null);
         if (m==null) {return null;}
-        return ChatColor.translateAlternateColorCodes('&', m);
+        return ColorUtil.translateHexColorCodes(m);
     }
 
     public static String getPermission(String world) {

@@ -1,9 +1,9 @@
 package p1xel.nobuildplus.storage;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import p1xel.nobuildplus.NoBuildPlus;
+import p1xel.nobuildplus.tool.ColorUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,7 +66,7 @@ public class Locale {
 
     public static String getMessage(String path) {
         try {
-            return ChatColor.translateAlternateColorCodes('&', yaml.getString(path).replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
+            return ColorUtil.translateHexColorCodes(yaml.getString(path).replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
         } catch (NullPointerException event){
             NoBuildPlus.getInstance().getLogger().warning("message of " + path + " is not found.");
             NoBuildPlus.getInstance().getLogger().warning("Your language file is not updated to the latest. Please delete it and let it to be re-generated.");
@@ -75,14 +75,14 @@ public class Locale {
     }
 
     public static String getCmdMessage(String path) {
-        return ChatColor.translateAlternateColorCodes('&', yaml.getString(path).replaceAll("%prefix%", yaml.getString("commands-plugin-name")).replaceAll("%version%", Config.getVersion()));
+        return ColorUtil.translateHexColorCodes(yaml.getString(path).replaceAll("%prefix%", yaml.getString("commands-plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
 
     public static String translate(String message) {
-        return ChatColor.translateAlternateColorCodes('&', message.replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
+        return ColorUtil.translateHexColorCodes(message.replaceAll("%prefix%", yaml.getString("plugin-name")).replaceAll("%version%", Config.getVersion()));
     }
 
-    public List<String> getLanguages() { return languages; }
+    public static List<String> getLanguages() { return languages; }
 
 
 }

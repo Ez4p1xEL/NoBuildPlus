@@ -19,7 +19,7 @@ public class NBPAPI implements NoBuildPlusAPI {
     private final String version;
 
     public NBPAPI() {
-        this.version = "v0.3";
+        this.version = "v0.4";
     }
 
     @Override
@@ -31,6 +31,11 @@ public class NBPAPI implements NoBuildPlusAPI {
     public void registerFlag(Flag flag) {
         FlagRegistry.registerFlag(flag);
         FlagsManager.defaultFlagList();
+    }
+
+    @Override
+    public boolean canDo(String world, Flag flag) {
+        return !flag.isEnabled(world);
     }
 
     @Override

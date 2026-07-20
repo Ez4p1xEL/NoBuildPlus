@@ -66,7 +66,14 @@ public class NoBuildPlus extends JavaPlugin {
     public void onEnable() {
 
         String[] stringVersion = getServer().getBukkitVersion().split("-")[0].split("\\.");
-        version = new int[]{Integer.parseInt(stringVersion[0]), Integer.parseInt(stringVersion[1]), Integer.parseInt(stringVersion[2])};
+        
+        // --- 修复版本号解析越界问题 ---
+        int major = Integer.parseInt(stringVersion[0]);
+        int minor = Integer.parseInt(stringVersion[1]);
+        // 如果版本号只有两段 (如 1.21)，则第三段默认为 0
+        int patch = stringVersion.length > 2 ? Integer.parseInt(stringVersion[2]) : 0;
+        version = new int[]{major, minor, patch};
+        // ------------------------------
 
         // 加载 ColorUtil (Hex color support for 1.16.1+)
         if (((version[0] == 1 && version[1] > 16) || (version[0] == 1 && version[1] == 16 && version[2] >= 1)) || version[0] >= 26) {
@@ -289,6 +296,5 @@ public class NoBuildPlus extends JavaPlugin {
         saveConfig();
 
     }
-
 
 }

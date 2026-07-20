@@ -11,9 +11,10 @@ world-setting:
     gamerule: YELLOW_STAINED_GLASS_PANE
   edit-permission: COMMAND_BLOCK
   edit-deny-message: FEATHER
+  apply-template: WRITABLE_BOOK
 
 main:
-  default-template-entry: BOOK
+  template-entry: BOOK
   add-world: LIME_STAINED_GLASS_PANE
   close: BARRIER
 

@@ -43,15 +43,19 @@ not-player: '&cDu musst ein Spieler sein, um das zu tun.'
 tp-success: '&7&l%prefix% &8&l>> &aDu wurdest zum Spawn von &9%world%&a teleportiert.'
 wrong-arg: '&7&l%prefix% &8&l>> &cFalsches Argument!'
 gui-not-support: '&7&l%prefix% &8&l> &cDeine Serverversion unterstützt die GUI-Funktion nicht.'
+template-flag-set-success: '&7&l%prefix% &8&l> &aDu hast das Flag &e%flag% &a der Vorlage &6%template%&a auf &e%boolean%&a gesetzt.'
 default-flag-set-success: '&7&l%prefix% &8&l> &aDu hast das Flag &e%flag% &a der Standardvorlage auf &e%boolean%&a gesetzt.'
 join-mode: '&7&l%prefix% &8&l> &aDu befindest dich im Texteingabemodus, bitte gib den Inhalt ein oder %cancel% zum Beenden.'
 already-in-mode: '&7&l%prefix% &8&l> &cDu befindest dich bereits in einem Modus, bitte gib %cancel% zum Beenden ein.'
 quit-mode: '&7&l%prefix% &8&l> &cDu verlässt den Texteingabemodus...'
+edit-template-permission: '&7&l%prefix% &8&l> &aDu hast die Berechtigung der Vorlage &6%template%&a auf &e%permission%&a geändert.'
 edit-default-permission: '&7&l%prefix% &8&l> &aDu hast die Berechtigung der Standardvorlage auf &e%permission%&a geändert.'
+edit-template-deny-message: '&7&l%prefix% &8&l> &aDu hast die Ablehnungsnachricht der Vorlage &6%template%&a auf &e%message%&a geändert.'
 edit-default-deny-message: '&7&l%prefix% &8&l> &aDu hast die Ablehnungsnachricht der Standardvorlage auf &e%message%&a geändert.'
 edit-permission: '&7&l%prefix% &8&l> &aDu hast die Berechtigung der Welt &9%world% &a auf &e%permission%&a geändert.'
 edit-deny-message: '&7&l%prefix% &8&l> &aDu hast die Ablehnungsnachricht der Welt &9%world% &a auf &e%message%&a geändert.'
 default-gamerule-set-success: '&7&l%prefix% &8&l> &aDu hast die Standardvorlage der Spielregel &e%gamerule% &aauf &e%value% gesetzt'
+template-gamerule-set-success: '&7&l%prefix% &8&l> &aDu hast die Spielregel &e%gamerule% &a der Vorlage &6%template%&a auf &e%value%&a gesetzt.'
 gamerule-set-success: '&7&l%prefix% &8&l> &aDu hast die Spielregel &e%gamerule% &a der Welt &9%world% &aauf &e%value% gesetzt'
 invalid-amount: '&7&l%prefix% &8&l> &cUnbekannter Wert'
 invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cexistiert nicht auf diesem Minecraft-Server in dieser Version!'
@@ -60,6 +64,8 @@ Wenn du das Verwaltungsmenü nicht über diesen Befehl öffnen möchtest, kannst
 &6&oDiese Benachrichtigung kann ebenfalls in der config.yml von NoBuildPlus deaktiviert werden!'
 documentation: '&e&l&n&oHier klicken, um die PixelCraft-Dokumentation zu öffnen'
 world-flag: '&e%flag% &avon &9%world% &aist derzeit auf &e%boolean%&a gesetzt.'
+cant-find-template: '&7&l%prefix% &8&l>> &cVorlage &6%template%&c nicht gefunden.'
+template-apply: '&7&l%prefix% &8&l>> &aDu hast die Vorlage &6%template% &aauf die Welt &9%world% &aangewendet.'
 
 gui:
   messages:
@@ -95,6 +101,15 @@ gui:
           - '&7für den Schutz.'
           - ''
           - '&7Klicken zum Hinzufügen'
+      edit-template:
+        display_name: '&aVorlage bearbeiten'
+        lore:
+          - ''
+          - '&7Bearbeite die Vorlage der'
+          - '&7Einstellungen für neue'
+          - '&7aktivierte Welt(en)'
+          - ''
+          - '&7Klicken zum Bearbeiten'
       edit-default:
         display_name: '&aStandardvorlage bearbeiten'
         lore:
@@ -252,6 +267,14 @@ gui:
           - '&7Aktuell: &7%message%'
           - ''
           - '&7Klicken zum Bearbeiten'
+      apply-template:
+        display_name: '&aVorlage anwenden'
+        lore:
+          - ''
+          - '&7Wende die Einstellungen der Vorlage'
+          - '&7auf diese Welt an.'
+          - ''
+          - '&7Klicken zum Anwenden'
       next_page:
         display_name: '&aNächste Seite'
         lore:
@@ -270,8 +293,101 @@ gui:
           - ''
           - '&7Klicken zum Wechseln'
           - ''
+  edit-template:
+    title: 'Vorlage der Flag-Einstellungen bearbeiten'
+    items:
+      type:
+        display_name: '&aAktueller Typ: &6%type%'
+        lore:
+          - ''
+          - '&7Du befindest dich derzeit'
+          - '&7im Bedienfeld von %type%'
+          - ''
+          - '&aKlicken zum Umschalten'
+      flag:
+        display_name: '&e%flag% &7(%bool%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aKlicken zum Umschalten'
+      gamerule:
+        display_name: '&e%gamerule% &7(%bool%%int%&7)'
+        lore:
+          - ''
+          - '&7%description%'
+          - ''
+          - '&aKlicken zum Umschalten'
+      edit-permission:
+        display_name: '&aBerechtigung bearbeiten'
+        lore:
+          - ''
+          - '&7Aktuelle Berechtigung: &b%permission%'
+          - '&7Spieler mit dieser Berechtigung können'
+          - '&7den Schutz von NoBuildPlus umgehen'
+          - ''
+          - '&7Klicken zum Bearbeiten'
+      edit-deny-message:
+        display_name: '&aAblehnungsnachricht bearbeiten'
+        lore:
+          - ''
+          - '&7Aktuell: &7%message%'
+          - ''
+          - '&7Klicken zum Bearbeiten'
+      next_page:
+        display_name: '&aNächste Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      previous_page:
+        display_name: '&aVorherige Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      back_to_main:
+        display_name: '&cZurück zum Hauptmenü'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+  template-list:
+    title: 'Vorlagenliste'
+    items:
+      template:
+        display_name: '&e%name%'
+        lore:
+          - ''
+          - '&7Label: &6%label%'
+          - '&7Beschreibung:'
+          - '&f%description%'
+          - '&7Berechtigung: &b%permission%'
+          - '&7Ablehnungsnachricht:'
+          - '&c%deny_message%'
+          - ''
+          - '&7Klicken zum Auswählen'
+      next_page:
+        display_name: '&aNächste Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      previous_page:
+        display_name: '&aVorherige Seite'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
+      back_to_main:
+        display_name: '&cZurück'
+        lore:
+          - ''
+          - '&7Klicken zum Wechseln'
+          - ''
 
 flag:
+  name: 'Flag'
   description:
     break: 'Block zerstören'
     build: 'Block platzieren'
@@ -427,6 +543,7 @@ gamerule:
     spectators_generate_chunks: Zuschauer erzeugen Chunks beim Bewegen.
     spectatorsGenerateChunks: Zuschauer erzeugen Chunks beim Bewegen.
     locator_bar: Zeigt die Locator-Leiste für Kompassverfolgung an.
+    locatorBar: Zeigt die Locator-Leiste für Kompassverfolgung an.
     global_sound_events: Aktiviert globale Soundereignisse.
     globalSoundEvents: Aktiviert globale Soundereignisse.
     allow_entering_nether_using_portals: Erlaubt den Eintritt ins Nether über Portale.
@@ -455,6 +572,7 @@ gamerule:
     fire_damage: Aktiviert Feuerschaden.
     fireDamage: Aktiviert Feuerschaden.
     tnt_explodes: Aktiviert TNT-Explosionen.
+    tntExplodes: Aktiviert TNT-Explosionen.
     players_sleeping_percentage: Legt den Prozentsatz der schlafenden Spieler fest.
     playersSleepingPercentage: Legt den Prozentsatz der schlafenden Spieler fest.
     projectiles_can_break_blocks: Bestimmt, ob Projektile Blöcke zerstören können.
@@ -473,3 +591,5 @@ value: '&b%value%'
 overworld: '&a[OVERWORLD]'
 nether: '&c[NETHER]'
 the_end: '&6[THE END]'
+
+no-description: '&7Keine Beschreibung angegeben.'

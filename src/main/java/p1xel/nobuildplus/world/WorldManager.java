@@ -6,12 +6,14 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 import p1xel.nobuildplus.Flag;
+import p1xel.nobuildplus.FlagRegistry;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.gamerule.GameRuleRegistry;
 import p1xel.nobuildplus.storage.Config;
 import p1xel.nobuildplus.storage.Logger;
 import p1xel.nobuildplus.storage.Settings;
 import p1xel.nobuildplus.storage.Worlds;
+import p1xel.nobuildplus.storage.template.Template;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -143,6 +145,25 @@ public class WorldManager {
         ProtectedWorld world = enabled_worlds.get(worldName);
         if (world == null) { return; }
         sendMessage(player, world);
+    }
+
+    public static void applyTemplate(ProtectedWorld protectedWorld, Template template) {
+        NBPWorld world = (NBPWorld) protectedWorld;
+
+        world.updatePermission(template.getPermission());
+        world.updateDenyMessage(template.getDenyMessage());
+
+        // Apply Flags
+        for (Flag flag : FlagRegistry.getAllFlags()) {
+            world.updateFlag(flag, template.getFlag(flag));
+        }
+
+        // Apply GameRules
+        for (String ruleName : GameRuleRegistry.getRegisteredGameRules()) {
+            Object value = template.getGameRule(ruleName);
+            if (value == null) { continue; }
+            GameRuleRegistry.setWorldGameRule(world.getWorldName(), ruleName, value);
+        }
     }
 
 }

@@ -48,7 +48,8 @@ public class MenuConfig {
         WORLD_SETTING_TYPE_BUTTON_GAMERULE = yaml.getString("world-setting.type-button.gamerule");
         WORLD_SETTING_EDIT_PERMISSION = yaml.getString("world-setting.edit-permission");
         WORLD_SETTING_EDIT_DENY_MESSAGE = yaml.getString("world-setting.edit-deny-message");
-        MAIN_DEFAULT_TEMPLATE_ENTRY = yaml.getString("main.default-template-entry");
+        WORLD_SETTING_APPLY_TEMPLATE = yaml.getString("world-setting.apply-template");
+        MAIN_TEMPLATE_ENTRY = yaml.getString("main.template-entry");
         MAIN_ADD_WORLD = yaml.getString("main.add-world");
         MAIN_CLOSE = yaml.getString("main.close");
         BUTTON_WIKI = yaml.getString("button.wiki");
@@ -64,7 +65,8 @@ public class MenuConfig {
     public static String WORLD_SETTING_TYPE_BUTTON_GAMERULE;
     public static String WORLD_SETTING_EDIT_PERMISSION;
     public static String WORLD_SETTING_EDIT_DENY_MESSAGE;
-    public static String MAIN_DEFAULT_TEMPLATE_ENTRY;
+    public static String WORLD_SETTING_APPLY_TEMPLATE;
+    public static String MAIN_TEMPLATE_ENTRY;
     public static String MAIN_ADD_WORLD;
     public static String MAIN_CLOSE;
     public static String BUTTON_WIKI;

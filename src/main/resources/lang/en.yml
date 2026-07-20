@@ -43,15 +43,15 @@ not-player: '&cYou must be a player to do that.'
 tp-success: '&7&l%prefix% &8&l>> &aYou teleport to spawn of &9%world%&a.'
 wrong-arg: '&7&l%prefix% &8&l>> &cWrong argument!'
 gui-not-support: '&7&l%prefix% &8&l> &cYour server version does not support GUI feature.'
-default-flag-set-success: '&7&l%prefix% &8&l> &aYou set flag &e%flag% &aof default template to &e%boolean%&a.'
+template-flag-set-success: '&7&l%prefix% &8&l> &aYou set flag &e%flag% &aof template &6%template%&a to &e%boolean%&a.'
 join-mode: '&7&l%prefix% &8&l> &aYou are in text editing mode, please enter the content or enter %cancel% to quit. '
 already-in-mode: '&7&l%prefix% &8&l> &cYou are currently in a mode, please enter %cancel% to quit.'
 quit-mode: '&7&l%prefix% &8&l> &cYou are quitting text editing mode...'
-edit-default-permission: '&7&l%prefix% &8&l> &aYou edited the permission of default template to &e%permission%&a.'
-edit-default-deny-message: '&7&l%prefix% &8&l> &aYou edited the deny message of default template to &e%message%&a.'
+edit-template-permission: '&7&l%prefix% &8&l> &aYou edited the permission of template &6%template%&a to &e%permission%&a.'
+edit-template-deny-message: '&7&l%prefix% &8&l> &aYou edited the deny message of template &6%template%&a to &e%message%&a.'
 edit-permission: '&7&l%prefix% &8&l> &aYou edited the permission of &9%world% &ato &e%permission%&a.'
 edit-deny-message: '&7&l%prefix% &8&l> &aYou edited the deny message of &9%world% &ato &e%message%&a.'
-default-gamerule-set-success: '&7&l%prefix% &8&l> &aYou set gamerule &e%gamerule% &aof default template to &e%value%&a.'
+template-gamerule-set-success: '&7&l%prefix% &8&l> &aYou set gamerule &e%gamerule% &aof template &6%template%&a to &e%value%&a.'
 gamerule-set-success: '&7&l%prefix% &8&l> &aYou set &9%world%&a''s gamerule &e%gamerule% &ato &e%value%&a.'
 invalid-amount: '&7&l%prefix% &8&l> &cInvalid amount.'
 invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cdoes not exist in this minecraft version!'
@@ -60,6 +60,8 @@ If you don''t want to open the management menu through this command, you are fee
 &6&oThis notification can also be disabled in config.yml of NoBuildPlus!'
 documentation: '&e&l&n&oClick here to open PixelCraft Documentation'
 world-flag: '&e%flag% &aof &9%world% &ais currently set to &e%boolean%&a.'
+cant-find-template: '&7&l%prefix% &8&l>> &cCant''t find template &6%template%&c.'
+template-apply: '&7&l%prefix% &8&l>> &aYou applied template &6%template% &ato world &9%world%&a.'
 
 gui:
   messages:
@@ -94,11 +96,11 @@ gui:
           - '&7for protection.'
           - ''
           - '&7Click to add'
-      edit-default:
-        display_name: '&aEdit default template'
+      edit-template:
+        display_name: '&aEdit template'
         lore:
           - ''
-          - '&7Edit the default template of'
+          - '&7Edit the template of'
           - '&7settings for new'
           - '&7enabled world(s)'
           - ''
@@ -151,8 +153,8 @@ gui:
           - ''
           - '&7Click to switch'
           - ''
-  edit-default:
-    title: 'Edit default template of flag settings'
+  edit-template:
+    title: 'Template %name% (%label%)'
     items:
       type:
         display_name: '&aCurrent Type: &6%type%'
@@ -251,6 +253,14 @@ gui:
           - '&7Current: &7%message%'
           - ''
           - '&7Click to edit'
+      apply-template:
+        display_name: '&aApply template'
+        lore:
+          - ''
+          - '&7Apply the settings of template'
+          - '&7to this world.'
+          - ''
+          - '&7Click to apply'
       next_page:
         display_name: '&aNext page'
         lore:
@@ -265,6 +275,39 @@ gui:
           - ''
       back_to_main:
         display_name: '&cBack to main menu'
+        lore:
+          - ''
+          - '&7Click to switch'
+          - ''
+  template-list:
+    title: 'Template list'
+    items:
+      template:
+        display_name: '&e%name%'
+        lore:
+          - ''
+          - '&7Label: &6%label%'
+          - '&7Description:'
+          - '&f%description%'
+          - '&7Permission: &b%permission%'
+          - '&7Deny message:'
+          - '&c%deny_message%'
+          - ''
+          - '&7Click to select'
+      next_page:
+        display_name: '&aNext page'
+        lore:
+          - ''
+          - '&7Click to switch'
+          - ''
+      previous_page:
+        display_name: '&aPrevious page'
+        lore:
+          - ''
+          - '&7Click to switch'
+          - ''
+      back_to_main:
+        display_name: '&cGo back'
         lore:
           - ''
           - '&7Click to switch'
@@ -475,3 +518,5 @@ value: '&b%value%'
 overworld: '&a[OVERWORLD]'
 nether: '&c[NETHER]'
 the_end: '&6[THE END]'
+
+no-description: '&7No description provided.'

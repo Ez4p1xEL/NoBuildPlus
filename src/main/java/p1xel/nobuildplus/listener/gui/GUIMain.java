@@ -57,10 +57,10 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
 
         Material closeButton = Material.matchMaterial(MenuConfig.MAIN_CLOSE);
         Material addButton = Material.matchMaterial(MenuConfig.MAIN_ADD_WORLD);
-        Material templateButton = Material.matchMaterial(MenuConfig.MAIN_DEFAULT_TEMPLATE_ENTRY);
+        Material templateButton = Material.matchMaterial(MenuConfig.MAIN_TEMPLATE_ENTRY);
         inventory = setItem(inventory, "close", closeButton != null ? closeButton : Material.BARRIER, 9*(size+2)-5);
         inventory = setItem(inventory, "add", addButton != null ? addButton : Material.LIME_STAINED_GLASS_PANE, 4);
-        inventory = setItem(inventory, "edit-default", templateButton != null ? templateButton : Material.BOOK, 3);
+        inventory = setItem(inventory, "edit-template", templateButton != null ? templateButton : Material.BOOK, 3);
 
         this.inventory = inventory;
         update(worlds);
@@ -170,8 +170,8 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
                 player.playSound(player.getLocation(), Sound.BLOCK_SLIME_BLOCK_PLACE, 1.0f, 1.0f);
                 return true;
             }
-            case "edit-default": {
-                player.openInventory(new GUIDefaultTemplate(1, GUIType.FLAG).getInventory());
+            case "edit-template": {
+                player.openInventory(new GUITemplateList(1, "edit", this).getInventory());
                 player.playSound(player.getLocation(), Sound.ENTITY_ARMOR_STAND_BREAK, 1.0f, 1.0f);
                 return true;
             }

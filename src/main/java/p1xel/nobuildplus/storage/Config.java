@@ -28,6 +28,7 @@ public class Config {
         RuleSetting.createFile();
         Logger.setEnabled(Config.getBool("debug"));
         MenuConfig.initialization();
+        NoBuildPlus.getTemplateManager().initializeTemplates();
 
     }
 

@@ -10,11 +10,10 @@ import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.Nullable;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.gamerule.GameRuleRegistry;
-import p1xel.nobuildplus.listener.gui.GUIAbstract;
-import p1xel.nobuildplus.listener.gui.GUIDefaultTemplate;
-import p1xel.nobuildplus.listener.gui.GUIType;
-import p1xel.nobuildplus.listener.gui.GUIWorld;
+import p1xel.nobuildplus.listener.gui.*;
 import p1xel.nobuildplus.storage.*;
+import p1xel.nobuildplus.storage.template.Template;
+import p1xel.nobuildplus.storage.template.TemplateManager;
 import p1xel.nobuildplus.world.WorldManager;
 
 import java.util.HashMap;
@@ -66,12 +65,15 @@ public class TextEditMode implements Listener {
         }
 
         String action = status.get(player);
+        TemplateManager templateManager = NoBuildPlus.getTemplateManager();
         switch (action) {
 
-            case "edit-default-permission": {
+            case "edit-template-permission": {
 
-                Settings.setPermission(text);
-                player.sendMessage(Locale.getMessage("edit-default-permission").replaceAll("%permission%", text));
+                GUITemplate gui = (GUITemplate) last_viewed_inventories.get(player);
+                Template template = gui.getTemplate();
+                templateManager.setPermission(template, text);
+                player.sendMessage(Locale.getMessage("edit-template-permission").replace("%permission%", text).replace("%template%", template.getName()));
                 player.sendMessage(Locale.getMessage("quit-mode"));
                 player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
                 openInventory(player);
@@ -80,10 +82,12 @@ public class TextEditMode implements Listener {
 
             }
 
-            case "edit-default-deny-message": {
+            case "edit-template-deny-message": {
 
-                Settings.setDenyMessageString(text);
-                player.sendMessage(Locale.getMessage("edit-default-deny-message").replaceAll("%message%", text));
+                GUITemplate gui = (GUITemplate) last_viewed_inventories.get(player);
+                Template template = gui.getTemplate();
+                templateManager.setDenyMessage(template, text);
+                player.sendMessage(Locale.getMessage("edit-template-deny-message").replace("%message%", text).replace("%template%", template.getName()));
                 player.sendMessage(Locale.getMessage("quit-mode"));
                 player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
                 openInventory(player);
@@ -119,7 +123,7 @@ public class TextEditMode implements Listener {
 
         }
 
-        if (action.startsWith("edit-default-gamerule:")) {
+        if (action.startsWith("edit-template-gamerule:")) {
 
             String gameruleName = action.split(":")[1];
             int number;
@@ -129,8 +133,10 @@ public class TextEditMode implements Listener {
                 player.sendMessage(Locale.getMessage("invalid-amount"));
                 return;
             }
-            Settings.setDefaultGameRule(gameruleName, number);
-            player.sendMessage(Locale.getMessage("default-gamerule-set-success").replace("%gamerule%", gameruleName).replace("%value%", text));
+            GUITemplate gui = (GUITemplate) last_viewed_inventories.get(player);
+            Template template = gui.getTemplate();
+            templateManager.setGameRule(template, gameruleName, number);
+            player.sendMessage(Locale.getMessage("template-gamerule-set-success").replace("%gamerule%", gameruleName).replace("%value%", text).replace("%template%", template.getName()));
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
             openInventory(player);

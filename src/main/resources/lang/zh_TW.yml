@@ -59,8 +59,14 @@ invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &c並不存在於你所在的
 gamerule-notice: '&c&l&n溫馨提示&a 你因為輸入了 /gamerule 指令而開啟了這個由 NoBuildPlus 提供的原版遊戲規則管理選單, 
 如果你不想透過該指令來開啟管理選單, 你完全、自由地或不受限制地可以在 NoBuildPlus 的 config 檔案中關閉, 
 &6&o這條提示訊息也同樣可在 config 中關閉'
+template-flag-set-success: '&7&l%prefix% &8&l> &a你設定了模板 &6%template%&a 的規則 &e%flag% 為 &e%boolean%&a'
+edit-template-permission: '&7&l%prefix% &8&l> &a你更改了模板 &6%template%&a 的權限為 &e%permission%&a'
+edit-template-deny-message: '&7&l%prefix% &8&l> &a你更改了模板 &6%template%&a 的拒絕訊息為 &e%message%&a'
+template-gamerule-set-success: '&7&l%prefix% &8&l> &a你設定了模板 &6%template%&a 的遊戲規則 &e%gamerule% 為 &e%value%&a'
+cant-find-template: '&7&l%prefix% &8&l>> &c找不到模板 &6%template%&c'
 documentation: '&e&l&n&o點擊這裏前往 PixelCraft 使用文檔'
 world-flag: '&e%flag% &a在 &9%world% &a中目前設定為 &e%boolean%&a。'
+template-apply: '&7&l%prefix% &8&l> &a你套用了模板 &6%template%&a 至世界 &9%world%&a'
 
 gui:
   messages:
@@ -94,32 +100,13 @@ gui:
           - '&7為其加入世界保護'
           - ''
           - '&7點擊新增'
-      edit-default:
-        display_name: '&a編輯預設模板'
+      edit-template:
+        display_name: '&a編輯模板'
         lore:
           - ''
-          - '&7修改預設模板的規則設定'
-          - '&7使下次啟用的世界可直接套用'
+          - '&7編輯用於新啟用世界的模板設定'
           - ''
-          - '&7點擊編輯'
-      next_page:
-        display_name: '&a下一頁'
-        lore:
-          - ''
-          - '&7點擊切換'
-          - ''
-      previous_page:
-        display_name: '&a上一頁'
-        lore:
-          - ''
-          - '&7點擊切換'
-          - ''
-      close:
-        display_name: '&c關閉選單'
-        lore:
-          - ''
-          - '&7點擊關閉'
-          - ''
+          - '&7點擊以編輯'
   list:
     title: '為世界新增世界保護'
     items:
@@ -150,17 +137,50 @@ gui:
           - ''
           - '&7點擊切換'
           - ''
-  edit-default:
-    title: '更改預設模板的規則'
+  template-list:
+    title: '範本列表'
+    items:
+      template:
+        display_name: '&e%name%'
+        lore:
+          - ''
+          - '&7標籤: &6%label%'
+          - '&7說明:'
+          - '&f%description%'
+          - '&7權限: &b%permission%'
+          - '&7拒絕訊息:'
+          - '&c%deny_message%'
+          - ''
+          - '&7點擊以選擇'
+      next_page:
+        display_name: '&a下一頁'
+        lore:
+          - ''
+          - '&7點擊切換'
+          - ''
+      previous_page:
+        display_name: '&a上一頁'
+        lore:
+          - ''
+          - '&7點擊切換'
+          - ''
+      back_to_main:
+        display_name: '&c返回主選單'
+        lore:
+          - ''
+          - '&7點擊切換'
+          - ''
+  edit-template:
+    title: '範本 %name% (%label%)'
     items:
       type:
         display_name: '&a目前類型: &6%type%'
         lore:
           - ''
-          - '&7你目前正處於'
-          - '&7%type% 的操作界面'
+          - '&7你目前正在'
+          - '&7%type% 的操作介面'
           - ''
-          - '&a点击切换'
+          - '&a點擊切換'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
         lore:
@@ -176,19 +196,19 @@ gui:
           - ''
           - '&a點擊切換'
       edit-permission:
-        display_name: '&a編輯預設權限節點'
+        display_name: '&a編輯權限'
         lore:
           - ''
-          - '&7當前權限: &b%permission%'
-          - '&7擁有該權限節點的玩家'
-          - '&7將無視NoBuildPlus的世界保護'
+          - '&7目前權限: &b%permission%'
+          - '&7有此權限的玩家可以繞過'
+          - '&7NoBuildPlus 的保護'
           - ''
           - '&7點擊編輯'
       edit-deny-message:
         display_name: '&a編輯拒絕訊息'
         lore:
           - ''
-          - '&7當前: &7%message%'
+          - '&7目前: &7%message%'
           - ''
           - '&7點擊編輯'
       next_page:
@@ -213,13 +233,13 @@ gui:
     title: '更改 %world% 規則'
     items:
       type:
-        display_name: '&a目前類型: &6%type%'
-        lore:
-          - ''
-          - '&7你目前正處於'
-          - '&7%type% 的操作界面'
-          - ''
-          - '&a点击切换'
+      display_name: '&a目前類型: &6%type%'
+      lore:
+        - ''
+        - '&7你目前正處於'
+        - '&7%type% 的操作界面'
+        - ''
+        - '&a点击切换'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
         lore:
@@ -250,6 +270,14 @@ gui:
           - '&7當前: &7%message%'
           - ''
           - '&7點擊編輯'
+      apply-template:
+        display_name: '&a套用模板'
+        lore:
+          - ''
+          - '&7套用模板將會覆蓋'
+          - '&7當前世界的規則設定'
+          - ''
+          - '&7點擊套用'
       next_page:
         display_name: '&a下一頁'
         lore:

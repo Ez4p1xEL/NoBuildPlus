@@ -16,6 +16,7 @@ import p1xel.nobuildplus.FlagRegistry;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.gamerule.GameRuleRegistry;
 import p1xel.nobuildplus.storage.*;
+import p1xel.nobuildplus.tool.ColorUtil;
 import p1xel.nobuildplus.world.NBPWorld;
 import p1xel.nobuildplus.world.WorldManager;
 
@@ -91,8 +92,10 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
 
             Material edit_permission = Material.matchMaterial(MenuConfig.WORLD_SETTING_EDIT_PERMISSION);
             Material edit_deny_message = Material.matchMaterial(MenuConfig.WORLD_SETTING_EDIT_DENY_MESSAGE);
+            Material apply_template = Material.matchMaterial(MenuConfig.WORLD_SETTING_APPLY_TEMPLATE);
             setItem(edit_permission != null ? edit_permission : Material.PAPER, "edit-permission", 2);
             setItem(edit_deny_message != null ? edit_deny_message : Material.PAPER, "edit-deny-message", 6);
+            setItem(apply_template != null ? apply_template : Material.WRITABLE_BOOK, "apply-template", 8);
         }
 
         update(list);
@@ -108,19 +111,11 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
 
         switch (menu_id) {
 
-            case "back_to_main": {
-
-                display_name = Locale.getMessage("gui.world.items." + menu_id + ".display_name");
-                lore = Locale.yaml.getStringList("gui.world.items." + menu_id + ".lore").stream()
-                        .map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
-                break;
-            }
-
             case "edit-permission": {
                 display_name = Locale.getMessage("gui.world.items." + menu_id + ".display_name");
                 lore = Locale.yaml.getStringList("gui.world.items." + menu_id + ".lore").stream()
-                        .map(line -> ChatColor.translateAlternateColorCodes('&', line))
-                        .map(line -> line.replaceAll("%permission%", world.getPermission())).collect(Collectors.toList());
+                        .map(ColorUtil::translateHexColorCodes)
+                        .map(line -> line.replace("%permission%", world.getPermission())).collect(Collectors.toList());
                 break;
             }
 
@@ -128,8 +123,15 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 String message = world.getDenyMessage() != null ? world.getDenyMessage() : "";
                 display_name = Locale.getMessage("gui.world.items." + menu_id + ".display_name");
                 lore = Locale.yaml.getStringList("gui.world.items." + menu_id + ".lore").stream()
-                        .map(line -> ChatColor.translateAlternateColorCodes('&', line))
-                        .map(line -> line.replaceAll("%message%", message)).collect(Collectors.toList());
+                        .map(ColorUtil::translateHexColorCodes)
+                        .map(line -> line.replace("%message%", message)).collect(Collectors.toList());
+                break;
+            }
+
+            default: {
+                display_name = Locale.getMessage("gui.world.items." + menu_id + ".display_name");
+                lore = Locale.yaml.getStringList("gui.world.items." + menu_id + ".lore").stream()
+                        .map(ColorUtil::translateHexColorCodes).collect(Collectors.toList());
                 break;
             }
         }
@@ -362,6 +364,12 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
                 player.closeInventory();
                 return true;
             }
+
+            case "apply-template": {
+                player.openInventory(new GUITemplateList(1, "apply", this).getInventory());
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1.0f, 1.0f);
+                return true;
+            }
         }
 
         if (name.startsWith("flag:")) {
@@ -422,5 +430,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         return page;
     }
 
-    public GUIType guiType() { return type; }
+    public GUIType getType() { return type; }
+
+    public String getWorldName() { return worldName;}
 }

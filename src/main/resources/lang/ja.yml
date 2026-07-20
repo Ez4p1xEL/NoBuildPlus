@@ -58,158 +58,197 @@ invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &cはこのMinecraftバージ
 gamerule-notice: '&c&l&n注意事項&a あなたは /gamerule コマンドを実行したため、NoBuildPlus が提供する gamerule 管理メニューを開いています。 
 このコマンドで管理メニューを開きたくない場合は、NoBuildPlus の config で無効にすることができます。
 &6&oこの通知も NoBuildPlus の config.yml で無効にできます！'
+template-flag-set-success: '&7&l%prefix% &8&l> &aテンプレート &6%template%&a のフラグ &e%flag% を &e%boolean% に設定しました。'
+edit-template-permission: '&7&l%prefix% &8&l> &aテンプレート &6%template%&a の権限を &e%permission% に編集しました。'
+edit-template-deny-message: '&7&l%prefix% &8&l> &aテンプレート &6%template%&a の拒否メッセージを &e%message% に編集しました。'
+template-gamerule-set-success: '&7&l%prefix% &8&l> &aテンプレート &6%template%&a のゲームルール &e%gamerule% を &e%value% に設定しました'
+cant-find-template: '&7&l%prefix% &8&l>> &cテンプレート &6%template%&c が見つかりません。'
 documentation: '&e&l&n&oここをクリックして PixelCraft 使用ドキュメントへ'
 world-flag: '&9%world% &a の &e%flag% &a は現在 &e%boolean%&a に設定されています。'
+template-apply: '&7&l%prefix% &8&l> &aテンプレート &6%template%&a をワールド &9%world%&a に適用しました。'
 
 gui:
   messages:
-    not-enabled: '&c&oこのワールドは保護されていないため、モードを変更することはできません。'
+    not-enabled: '&c&oThis world is not under protection, you can''t change the mode.'
   buttons:
     wiki:
-      display_name: '&6&oNoBuildPlus 使用ドキュメント'
+      display_name: '&6&oNoBuildPlus Documentation'
       lore:
         - ''
-        - '&7&oPixelCraft 使用ドキュメントで'
-        - '&7&oさらに多くのプラグインガイドを閲覧'
+        - '&7&oView more information on'
+        - '&7&oPixelCraft Documentation'
         - '&7&ohttps://docs.p1mc.top'
         - ''
-        - '&7クリックして開く'
+        - '&7Click to open'
 
   main:
-    title: 'NoBuildPlus ワールド管理'
+    title: 'NoBuildPlus World Management'
     items:
       world:
-        display_name: '&7ワールド &e%world% %type%'
+        display_name: '&7World &e%world% %type%'
         lore:
           - ''
-          - '&7保護対象として有効'
+          - '&7Enabled for Protection'
           - ''
-          - '&7左クリックでフラグを表示'
-          - '&c右クリックで削除'
+          - '&7Left click to view'
+          - '&cRight click to delete'
       add:
-        display_name: '&aワールドを追加'
+        display_name: '&aAdd world'
         lore:
           - ''
-          - '&7ワールドを追加して'
-          - '&7管理に組み込み'
-          - '&7保護対象にします。'
+          - '&7Add the world'
+          - '&7into management'
+          - '&7for protection.'
           - ''
-          - '&7クリックで追加'
-      edit-default:
-        display_name: '&aデフォルトテンプレートを編集'
+          - '&7Click to add'
+      edit-template:
+        display_name: '&aEdit template'
         lore:
           - ''
-          - '&7新しい有効ワールドの'
-          - '&7フラグ設定用デフォルト'
-          - '&7テンプレートを編集'
+          - '&7Edit the template of'
+          - '&7settings for new'
+          - '&7enabled world(s)'
           - ''
-          - '&7クリックで編集'
+          - '&7Click to edit'
       next_page:
-        display_name: '&a次のページ'
+        display_name: '&aNext page'
         lore:
           - ''
-          - '&7クリックで切り替え'
+          - '&7Click to switch'
           - ''
       previous_page:
-        display_name: '&a前のページ'
+        display_name: '&aPrevious page'
         lore:
           - ''
-          - '&7クリックで切り替え'
+          - '&7Click to switch'
           - ''
       close:
-        display_name: '&cメニューを閉じる'
+        display_name: '&cClose the menu'
         lore:
           - ''
-          - '&7クリックで閉じる'
+          - '&7Click to close'
           - ''
   list:
-    title: '保護対象にワールドを追加'
+    title: 'Add World for Protection'
     items:
       world:
-        display_name: '&7ワールド &e%world% %type%'
+        display_name: '&7World &e%world% %type%'
         lore:
           - ''
-          - '&7このワールドはまだ'
-          - '&7保護対象として有効ではありません。'
+          - '&7This world is not enabled'
+          - '&7for the protection.'
           - ''
-          - '&7左クリックで有効化'
-          - '&7右クリックでゲームルールを管理'
+          - '&7Left click to enable'
+          - '&7Right click to manage gamerules'
       next_page:
-        display_name: '&a次のページ'
+        display_name: '&aNext page'
         lore:
           - ''
-          - '&7クリックで切り替え'
+          - '&7Click to switch'
           - ''
       previous_page:
-        display_name: '&a前のページ'
+        display_name: '&aPrevious page'
         lore:
           - ''
-          - '&7クリックで切り替え'
+          - '&7Click to switch'
           - ''
       back_to_main:
-        display_name: '&cメインメニューに戻る'
+        display_name: '&cBack to main menu'
         lore:
           - ''
-          - '&7クリックで切り替え'
+          - '&7Click to switch'
           - ''
-  edit-default:
-    title: 'デフォルトテンプレートのフラグ設定を編集'
+  edit-template:
+    title: 'Template %name% (%label%)'
     items:
       type:
-        display_name: '&a現在のタイプ: &6%type%'
+        display_name: '&aCurrent Type: &6%type%'
         lore:
           - ''
-          - '&7あなたは現在'
-          - '&7%type% の操作画面にいます'
+          - '&7You are currently operating in'
+          - '&7%type% setting mode.'
           - ''
-          - '&aクリックで切り替え'
+          - '&aClick to change'
       flag:
         display_name: '&e%flag% &7(%bool%&7)'
         lore:
           - ''
           - '&7%description%'
           - ''
-          - '&aクリックで切り替え'
+          - '&aClick to switch'
       gamerule:
         display_name: '&e%gamerule% &7(%bool%%int%&7)'
         lore:
           - ''
           - '&7%description%'
           - ''
-          - '&aクリックで切り替え'
+          - '&aClick to switch'
       edit-permission:
-        display_name: '&a権限を編集'
+        display_name: '&aEdit permission'
         lore:
           - ''
-          - '&7現在の権限: &b%permission%'
-          - '&7この権限を持つプレイヤーは'
-          - '&7NoBuildPlus の保護をバイパスできます'
+          - '&7Current permission: &b%permission%'
+          - '&7Players who have this permission can bypass'
+          - '&7the protection by NoBuildPlus'
           - ''
-          - '&7クリックで編集'
+          - '&7Click to edit'
       edit-deny-message:
-        display_name: '&a拒否メッセージを編集'
+        display_name: '&aEdit deny message'
         lore:
           - ''
-          - '&7現在: &7%message%'
+          - '&7Current: &7%message%'
           - ''
-          - '&7クリックで編集'
+          - '&7Click to edit'
       next_page:
-        display_name: '&a次のページ'
+        display_name: '&aNext page'
         lore:
           - ''
-          - '&7クリックで切り替え'
+          - '&7Click to switch'
           - ''
       previous_page:
-        display_name: '&a前のページ'
+        display_name: '&aPrevious page'
         lore:
           - ''
-          - '&7クリックで切り替え'
+          - '&7Click to switch'
           - ''
       back_to_main:
-        display_name: '&cメインメニューに戻る'
+        display_name: '&cBack to main menu'
         lore:
           - ''
-          - '&7クリックで切り替え'
+          - '&7Click to switch'
+          - ''
+  template-list:
+    title: 'Template list'
+    items:
+      template:
+        display_name: '&e%name%'
+        lore:
+          - ''
+          - '&7Label: &6%label%'
+          - '&7Description:'
+          - '&f%description%'
+          - '&7Permission: &b%permission%'
+          - '&7Deny message:'
+          - '&c%deny_message%'
+          - ''
+          - '&7Click to select'
+      next_page:
+        display_name: '&aNext page'
+        lore:
+          - ''
+          - '&7Click to switch'
+          - ''
+      previous_page:
+        display_name: '&aPrevious page'
+        lore:
+          - ''
+          - '&7Click to switch'
+          - ''
+      back_to_main:
+        display_name: '&cGo back'
+        lore:
+          - ''
+          - '&7Click to switch'
           - ''
   world:
     title: '%world% のフラグ設定を編集'
@@ -252,6 +291,13 @@ gui:
           - '&7現在: &7%message%'
           - ''
           - '&7クリックで編集'
+      apply-template:
+        display_name: '&aテンプレートを適用'
+        lore:
+          - ''
+          - '&7クリックでテンプレートを適用'
+          - ''
+          - '&7クリックで切り替え'
       next_page:
         display_name: '&a次のページ'
         lore:

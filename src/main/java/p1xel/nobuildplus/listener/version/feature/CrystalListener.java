@@ -18,7 +18,7 @@ import p1xel.nobuildplus.world.WorldManager;
 public class CrystalListener implements FeatureListener {
     @Override
     public String getName() {
-        return "CrystalListener";
+        return "CrystalListener 1.13+";
     }
 
     @Override

@@ -13,6 +13,7 @@ import p1xel.nobuildplus.listener.gui.GUIListener;
 import p1xel.nobuildplus.listener.text.TextEditMode;
 import p1xel.nobuildplus.listener.version.*;
 import p1xel.nobuildplus.storage.*;
+import p1xel.nobuildplus.storage.template.TemplateManager;
 import p1xel.nobuildplus.tool.ColorUtil;
 import p1xel.nobuildplus.tool.bstats.Metrics;
 import p1xel.nobuildplus.tool.spigotmc.UpdateChecker;
@@ -29,7 +30,7 @@ public class NoBuildPlus extends JavaPlugin {
     private static NoBuildPlus instance;
     private static FoliaLib foliaLib;
     private static TextEditMode textEditMode;
-
+    private static TemplateManager templateManager;
     public static NoBuildPlus getInstance() {
         return instance;
     }
@@ -40,6 +41,7 @@ public class NoBuildPlus extends JavaPlugin {
     }
     public static FoliaLib getFoliaLib() {return foliaLib;}
     public static TextEditMode getTextEditMode() { return textEditMode; }
+    public static TemplateManager getTemplateManager() { return templateManager; }
 
     private boolean firstLoad = false;
 
@@ -90,6 +92,8 @@ public class NoBuildPlus extends JavaPlugin {
         GameRuleRegistry.init();
         textEditMode = new TextEditMode();
         MenuConfig.initialization();
+        templateManager = new TemplateManager(this);
+        templateManager.initializeTemplates();
 
         getLogger().info("[NBP] START LOADING ...");
         getServer().getPluginCommand("NoBuildPlus").setExecutor(new Cmd());

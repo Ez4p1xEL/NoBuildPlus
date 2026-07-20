@@ -59,8 +59,14 @@ invalid-gamerule: '&7&l%prefix% &8&l> &e%gamerule% &c并不存在于该Minecraft
 gamerule-notice: '&c&l&n温馨提示&a 你因为输入了 /gamerule 指令而开启了这个由NoBuildPlus提供的原版游戏规则管理菜单, 
 如果你不想通过该指令来打开管理菜单, 你完全、绝对自由地、不受限制地、畅通无阻地、随心所欲地或无条件地可以在NoBuildPlus的config文件中关闭, 
 &6&o这条提示消息也同样可在config中关闭'
+template-flag-set-success: '&7&l%prefix% &8&l> &a你设置了模板 &6%template%&a 的规则 &e%flag% 为 &e%boolean%&a'
+edit-template-permission: '&7&l%prefix% &8&l> &a你更改了模板 &6%template%&a 的权限为 &e%permission%&a'
+edit-template-deny-message: '&7&l%prefix% &8&l> &a你更改了模板 &6%template%&a 的拒绝消息为 &e%message%&a'
+template-gamerule-set-success: '&7&l%prefix% &8&l> &a你设置了模板 &6%template%&a 的游戏规则 &e%gamerule% 为 &e%value%&a'
+cant-find-template: '&7&l%prefix% &8&l>> &c找不到模板 &6%template%&c'
 documentation: '&e&l&n&o点击这里前往 PixelCraft 使用文档'
 world-flag: '&e%flag% &a在 &9%world% &a中当前设置为 &e%boolean%&a。'
+template-apply: '&7&l%prefix% &8&l> &a你将模板 &6%template%&a 应用至世界 &9%world%&a 的规则设置'
 
 gui:
   messages:
@@ -94,14 +100,13 @@ gui:
           - '&7为其加入世界保护'
           - ''
           - '&7点击新增'
-      edit-default:
-        display_name: '&a编辑默认模板'
+      edit-template:
+        display_name: '&a编辑模板'
         lore:
           - ''
-          - '&7修改默认模板的规则设定'
-          - '&7使下次启用的世界可直接套用'
+          - '&7编辑用于新启用世界的模板设置'
           - ''
-          - '&7点击编辑'
+          - '&7点击以编辑'
       next_page:
         display_name: '&a下一页'
         lore:
@@ -150,15 +155,48 @@ gui:
           - ''
           - '&7点击切换'
           - ''
-  edit-default:
-    title: '更改默认模板的规则'
+  template-list:
+    title: '模板列表'
+    items:
+      template:
+        display_name: '&e%name%'
+        lore:
+          - ''
+          - '&7标签: &6%label%'
+          - '&7说明:'
+          - '&f%description%'
+          - '&7权限: &b%permission%'
+          - '&7拒绝信息:'
+          - '&c%deny_message%'
+          - ''
+          - '&7点击以选择'
+      next_page:
+        display_name: '&a下一页'
+        lore:
+          - ''
+          - '&7点击切换'
+          - ''
+      previous_page:
+        display_name: '&a上一页'
+        lore:
+          - ''
+          - '&7点击切换'
+          - ''
+      back_to_main:
+        display_name: '&c返回主菜单'
+        lore:
+          - ''
+          - '&7点击切换'
+          - ''
+  edit-template:
+    title: '模板 %name% (%label%)'
     items:
       type:
         display_name: '&a当前类型: &6%type%'
         lore:
           - ''
-          - '&7你目前正处于'
-          - '&7%type% 的操作界面'
+          - '&7你当前正在'
+          - '&7%type% 设置界面'
           - ''
           - '&a点击切换'
       flag:
@@ -176,16 +214,16 @@ gui:
           - ''
           - '&a点击切换'
       edit-permission:
-        display_name: '&a编辑默认权限节点'
+        display_name: '&a编辑权限'
         lore:
           - ''
           - '&7当前权限: &b%permission%'
-          - '&7拥有该权限节点的玩家'
-          - '&7将无视NoBuildPlus的世界保护'
+          - '&7拥有此权限的玩家可以绕过'
+          - '&7NoBuildPlus 的保护'
           - ''
           - '&7点击编辑'
       edit-deny-message:
-        display_name: '&a编辑拒绝消息'
+        display_name: '&a编辑拒绝信息'
         lore:
           - ''
           - '&7当前: &7%message%'
@@ -250,6 +288,14 @@ gui:
           - '&7当前: &7%message%'
           - ''
           - '&7点击编辑'
+      apply-template:
+        display_name: '&a应用模板'
+        lore:
+          - ''
+          - '&7将模板应用至'
+          - '&7当前世界的规则设置'
+          - ''
+          - '&7点击应用'
       next_page:
         display_name: '&a下一页'
         lore:

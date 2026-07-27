@@ -70,8 +70,8 @@ public class NoBuildPlus extends JavaPlugin {
         // --- 修复版本号解析越界问题 ---
         int major = Integer.parseInt(stringVersion[0]);
         int minor = Integer.parseInt(stringVersion[1]);
-        // 如果版本号只有两段 (如 1.21)，则第三段默认为 0
-        int patch = stringVersion.length > 2 ? Integer.parseInt(stringVersion[2]) : 0;
+        // 兼容新版 Paper 的 26.2.build.84-stable 格式，非数字补丁版本默认为 0
+        int patch = stringVersion.length > 2 && stringVersion[2].matches("\\d+") ? Integer.parseInt(stringVersion[2]) : 0;
         version = new int[]{major, minor, patch};
         // ------------------------------
 

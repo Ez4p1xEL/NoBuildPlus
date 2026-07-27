@@ -89,6 +89,8 @@ public class NoBuildPlus extends JavaPlugin {
         FlagsManager.createFlagsManagerFile();
         Settings.createSettingsFile();
         Worlds.createWorldsFile();
+
+        FlagRegistrationLoader.load(this); // 加载 ExtraFlag, 必须在NBPWorld初始化之前
         WorldManager.init();
         Settings.defaultList();
         FlagRegistry.refreshMap();
@@ -120,7 +122,6 @@ public class NoBuildPlus extends JavaPlugin {
         getLogger().info("[NBP] LISTENERS LOADED.");
 
         AreaProtectionLoader.load(this);
-        FlagRegistrationLoader.load(this);
         updateFlags();
 
         getLogger().info("[NBP] HOOKED FUNCTIONS LOADED.");

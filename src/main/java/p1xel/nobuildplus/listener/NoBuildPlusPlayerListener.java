@@ -425,16 +425,20 @@ public class NoBuildPlusPlayerListener implements Listener {
 
     // Flag: egg throw
     @EventHandler(ignoreCancelled = true)
-    public void onEggThrow(PlayerInteractEvent e) {
+    public void onEggThrow(PlayerInteractEvent event) {
 
-        Action action = e.getAction();
-        ItemStack item = e.getItem();
+        Action action = event.getAction();
+        ItemStack item = event.getItem();
 
-        if (!(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && (item == null || item.getType() != Material.EGG)) {
+        if (item == null || item.getType() != Material.EGG) {
             return;
         }
 
-        Player player = e.getPlayer();
+        if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) {
+            return;
+        }
+
+        Player player = event.getPlayer();
 
         if (HookedPlugins.cancel(player)) {
             return;
@@ -451,22 +455,26 @@ public class NoBuildPlusPlayerListener implements Listener {
         }
 
         WorldManager.sendMessage(player, world);
-        e.setCancelled(true);
+        event.setCancelled(true);
 
     }
 
     // Flag: snowball throw
     @EventHandler(ignoreCancelled = true)
-    public void onSnowBallThrow(PlayerInteractEvent e) {
+    public void onSnowBallThrow(PlayerInteractEvent event) {
 
-        Action action = e.getAction();
-        ItemStack item = e.getItem();
+        Action action = event.getAction();
+        ItemStack item = event.getItem();
 
-        if (!(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && (item == null || !(item.getType() == Material.matchMaterial("snowball") || item.getType() == Material.matchMaterial("snow_ball")))) {
+        if (item == null || !(item.getType() == Material.matchMaterial("snowball") || item.getType() == Material.matchMaterial("snow_ball"))) {
             return;
         }
 
-        Player player = e.getPlayer();
+        if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) {
+            return;
+        }
+
+        Player player = event.getPlayer();
 
         if (HookedPlugins.cancel(player)) {
             return;
@@ -483,7 +491,7 @@ public class NoBuildPlusPlayerListener implements Listener {
         }
 
         WorldManager.sendMessage(player, world);
-        e.setCancelled(true);
+        event.setCancelled(true);
 
     }
 

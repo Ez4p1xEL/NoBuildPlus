@@ -906,6 +906,31 @@ public class NoBuildPlusEntityListener implements Listener {
 
     }
 
+    @Flag("wither-destroy")
+    @EventHandler
+    public void onWitherDestructBlocks(EntityChangeBlockEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (HookedPlugins.cancel(entity)) {
+            return;
+        }
+
+        if (entity.getType() != EntityType.WITHER) {
+            return;
+        }
+
+        String worldName = entity.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+
+        if (!Flags.wither_destroy.isEnabled(world)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+    }
+
     // Flag: tnt
     @EventHandler
     public void onTNTDestroyEntity(EntityDamageByEntityEvent event) {

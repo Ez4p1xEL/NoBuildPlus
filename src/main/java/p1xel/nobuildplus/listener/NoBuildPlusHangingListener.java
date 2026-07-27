@@ -72,16 +72,17 @@ public class NoBuildPlusHangingListener implements Listener {
     public void onPaintingBroke(HangingBreakByEntityEvent e) {
 
         Entity entity = e.getRemover();
+        Entity hanging = e.getEntity();
 
-        if (HookedPlugins.cancel(entity)) {
+        if (HookedPlugins.cancel(hanging)) {
             return;
         }
 
-        if (!(entity instanceof Painting)) {
+        if (!(hanging instanceof Painting)) {
             return;
         }
 
-        String worldName = entity.getWorld().getName();
+        String worldName = hanging.getWorld().getName();
         ProtectedWorld world = WorldManager.getWorld(worldName);
 
         if (!Flags.painting.isEnabled(world)) {

@@ -81,7 +81,8 @@ public enum Flags implements Flag {
     fire_spread("fire-spread", "CRIMSON_STEM", null, null),
     wind_charge("wind-charge", "WIND_CHARGE", null, null),
     wither_destroy("wither-destroy", "WITHER_SPAWN_EGG", null, null),
-    wither_damage("wither-damage", "WITHER_SPAWN_EGG",null, null);
+    wither_damage("wither-damage", "WITHER_SPAWN_EGG",null, null),
+    ender_pearl("ender-pearl", "ENDER_PEARL", null, null),;
 
     private final String flag_name;
     private final String show_item;

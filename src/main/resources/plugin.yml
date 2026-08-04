@@ -14,3 +14,6 @@ permissions:
   nobuildplus.gui:
     default: op
     description: Using GUI management
+  nobuildplus.gamerule:
+    default: op
+    description: Using gamerule management through command

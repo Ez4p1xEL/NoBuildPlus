@@ -9,10 +9,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.projectiles.ProjectileSource;
 import p1xel.nobuildplus.Flags;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.hook.HookedPlugins;
@@ -916,7 +918,6 @@ public class NoBuildPlusPlayerListener implements Listener {
     public void onPlayerTeleport(PlayerTeleportEvent e) {
 
         Player player = e.getPlayer();
-
         if (HookedPlugins.cancel(player)) {
             return;
         }
@@ -1158,4 +1159,72 @@ public class NoBuildPlusPlayerListener implements Listener {
         e.setCancelled(true);
 
     }
+
+    @Flag("ender-pearl")
+    @EventHandler(ignoreCancelled = true)
+    public void onPearlUse(PlayerTeleportEvent event) {
+
+        Player player = event.getPlayer();
+
+        if (HookedPlugins.cancel(player)) {
+            return;
+        }
+
+        if (event.getCause() != PlayerTeleportEvent.TeleportCause.ENDER_PEARL) {
+            return;
+        }
+
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.ender_pearl.isEnabled(world)) {
+            return;
+        }
+
+        if (player.hasPermission(world.getPermission())) {
+            return;
+        }
+
+        WorldManager.sendMessage(player, world);
+        event.setCancelled(true);
+
+    }
+
+    @Flag("ender-pearl")
+    @EventHandler(ignoreCancelled = true)
+    public void onPearlInteract(ProjectileLaunchEvent event) {
+
+        Entity entity = event.getEntity();
+
+        if (!(entity instanceof EnderPearl)) {
+            return;
+        }
+
+        EnderPearl pearl = (EnderPearl) entity;
+
+        if (HookedPlugins.cancel(pearl)) {
+            return;
+        }
+
+        ProjectileSource shooter = pearl.getShooter();
+        if (!(shooter instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) shooter;
+
+        String worldName = player.getWorld().getName();
+        ProtectedWorld world = WorldManager.getWorld(worldName);
+        if (!Flags.ender_pearl.isEnabled(world)) {
+            return;
+        }
+
+        if (player.hasPermission(world.getPermission())) {
+            return;
+        }
+
+        WorldManager.sendMessage(player, world);
+        event.setCancelled(true);
+    }
+
+
 }

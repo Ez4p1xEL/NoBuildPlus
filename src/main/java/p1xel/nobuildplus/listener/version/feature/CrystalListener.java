@@ -27,6 +27,21 @@ public class CrystalListener implements FeatureListener {
     }
 
 
+    private EntityType END_CRYSTAL;
+    private void setEndCrystalType() {
+        try {
+            END_CRYSTAL = EntityType.valueOf("ENDER_CRYSTAL");
+        } catch (IllegalArgumentException e) {
+            END_CRYSTAL = EntityType.END_CRYSTAL;
+        }
+
+    }
+
+    public CrystalListener() {
+        setEndCrystalType();
+    }
+
+
     @Flag("crystal")
     @EventHandler(ignoreCancelled = true)
     public void onCrystalDestroyEntity(EntityDamageByEntityEvent event) {
@@ -38,7 +53,7 @@ public class CrystalListener implements FeatureListener {
 
         Entity damager = event.getDamager();
         EntityType type = damager.getType();
-        if (type != EntityType.END_CRYSTAL) {
+        if (type != END_CRYSTAL) {
             return;
         }
 
@@ -62,7 +77,7 @@ public class CrystalListener implements FeatureListener {
             return;
         }
 
-        if (entity.getType() != EntityType.END_CRYSTAL) {
+        if (entity.getType() != END_CRYSTAL) {
             return;
         }
 

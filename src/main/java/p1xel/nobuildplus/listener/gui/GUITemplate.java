@@ -107,8 +107,10 @@ public class GUITemplate extends GUIAbstract implements InventoryHolder {
 
         Material edit_permission = Material.matchMaterial(MenuConfig.WORLD_SETTING_EDIT_PERMISSION);
         Material edit_deny_message = Material.matchMaterial(MenuConfig.WORLD_SETTING_EDIT_DENY_MESSAGE);
+        Material replace_gamerules = Material.matchMaterial(MenuConfig.TEMPLATE_REPLACE_GAMERULES);
         setItem(edit_permission != null ? edit_permission : Material.PAPER, "edit-permission", 2);
         setItem(edit_deny_message != null ? edit_deny_message : Material.PAPER, "edit-deny-message", 6);
+        setItem(replace_gamerules != null ? replace_gamerules : Material.OAK_SIGN, "replace-gamerules", 8);
 
         update(list);
 
@@ -144,6 +146,13 @@ public class GUITemplate extends GUIAbstract implements InventoryHolder {
                 lore = Locale.yaml.getStringList("gui.edit-template.items." + menu_id + ".lore").stream()
                         .map(ColorUtil::translateHexColorCodes)
                         .map(line -> line.replaceAll("%message%", denyMessage)).collect(Collectors.toList());
+                break;
+            }
+
+            case "replace-gamerules": {
+                display_name = Locale.getMessage("gui.edit-template.items." + menu_id + ".display_name").replace("%boolean%", Locale.getMessage("gamerule_" + String.valueOf(template.isReplaceGamerules()).toLowerCase()));
+                lore = Locale.yaml.getStringList("gui.edit-template.items." + menu_id + ".lore").stream()
+                        .map(ColorUtil::translateHexColorCodes).collect(Collectors.toList());
                 break;
             }
         }
@@ -323,6 +332,15 @@ public class GUITemplate extends GUIAbstract implements InventoryHolder {
                 player.closeInventory();
                 player.sendMessage(Locale.getMessage("join-mode").replaceAll("%cancel%", NoBuildPlus.getTextEditMode().cancelWord));
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1.0f, 1.0f);
+                return true;
+            }
+
+            case "replace-gamerules": {
+                boolean bool = template.isReplaceGamerules();
+                templateManager.setReplaceGamerules(template, !bool);
+                Material replace_gamerules = Material.matchMaterial(MenuConfig.TEMPLATE_REPLACE_GAMERULES);
+                setItem(replace_gamerules != null ? replace_gamerules : Material.OAK_SIGN, "replace-gamerules", 8);
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1.0f, 1.0f);
                 return true;
             }
 

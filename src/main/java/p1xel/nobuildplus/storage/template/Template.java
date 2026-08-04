@@ -23,8 +23,9 @@ public class Template {
     private String description;
     private @Nullable String bypassPermission;
     private @Nullable String denyMessage;
-    private HashMap<Flag, Boolean> flags = new HashMap<>();
-    private HashMap<String, Object> gamerules = new HashMap<>();
+    private final HashMap<Flag, Boolean> flags = new HashMap<>();
+    private final HashMap<String, Object> gamerules = new HashMap<>();
+    private boolean replaceGamerules;
     private final File file;
     private final FileConfiguration yaml;
 
@@ -38,6 +39,7 @@ public class Template {
         description = yaml.getString("description", Locale.yaml.getString("no-description", "No description provided."));
         bypassPermission = yaml.getString("permission", null);
         denyMessage = yaml.getString("deny-message", null);
+        replaceGamerules = yaml.getBoolean("replace-gamerules", false);
 
 
         for (String flagName : yaml.getConfigurationSection("flags").getKeys(false)) {
@@ -81,6 +83,9 @@ public class Template {
     }
 
     public boolean getFlag(Flag flag) {
+        if (flags.get(flag) == null) {
+            return true;
+        }
         return flags.get(flag);
     }
 
@@ -94,6 +99,10 @@ public class Template {
 
     public String getDenyMessage() {
         return denyMessage;
+    }
+
+    public boolean isReplaceGamerules() {
+        return replaceGamerules;
     }
 
     void setFlag(Flag flag, boolean value) {
@@ -149,6 +158,16 @@ public class Template {
     void setDescription(String description) {
         this.description = description;
         yaml.set("description", description);
+        try {
+            yaml.save(file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void setReplaceGamerules(boolean replaceGamerules) {
+        this.replaceGamerules = replaceGamerules;
+        yaml.set("replace-gamerules", replaceGamerules);
         try {
             yaml.save(file);
         } catch (IOException e) {

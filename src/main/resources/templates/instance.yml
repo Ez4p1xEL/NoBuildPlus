@@ -2,6 +2,7 @@ label: Instance
 description: 'Instance / dungeon template with PvP disabled.'
 permission: nobuildplus.instance.bypass
 deny-message: '&c&l! &7You cannot do that in this instance.'
+replace-gamerules: true
 flags:
   break: false
   build: false
@@ -72,6 +73,7 @@ flags:
   wind-charge: false
   wither-damage: false
   wither-destroy: false
+  ender-pearl: false
 # the usage of boolean (true/false) here does not equal to the usage of flag
 gamerules:
   advance_time: true

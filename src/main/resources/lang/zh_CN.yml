@@ -229,6 +229,14 @@ gui:
           - '&7当前: &7%message%'
           - ''
           - '&7点击编辑'
+      replace-gamerules:
+        display_name: '&a替换游戏规则 &7(%boolean%&7)'
+        lore:
+          - ''
+          - '&7应用此模板时，是否'
+          - '&7替换该世界的游戏规则？'
+          - ''
+          - '&7点击切换'
       next_page:
         display_name: '&a下一页'
         lore:
@@ -387,6 +395,7 @@ flag:
     wind-charge: '玩家使用风弹及风弹爆炸'
     wither-destroy: '凋灵头颅引发的爆炸'
     wither-damage: '凋灵伤害'
+    ender-pearl: '投掷末影珍珠'
     ia-furniture-sit: '坐在ItemsAdder家具'
     ia-campfire-interact: '与ItemsAdder营火互动'
 

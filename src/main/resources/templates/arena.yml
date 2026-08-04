@@ -2,6 +2,7 @@ label: Arena
 description: 'Pure PvP arena template.'
 permission: nobuildplus.arena.bypass
 deny-message: '&c&l! &7You cannot do that in the arena.'
+replace-gamerules: true
 flags:
   break: false
   build: false
@@ -72,6 +73,7 @@ flags:
   wind-charge: true
   wither-damage: false
   wither-destroy: false
+  ender-pearl: true
 # the usage of boolean (true/false) here does not equal to the usage of flag
 gamerules:
   advance_time: false

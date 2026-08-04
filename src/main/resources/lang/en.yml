@@ -212,6 +212,15 @@ gui:
           - ''
           - '&7Click to switch'
           - ''
+      replace-gamerules:
+        display_name: '&aReplace gamerules &7(%boolean%&7)'
+        lore:
+          - ''
+          - '&7Should this template'
+          - '&7replace the gamerules of'
+          - '&7the world when applied?'
+          - ''
+          - '&7Click to switch'
   world:
     title: 'Edit settings of %world%'
     items:
@@ -385,6 +394,7 @@ flag:
     wind-charge: 'The use and explosion of wind charge'
     wither-destroy: 'Explosion caused by the wither skull'
     wither-damage: 'Wither damage'
+    ender-pearl: 'Ender pearl throwing'
     ia-furniture-sit: 'Sit on ItemsAdder furniture'
     ia-campfire-interact: 'Interact with ItemsAdder campfire'
 

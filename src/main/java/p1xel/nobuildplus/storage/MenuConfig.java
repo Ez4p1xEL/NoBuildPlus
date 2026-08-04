@@ -53,7 +53,7 @@ public class MenuConfig {
         MAIN_ADD_WORLD = yaml.getString("main.add-world");
         MAIN_CLOSE = yaml.getString("main.close");
         BUTTON_WIKI = yaml.getString("button.wiki");
-
+        TEMPLATE_REPLACE_GAMERULES = yaml.getString("template.replace-gamerules");
 
     }
 
@@ -70,5 +70,6 @@ public class MenuConfig {
     public static String MAIN_ADD_WORLD;
     public static String MAIN_CLOSE;
     public static String BUTTON_WIKI;
+    public static String TEMPLATE_REPLACE_GAMERULES;
 
 }

@@ -334,6 +334,15 @@ gui:
           - '&7Aktuell: &7%message%'
           - ''
           - '&7Klicken zum Bearbeiten'
+      replace-gamerules:
+        display_name: '&aSpielregeln ersetzen &7(%boolean%&7)'
+        lore:
+          - ''
+          - '&7Soll diese Vorlage'
+          - '&7die Spielregeln der Welt'
+          - '&7beim Anwenden ersetzen?'
+          - ''
+          - '&7Klicken zum Umschalten'
       next_page:
         display_name: '&aNächste Seite'
         lore:
@@ -458,6 +467,7 @@ flag:
     wind-charge: 'Verwendung und Explosion von Windladung'
     wither-destroy: 'Explosion durch den Wither-Schädel'
     wither-damage: 'Wither-Schaden'
+    ender-pearl: 'Enderperlen werfen'
     ia-furniture-sit: 'Auf ItemsAdder-Möbel sitzen'
     ia-campfire-interact: 'Interaktion mit ItemsAdder-Lagerfeuer'
 

@@ -88,6 +88,10 @@ public class TemplateManager {
         template.setDescription(description);
     }
 
+    public void setReplaceGamerules(Template template, boolean replace) {
+        template.setReplaceGamerules(replace);
+    }
+
     public Template getTemplate(String name) {
         return templates.get(name);
     }

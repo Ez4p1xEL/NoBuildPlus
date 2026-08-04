@@ -59,10 +59,24 @@ public class WorldManager {
         Worlds.createWorld(worldName);
         NBPWorld world = new NBPWorld(worldName);
         enabled_worlds.put(worldName, world);
+        Template defaultTemplate = NoBuildPlus.getTemplateManager().getTemplate("default");
+        if (defaultTemplate != null) {
 
-        for (String gameruleName : GameRuleRegistry.getRegisteredGameRules()) {
-            GameRuleRegistry.setWorldGameRule(worldName, gameruleName, Settings.getDefaultGameRule(gameruleName));
+            for (Flag flag : FlagRegistry.getAllFlags()) {
+                WorldManager.setFlag(world, flag, defaultTemplate.getFlag(flag));
+            }
+
+            if (defaultTemplate.isReplaceGamerules()) {
+                for (String gameruleName : GameRuleRegistry.getRegisteredGameRules()) {
+                    if (defaultTemplate.getGameRule(gameruleName) == null) {
+                        continue;
+                    }
+                    GameRuleRegistry.setWorldGameRule(worldName, gameruleName, defaultTemplate.getGameRule(gameruleName));
+                }
+            }
         }
+
+
 
         Logger.debug("A new enabled world " + worldName + " has been uploaded to caches!");
     }
@@ -159,10 +173,16 @@ public class WorldManager {
         }
 
         // Apply GameRules
-        for (String ruleName : GameRuleRegistry.getRegisteredGameRules()) {
-            Object value = template.getGameRule(ruleName);
-            if (value == null) { continue; }
-            GameRuleRegistry.setWorldGameRule(world.getWorldName(), ruleName, value);
+        // 如果该模板设置了替换游戏规则，则将模板中的游戏规则应用到世界中
+        // 否则，保留世界中已有的游戏规则设置
+        if (template.isReplaceGamerules()) {
+            for (String ruleName : GameRuleRegistry.getRegisteredGameRules()) {
+                Object value = template.getGameRule(ruleName);
+                if (value == null) {
+                    continue;
+                }
+                GameRuleRegistry.setWorldGameRule(world.getWorldName(), ruleName, value);
+            }
         }
     }
 

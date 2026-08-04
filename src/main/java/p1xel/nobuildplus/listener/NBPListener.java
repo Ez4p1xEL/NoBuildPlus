@@ -31,6 +31,10 @@ public class NBPListener implements Listener {
         if (Config.getBool("open-menu-if-gamerule.enable")) {
             Player player = event.getPlayer();
 
+            if (!player.hasPermission("nobuildplus.gamerule")) {
+                return;
+            }
+
             String worldName = player.getWorld().getName();
             ProtectedWorld world = WorldManager.getWorld(worldName);
             if (world == null && Config.getBool("open-menu-if-gamerule.disable-in-non-protected-world")) {

@@ -72,6 +72,7 @@ global-settings:
     wind-charge: true
     wither-damage: true
     wither-destroy: false
+    ender-pearl: true
   # the usage of boolean (true/false) here does not equal to the usage of flag
   gamerules:
     advance_time: true

@@ -25,6 +25,30 @@ import java.util.List;
 
 public class NoBuildPlusEntityListener implements Listener {
 
+    private EntityType TNT;
+    private EntityType TNT_MINECART;
+
+    public NoBuildPlusEntityListener() {
+        setTNTType();
+        setTNTMinecart();
+    }
+
+    public void setTNTType() {
+        try {
+            TNT = EntityType.valueOf("PRIMED_TNT");
+        } catch (IllegalArgumentException e) {
+            TNT = EntityType.TNT;
+        }
+    }
+
+    public void setTNTMinecart() {
+        try {
+            TNT_MINECART = EntityType.valueOf("MINECART_TNT");
+        } catch (NoSuchFieldError e) {
+            TNT_MINECART = EntityType.TNT_MINECART;
+        }
+    }
+
     // Flag: Mob Damage
     @EventHandler(ignoreCancelled = true)
     public void onMobDamage(EntityDamageByEntityEvent e) {
@@ -942,7 +966,7 @@ public class NoBuildPlusEntityListener implements Listener {
 
         Entity damager = event.getDamager();
         EntityType type = damager.getType();
-        if (type != EntityType.TNT && type != EntityType.TNT_MINECART && !(damager instanceof Player) && !(damager instanceof EnderCrystal)) {
+        if (type != TNT && type != TNT_MINECART && !(damager instanceof Player) && !(damager instanceof EnderCrystal)) {
             return;
         }
 

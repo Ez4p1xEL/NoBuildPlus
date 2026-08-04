@@ -347,3 +347,5 @@ flags:
     enable: true
   wither-destroy:
     enable: true
+  ender-pearl:
+    enable: true

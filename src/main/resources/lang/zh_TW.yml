@@ -211,6 +211,14 @@ gui:
           - '&7目前: &7%message%'
           - ''
           - '&7點擊編輯'
+      replace-gamerules:
+        display_name: '&a替換遊戲規則 &7(%boolean%&7)'
+        lore:
+          - ''
+          - '&7應用此範本時，是否'
+          - '&7替換該世界的遊戲規則？'
+          - ''
+          - '&7點擊切換'
       next_page:
         display_name: '&a下一頁'
         lore:
@@ -369,6 +377,7 @@ flag:
     wind-charge: '玩家使用風彈及風彈爆炸'
     wither-destroy: '凋零骷髏頭引發的爆炸'
     wither-damage: '凋零傷害'
+    ender-pearl: '投擲末影珍珠'
     ia-furniture-sit: '坐在ItemsAdder家具'
     ia-campfire-interact: '與ItemsAdder營火互動'
 

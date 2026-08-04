@@ -199,6 +199,15 @@ gui:
           - '&7Current: &7%message%'
           - ''
           - '&7Click to edit'
+      replace-gamerules:
+        display_name: '&aゲームルールを置き換える &7(%boolean%&7)'
+        lore:
+          - ''
+          - '&7このテンプレートは'
+          - '&7適用時にワールドのゲームルールを'
+          - '&7置き換えますか？'
+          - ''
+          - '&7クリックで切り替え'
       next_page:
         display_name: '&aNext page'
         lore:
@@ -388,6 +397,7 @@ flag:
     wind-charge: '風の弾の使用と爆発'
     wither-destroy: 'ウィザースカルによる爆発'
     wither-damage: 'ウィザーのダメージ'
+    ender-pearl: 'エンダーパール投げ'
     ia-furniture-sit: 'ItemsAdder家具に座る'
     ia-campfire-interact: 'ItemsAdder焚き火の操作'
 

@@ -20,3 +20,6 @@ main:
 
 button:
   wiki: BOOK
+
+template:
+  replace-gamerules: OAK_SIGN

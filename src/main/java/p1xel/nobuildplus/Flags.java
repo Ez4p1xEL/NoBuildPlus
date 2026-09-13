@@ -82,7 +82,9 @@ public enum Flags implements Flag {
     wind_charge("wind-charge", "WIND_CHARGE", null, null),
     wither_destroy("wither-destroy", "WITHER_SPAWN_EGG", null, null),
     wither_damage("wither-damage", "WITHER_SPAWN_EGG",null, null),
-    ender_pearl("ender-pearl", "ENDER_PEARL", null, null),;
+    ender_pearl("ender-pearl", "ENDER_PEARL", null, null),
+    chorus_teleport("chorus-teleport", "CHORUS_FRUIT", null, null),
+    spear("spear", "DIAMOND_SPEAR", "list", Arrays.asList("WOODEN_SPEAR", "GOLDEN_SPEAR", "STONE_SPEAR", "COPPER_SPEAR", "IRON_SPEAR", "DIAMOND_SPEAR", "NETHERITE_SPEAR")),;
 
     private final String flag_name;
     private final String show_item;

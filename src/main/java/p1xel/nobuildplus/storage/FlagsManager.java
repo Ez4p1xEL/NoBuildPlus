@@ -54,7 +54,11 @@ public class FlagsManager {
     }
 
     public static List<String> getFlagsList(String flag) {
-        return yaml.getStringList("flags."+flag+".list");
+       List<String> list = new ArrayList<>();
+       for (String s : yaml.getStringList("flags."+flag+".list")) {
+           list.add(s.toUpperCase());
+       }
+       return list;
     }
 
     static List<String> flagList = new ArrayList<>();

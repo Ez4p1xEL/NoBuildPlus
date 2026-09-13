@@ -398,6 +398,8 @@ flag:
     wither-destroy: 'ウィザースカルによる爆発'
     wither-damage: 'ウィザーのダメージ'
     ender-pearl: 'エンダーパール投げ'
+    chorus-teleport: 'コーラスフルーツによるテレポート'
+    spear: '槍を使う'
     ia-furniture-sit: 'ItemsAdder家具に座る'
     ia-campfire-interact: 'ItemsAdder焚き火の操作'
 

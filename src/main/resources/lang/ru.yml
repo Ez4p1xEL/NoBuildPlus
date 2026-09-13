@@ -375,6 +375,8 @@ flag:
     wither-destroy: 'Взрыв, вызванный черепом иссушителя'
     wither-damage: 'Урон от иссушителя'
     ender-pearl: 'Бросок жемчужины Эндера'
+    chorus-teleport: 'Телепортация игрока через растение Хоруса'
+    spear: 'Использование копья'
     ia-furniture-sit: 'Сидение на мебели ItemsAdder'
     ia-campfire-interact: 'Взаимодействие с костром ItemsAdder'
 

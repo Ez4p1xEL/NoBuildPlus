@@ -396,6 +396,8 @@ flag:
     wither-destroy: '凋灵头颅引发的爆炸'
     wither-damage: '凋灵伤害'
     ender-pearl: '投掷末影珍珠'
+    chorus-teleport: '使用紫颂果传送'
+    spear: '使用长矛'
     ia-furniture-sit: '坐在ItemsAdder家具'
     ia-campfire-interact: '与ItemsAdder营火互动'
 

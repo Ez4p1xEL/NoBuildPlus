@@ -349,3 +349,16 @@ flags:
     enable: true
   ender-pearl:
     enable: true
+  chorus-teleport:
+    enable: true
+  spear:
+    enable: true
+    type: list
+    list:
+      - 'WOODEN_SPEAR'
+      - 'GOLDEN_SPEAR'
+      - 'COPPER_SPEAR'
+      - 'STONE_SPEAR'
+      - 'IRON_SPEAR'
+      - 'DIAMOND_SPEAR'
+      - 'NETHERITE_SPEAR'

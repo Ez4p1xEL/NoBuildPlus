@@ -468,6 +468,8 @@ flag:
     wither-destroy: 'Explosion durch den Wither-Schädel'
     wither-damage: 'Wither-Schaden'
     ender-pearl: 'Enderperlen werfen'
+    chorus: 'Chorusfrucht teleportieren'
+    spear: 'Speer werfen'
     ia-furniture-sit: 'Auf ItemsAdder-Möbel sitzen'
     ia-campfire-interact: 'Interaktion mit ItemsAdder-Lagerfeuer'
 

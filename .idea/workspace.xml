@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.7.1">
+    <list default="true" id="ee5cfa3f-28a4-4b4c-84e2-0fe38aa08e89" name="Changes" comment="1.7.20">
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/feature/ChorusListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/feature/LegacySpearLungeListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/feature/SpearListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/feature/SpearLungeListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/Flags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NBPListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusEntityListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusEntityListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusPlayerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/NoBuildPlusPlayerListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUITemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/gui/GUITemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/feature/CrystalListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/feature/CrystalListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/MenuConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/MenuConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/template/Template.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/template/Template.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/template/TemplateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/template/TemplateManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/world/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/world/WorldManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/FeatureListenerLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/listener/version/FeatureListenerLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/FlagsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/p1xel/nobuildplus/storage/FlagsManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/flags.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/flags.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/lang/de.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/de.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/lang/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/en.yml" afterDir="false" />
@@ -24,8 +21,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/lang/ru.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/ru.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_TW.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/menus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/menus.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/settings.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/settings.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/arena.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/arena.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/default.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/default.yml" afterDir="false" />
@@ -104,61 +99,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000000000397039" />
-      <entry key="MS500" value="1.0133393996302158" />
-      <entry key="S2" value="1.5893086456421222" />
-      <entry key="S5" value="3.3546652393630496" />
-      <entry key="S10" value="5.814097467235869" />
-      <entry key="S30" value="11.984137948107492" />
-      <entry key="S60" value="16.313750913939067" />
-      <entry key="M2" value="20.3902592061411" />
-      <entry key="M5" value="29.09198127435429" />
-      <entry key="M10" value="44.37716087519127" />
-      <entry key="M15" value="59.77822502782104" />
-      <entry key="M30" value="97.86669696868283" />
-      <entry key="H1" value="145.05285561387328" />
-      <entry key="H2" value="193.3099945559404" />
-      <entry key="H4" value="233.0557837272754" />
-      <entry key="D1" value="281.08474925422036" />
-      <entry key="W1" value="291.24167568446256" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000000009111107" />
+      <entry key="S60" value="1.0000637326946877" />
+      <entry key="M2" value="1.017547185761919" />
+      <entry key="M5" value="1.5599570405052536" />
+      <entry key="M10" value="4.172966450002375" />
+      <entry key="M15" value="10.043413054079348" />
+      <entry key="M30" value="44.182627100882215" />
+      <entry key="H1" value="124.9241073428909" />
+      <entry key="H2" value="235.3315513156235" />
+      <entry key="H4" value="338.3353706361408" />
+      <entry key="D1" value="473.72195218806445" />
+      <entry key="W1" value="503.7530420835849" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.026644840367748644" />
-      <entry key="MS500" value="0.48430960504287124" />
-      <entry key="S2" value="0.8662426280162949" />
-      <entry key="S5" value="1.3047809882095132" />
-      <entry key="S10" value="2.0661172077295777" />
-      <entry key="S30" value="4.808723897304743" />
-      <entry key="S60" value="6.993939177464597" />
-      <entry key="M2" value="8.960695282073695" />
-      <entry key="M5" value="12.412343617572303" />
-      <entry key="M10" value="18.168083875704955" />
-      <entry key="M15" value="23.97279349747836" />
-      <entry key="M30" value="36.99765924285709" />
-      <entry key="H1" value="50.68668283855555" />
-      <entry key="H2" value="63.08247456382987" />
-      <entry key="H4" value="72.75999606550081" />
-      <entry key="D1" value="84.1882842304403" />
-      <entry key="W1" value="86.58547345411225" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="4.24281712253671E-143" />
+      <entry key="S5" value="1.4623412185581414E-57" />
+      <entry key="S10" value="5.223204750957176E-29" />
+      <entry key="S30" value="5.884984615109597E-10" />
+      <entry key="S60" value="3.427143232830258E-5" />
+      <entry key="M2" value="0.008277181173387015" />
+      <entry key="M5" value="0.232281138211556" />
+      <entry key="M10" value="1.0598042471435811" />
+      <entry key="M15" value="2.621055293760663" />
+      <entry key="M30" value="11.346280069576121" />
+      <entry key="H1" value="32.53930675152163" />
+      <entry key="H2" value="61.61129045404453" />
+      <entry key="H4" value="88.38318603940934" />
+      <entry key="D1" value="123.04867399000639" />
+      <entry key="W1" value="130.67052786935176" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.08406667896090897" />
-      <entry key="MS500" value="0.830083340428634" />
-      <entry key="S2" value="2.070054596058042" />
-      <entry key="S5" value="4.282816107866597" />
-      <entry key="S10" value="7.510665225678326" />
-      <entry key="S30" value="16.49541182645804" />
-      <entry key="S60" value="23.090652759344685" />
-      <entry key="M2" value="29.208827178413497" />
-      <entry key="M5" value="41.420982200493334" />
-      <entry key="M10" value="62.483286590223656" />
-      <entry key="M15" value="83.69689672124335" />
-      <entry key="M30" value="134.82249093912785" />
-      <entry key="H1" value="195.70995420947284" />
-      <entry key="H2" value="256.3732970151108" />
-      <entry key="H4" value="305.8043691741795" />
-      <entry key="D1" value="365.2707591066988" />
-      <entry key="W1" value="377.8268128755895" />
+      <entry key="MS100" value="0.9075191553171609" />
+      <entry key="MS500" value="0.9807790039885513" />
+      <entry key="S2" value="0.9951597218200828" />
+      <entry key="S5" value="0.9980610700524115" />
+      <entry key="S10" value="0.9990300646389034" />
+      <entry key="S30" value="0.9996765850754235" />
+      <entry key="S60" value="0.9999346951266973" />
+      <entry key="M2" value="1.0255380007964139" />
+      <entry key="M5" value="1.7898084567820973" />
+      <entry key="M10" value="5.22791997614316" />
+      <entry key="M15" value="12.65736737121216" />
+      <entry key="M30" value="55.51519660853546" />
+      <entry key="H1" value="157.44415956762361" />
+      <entry key="H2" value="296.92434987513786" />
+      <entry key="H4" value="426.7050366437893" />
+      <entry key="D1" value="596.7674114353542" />
+      <entry key="W1" value="634.4230797885288" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -172,40 +167,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Maven.NoBuildPlus [clean].executor": "Run",
-    "Maven.NoBuildPlus [install,--non-recursive].executor": "Run",
-    "Maven.NoBuildPlus [package].executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Space/Projects/NoBuildPlus/src/main/resources/templates",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "com.github.copilot.settings.network.NetworkConfigurable",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Maven.NoBuildPlus [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.NoBuildPlus [install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.NoBuildPlus [package].executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Space/Projects/NoBuildPlus/src/main/resources/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Space\Projects\NoBuildPlus\src\main\resources\templates" />
@@ -707,8 +702,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="menu update and package rename" />
-    <MESSAGE value="pom update" />
     <MESSAGE value="lets make flags.yml clean again" />
     <MESSAGE value="clean maven package" />
     <MESSAGE value="1.5.4 update - world flag menu remake" />
@@ -732,7 +725,9 @@
     <MESSAGE value="1.6.40 - flags adding and nbpapi adjust" />
     <MESSAGE value="1.7.0" />
     <MESSAGE value="1.7.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.7.1" />
+    <MESSAGE value="1.7.10" />
+    <MESSAGE value="1.7.20" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.7.20" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

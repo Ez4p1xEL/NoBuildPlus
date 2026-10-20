@@ -1,5 +1,7 @@
 package p1xel.nobuildplus.listener.version;
 
+import org.bukkit.event.Event;
+import org.bukkit.event.EventPriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import p1xel.nobuildplus.NoBuildPlus;
 import p1xel.nobuildplus.listener.gui.GUIListener;
@@ -24,7 +26,8 @@ public class FeatureListenerLoader {
             new ChorusListener(),
             new SpearListener(),
             new LegacySpearLungeListener(),
-            new SpearLungeListener()
+            new SpearLungeListener(),
+            new CushionListener()
             );
 
 
@@ -35,6 +38,14 @@ public class FeatureListenerLoader {
             if (listener.matchRequirement(version)) {
                 plugin.getServer().getPluginManager().registerEvents(listener, plugin);
                 plugin.getLogger().info("NBP Listener " + listener.getName() + " has been registered.");
+            }
+        }
+
+        if (NoBuildPlus.getFoliaLib().isPaper()) {
+            try {
+                plugin.getServer().getPluginManager().registerEvent((Class<? extends Event>) Class.forName("io.papermc.paper.event.entity.EntityBreakByEntityEvent"), new PaperCushionBreakListener(), EventPriority.NORMAL, new PaperEventExecutor(), plugin);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
 

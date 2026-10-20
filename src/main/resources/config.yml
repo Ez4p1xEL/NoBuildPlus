@@ -16,8 +16,6 @@
 ## flags.yml is a flags manager file. You can enable or disable the flag here.
 ## There is a type for the flag. type: all (some flags are unavailable for type: all) type: list (select the objects from the list.)
 ##
-## Sorry for my bad english.
-##
 ## Thanks for using my plugin
 ## My name on SpigotMC is p1xEL_mc
 

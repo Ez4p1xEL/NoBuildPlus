@@ -362,3 +362,5 @@ flags:
       - 'IRON_SPEAR'
       - 'DIAMOND_SPEAR'
       - 'NETHERITE_SPEAR'
+  cushion:
+    enable: true

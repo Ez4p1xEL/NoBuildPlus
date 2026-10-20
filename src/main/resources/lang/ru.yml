@@ -377,6 +377,7 @@ flag:
     ender-pearl: 'Бросок жемчужины Эндера'
     chorus-teleport: 'Телепортация игрока через растение Хоруса'
     spear: 'Использование копья'
+    cushion: 'Взаимодействие с кушеткой'
     ia-furniture-sit: 'Сидение на мебели ItemsAdder'
     ia-campfire-interact: 'Взаимодействие с костром ItemsAdder'
 

@@ -400,6 +400,7 @@ flag:
     ender-pearl: 'エンダーパール投げ'
     chorus-teleport: 'コーラスフルーツによるテレポート'
     spear: '槍を使う'
+    cushion: 'クッションの使用'
     ia-furniture-sit: 'ItemsAdder家具に座る'
     ia-campfire-interact: 'ItemsAdder焚き火の操作'
 

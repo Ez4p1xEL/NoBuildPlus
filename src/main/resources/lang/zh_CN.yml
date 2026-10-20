@@ -398,6 +398,7 @@ flag:
     ender-pearl: '投掷末影珍珠'
     chorus-teleport: '使用紫颂果传送'
     spear: '使用长矛'
+    cushion: '与坐垫互动'
     ia-furniture-sit: '坐在ItemsAdder家具'
     ia-campfire-interact: '与ItemsAdder营火互动'
 

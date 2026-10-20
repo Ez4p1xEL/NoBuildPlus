@@ -76,6 +76,7 @@ flags:
   ender-pearl: false
   chorus-teleport: false
   spear: false
+  cushion: false
 # the usage of boolean (true/false) here does not equal to the usage of flag
 gamerules:
   advance_time: true

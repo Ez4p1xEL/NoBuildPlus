@@ -6,7 +6,7 @@
 
     <groupId>org.p1xel</groupId>
     <artifactId>NoBuildPlus</artifactId>
-    <version>1.7.20</version>
+    <version>1.7.21</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -117,7 +117,7 @@
         <dependency>
             <groupId>cn.lunadeer</groupId>
             <artifactId>DominionAPI</artifactId>
-            <version>4.3</version>
+            <version>4.6.0</version>
             <scope>provided</scope>
         </dependency>
 

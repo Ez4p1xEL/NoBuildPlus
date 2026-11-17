@@ -217,7 +217,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
             ItemStack item = inventory.getItem(slot);
             ItemMeta meta = item.getItemMeta();
             PersistentDataContainer container = meta.getPersistentDataContainer();
-            String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+            String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":", 2)[1];
             Flag flag = FlagRegistry.matchFlag(flagName);
             boolean bool = Settings.getDefaultFlag(flagName);
             meta.setDisplayName(Locale.getMessage("gui.edit-default.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
@@ -236,7 +236,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
         ItemStack item = inventory.getItem(slot);
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
-        String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+        String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":", 2)[1];
         Object value = Settings.getDefaultGameRule(gameruleName);
         String gameruleBoolean = value instanceof Boolean ? Locale.getMessage("gamerule_"+(boolean) value) : "";
         String gameruleInteger = value instanceof Integer ? Locale.getMessage("value").replace("%value%", String.valueOf((int) value)) : "";
@@ -311,7 +311,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("flag:")) {
-            String flag = name.split(":")[1];
+            String flag = name.split(":", 2)[1];
             boolean bool = Settings.getDefaultFlag(flag);
 
             Settings.setDefaultFlag(flag, !bool);
@@ -323,7 +323,7 @@ public class GUIDefaultTemplate extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("gamerule:")) {
-            String gameruleName = name.split(":")[1];
+            String gameruleName = name.split(":", 2)[1];
             Object value = Settings.getDefaultGameRule(gameruleName);
             if (value instanceof Boolean) {
                 boolean bool = (boolean) value;

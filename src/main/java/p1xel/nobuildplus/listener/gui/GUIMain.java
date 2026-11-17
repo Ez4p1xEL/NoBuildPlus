@@ -178,7 +178,7 @@ public class GUIMain extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("world:")) {
-            String world = name.split(":")[1];
+            String world = name.split(":", 2)[1];
             if (clickType == ClickType.LEFT) {
                 if (WorldManager.getWorld(world) == null) {
                     player.sendMessage(Locale.getMessage("cant-find-world"));

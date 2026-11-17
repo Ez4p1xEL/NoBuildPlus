@@ -1,6 +1,5 @@
 package p1xel.nobuildplus.listener.text;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -101,7 +100,7 @@ public class TextEditMode implements Listener {
 
         if (action.startsWith("edit-permission:")) {
 
-            String worldName = action.split(":")[1];
+            String worldName = action.split(":", 2)[1];
             WorldManager.setPermission(worldName, text);
             player.sendMessage(Locale.getMessage("edit-permission").replaceAll("%world%", worldName).replaceAll("%permission%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
@@ -113,7 +112,7 @@ public class TextEditMode implements Listener {
 
         if (action.startsWith("edit-deny-message:")) {
 
-            String worldName = action.split(":")[1];
+            String worldName = action.split(":", 2)[1];
             WorldManager.setDenyMessage(worldName, text);
             player.sendMessage(Locale.getMessage("edit-deny-message").replaceAll("%world%", worldName).replaceAll("%message%", text));
             player.sendMessage(Locale.getMessage("quit-mode"));
@@ -125,7 +124,7 @@ public class TextEditMode implements Listener {
 
         if (action.startsWith("edit-template-gamerule:")) {
 
-            String gameruleName = action.split(":")[1];
+            String gameruleName = action.split(":", 2)[1];
             int number;
             try {
                 number = Integer.parseInt(text);
@@ -146,7 +145,8 @@ public class TextEditMode implements Listener {
 
         if (action.startsWith("edit-gamerule:")) {
 
-            String[] split = action.split(":");
+            // 世界名本身可能带冒号（如 worlds:city），所以只切前两刀
+            String[] split = action.split(":", 3);
             String gameruleName = split[1];
             String worldName = split[2];
             int number;
@@ -157,12 +157,8 @@ public class TextEditMode implements Listener {
                 return;
             }
             try {
-
-                if (NoBuildPlus.getFoliaLib().isFolia()) {
-                    NoBuildPlus.getFoliaLib().getScheduler().runNextTick(wrappedTask -> GameRuleRegistry.setWorldGameRule(worldName, gameruleName, number));
-                } else {
-                    Bukkit.getScheduler().runTask(NoBuildPlus.getInstance(), task -> GameRuleRegistry.setWorldGameRule(worldName, gameruleName, number));
-                }
+                // 写入由 GameRuleRegistry 投递到正确的线程，生效后再重开界面，避免渲染到旧值
+                GameRuleRegistry.setWorldGameRule(worldName, gameruleName, number).thenRun(() -> openInventory(player));
             } catch (IllegalArgumentException exception) {
                 player.sendMessage(Locale.getMessage("invalid-gamerule").replace("%gamerule%", gameruleName));
                 return;
@@ -171,26 +167,14 @@ public class TextEditMode implements Listener {
             player.sendMessage(Locale.getMessage("quit-mode"));
             player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.4f, 0.4f);
 
-            openInventory(player);
-
         }
 
     }
 
     public void openInventory(Player player) {
 
-        //Inventory inventory = gui.getInventory();
-        if (NoBuildPlus.getFoliaLib().isFolia()) {
-            NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> {
-                GUIAbstract gui = last_viewed_inventories.get(player);
-                gui.init();
-                player.openInventory(gui.getInventory());
-                removePlayer(player);
-            });
-            return;
-        }
-
-        Bukkit.getScheduler().runTask(NoBuildPlus.getInstance(), () -> {
+        // 这里通常在异步聊天事件里被调用：重开背包必须在玩家自己的区域线程（Folia）/ 主线程（Paper）上做
+        NoBuildPlus.getFoliaLib().getScheduler().runAtEntity(player, task -> {
             GUIAbstract gui = last_viewed_inventories.get(player);
             gui.init();
             player.openInventory(gui.getInventory());

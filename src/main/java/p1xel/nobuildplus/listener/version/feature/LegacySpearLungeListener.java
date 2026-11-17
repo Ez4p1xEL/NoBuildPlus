@@ -1,6 +1,5 @@
 package p1xel.nobuildplus.listener.version.feature;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -61,15 +60,9 @@ public class LegacySpearLungeListener implements FeatureListener {
             return;
         }
 
-        if (NoBuildPlus.getFoliaLib().isFolia()) {
-            NoBuildPlus.getFoliaLib().getScheduler().runNextTick(wrappedTask -> {
-                player.setVelocity(new Vector(0, player.getVelocity().getY(), 0));
-            });
-        } else {
-            Bukkit.getScheduler().runTask(NoBuildPlus.getInstance(), task -> {
-                player.setVelocity(new Vector(0, player.getVelocity().getY(), 0));
-            });
-        }
+        // 速度是玩家自身状态，必须排到玩家自己的区域线程（Folia）/ 主线程（Paper）
+        NoBuildPlus.getFoliaLib().getScheduler().runAtEntity(player, task ->
+                player.setVelocity(new Vector(0, player.getVelocity().getY(), 0)));
 
     }
 

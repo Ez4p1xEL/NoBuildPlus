@@ -900,16 +900,8 @@ public class NoBuildPlusPlayerListener implements Listener {
         WorldManager.sendMessage(player, world);
         e.setCancelled(true);
 
-        if (NoBuildPlus.getFoliaLib().isFolia()) {
-            NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> {
-                player.setFlying(false);
-            });
-            return;
-        } else {
-            Bukkit.getScheduler().runTaskLater(NoBuildPlus.getInstance(), () -> {
-                player.setFlying(false);
-            }, 1L);
-        }
+        // 玩家状态只能在玩家自己的区域线程上改（Folia），全局调度器跑的是别的线程
+        NoBuildPlus.getFoliaLib().getScheduler().runAtEntity(player, task -> player.setFlying(false));
 
     }
 

@@ -50,7 +50,7 @@ public class Cmd implements CommandExecutor {
                     return true;
                 }
 
-                if (NoBuildPlus.getInstance().isMenuFunctionEnabled()) {
+                if (!NoBuildPlus.getInstance().isMenuFunctionEnabled()) {
                     sender.sendMessage(Locale.getMessage("gui-not-support"));
                     return true;
                 }

@@ -259,7 +259,7 @@ public class GUITemplate extends GUIAbstract implements InventoryHolder {
             ItemStack item = inventory.getItem(slot);
             ItemMeta meta = item.getItemMeta();
             PersistentDataContainer container = meta.getPersistentDataContainer();
-            String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+            String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":", 2)[1];
             Flag flag = FlagRegistry.matchFlag(flagName);
             boolean bool = template.getFlag(flag);
             meta.setDisplayName(Locale.getMessage("gui.edit-template.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
@@ -278,7 +278,7 @@ public class GUITemplate extends GUIAbstract implements InventoryHolder {
         ItemStack item = inventory.getItem(slot);
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
-        String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+        String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":", 2)[1];
         Object value = template.getGameRule(gameruleName);
         String gameruleBoolean = value instanceof Boolean ? Locale.getMessage("gamerule_"+(boolean) value) : "";
         String gameruleInteger = value instanceof Integer ? Locale.getMessage("value").replace("%value%", String.valueOf((int) value)) : "";
@@ -362,7 +362,7 @@ public class GUITemplate extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("flag:")) {
-            String flagName = name.split(":")[1];
+            String flagName = name.split(":", 2)[1];
             Flag flag = FlagRegistry.matchFlag(flagName);
             boolean bool = template.getFlag(flag);
 
@@ -376,7 +376,7 @@ public class GUITemplate extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("gamerule:")) {
-            String gameruleName = name.split(":")[1];
+            String gameruleName = name.split(":", 2)[1];
             Object value = template.getGameRule(gameruleName);
             if (value instanceof Boolean) {
                 boolean bool = (boolean) value;

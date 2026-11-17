@@ -144,7 +144,7 @@ public class GUITemplateList extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("template:")) {
-            String templateName = name.split(":")[1];
+            String templateName = name.split(":", 2)[1];
 
             if (templateManager.getTemplate(templateName) == null) {
                 player.sendMessage(Locale.getMessage("cant-find-template").replace("%template%", templateName));

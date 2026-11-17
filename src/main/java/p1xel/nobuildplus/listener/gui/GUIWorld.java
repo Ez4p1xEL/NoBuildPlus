@@ -254,7 +254,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
             ItemStack item = inventory.getItem(slot);
             ItemMeta meta = item.getItemMeta();
             PersistentDataContainer container = meta.getPersistentDataContainer();
-            String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+            String flagName = container.get(menu_id_key, PersistentDataType.STRING).split(":", 2)[1];
             Flag flag = FlagRegistry.matchFlag(flagName);
             boolean bool = world.getFlag(flag);
             meta.setDisplayName(Locale.getMessage("gui.world.items.flag.display_name").replaceAll("%flag%", flagName).replaceAll("%bool%", Locale.getMessage(String.valueOf(bool))));
@@ -273,7 +273,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         ItemStack item = inventory.getItem(slot);
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
-        String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":")[1];
+        String gameruleName = container.get(menu_id_key, PersistentDataType.STRING).split(":", 2)[1];
         String value = GameRuleRegistry.getWorldGameRule(worldName, gameruleName);
         String gameruleBoolean;
         String gameruleInteger = "";
@@ -373,7 +373,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("flag:")) {
-            String flagName = name.split(":")[1];
+            String flagName = name.split(":", 2)[1];
             Flag flag = FlagRegistry.matchFlag(flagName);
             boolean bool = world.getFlag(flag);
 
@@ -386,7 +386,7 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
         }
 
         if (name.startsWith("gamerule:")) {
-            String gameruleName = name.split(":")[1];
+            String gameruleName = name.split(":", 2)[1];
             String value = GameRuleRegistry.getWorldGameRule(worldName, gameruleName);
 
             try {
@@ -399,12 +399,10 @@ public class GUIWorld extends GUIAbstract implements InventoryHolder {
             } catch (NumberFormatException ignored) {}
 
             boolean bool = Boolean.parseBoolean(value);
-            GameRuleRegistry.setWorldGameRule(worldName, gameruleName, !bool);
-            if (NoBuildPlus.getFoliaLib().isFolia()) {
-                NoBuildPlus.getFoliaLib().getScheduler().runNextTick(task -> updateSlot(slot));
-            } else {
-                updateSlot(slot);
-            }
+            // gamerule 的写入在 Folia 上走全局区域线程，写生效后再回到玩家自己的区域线程刷新槽位，
+            // 绝不能拿全局调度器去改玩家正开着的背包。
+            GameRuleRegistry.setWorldGameRule(worldName, gameruleName, !bool).thenRun(() ->
+                    NoBuildPlus.getFoliaLib().getScheduler().runAtEntity(player, task -> updateSlot(slot)));
             player.sendMessage(Locale.getMessage("gamerule-set-success").replace("%world%", worldName).replace("%gamerule%", gameruleName).replace("%value%", String.valueOf(!bool)));
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1.0f, 1.0f);
             Logger.debug("Setting world "+worldName+" gamerule: " + gameruleName);
